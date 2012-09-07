@@ -4,6 +4,18 @@
 " ******************************************
 " Personal Setting *************************
 
+" Font (.gvimrc override)
+if has('win32')
+	" Windows
+	set guifont=MS_Gothic:h12:cSHIFTJIS
+elseif has('mac')
+	set guifont=Osakaï¼ç­‰å¹…:h12
+elseif has('xfontset')
+	" UNIXç”¨ (xfontsetã‚’ä½¿ç”¨)
+	set guifontset=a14,r14,k14
+endif
+
+
 " Open URL - Firefox
 function! HandleURL()
 	let s:uri = matchstr(getline("."), '[a-z]*://[^ >,;]*')
@@ -28,29 +40,26 @@ nmap <leader>g :call Google()<CR>
 
 " ******************************************
 " Minor setting ****************************
-" ƒJƒ‰[İ’è
+" ã‚«ãƒ©ãƒ¼è¨­å®š
 colorscheme svjunic
-"colorscheme zellner
-"colorscheme ron
-"colorscheme torte
 
+" Windows
+if has('win32')
+	" Insert : copy
+	map <Insert> "+y
 
-" Insert‚ÅƒRƒs[
-" (native‚Évim‚ğ‹N“®‚µ‚Ä‚¢‚È‚¢‚ÆˆÓ–¡‚ª‚È‚¢‚Ì‚Åwindows‚Ì‚İ‚Å’è‹`)
-map <Insert> "+y
+	" Shift-Insert : paste
+	map <S-Insert> "+gP
+	imap <S-Insert> <C-R>+
+endif
 
-" Shift-Insert‚Åƒy[ƒXƒg
-" (native‚Évim‚ğ‹N“®‚µ‚Ä‚¢‚È‚¢‚ÆˆÓ–¡‚ª‚È‚¢‚Ì‚Åwindows‚Ì‚İ‚Å’è‹`)
-map <S-Insert> "+gP
-imap <S-Insert> <C-R>+
-
-" Ctrl-L ‚ÅŒŸõƒnƒCƒ‰ƒCƒg‚ğÁ‚·
+" Ctrl-L ã§æ¤œç´¢ãƒã‚¤ãƒ©ã‚¤ãƒˆã‚’æ¶ˆã™
 nmap <C-l> <C-l>:nohlsearch<CR>
 
-" highlightŠÖ˜A‚Ìİ’è‚Íİ’èƒtƒ@ƒCƒ‹‚ÌÅŒã‚É‹Lq‚µ‚È‚¢‚Æ‚¤‚Ü‚­‹@”\‚µ‚È‚©‚Á‚½
-" ‚Ü‚½windows‚Å‚Í‘SŠpƒXƒy[ƒX(@)‚Ícp932‚Å‹Lq‚µ‚È‚¢‚Æ‚¤‚Ü‚­‹@”\‚µ‚È‚¢
+" highlighté–¢é€£ã®è¨­å®šã¯è¨­å®šãƒ•ã‚¡ã‚¤ãƒ«ã®æœ€å¾Œã«è¨˜è¿°ã—ãªã„ã¨ã†ã¾ãæ©Ÿèƒ½ã—ãªã‹ã£ãŸ
+" ã¾ãŸwindowsã§ã¯å…¨è§’ã‚¹ãƒšãƒ¼ã‚¹(ã€€)ã¯cp932ã§è¨˜è¿°ã—ãªã„ã¨ã†ã¾ãæ©Ÿèƒ½ã—ãªã„
 highlight ZenkakuSpace cterm=reverse gui=reverse
-match ZenkakuSpace /@/
+match ZenkakuSpace /ã€€/
 
 
 "	syntax on
@@ -63,46 +72,74 @@ set nobackup
 set matchpairs=(:),{:},[:],<:>
 set pastetoggle=<Insert>
 
-" ƒXƒe[ƒ^ƒXƒ‰ƒCƒ“‚Ìİ’è
+" ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ãƒ©ã‚¤ãƒ³ã®è¨­å®š
 set cmdheight=1
 set laststatus=2
 set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
 
 
+" æ–‡å­—ã‚³ãƒ¼ãƒ‰é–¢é€£ã®è¨­å®š
+set encoding=utf-8
+set fileencodings=ucs-bom,utf-8,iso-2022-jp,euc-jp,cp932
+set fileformat=unix
+set fileformats=unix,dos
+set ambiwidth=double
+set number
+
+" æ–‡å­—ã‚³ãƒ¼ãƒ‰æŒ‡å®šã§ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä¿å­˜
+cabbrev ws set fenc=cp932<CR>:w
+cabbrev we set fenc=euc-jisx0213<CR>:w
+cabbrev wj set fenc=iso-2022-jp-3<CR>:w
+cabbrev wu set fenc=utf-8<CR>:w
+
+" æ–‡å­—ã‚³ãƒ¼ãƒ‰æŒ‡å®šã§ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã
+cabbrev es e ++enc=cp932
+cabbrev ee e ++enc=euc-jisx0213
+cabbrev ej e ++enc=iso-2022-jp-3
+cabbrev eu e ++enc=utf-8
+
+
 " Plugin Setting ***************************
 
+" netrwã¯å¸¸ã«tree view
+let g:netrw_liststyle = 3
+"" v ã§vsp
+"let g:netrw_altv = 1
+"" o ã§ä¸‹
+"let g:netrw_alto = 1
+
 "	""" unite.vim
-"	" “ü—Íƒ‚[ƒh‚ÅŠJn‚·‚é
+"	" å…¥åŠ›ãƒ¢ãƒ¼ãƒ‰ã§é–‹å§‹ã™ã‚‹
 "	" let g:unite_enable_start_insert=1
-"	" ƒoƒbƒtƒ@ˆê——
+"	" ãƒãƒƒãƒ•ã‚¡ä¸€è¦§
 "	nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
-"	" ƒtƒ@ƒCƒ‹ˆê——
+"	" ãƒ•ã‚¡ã‚¤ãƒ«ä¸€è¦§
 "	nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
-"	" ƒŒƒWƒXƒ^ˆê——
+"	" ãƒ¬ã‚¸ã‚¹ã‚¿ä¸€è¦§
 "	nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
-"	" Å‹ßg—p‚µ‚½ƒtƒ@ƒCƒ‹ˆê——
+"	" æœ€è¿‘ä½¿ç”¨ã—ãŸãƒ•ã‚¡ã‚¤ãƒ«ä¸€è¦§
 "	nnoremap <silent> ,um :<C-u>Unite file_mru<CR>
-"	" í—pƒZƒbƒg
+"	" å¸¸ç”¨ã‚»ãƒƒãƒˆ
 "	nnoremap <silent> ,uu :<C-u>Unite buffer file_mru<CR>
-"	" ‘S•”æ‚¹
+"	" å…¨éƒ¨ä¹—ã›
 "	nnoremap <silent> ,ua :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
 "	
-"	" ƒEƒBƒ“ƒhƒE‚ğ•ªŠ„‚µ‚ÄŠJ‚­
+"	" ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’åˆ†å‰²ã—ã¦é–‹ã
 "	au FileType unite nnoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
 "	au FileType unite inoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
-"	" ƒEƒBƒ“ƒhƒE‚ğc‚É•ªŠ„‚µ‚ÄŠJ‚­
+"	" ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’ç¸¦ã«åˆ†å‰²ã—ã¦é–‹ã
 "	au FileType unite nnoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
 "	au FileType unite inoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
-"	" ESCƒL[‚ğ2‰ñ‰Ÿ‚·‚ÆI—¹‚·‚é
+"	" ESCã‚­ãƒ¼ã‚’2å›æŠ¼ã™ã¨çµ‚äº†ã™ã‚‹
 "	au FileType unite nnoremap <silent> <buffer> <ESC><ESC> q
 "	au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
 "	
 "	" ******************************************
 "	" neocomplcache.vim ************************
-"	let g:neocomplcache_enable_at_startup = 1 " ‹N“®‚É—LŒø‰»
+"	let g:neocomplcache_enable_at_startup = 1 " èµ·å‹•æ™‚ã«æœ‰åŠ¹åŒ–
 "	NeoComplCacheEnable
 "	
-"	" control+l ‚ÅƒXƒjƒyƒbƒg“WŠJ
+"	" control+l ã§ã‚¹ãƒ‹ãƒšãƒƒãƒˆå±•é–‹
 "	imap <C-l>    <Plug>(neocomplcache_snippets_expand)
 "	smap <C-l>    <Plug>(neocomplcache_snippets_expand)
 
@@ -113,14 +150,22 @@ set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V
 
 " MULTIByte Space Highlight
 highlight ZenkakuSpace cterm=reverse gui=reverse
-match ZenkakuSpace /@/
+match ZenkakuSpace /ã€€/
 
 " tab highlight
 set listchars=tab:\ \ 
 highlight SpecialKey cterm=underline gui=underline
 
-"ƒJ[ƒ\ƒ‹s‚ÌƒnƒCƒ‰ƒCƒg
+"ã‚«ãƒ¼ã‚½ãƒ«è¡Œã®ãƒã‚¤ãƒ©ã‚¤ãƒˆ
 set cursorline
 hi clear CursorLine
 "highlight CursorLine ctermbg=black guibg=black
 highlight CursorLine guibg=black
+
+""å€™è£œã®ãƒ—ãƒ«ãƒ€ã‚¦ãƒ³ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®é…è‰²
+hi Pmenu guibg=#666666
+hi PmenuSel guibg=#8cd0d3 guifg=#666666
+hi PmenuSbar guibg=#333333
+highlight Pmenu ctermbg=4
+highlight PmenuSel ctermbg=1
+highlight PMenuSbar ctermbg=4
