@@ -121,13 +121,14 @@ SQLUtilities
 | .gvimrc
 
 ※windowsの場合
-/Users/ユーザ名/
-| .vim/
-| | bundle/
-| | colors/
-| | vundle.git/
-| | vim_local.vim
-| .gvimrc
+vimのディレクトリ/
+| | vim73
+| | | colors
+| | vimfiles/
+| |  | bundle/
+| |  | vundle/
+| vim_local.vim
+| _gvimrc
 
 .unite
 とか、そういうディレクトリがホームディレクトリにできますが、それはそれぞれのプラグインが使ってるものです。
