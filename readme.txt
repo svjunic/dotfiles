@@ -34,6 +34,44 @@ mac晩は普通のアプリと一緒です。
 
 
 3. Pluginをインストールする
+下記を入力してください。
+:BundleInstall
+
+↓vimrc_local.vim で標準インストールしているプラグイン
+Bundle 'Shougo/neocomplcache'
+Bundle 'unite.vim'
+Bundle 'surround.vim'
+Bundle 'mattn/zencoding-vim'
+Bundle 'SQLUtilities'
+
+※Bundle の値を変えてBundlInstallすることで他のプラグインもインストールできます
+
+↓個人的な見解
+neocomplcache
+→補完を実装するプラグイン。
+有名でオプションも豊富。
+
+unite.vim
+→ファイラーみたいな機能を実装するプラグイン。
+ヤンクの履歴みれたり他にもいろいろ機能があるよ！
+
+surround.vim
+→text-objectsを拡張したようなもの。
+タグで囲んだり()で囲んだり()中だけ消したりするのが一瞬でできるようになる。
+
+zencoding-vim
+→zencodingのvim版
+初期段階からコーディングする場合に威力を発揮。
+
+SQLUtilities
+→
+使ってみようかなと思って入れてみた。まだ使ってない！
+
+
+オプション等の記述はvimrc_local.vimに書くと上書きされる可能性もあるので、.gvimrc に書くほうがいいです。
+
+※準備で失敗してるとwindows版は動かないので1を確認！
+
 
 4. まとめ
 
