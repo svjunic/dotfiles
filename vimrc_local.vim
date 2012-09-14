@@ -1,4 +1,11 @@
-""" vundle
+" Vim color file
+" Maintaner: sv.junic
+" Last Change: 14-Sep-2012."
+
+" kaoriyaさんからダウンロードした状態で、vimrcにvimrc_local.vimがあればそれを
+" 先読みする設定があるので、そのの設定を使います
+
+" vundle
 set nocompatible
 filetype off
 if has('win32') || has('win64')
