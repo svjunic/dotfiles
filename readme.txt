@@ -3,6 +3,7 @@
 
 vimでコーディングするときの環境を
 vundleを使って簡単に用意できる.gvimrcなどを作ることを目標としています。
+慣れたら勝手にカスタマイズしてね。
 
 
 1. 準備
@@ -33,7 +34,40 @@ win版は解凍する。
 mac晩は普通のアプリと一緒です。
 
 
-3. Pluginをインストールする
+3. このリポジトリのファイルを設置する。
+
+○macの場合
+/Users/ユーザ名/
+| .vim/
+| | colors/
+| | vundle.git/
+| .gvimrc
+/Applications/MacVim.app/Contents/Resources/vim/
+| | vim_local.vim
+
+○windowsの場合
+vimのディレクトリ/
+| | vim73
+| | | colors
+| | vimfiles/
+| vim_local.vim
+| _gvimrc
+※.gvimrcのファイル名を_gvimrcに変更します。
+
+
+
+4. Plugin管理用のプラグインをインストールする
+vundleをインストールします。
+
+windows
+git clone http://github.com/gmarik/vundle.git vimのディレクトリ/bundle/vundle
+
+mac
+git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+
+
+
+5.Pluginをインストールする
 下記を入力してください。
 :BundleInstall
 
@@ -46,7 +80,7 @@ Bundle 'SQLUtilities'
 
 ※Bundle の値を変えてBundlInstallすることで他のプラグインもインストールできます
 
-↓個人的な見解
+↓標準で入れたプラグインの紹介
 neocomplcache
 →補完を実装するプラグイン。
 有名でオプションも豊富。
@@ -73,7 +107,7 @@ SQLUtilities
 ※準備で失敗してるとwindows版は動かないので1を確認！
 
 
-4. まとめ
+5. まとめ
 
 適応した場合は下記のディレクトリになります。
 
