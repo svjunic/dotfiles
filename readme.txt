@@ -22,9 +22,12 @@ windows意外は必要ないです。
 
 
 2. 入れる
-kaoriyaさんのところからvim本体をダウンロードします。
-winはこちら（http://www.kaoriya.net/）
-macはこちら（http://code.google.com/p/macvim-kaoriya/）
+下記からダウンロード。
+香り屋
+http://www.kaoriya.net/
+
+香り屋さんのWindows版の使い勝手に近いMacVim
+http://code.google.com/p/macvim-kaoriya/
 
 win版は解凍する。
 mac晩は普通のアプリと一緒です。
