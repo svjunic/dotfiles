@@ -1,5 +1,6 @@
 " Vim color file
 " Maintaner: <sv.junic@gmail.com>
+" Last Change: 14-Sep-2012."
 
 set background=dark
 
