@@ -1,4 +1,4 @@
-"Last Change: 13-Sep-2012."
+"Last Change: 14-Sep-2012."
 
 " ******************************************
 " Personal Setting *************************
@@ -136,11 +136,18 @@ au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
 " ******************************************
 " neocomplcache.vim ************************
 let g:neocomplcache_enable_at_startup = 1 " 起動時に有効化
-"NeoComplCacheEnable
+NeoComplCacheEnable
 
 " control+l でスニペット展開
 imap <C-l>    <Plug>(neocomplcache_snippets_expand)
 smap <C-l>    <Plug>(neocomplcache_snippets_expand)
+
+"let g:neocomplcache_dictionary_filetype_lists = {
+"    \ 'default'    : '',
+"    \ 'perl'       : $HOME . '/.vim/dict/perl.dict'
+"    \ }
+
+
 
 
 " ******************************************
