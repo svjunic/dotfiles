@@ -1,4 +1,4 @@
-"Last Change: 14-Sep-2012."
+"Last Change: 18-Sep-2012."
 
 " ******************************************
 " Personal Setting *************************
@@ -97,6 +97,9 @@ cabbrev ee e ++enc=euc-jisx0213
 cabbrev ej e ++enc=iso-2022-jp-3
 cabbrev eu e ++enc=utf-8
 
+" ウィンドウに1行で収まらない場合、ウィンドウ上では自動改行を行って表示しない
+set nowrap
+
 
 " Plugin Setting ***************************
 
@@ -138,14 +141,34 @@ au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
 let g:neocomplcache_enable_at_startup = 1 " 起動時に有効化
 NeoComplCacheEnable
 
-" control+l でスニペット展開
-imap <C-l>    <Plug>(neocomplcache_snippets_expand)
-smap <C-l>    <Plug>(neocomplcache_snippets_expand)
+" キャッシュする文字列の長さの最小値（デフォルト値4）
+let g:neocomplcache_min_syntax_length = 3
 
+" 大文字が入力さた場合、限り大文字小文字の区別をする
+let g:neocomplcache_enable_smart_case = 1
+
+" キャメルケースの候補展開
+" 0:無効
+" 1:有効
+" 例）DooDooo -> DD
+let g:neocomplcache_enable_camel_case_completion = 1
+
+" アンダースコアの候補展開
+" 0:無効
+" 1:有効
+" 例）n_e_u_c -> neocomplcache_enable_underbar_completion
+let g:neocomplcache_enable_underbar_completion = 1
+
+"" ファイルタイプ毎にdictファイルを設定
 "let g:neocomplcache_dictionary_filetype_lists = {
 "    \ 'default'    : '',
 "    \ 'perl'       : $HOME . '/.vim/dict/perl.dict'
 "    \ }
+
+
+" control+l でスニペット展開
+imap <C-l>    <Plug>(neocomplcache_snippets_expand)
+smap <C-l>    <Plug>(neocomplcache_snippets_expand)
 
 
 
