@@ -2,7 +2,7 @@
 set nocompatible
 filetype off
 if has('win32') || has('win64')
-	set rtp+=$VIM/vimfiles/vundle/
+	set rtp+=$VIM/vimfiles/bundle/vundle/
 	let $PLUGIN_PATH = $VIM.'/vimfiles/bundle'
 else
 	set rtp+=~/.vim/vundle.git/
