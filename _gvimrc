@@ -1,4 +1,4 @@
-"Last Change: 18-Sep-2012."
+"Last Change: 24-Sep-2012."
 
 " ******************************************
 " Personal Setting *************************
@@ -15,7 +15,7 @@ elseif has('xfontset')
 endif
 
 
-" Open URL - Firefox
+" Open URL - Firefox firefox.exe -new-tab
 function! HandleURL()
 	let s:uri = matchstr(getline("."), '[a-z]*://[^ >,;]*')
 	if s:uri != ""
@@ -27,7 +27,7 @@ function! HandleURL()
 endfunction
 map <leader>u :call HandleURL()<cr>
 
-" Search Keyword - Firefox :Seach -> Google
+" Search Keyword - firefox.exe -new-tab google-search-url
 function! Google()
 	let keyword = expand("<cword>")
 	let url = "http://www.google.com/search?q=" . keyword
@@ -74,7 +74,12 @@ set pastetoggle=<Insert>
 " ステータスラインの設定
 set cmdheight=1
 set laststatus=2
-set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
+"set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
+"set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
+"set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
+set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ %c%V%8P
+set statusline=%<%F\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ %c%V%8P
+
 
 
 " 文字コード関連の設定
@@ -103,12 +108,6 @@ set nowrap
 
 " Plugin Setting ***************************
 
-" netrwは常にtree view
-let g:netrw_liststyle = 3
-"" v でvsp
-"let g:netrw_altv = 1
-"" o で下
-"let g:netrw_alto = 1
 
 """ unite.vim
 " 入力モードで開始する
@@ -184,7 +183,7 @@ match ZenkakuSpace /　/
 set listchars=tab:\ \ 
 highlight SpecialKey cterm=underline gui=underline
 
-"カーソル行のハイライト
+""カーソル行のハイライト
 set cursorline
 hi clear CursorLine
 "highlight CursorLine ctermbg=black guibg=black
