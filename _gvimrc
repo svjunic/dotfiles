@@ -1,4 +1,4 @@
-"Last Change: 24-Sep-2012."
+"Last Change: 27-Sep-2012."
 
 " ******************************************
 " Personal Setting *************************
@@ -140,11 +140,11 @@ au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
 let g:neocomplcache_enable_at_startup = 1 " 起動時に有効化
 NeoComplCacheEnable
 
-" キャッシュする文字列の長さの最小値（デフォルト値4）
-let g:neocomplcache_min_syntax_length = 3
+"" キャッシュする文字列の長さの最小値（デフォルト値4）
+"let g:neocomplcache_min_syntax_length = 3
 
-" 大文字が入力さた場合、限り大文字小文字の区別をする
-let g:neocomplcache_enable_smart_case = 1
+"" 大文字が入力さた場合、限り大文字小文字の区別をする
+"let g:neocomplcache_enable_smart_case = 1
 
 " キャメルケースの候補展開
 " 0:無効
