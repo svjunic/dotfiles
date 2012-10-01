@@ -1,4 +1,4 @@
-" Last Change: 14-Sep-2012."
+" Last Change: 01-Oct-2012."
 " Maintaner: sv.junic
 
 vimでコーディングするときの環境を
@@ -41,6 +41,7 @@ mac晩は普通のアプリと一緒です。
 | .vim/
 | | colors/
 | | vundle.git/
+| | template/
 | .gvimrc
 /Applications/MacVim.app/Contents/Resources/vim/
 | | vim_local.vim
@@ -49,6 +50,7 @@ mac晩は普通のアプリと一緒です。
 vimのディレクトリ/
 | | vim73
 | | | colors
+| | template/
 | | vimfiles/
 | vim_local.vim
 | _gvimrc
@@ -117,11 +119,13 @@ SQLUtilities
 | | bundle/
 | | colors/
 | | vundle.git/
+| | template/
 | | vim_local.vim
 | .gvimrc
 
 ※windowsの場合
 vimのディレクトリ/
+| | template/
 | | vim73
 | | | colors
 | | vimfiles/
