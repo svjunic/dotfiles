@@ -1,6 +1,17 @@
 " Vim color file
-" Maintaner: sv.junic
-" Last Change: 14-Sep-2012."
+" Maintaner: Radu Dineiu <radu.dineiu@gmail.com>
+" URL: http://ld.yi.org/vim/rdark/
+" Last Change: 2007 Jun 23
+" Version: 0.6
+"
+" Features:
+"   - let rdark_current_line = 1 if you want to highlight the current line
+"
+" Changelog:
+"   0.5 - fixed the Pmenu colors
+"   0.6 - added SignColumn colors
+"
+" svjunic Extends rdark
 
 set background=dark
 
@@ -9,7 +20,7 @@ if exists("syntax_on")
 	syntax reset
 endif
 
-let colors_name = "rdark"
+let colors_name = "svjunic"
 
 " Current Line
 if exists('rdark_current_line') && rdark_current_line == 1
@@ -151,13 +162,11 @@ hi link cssTextAttr Constant
 hi link cssColorAttr Constant
 hi link cssFontAttr Constant
 
-
-gui
+""gui
 if has('win32')
-	" Windows
 	set transparency=240
 elseif has('mac')
 	set transparency=7
 elseif has('xfontset')
-	set transparency=7
+	"set transparency=7
 endif
