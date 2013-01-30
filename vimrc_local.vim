@@ -17,22 +17,24 @@ Bundle 'git://github.com/Shougo/neocomplcache-snippets-complete.git'
 Bundle 'unite.vim'
 Bundle 'surround.vim'
 Bundle 'mattn/zencoding-vim'
+
+Bundle 'teramako/jscomplete-vim'
+Bundle 'git://github.com/AtsushiM/sass-compile.vim.git'
 Bundle 'SQLUtilities'
+
+" windowsだといろいろしないといけないので一旦保留。
+"Bundle 'TwitVim'
 filetype plugin indent on
 
 
-"" netrw setting
-let g:netrw_liststyle = 3
-" v でvsp
-let g:netrw_altv = 1
-" o で下
-let g:netrw_alto = 1
-
-let g:netrw_localmkdir   = "mkdir"
-let g:netrw_localrmdir   = "rmdir"
-let g:netrw_localcopycmd = "copy"
-let g:netrw_localmovecmd = "move"
-
-"if !executable(g:netrw_localmkdir)
-"	echo "kore"
-"endif
+""" netrw setting
+"let g:netrw_liststyle = 3
+"" v でvsp
+"let g:netrw_altv = 1
+"" o で下
+"let g:netrw_alto = 1
+"
+"let g:netrw_localmkdir   = "mkdir"
+"let g:netrw_localrmdir   = "rmdir"
+"let g:netrw_localcopycmd = "copy"
+"let g:netrw_localmovecmd = "move"
