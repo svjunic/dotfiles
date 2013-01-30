@@ -1,8 +1,8 @@
-" Last Change: 01-Oct-2012."
+" Last Change: 30-Jan-2013."
 " Maintaner: sv.junic
 
 vimでコーディングするときの環境を
-vundleを使って簡単に用意できる.gvimrcなどを作ることを目標としています。
+NeoBundleを使って簡単に用意できる.gvimrcなどを作ることを目標としています。
 慣れたら勝手にカスタマイズしてね。
 
 
