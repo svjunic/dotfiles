@@ -1,40 +1,61 @@
 """ vundle
 set nocompatible
 filetype off
+""rtp は runtimepath
 if has('win32') || has('win64')
-	set rtp+=$VIM/vimfiles/bundle/vundle/
-	let $PLUGIN_PATH = $VIM.'/vimfiles/bundle'
+	set rtp+=$VIM/vimfiles/bundle/neobundle.vim
+	let $PLUGIN_PATH = $VIM.'/vimfiles/bundle/'
 else
-	set rtp+=~/.vim/vundle.git/
-	let $PLUGIN_PATH = expand('~/.vim/bundle')
+	set rtp+=~/.vim/bundle/neobundle.vim
+	let $PLUGIN_PATH = expand('~/.vim/bundle/')
 endif
-call vundle#rc($PLUGIN_PATH)
+call neobundle#rc($PLUGIN_PATH)
 
 
 "Plugin Installing
-Bundle 'Shougo/neocomplcache'
-Bundle 'git://github.com/Shougo/neocomplcache-snippets-complete.git'
-Bundle 'unite.vim'
-Bundle 'surround.vim'
-Bundle 'mattn/zencoding-vim'
+" 1.
+NeoBundle 'Shougo/neobundle.vim'
+NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'git://github.com/Shougo/neocomplcache-snippets-complete.git'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/vimproc'
+NeoBundle 'surround.vim'
+NeoBundle 'mattn/zencoding-vim'
+NeoBundle 'teramako/jscomplete-vim'
 
-Bundle 'teramako/jscomplete-vim'
-Bundle 'git://github.com/AtsushiM/sass-compile.vim.git'
-Bundle 'SQLUtilities'
+" 2.
+NeoBundle 'ref.vim'
+NeoBundle 'SQLUtilities'
+NeoBundle 'git://github.com/AtsushiM/sass-compile.vim.git'
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'mattn/webapi-vim'
+NeoBundle 'open-browser.vim'
+NeoBundle 'jelera/vim-javascript-syntax'
 
-" windowsだといろいろしないといけないので一旦保留。
-"Bundle 'TwitVim'
+" 3.
+"NeoBundle 'ujihisa/unite-locate'
+"NeoBundle 'violetyk/cake.vim'
+"NeoBundle 'tpope/vim-surround'
+"NeoBundle 'taglist.vim'
+"NeoBundle 'ZenCoding.vim'
+
+
+" 4.
+NeoBundle 'TwitVim'
+
+" 5. git
+"NeoBundle 'fugitive.vim'
+
+" 6.
+"NeoBundle 'The-NERD-tree'
+"NeoBundle 'The-NERD-Commenter'
+"NeoBundle 'thinca/vim-localrc'
+"NeoBundle 'motemen/hatena-vim'
+"NeoBundle 'mattn/unite-advent_calendar'
+
+
+
 filetype plugin indent on
 
 
-""" netrw setting
-"let g:netrw_liststyle = 3
-"" v でvsp
-"let g:netrw_altv = 1
-"" o で下
-"let g:netrw_alto = 1
-"
-"let g:netrw_localmkdir   = "mkdir"
-"let g:netrw_localrmdir   = "rmdir"
-"let g:netrw_localcopycmd = "copy"
-"let g:netrw_localmovecmd = "move"
+
