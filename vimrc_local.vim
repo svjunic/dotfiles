@@ -16,9 +16,17 @@ call neobundle#rc($PLUGIN_PATH)
 " 1.
 NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'git://github.com/Shougo/neocomplcache-snippets-complete.git'
+NeoBundle 'Shougo/neosnippet.git'
 NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/vimproc'
+NeoBundle 'Shougo/vimshell'
+NeoBundle 'Shougo/vimproc', {
+\ 'build' : {
+\     'windows' : 'echo "Sorry, cannot update vimproc binary file in Windows."',
+\     'cygwin' : 'make -f make_cygwin.mak',
+\     'mac' : 'make -f make_mac.mak',
+\     'unix' : 'make -f make_unix.mak',
+\   },
+\ }
 NeoBundle 'surround.vim'
 NeoBundle 'mattn/zencoding-vim'
 NeoBundle 'teramako/jscomplete-vim'
