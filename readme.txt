@@ -1,4 +1,4 @@
-" Last Change: 30-Jan-2013."
+" Last Change: 04-Feb-2013."
 " Maintaner: sv.junic
 
 vimでコーディングするときの環境を
@@ -62,10 +62,10 @@ vimのディレクトリ/
 vundleをインストールします。
 
 windows
-git clone http://github.com/gmarik/vundle.git vimのディレクトリ/bundle/vundle
+git clone http://github.com/gmarik/vundle.git vimのディレクトリ/bundle/
 
 mac
-git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/
 
 
 
@@ -79,6 +79,10 @@ Bundle 'unite.vim'
 Bundle 'surround.vim'
 Bundle 'mattn/zencoding-vim'
 Bundle 'SQLUtilities'
+
+その他いろいろ入れています。
+WindowsはTwitVim（Twitterを使うためのプラグイン）を使用するために色々しないといけないので、コメントアウトにして
+しまったほうがいいかも。
 
 ※Bundle の値を変えてBundlInstallすることで他のプラグインもインストールできます
 
@@ -116,12 +120,11 @@ SQLUtilities
 ※macの場合
 /Users/ユーザ名/
 | .vim/
-| | bundle/
 | | colors/
-| | vundle.git/
-| | template/
-| | vim_local.vim
+| | bundle/
 | .gvimrc
+/Applications/MacVim.app/Contents/Resources/vim/
+| | vim_local.vim
 
 ※windowsの場合
 vimのディレクトリ/
@@ -136,3 +139,6 @@ vimのディレクトリ/
 
 .unite
 とか、そういうディレクトリがホームディレクトリにできますが、それはそれぞれのプラグインが使ってるものです。
+
+
+※プラグイン作成者に感謝！
