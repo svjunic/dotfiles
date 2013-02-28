@@ -1,4 +1,4 @@
-" Last Change: 04-Feb-2013."
+" Last Change: 28-Feb-2013."
 " Maintaner: sv.junic
 
 vimでコーディングするときの環境を
@@ -142,3 +142,30 @@ vimのディレクトリ/
 
 
 ※プラグイン作成者に感謝！
+
+
+メモ：
+zencoding-vim の画像の高さ幅を自動で入力するImageSizeを絶対パスでも動くように
+hokaccha 様のfix absolute image pathを参考にしました。
+
+↓htmlのみ
+/zencoding-vim/autoload/zencoding/lang/html.vim 
+before:
+402   if fn =~ '^\s*$'
+403     return
+404   elseif fn !~ '^\(/\|http\)'
+405     let fn = simplify(expand('%:h') . '/' . fn)
+406   endif
+
+after:
+402   if fn =~ '^\s*$'
+403     return
+404   elseif fn =~ '^/'                                                                                                                               
+405     let fn = findfile(substitute(fn, '/', '', ''), '.;')
+406   elseif fn !~ '^\(/\|http\)'
+407     let fn = simplify(expand('%:h') . '/' . fn)
+408   endif 
+
+
+slim.vim,haml.vimもあるけど、一先ず必要なのはhtmlなのでこれだけメモ残しておき
+ます。
