@@ -31,27 +31,36 @@ NeoBundle 'surround.vim'
 NeoBundle 'mattn/zencoding-vim'
 NeoBundle 'teramako/jscomplete-vim'
 
+NeoBundle 'hail2u/vim-css3-syntax'
+NeoBundle 'cakebaker/scss-syntax.vim'
+NeoBundle 'AtsushiM/sass-compile.vim'
+NeoBundle 'jelera/vim-javascript-syntax'
+
 " 2.
 NeoBundle 'ref.vim'
 NeoBundle 'SQLUtilities'
-NeoBundle 'git://github.com/AtsushiM/sass-compile.vim.git'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'mattn/webapi-vim'
-NeoBundle 'open-browser.vim'
-NeoBundle 'jelera/vim-javascript-syntax'
+NeoBundle 'tyru/open-browser.vim'
+NeoBundle 'git://github.com/tell-k/vim-browsereload-mac.git'
+
 
 " 3.
 "NeoBundle 'ujihisa/unite-locate'
 "NeoBundle 'violetyk/cake.vim'
-"NeoBundle 'tpope/vim-surround'
 "NeoBundle 'taglist.vim'
-"NeoBundle 'ZenCoding.vim'
 
 
 " 4.
-NeoBundle 'TwitVim'
+"NeoBundle 'basyura/TweetVim'
+NeoBundle 'basyura/twibill.vim'
+NeoBundle 'h1mesuke/unite-outline'
+NeoBundle 'basyura/bitly.vim'
 
-" 5. git
+"NeoBundle 'TwitVim'
+NeoBundle 'Shougo/vinarise'
+
+" 5.
 "NeoBundle 'fugitive.vim'
 
 " 6.

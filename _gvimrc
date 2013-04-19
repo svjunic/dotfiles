@@ -1,4 +1,4 @@
-"Last Change: 01-Oct-2012."
+"Last Change: 19-Apr-2013."
 
 " ******************************************
 " Personal Setting *************************
@@ -83,8 +83,8 @@ set laststatus=2
 "set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
 "set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
 "set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
-set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ %c%V%8P
-set statusline=%<%F\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ %c%V%8P
+"set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ %c%V%8P
+set statusline=%<%F\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ %c%V%8P
 
 " 文字コード関連の設定
 set encoding=utf-8
@@ -186,9 +186,11 @@ smap <C-l>    <Plug>(neocomplcache_snippets_expand)
 " netrw
 let g:netrw_use_errorwindow =1
 
-
-"" Twitvim
-"let twitvim_count = 40
+"" TweetVim
+"let g:tweetvim_tweet_per_page = 100
+"let g:tweetvim_cache_size     = 100
+"let g:tweetvim_include_rts    = 1
+"let g:tweetvim_display_source = 1
 
 
 "lynx.cfg の絶対パス
