@@ -8,7 +8,9 @@ if has('win32')
 	" Windows
 	set guifont=MS_Gothic:h10:cSHIFTJIS
 elseif has('mac')
-	set guifont=Osaka－等幅:h10
+	set lines=90
+	set columns=300
+	set guifont=Ayuthaya:h11
 elseif has('xfontset')
 	" UNIX用 (xfontsetを使用)
 	set guifontset=a14,r14,k14
