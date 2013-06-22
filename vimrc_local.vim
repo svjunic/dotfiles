@@ -15,8 +15,10 @@ call neobundle#rc($PLUGIN_PATH)
 "Plugin Installing
 " 1.
 NeoBundle 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'Shougo/neosnippet.git'
+"NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'https://github.com/Shougo/neocomplcache.vim.git'
+"NeoBundle 'Shougo/neosnippet.git'
+NeoBundle 'https://github.com/Shougo/neosnippet.vim.git'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimshell'
 NeoBundle 'Shougo/vimproc', {
@@ -35,7 +37,6 @@ NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'cakebaker/scss-syntax.vim'
 NeoBundle 'AtsushiM/sass-compile.vim'
 NeoBundle 'jelera/vim-javascript-syntax'
-NeoBundle 'vim-scripts/YankRing.vim'
 
 " 2.
 NeoBundle 'ref.vim'
@@ -44,6 +45,7 @@ NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'mattn/webapi-vim'
 NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'git://github.com/tell-k/vim-browsereload-mac.git'
+NeoBundle 'vim-scripts/YankRing.vim'
 
 
 " 3.
@@ -53,7 +55,7 @@ NeoBundle 'git://github.com/tell-k/vim-browsereload-mac.git'
 
 
 " 4.
-"NeoBundle 'basyura/TweetVim'
+NeoBundle 'basyura/TweetVim'
 NeoBundle 'basyura/twibill.vim'
 NeoBundle 'h1mesuke/unite-outline'
 NeoBundle 'basyura/bitly.vim'
@@ -74,6 +76,3 @@ NeoBundle 'Shougo/vinarise'
 
 
 filetype plugin indent on
-
-
-
