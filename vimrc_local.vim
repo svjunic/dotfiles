@@ -35,6 +35,7 @@ NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'cakebaker/scss-syntax.vim'
 NeoBundle 'AtsushiM/sass-compile.vim'
 NeoBundle 'jelera/vim-javascript-syntax'
+NeoBundle 'vim-scripts/YankRing.vim'
 
 " 2.
 NeoBundle 'ref.vim'
