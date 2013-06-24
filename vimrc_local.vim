@@ -60,7 +60,7 @@ NeoBundle 'git://github.com/tell-k/vim-browsereload-mac.git'
 " 4.
 NeoBundle 'basyura/TweetVim'
 NeoBundle 'basyura/twibill.vim'
-NeoBundle 'h1mesuke/unite-outline'
+NeoBundle 'Shougo/unite-outline'
 NeoBundle 'basyura/bitly.vim'
 
 "NeoBundle 'TwitVim'
