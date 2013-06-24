@@ -38,6 +38,10 @@ NeoBundle 'cakebaker/scss-syntax.vim'
 NeoBundle 'AtsushiM/sass-compile.vim'
 NeoBundle 'jelera/vim-javascript-syntax'
 
+NeoBundle 'hallettj/jslint.vim.git'
+NeoBundle 'vim-scripts/YankRing.vim'
+
+
 " 2.
 NeoBundle 'ref.vim'
 NeoBundle 'SQLUtilities'
@@ -45,7 +49,6 @@ NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'mattn/webapi-vim'
 NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'git://github.com/tell-k/vim-browsereload-mac.git'
-NeoBundle 'vim-scripts/YankRing.vim'
 
 
 " 3.
