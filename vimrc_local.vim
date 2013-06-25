@@ -16,8 +16,8 @@ call neobundle#rc($PLUGIN_PATH)
 NeoBundle 'Shougo/neobundle.vim'
 "NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'https://github.com/Shougo/neocomplcache.vim.git'
-NeoBundle 'Shougo/neosnippet.git'
-NeoBundle 'https://github.com/Shougo/neosnippet.vim.git'
+NeoBundle 'git://github.com/Shougo/neosnippet.vim.git'
+NeoBundle 'git://github.com/honza/vim-snippets.git'
 
 
 NeoBundle 'Shougo/unite.vim'
