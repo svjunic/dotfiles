@@ -1,4 +1,4 @@
-"Last Change: 24-Jun-2013."
+"Last Change: 25-Jun-2013."
 
 " ******************************************
 " Personal Setting *************************
@@ -89,6 +89,10 @@ set laststatus=2
 set statusline=%<%F\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ %c%V%8P
 
 " 文字コード関連の設定
+if has("win32")
+  "ref.vim
+  let &termencoding = &encoding
+endif
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,iso-2022-jp,euc-jp,cp932
 set fileformat=unix
@@ -180,12 +184,20 @@ let g:neocomplcache_enable_underbar_completion = 1
 "    \ }
 
 
-" control+l でスニペット展開
-imap <C-l>    <Plug>(neocomplcache_snippets_expand)
-smap <C-l>    <Plug>(neocomplcache_snippets_expand)
+"" neosnippet.vim
+"control+l でスニペット展開
+imap <C-l>    <Plug>(neosnippet_expand_or_jump)
+smap <C-l>    <Plug>(neosnippet_expand_or_jump)
+xmap <C-l>    <Plug>(neosnippet_expand_or_jump)
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: "\<TAB>"
 
 
-" netrw
+"" netrw.vim
 let g:netrw_use_errorwindow =1
 
 "" TweetVim
@@ -195,15 +207,22 @@ let g:netrw_use_errorwindow =1
 "let g:tweetvim_display_source = 1
 
 
-"lynx.cfg の絶対パス
-"vim-ref.vim
-let s:lynx = "Z:\Program Files\vim\lynx.exe"
-let s:cfg  = "Z:\Program Files\vim\lynx.cfg"
-let g:ref_alc_cmd = s:lynx.' -cfg='.s:cfg.' -dump %s'
-let g:ref_alc_start_linenumber = 47 " 開いたときの初期カーソル位置
-let g:ref_alc_encoding = 'Shift-JIS' " 文字化けするならここで文字コードを指定してみる
-
-nmap ,ra :<C-u>Ref alc<Space>
+"" vim-ref.vim
+""lynx.cfg の絶対パス
+""Macはbrew install lynx でOK
+""/usr/local/Cellar/lynx/2.8.7/etc/lynx.cfg
+""      445 #CHARACTER_SET:iso-8859-1
+""追記）446 CHARACTER_SET:utf-8
+""      599 #PREFERRED_LANGUAGE:en
+""追記）600 PREFERRED_LANGUAGE:ja
+"let g:ref_alc_cmd='lynx -dump -nonumbers %s'
+""let s:lynx = "Z:\Program Files\vim\lynx.exe"
+""let s:cfg  = "Z:\Program Files\vim\lynx.cfg"
+"let g:ref_alc_cmd = s:lynx.' -cfg='.s:cfg.' -dump %s'
+"let g:ref_alc_start_linenumber = 47 " 開いたときの初期カーソル位置
+"let g:ref_alc_encoding = 'Shift-JIS' " 文字化けするならここで文字コードを指定してみる
+"
+"nmap ,ra :<C-u>Ref alc<Space>
 
 
 "YankRing.vim
