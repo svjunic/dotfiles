@@ -1,4 +1,4 @@
-"Last Change: 25-Jun-2013."
+"Last Change: 01-Jul-2013."
 
 " ******************************************
 " Personal Setting *************************
@@ -241,9 +241,6 @@ elseif has('mac')
   let g:yankringt_history_file = '.yankring_history'
 elseif has('xfontset')
 endif
-
-" jscomplete-vim
-let g:jscomplete_use = ['dom']
 
 " filetype plugin
 "   -> jslint.vim
