@@ -13,9 +13,8 @@ call neobundle#rc($PLUGIN_PATH)
 
 
 "Plugin Installing
-NeoBundle 'Shougo/neobundle.vim'
-"NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'https://github.com/Shougo/neocomplcache.vim.git'
+"NeoBundle 'Shougo/neobundle.vim'
+NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'git://github.com/Shougo/neosnippet.vim.git'
 NeoBundle 'git://github.com/honza/vim-snippets.git'
 
@@ -45,12 +44,10 @@ NeoBundle 'mattn/zencoding-vim'
 " front-end - css
 NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'cakebaker/scss-syntax.vim'
-NeoBundle 'AtsushiM/sass-compile.vim'
+"NeoBundle 'AtsushiM/sass-compile.vim'
 " front-end - javascript
 NeoBundle 'hallettj/jslint.vim.git'
-NeoBundle 'teramako/jscomplete-vim'
 NeoBundle 'jelera/vim-javascript-syntax'
-
 
 " utility2
 NeoBundle 'SQLUtilities'
@@ -63,7 +60,7 @@ NeoBundle 'basyura/TweetVim'
 NeoBundle 'basyura/twibill.vim'
 NeoBundle 'basyura/bitly.vim'
 "NeoBundle 'TwitVim'
-NeoBundle 'Shougo/vinarise'
+"NeoBundle 'Shougo/vinarise'
 "NeoBundle 'fugitive.vim'
 "NeoBundle 'The-NERD-tree'
 "NeoBundle 'The-NERD-Commenter'
