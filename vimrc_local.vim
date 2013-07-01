@@ -46,7 +46,7 @@ NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'cakebaker/scss-syntax.vim'
 "NeoBundle 'AtsushiM/sass-compile.vim'
 " front-end - javascript
-NeoBundle 'hallettj/jslint.vim.git'
+"NeoBundle 'hallettj/jslint.vim.git'
 NeoBundle 'jelera/vim-javascript-syntax'
 
 " utility2
