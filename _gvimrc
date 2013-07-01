@@ -16,30 +16,30 @@ elseif has('xfontset')
 	set guifontset=a14,r14,k14
 endif
 
-" mac用の記述しないと・・・
-" Open URL - Firefox firefox.exe -new-tab
-function! HandleURL()
-	let s:uri = matchstr(getline("."), '[a-z]*://[^ >,;]*')
-	if s:uri != ""
-		let path = "C:/Program Files/Mozilla Firefox/"
-		exec 'silent !"' . path . 'firefox.exe" -new-tab ' . s:uri
-	else
-		echo "No URI found in line."
-	endif
-endfunction
-" \u で実行
-map <leader>u :call HandleURL()<cr>
-
-" mac用の記述しないと・・・
-" Search Keyword - firefox.exe -new-tab google-search-url
-function! Google()
-	let keyword = expand("<cword>")
-	let url = "http://www.google.com/search?q=" . keyword
-	let path = "C:/Program Files/Mozilla Firefox/"
-	exec 'silent !"' . path . 'firefox.exe" -new-tab ' . url
-endfun
-" \g で実行
-nmap <leader>g :call Google()<CR>
+"" " mac用の記述しないと・・・
+"" " Open URL - Firefox firefox.exe -new-tab
+"" function! HandleURL()
+"" 	let s:uri = matchstr(getline("."), '[a-z]*://[^ >,;]*')
+"" 	if s:uri != ""
+"" 		let path = "C:/Program Files/Mozilla Firefox/"
+"" 		exec 'silent !"' . path . 'firefox.exe" -new-tab ' . s:uri
+"" 	else
+"" 		echo "No URI found in line."
+"" 	endif
+"" endfunction
+"" " \u で実行
+"" map <leader>u :call HandleURL()<cr>
+"" 
+"" " mac用の記述しないと・・・
+"" " Search Keyword - firefox.exe -new-tab google-search-url
+"" function! Google()
+"" 	let keyword = expand("<cword>")
+"" 	let url = "http://www.google.com/search?q=" . keyword
+"" 	let path = "C:/Program Files/Mozilla Firefox/"
+"" 	exec 'silent !"' . path . 'firefox.exe" -new-tab ' . url
+"" endfun
+"" " \g で実行
+"" nmap <leader>g :call Google()<CR>
 
 
 " :CopyCmdOutput
@@ -49,6 +49,7 @@ func! s:func_copy_cmd_output(cmd)
 	redir END
 endfunc
 command! -nargs=1 -complete=command CopyCmdOutput call <SID>func_copy_cmd_output(<q-args>)
+
 
 
 " ******************************************
@@ -160,10 +161,10 @@ let g:neocomplcache_enable_at_startup = 1 " 起動時に有効化
 NeoComplCacheEnable
 
 "" キャッシュする文字列の長さの最小値（デフォルト値4）
-"let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_min_syntax_length = 3
 
 "" 大文字が入力さた場合、限り大文字小文字の区別をする
-"let g:neocomplcache_enable_smart_case = 1
+let g:neocomplcache_enable_smart_case = 1
 
 " キャメルケースの候補展開
 " 0:無効
@@ -203,7 +204,7 @@ let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
 
 
 "" netrw.vim
-let g:netrw_use_errorwindow =1
+let g:netrw_use_errorwindow = 1
 
 
 "" TweetVim
