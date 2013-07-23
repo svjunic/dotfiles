@@ -38,6 +38,7 @@ NeoBundle 'surround.vim'
 NeoBundle 'vim-scripts/YankRing.vim'
 NeoBundle 'ref.vim'
 NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'https://github.com/rbtnn/vimconsole.vim.git'
 
 " front-end - html
 NeoBundle 'mattn/zencoding-vim'
@@ -47,6 +48,7 @@ NeoBundle 'cakebaker/scss-syntax.vim'
 "NeoBundle 'AtsushiM/sass-compile.vim'
 " front-end - javascript
 "NeoBundle 'hallettj/jslint.vim.git'
+NeoBundle 'https://github.com/scrooloose/syntastic.git'
 NeoBundle 'jelera/vim-javascript-syntax'
 
 " utility2
