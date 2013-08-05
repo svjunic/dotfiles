@@ -58,10 +58,10 @@ hi PmenuSbar guibg=#555753
 hi PmenuThumb guifg=#ffffff
 
 " Diff
-hi DiffDelete guifg=#2e3436 guibg=#0e1416
+hi DiffDelete guifg=#4D3800 guibg=#0e1416
 hi DiffAdd guibg=#1f2b2d
-hi DiffChange guibg=#2e3436
-hi DiffText guibg=#000000 gui=none
+hi DiffChange guibg=#003C70
+hi DiffText guibg=#b30487 gui=none
 
 " Folds
 hi Folded guifg=#d3d7cf guibg=#204a87
