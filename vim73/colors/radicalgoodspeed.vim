@@ -1,17 +1,9 @@
 " Vim color file
-" Maintaner: Radu Dineiu <radu.dineiu@gmail.com>
-" URL: http://ld.yi.org/vim/rdark/
-" Last Change: 2007 Jun 23
-" Version: 0.6
-"
-" Features:
-"   - let rdark_current_line = 1 if you want to highlight the current line
-"
+" Maintaner: sv.junic(sv.junic@gmail.com)
+" URL: http://sv.junic.jp
+" Last Change: 2013 Aug 8
+" Version: 0.1
 " Changelog:
-"   0.5 - fixed the Pmenu colors
-"   0.6 - added SignColumn colors
-"
-" svjunic Extends rdark
 
 set background=dark
 
@@ -20,13 +12,12 @@ if exists("syntax_on")
 	syntax reset
 endif
 
-let colors_name = "svjunic"
+let colors_name = "radicalgoodspeed"
 
 " Current Line
 set cursorline
 hi clear CursorLine
 hi CursorLine guibg=black ctermbg=black
-
 
 
 " Default Colors
@@ -83,10 +74,10 @@ hi MatchParen guifg=#2e3436 guibg=#fcaf3e
 hi Directory guifg=#ffffff
 
 " Syntax
-hi Comment guifg=#656763
+hi Comment guifg=#00ccff
 hi Constant guifg=#8ae234
 hi Number guifg=#8ae234
-hi Statement guifg=#729fcf gui=none
+hi Statement guifg=#ff88ee gui=none
 hi Identifier guifg=#ffffff
 hi PreProc guifg=#fcaf3e
 hi Function guifg=#fcaf3e
@@ -165,7 +156,7 @@ hi link cssFontAttr Constant
 if has('win32')
 	set transparency=240
 elseif has('mac')
-	set transparency=7
+	set transparency=10
 elseif has('xfontset')
 	"set transparency=7
 endif
