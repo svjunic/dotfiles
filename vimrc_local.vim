@@ -1,5 +1,6 @@
 """ vundle
 set nocompatible
+
 filetype off
 ""rtp は runtimepath
 if has('win32') || has('win64')
@@ -42,14 +43,19 @@ NeoBundle 'https://github.com/rbtnn/vimconsole.vim.git'
 
 " front-end - html
 NeoBundle 'mattn/zencoding-vim'
+
 " front-end - css
-NeoBundle 'hail2u/vim-css3-syntax'
-NeoBundle 'cakebaker/scss-syntax.vim'
+"NeoBundle 'hail2u/vim-css3-syntax'
+"NeoBundle 'cakebaker/scss-syntax.vim'
 "NeoBundle 'AtsushiM/sass-compile.vim'
+NeoBundle 'https://gist.github.com/1398610.git'
+
 " front-end - javascript
 "NeoBundle 'hallettj/jslint.vim.git'
 NeoBundle 'https://github.com/scrooloose/syntastic.git'
 NeoBundle 'jelera/vim-javascript-syntax'
+"necoとなんかバッティング
+"NeoBundle 'https://github.com/teramako/jscomplete-vim.git'
 
 " utility2
 NeoBundle 'SQLUtilities'
@@ -69,5 +75,9 @@ NeoBundle 'basyura/bitly.vim'
 "NeoBundle 'thinca/vim-localrc'
 "NeoBundle 'motemen/hatena-vim'
 "NeoBundle 'mattn/unite-advent_calendar'
+
+NeoBundle 'https://github.com/vim-scripts/css_color.vim.git'
+NeoBundle 'https://github.com/vim-scripts/hexHighlight.vim.git'
+
 
 filetype plugin indent on
