@@ -1,10 +1,17 @@
 " Vim color file
-" Maintaner: sv.junic(sv.junic@gmail.com)
-" URL: http://sv.junic.jp
-" Last Change: 2013 Aug 8
-" Version: 0.2
-" Changelog: 0.1 - add many color
-"            0.2 - change many color
+" Maintaner: Radu Dineiu <radu.dineiu@gmail.com>
+" URL: http://ld.yi.org/vim/rdark/
+" Last Change: 2007 Jun 23
+" Version: 0.6
+"
+" Features:
+"   - let rdark_current_line = 1 if you want to highlight the current line
+"
+" Changelog:
+"   0.5 - fixed the Pmenu colors
+"   0.6 - added SignColumn colors
+"
+" svjunic Extends rdark
 
 set background=dark
 
@@ -13,7 +20,7 @@ if exists("syntax_on")
 	syntax reset
 endif
 
-let colors_name = "radicalgoodspeed"
+let colors_name = "svjunic"
 
 " Current Line
 set cursorline
@@ -21,8 +28,9 @@ hi clear CursorLine
 hi CursorLine guibg=black ctermbg=black
 
 
+
 " Default Colors
-hi Normal guifg=#f0f0f0 guibg=#1e2426
+hi Normal guifg=#babdb6 guibg=#1e2426
 hi NonText guifg=#2c3032 guibg=#2c3032 gui=none
 hi Cursor guibg=#babdb6
 hi ICursor guibg=#babdb6
@@ -61,7 +69,7 @@ hi FoldColumn guifg=#3465a4 guibg=#000000
 " Specials
 hi Title guifg=#fcaf3e
 hi Todo guifg=#fcaf3e guibg=bg
-hi SpecialKey guifg=#ef2929 cterm=underline gui=underline
+hi SpecialKey guifg=#ef2929
 
 " Tabs
 hi TabLine guibg=#0a1012 guifg=#888a85
@@ -75,11 +83,11 @@ hi MatchParen guifg=#2e3436 guibg=#fcaf3e
 hi Directory guifg=#ffffff
 
 " Syntax
-hi Comment guifg=#00ccff
+hi Comment guifg=#656763
 hi Constant guifg=#8ae234
 hi Number guifg=#8ae234
-hi Statement guifg=#ff88ee gui=none
-hi Identifier guifg=#ffd700
+hi Statement guifg=#729fcf gui=none
+hi Identifier guifg=#ffffff
 hi PreProc guifg=#fcaf3e
 hi Function guifg=#fcaf3e
 hi Type guifg=#e3e7df gui=none
@@ -153,12 +161,11 @@ hi link cssTextAttr Constant
 hi link cssColorAttr Constant
 hi link cssFontAttr Constant
 
-
-"" gui
+""gui
 if has('win32')
 	set transparency=240
 elseif has('mac')
-	set transparency=10
+	set transparency=7
 elseif has('xfontset')
 	"set transparency=7
 endif
