@@ -1,4 +1,4 @@
-"Last Change: 08-Aug-2013."
+"Last Change: 09-Aug-2013."
 
 " ******************************************
 " ******************************************
@@ -111,7 +111,7 @@ command! -nargs=1 -complete=command CopyCmdOutput call <SID>func_copy_cmd_output
 nnoremap <silent> ,cr :ChromeReload<CR>
 
 
-autocmd css FileType call g:setPreviewCSSColorInLine()
+autocmd FileType css,scss,sass call g:setPreviewCSSColorInLine()
 
 
 " ******************************************
@@ -277,7 +277,7 @@ endif
 " Enable snipMate compatibility feature.
 let g:neosnippet#enable_snipmate_compatibility = 1
 " Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets,~/.vim/bundle/1398610'
 
 
 
@@ -364,26 +364,16 @@ let g:syntastic_style_warning_symbol = '⚠'
 
 
 " ******************************************
-" Append Override Settings *****************
+" Highlight Override Settings **************
+
 
 " MULTIByte Space Highlight
-highlight ZenkakuSpace cterm=reverse gui=reverse
+hi ZenkakuSpace cterm=reverse gui=reverse
 match ZenkakuSpace /　/
 
 " tab highlight
 set listchars=tab:\ \ 
-highlight SpecialKey cterm=underline gui=underline
 
-"" "" カーソル行のハイライト
-"" set cursorline
-"" hi clear CursorLine
-"" "highlight CursorLine ctermbg=black guibg=black
-"" highlight CursorLine guibg=black
-"" 
-"" "" 候補のプルダウンウィンドウの配色
-"" hi Pmenu guibg=#666666
-"" hi PmenuSel guibg=#8cd0d3 guifg=#666666
-"" hi PmenuSbar guibg=#333333
-"" highlight Pmenu ctermbg=4
-"" highlight PmenuSel ctermbg=1
-"" highlight PMenuSbar ctermbg=4
+" The Usual
+hi CurlyBracket guifg=#00bfff
+match CurlyBracket /[{}]/
