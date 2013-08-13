@@ -1,4 +1,4 @@
-"Last Change: 09-Aug-2013."
+"Last Change: 13-Aug-2013."
 
 " ******************************************
 " ******************************************
@@ -116,7 +116,31 @@ autocmd FileType css,scss,sass call g:setPreviewCSSColorInLine()
 
 " ******************************************
 " Minor settings ***************************
-" カラー設定
+
+" Highlight Override Settings
+" tab highlight
+set listchars=tab:\ \ 
+
+augroup highlightOverride
+	autocmd! highlightOverride
+
+	"" highlight " +$"
+	autocmd ColorScheme,BufNewFile,BufRead * highlight WhitespaceEOL cterm=underline ctermbg=red guibg=#FF0000
+	au BufWinEnter * let w:m1 = matchadd("WhitespaceEOL", ' +$')
+	au WinEnter * let w:m1 = matchadd("WhitespaceEOL", ' +$')
+
+	"" highlight "　"
+	autocmd ColorScheme,BufNewFile,BufRead * highlight ZenkakuSpace cterm=reverse gui=reverse
+	au BufWinEnter * let w:m2 = matchadd("ZenkakuSpace", '　')
+	au WinEnter * let w:m2 = matchadd("ZenkakuSpace", '^\t+')
+
+	"" highlight "[{}]"
+	autocmd ColorScheme,BufNewFile,BufRead * highlight CurlyBracket guifg=#00bfff
+	au BufWinEnter * let w:m3 = matchadd("CurlyBracket", '[{}]')
+	au WinEnter * let w:m3 = matchadd("CurlyBracket", '[{}]')
+augroup END     
+
+" Read Colorscheme
 colorscheme radicalgoodspeed
 
 " Windows
@@ -132,7 +156,6 @@ endif
 " Ctrl-L で検索ハイライトを消す
 nmap <C-l> <C-l>:nohlsearch<CR>
 
-" syntax on
 set list
 set nrformats-=octal
 set hlsearch
@@ -361,19 +384,22 @@ let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_style_warning_symbol = '⚠'
 
 
-
-
 " ******************************************
-" Highlight Override Settings **************
+" t9md/vim-quickhl.vim *********************
+nmap <Space>m <Plug>(quickhl-toggle)
+"xmap <Space>m <Plug>(quickhl-toggle)
+nmap <Space>M <Plug>(quickhl-reset)
+"xmap <Space>M <Plug>(quickhl-reset)
+nmap <Space>j <Plug>(quickhl-match)
 
-
-" MULTIByte Space Highlight
-hi ZenkakuSpace cterm=reverse gui=reverse
-match ZenkakuSpace /　/
-
-" tab highlight
-set listchars=tab:\ \ 
-
-" The Usual
-hi CurlyBracket guifg=#00bfff
-match CurlyBracket /[{}]/
+"" let g:quickhl_colors = [
+"" \ "gui=bold cterm=reverse gui=reverse",
+"" \ "guibg=NONE guifg=#00bfff",
+"" \ "guibg=NONE guifg=#00bfff",
+"" \ "guibg=NONE guifg=#ff0000",
+"" \ ]
+"" 
+"" let g:quickhl_keywords = [
+"" \ ]
+" "call QuickhlReloadColors
+" "call QuickhlMatchAuto
