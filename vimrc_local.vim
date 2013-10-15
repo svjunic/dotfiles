@@ -1,4 +1,4 @@
-"Last Change: 12-Aug-2013."
+"Last Change: 15-Aug-2013."
 """ vundle
 set nocompatible
 
@@ -43,7 +43,8 @@ NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'https://github.com/rbtnn/vimconsole.vim.git'
 
 " front-end - html
-NeoBundle 'mattn/zencoding-vim'
+"NeoBundle 'mattn/zencoding-vim'
+NeoBundle 'https://github.com/mattn/emmet-vim.git'
 
 " front-end - css
 "NeoBundle 'hail2u/vim-css3-syntax'
