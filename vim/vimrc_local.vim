@@ -1,4 +1,4 @@
-"Last Change: 15-Aug-2013."
+"Last Change: 21-Nov-2013."
 """ vundle
 set nocompatible
 
@@ -9,6 +9,8 @@ if has('win32') || has('win64')
 	let $PLUGIN_PATH = $VIM.'/vimfiles/bundle/'
 else
 	set rtp+=~/.vim/bundle/neobundle.vim
+	set rtp+=~/.vim/bundle/vimproc.vim
+	set rtp+=~/.vim/colors
 	let $PLUGIN_PATH = expand('~/.vim/bundle/')
 endif
 call neobundle#rc($PLUGIN_PATH)
@@ -45,10 +47,11 @@ NeoBundle 'https://github.com/rbtnn/vimconsole.vim.git'
 " front-end - html
 "NeoBundle 'mattn/zencoding-vim'
 NeoBundle 'https://github.com/mattn/emmet-vim.git'
+NeoBundle 'https://github.com/othree/html5.vim.git'
 
 " front-end - css
 "NeoBundle 'hail2u/vim-css3-syntax'
-"NeoBundle 'cakebaker/scss-syntax.vim'
+NeoBundle 'cakebaker/scss-syntax.vim'
 "NeoBundle 'AtsushiM/sass-compile.vim'
 NeoBundle 'https://gist.github.com/1398610.git'
 

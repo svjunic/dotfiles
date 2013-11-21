@@ -109,7 +109,7 @@ hi javaScriptOperator guifg=#888a85
 " HTML
 hi htmlTag guifg=#888a85
 hi htmlEndTag guifg=#888a85
-hi htmlTagName guifg=#babdb6
+hi htmlTagName guifg=#ffffff
 hi htmlSpecialTagName guifg=#babdb6
 hi htmlArg guifg=#d3d7cf
 hi htmlTitle guifg=#8ae234 gui=none
@@ -158,7 +158,7 @@ hi link cssFontAttr Constant
 if has('win32')
 	set transparency=240
 elseif has('mac')
-	set transparency=10
+	set transparency=14
 elseif has('xfontset')
 	"set transparency=7
 endif
