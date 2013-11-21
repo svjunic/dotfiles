@@ -10,7 +10,6 @@ if has('win32') || has('win64')
 else
 	set rtp+=~/.vim/bundle/neobundle.vim
 	set rtp+=~/.vim/bundle/vimproc.vim
-	set rtp+=~/.vim/colors
 	let $PLUGIN_PATH = expand('~/.vim/bundle/')
 endif
 call neobundle#rc($PLUGIN_PATH)
@@ -84,5 +83,8 @@ NeoBundle 'basyura/bitly.vim'
 NeoBundle 'https://github.com/vim-scripts/css_color.vim.git'
 NeoBundle 'https://github.com/vim-scripts/hexHighlight.vim.git'
 
+
+" ColorScheme
+NeoBundle 'https://github.com/svjunic/RadicalGoodSpeed.git'
 
 filetype plugin indent on

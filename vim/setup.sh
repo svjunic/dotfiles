@@ -1,7 +1,7 @@
 #!/bin/sh
 
 VIM_HOME=$HOME/.vim
-VIM_COLORS=$HOME/.vim/colors
+#VIM_COLORS=$HOME/.vim/colors
 VIM_BUNDLE=$HOME/.vim/bundle
 MACVIM_RESOURCES_VIM=/Applications/MacVim.app/Contents/Resources/vim
 
@@ -28,6 +28,8 @@ then
 fi
 
 
+echo "copy vimrc_local.vim $MACVIM_RESOURCES_VIM"
+cp vimrc_local.vim $MACVIM_RESOURCES_VIM
 
 echo "copy .vimrc ~/"
 cp .vimrc ~/
@@ -35,8 +37,8 @@ cp .vimrc ~/
 echo "copy .gvimrc ~/"
 cp .gvimrc ~/
 
-echo "copy ./colors ~/.vim"
-cp -a ./colors ~/.vim
+#echo "copy ./colors ~/.vim"
+#cp -a ./colors ~/.vim
 
 echo "git clone neobundle"
 git clone https://github.com/Shougo/neobundle.vim.git $VIM_BUNDLE/neobundle.vim
