@@ -1,26 +1,49 @@
-"Last Change: 23-Jul-2013."
+"Last Change: 20-Nov-2013."
 
 " ******************************************
 " ******************************************
 " Personal Settings ************************
 
 " テスト
+function! NormalMode()
+	set lines=90
+	set columns=300
+	set guifont=Ayuthaya:h11
+endfunction
+map <leader>n :call NormalMode()<cr>
+
+function! SlashTheEnd()
+%s/\(<br[^>]*\) \/>/\1>/g
+%s/\(<br[^>]*\)\/>/\1>/g
+%s/\(<img[^>]*\) \/>/\1>/g
+%s/\(<img[^>]*\)\/>/\1>/g
+%s/\(<hr[^>]*\) \/>/\1>/g
+%s/\(<hr[^>]*\)\/>/\1>/g
+%s/\(<col[^>]*\) \/>/\1>/g
+%s/\(<col[^>]*\)\/>/\1>/g
+endfunction
+map <leader>5 :call SlashTheEnd()<cr>
+
+" テスト 2
 function! SuperMode()
 	set lines=100
 	set columns=300
 	set guifont=Zapfino:h11
 endfunction
-" \s で実行
-map <leader>s :call NormalMode()<cr>
-function! SuperMode()
-		set lines=90
-		set columns=300
-		set guifont=Ayuthaya:h11
-endfunction
-" \s で実行
-map <leader>n :call NormalMode()<cr>
+map <leader>s :call SuperMode()<cr>
 
-" Font (.gvimrc override)
+" ハイライト確認用
+function! _VimColorTest()
+	so $VIMRUNTIME/syntax/colortest.vim
+endfunction
+map <leader>vc :call _VimColorTest()<cr>
+
+function! _VimHighliteColorTest()
+	so $VIMRUNTIME/syntax/hitest.vim
+endfunction
+map <leader>vhc :call _VimHighliteColorTest()<cr>
+
+" Font
 function! SetInit()
 	if has('win32')
 		" Windows
@@ -38,7 +61,7 @@ function! SetInit()
 
 endfunction!
 
-call SetInit()<cr>
+call SetInit()<CR>
 
 function! ToolbarToggle()
 	if &guioptions == 'egrLtTm'
@@ -96,11 +119,18 @@ func! s:func_copy_cmd_output(cmd)
 endfunc
 command! -nargs=1 -complete=command CopyCmdOutput call <SID>func_copy_cmd_output(<q-args>)
 
+" 全部乗せ
+nnoremap <silent> ,cr :ChromeReload<CR>
+
+
+autocmd BufRead,BufNewFile *.scss set filetype=scss
+autocmd BufRead,BufNewFile *.sass set filetype=scss
+
 
 " ******************************************
 " Minor settings ***************************
 " カラー設定
-colorscheme svjunic
+colorscheme radicalgoodspeed
 
 " Windows
 if has('win32')
@@ -168,7 +198,7 @@ else
 	let $TEMPLATE_PATH = expand('~/.vim/template/')
 endif
 autocmd BufNewFile *.php 0r $TEMPLATE_PATH/php.txt
-autocmd BufNewFile *.js  0r  $TEMPLATE_PATH/javascript.txt
+autocmd BufNewFile *.js  0r $TEMPLATE_PATH/javascript.txt
 
 
 " ******************************************
@@ -212,8 +242,15 @@ au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
 let g:neocomplcache_enable_at_startup = 1 " 起動時に有効化
 NeoComplCacheEnable
 
+"" オムニ補完無効
+if !exists('g:neocomplcache_omni_patterns')
+let g:neocomplcache_omni_patterns = {}
+endif
+let g:neocomplcache_omni_patterns['scss'] = '';
+let g:neocomplcache_omni_patterns['sass'] = '';
+
 "" キャッシュする文字列の長さの最小値（デフォルト値4）
-let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_min_syntax_length = 4
 
 "" 大文字が入力さた場合、限り大文字小文字の区別をする
 let g:neocomplcache_enable_smart_case = 1
@@ -260,7 +297,7 @@ endif
 " Enable snipMate compatibility feature.
 let g:neosnippet#enable_snipmate_compatibility = 1
 " Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets,~/.vim/bundle/1398610'
 
 
 
@@ -283,6 +320,19 @@ let g:tweetvim_display_source = 1
 nnoremap <silent> ,th :<C-u>TweetVimHomeTimeline<CR>
 
 
+" ******************************************
+" othree/html5.vim *********************************
+"Disable event-handler attributes support:
+let g:html5_event_handler_attributes_complete = 0
+
+"Disable RDFa attributes support:
+let g:html5_rdfa_attributes_complete = 0
+
+"Disable microdata attributes support:
+let g:html5_microdata_attributes_complete = 0
+
+"Disable WAI-ARIA attribute support:
+let g:html5_aria_attributes_complete = 0
 
 
 " ******************************************
@@ -295,6 +345,7 @@ nnoremap <silent> ,th :<C-u>TweetVimHomeTimeline<CR>
 "      599 #PREFERRED_LANGUAGE:en
 "追記）600 PREFERRED_LANGUAGE:ja
 let g:ref_alc_cmd = s:lynx.' -cfg='.s:cfg.' -dump -nonumbers %s'
+""let g:ref_alc_cmd = 'lynx -dump -nonumbers %s'
 let g:ref_alc_start_linenumber = 47 " 開いたときの初期カーソル位置
 "let g:ref_alc_encoding = 'Shift-JIS' " 文字化けするならここで文字コードを指定してみる
 nmap ,ra :<C-u>Ref alc<Space>
@@ -319,16 +370,15 @@ filetype plugin on
 
 " ******************************************
 " syntastic.vim ****************************
-" 参考 http://blog.craftgear.net/50832ff38cdc8fb415000001/title
 " jshintを入れる必要あり( npm install -g jshint )
-let g:syntastic_check_on_open = 1    "ファイルを開いたときはチェックしない
-let g:syntastic_check_on_save = 1    "保存時にはチェック
-let g:syntastic_auto_loc_list = 1    "エラーがあったら自動でロケーションリストを開く
+let g:syntastic_check_on_open = 0    "ファイルを開いたときはチェックしない
+let g:syntastic_check_on_wq = 0      "保存時にはチェック
+let g:syntastic_auto_loc_list = 2    "エラーがあったら自動でロケーションリストを開く（0:自動で閉じない、1:自動で開いたり閉じたり、2:そもそも開かない）
 let g:syntastic_loc_list_height = 6  "エラー表示ウィンドウの高さ
 set statusline += %#warningmsg#      "エラーメッセージの書式
 set statusline += %{SyntasticStatuslineFlag()}
 set statusline += %*
-let g:syntastic_javascript_checker = 'jshint' "jshintを使う（これはデフォルトで設定されている）
+"let g:syntastic_javascript_checker = 'jshint' "jshintを使う（これはデフォルトで設定されている）
 let g:syntastic_mode_map = {
       \ 'mode': 'active',
       \ 'active_filetypes': ['ruby', 'javascript'],
@@ -340,30 +390,25 @@ let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_enable_highlighting = 1
 
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_style_error_symbol = '✗'
+let g:syntastic_warning_symbol = '⚠'
+let g:syntastic_style_warning_symbol = '⚠'
+
 
 
 
 " ******************************************
-" Append Override Settings *****************
+" Highlight Override Settings **************
+
 
 " MULTIByte Space Highlight
-highlight ZenkakuSpace cterm=reverse gui=reverse
+hi ZenkakuSpace cterm=reverse gui=reverse
 match ZenkakuSpace /　/
 
 " tab highlight
 set listchars=tab:\ \ 
-highlight SpecialKey cterm=underline gui=underline
 
-"" カーソル行のハイライト
-set cursorline
-hi clear CursorLine
-"highlight CursorLine ctermbg=black guibg=black
-highlight CursorLine guibg=black
-
-"" 候補のプルダウンウィンドウの配色
-hi Pmenu guibg=#666666
-hi PmenuSel guibg=#8cd0d3 guifg=#666666
-hi PmenuSbar guibg=#333333
-highlight Pmenu ctermbg=4
-highlight PmenuSel ctermbg=1
-highlight PMenuSbar ctermbg=4
+" The Usual
+hi CurlyBracket guifg=#00bfff
+match CurlyBracket /[{}]/
