@@ -1,4 +1,4 @@
-"Last Change: 21-Nov-2013."
+"Last Change: 27-Dec-2013."
 """ vundle
 set nocompatible
 
@@ -21,9 +21,8 @@ NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'git://github.com/Shougo/neosnippet.vim.git'
 NeoBundle 'git://github.com/honza/vim-snippets.git'
 
-
 NeoBundle 'Shougo/unite.vim'
-"NeoBundle 'ujihisa/unite-locate'
+NeoBundle 'ujihisa/unite-locate'
 NeoBundle 'Shougo/unite-outline'
 
 NeoBundle 'Shougo/vimshell'
@@ -36,7 +35,9 @@ NeoBundle 'Shougo/vimproc', {
 \   },
 \ }
 
+
 " utility
+NeoBundle 'scrooloose/syntastic.git'
 NeoBundle 'surround.vim'
 NeoBundle 'vim-scripts/YankRing.vim'
 NeoBundle 'ref.vim'
@@ -44,33 +45,45 @@ NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'https://github.com/rbtnn/vimconsole.vim.git'
 
 " front-end - html
-"NeoBundle 'mattn/zencoding-vim'
-NeoBundle 'https://github.com/mattn/emmet-vim.git'
 NeoBundle 'https://github.com/othree/html5.vim.git'
+NeoBundle 'https://github.com/mattn/emmet-vim.git'
+
+NeoBundle 'digitaltoad/vim-jade.git'
 
 " front-end - css
-"NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'cakebaker/scss-syntax.vim'
-"NeoBundle 'AtsushiM/sass-compile.vim'
 NeoBundle 'https://gist.github.com/1398610.git'
+NeoBundle 'https://github.com/vim-scripts/css_color.vim.git'
+NeoBundle 'https://github.com/vim-scripts/hexHighlight.vim.git'
 
 " front-end - javascript
-"NeoBundle 'hallettj/jslint.vim.git'
-NeoBundle 'https://github.com/scrooloose/syntastic.git'
 NeoBundle 'jelera/vim-javascript-syntax'
-"necoとなんかバッティング
-"NeoBundle 'https://github.com/teramako/jscomplete-vim.git'
+NeoBundle 'leafgarland/typescript-vim'
 
 " utility2
 NeoBundle 'SQLUtilities'
 NeoBundle 'mattn/webapi-vim'
 NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'git://github.com/tell-k/vim-browsereload-mac.git'
-"NeoBundle 'violetyk/cake.vim'
-"NeoBundle 'taglist.vim'
 NeoBundle 'basyura/TweetVim'
 NeoBundle 'basyura/twibill.vim'
 NeoBundle 'basyura/bitly.vim'
+
+
+" ColorScheme
+NeoBundle 'https://github.com/svjunic/RadicalGoodSpeed.git'
+
+
+
+
+
+
+
+"NeoBundle 'hail2u/vim-css3-syntax'
+"NeoBundle 'AtsushiM/sass-compile.vim'
+
+"NeoBundle 'violetyk/cake.vim'
+"NeoBundle 'taglist.vim'
 "NeoBundle 'TwitVim'
 "NeoBundle 'Shougo/vinarise'
 "NeoBundle 'fugitive.vim'
@@ -79,12 +92,5 @@ NeoBundle 'basyura/bitly.vim'
 "NeoBundle 'thinca/vim-localrc'
 "NeoBundle 'motemen/hatena-vim'
 "NeoBundle 'mattn/unite-advent_calendar'
-
-NeoBundle 'https://github.com/vim-scripts/css_color.vim.git'
-NeoBundle 'https://github.com/vim-scripts/hexHighlight.vim.git'
-
-
-" ColorScheme
-NeoBundle 'https://github.com/svjunic/RadicalGoodSpeed.git'
 
 filetype plugin indent on
