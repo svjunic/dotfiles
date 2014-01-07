@@ -1,4 +1,4 @@
-"Last Change: 25-Nov-2013."
+"Last Change: 06-Jan-2014."
 
 " ハイライト確認用
 function! _VimColorTest()
@@ -291,11 +291,11 @@ let g:html5_aria_attributes_complete = 0
 " ******************************************
 " YankRing.vim *****************************
 if has('win32')
-  let g:yankringt_history_dir = expand('$HOME')
-  let g:yankringt_history_file = '.yankring_history'
+	let g:yankring_history_dir = expand('$HOME')
+	let g:yankring_history_file = 'yankring_history'
 elseif has('mac')
-  let g:yankringt_history_dir = expand('~/.vim/')
-  let g:yankringt_history_file = '.yankring_history'
+	let g:yankring_history_dir = '~/.vim'
+	let g:yankring_history_file = 'yankring_history'
 elseif has('xfontset')
 endif
 
