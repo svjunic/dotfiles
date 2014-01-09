@@ -1,4 +1,4 @@
-"Last Change: 06-Jan-2014."
+"Last Change: 09-Jan-2014."
 
 " ハイライト確認用
 function! _VimColorTest()
@@ -10,6 +10,12 @@ function! _VimHighliteColorTest()
 	so $VIMRUNTIME/syntax/hitest.vim
 endfunction
 map <leader>vhc :call _VimHighliteColorTest()<cr>
+
+" Irregular keymap
+nmap ˜ ~
+nmap te :tabedit<cr>
+nmap tn :tabnext<cr>
+nmap tp :tabprevious<cr>
 
 " Font
 function! SetInit()
