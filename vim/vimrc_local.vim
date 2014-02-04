@@ -1,4 +1,4 @@
-"Last Change: 27-Dec-2013."
+"Last Change: 04-Feb-2014."
 """ vundle
 set nocompatible
 
@@ -19,7 +19,9 @@ call neobundle#rc($PLUGIN_PATH)
 "NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'git://github.com/Shougo/neosnippet.vim.git'
+NeoBundle "Shougo/neosnippet-snippets"
 NeoBundle 'git://github.com/honza/vim-snippets.git'
+NeoBundle 'gh:svjunic/javascript-snippet.git'
 
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'ujihisa/unite-locate'
@@ -53,7 +55,6 @@ NeoBundle 'digitaltoad/vim-jade.git'
 " front-end - css
 NeoBundle 'cakebaker/scss-syntax.vim'
 NeoBundle 'https://gist.github.com/1398610.git'
-NeoBundle 'https://github.com/vim-scripts/css_color.vim.git'
 NeoBundle 'https://github.com/vim-scripts/hexHighlight.vim.git'
 
 " front-end - javascript
@@ -70,9 +71,9 @@ NeoBundle 'basyura/twibill.vim'
 NeoBundle 'basyura/bitly.vim'
 
 
-" ColorScheme
-NeoBundle 'https://github.com/svjunic/RadicalGoodSpeed.git'
 
+" ColorScheme
+NeoBundle 'gh:svjunic/RadicalGoodSpeed.vim.git'
 
 
 
