@@ -1,4 +1,4 @@
-"Last Change: 09-Jan-2014."
+"Last Change: 04-Feb-2014."
 
 " ハイライト確認用
 function! _VimColorTest()
@@ -64,6 +64,10 @@ command! -nargs=1 -complete=command CopyCmdOutput call <SID>func_copy_cmd_output
 
 " 全部乗せ
 nnoremap <silent> ,cr :ChromeReload<CR>
+
+"" set clipboard=unnamed
+"" nnoremap <D-c> :!pbcopy;pbpaste<CR>
+
 
 
 autocmd BufRead,BufNewFile *.scss set filetype=scss
@@ -141,10 +145,15 @@ autocmd BufNewFile *.js  0r $TEMPLATE_PATH/javascript.txt
 
 
 " ******************************************
+" vimgrep   ********************************
+nnoremap cp :cprevious<CR>zz   "前へ
+nnoremap cn :cnext<CR>zz       " 次へ
+nnoremap cf :<C-u>cfirst<CR>zz " 最初へ
+nnoremap cl :<C-u>clast<CR>zz  " 最後へ
+
+" ******************************************
 " ******************************************
 " Plugin Settings **************************
-
-
 
 " ******************************************
 " unite.vim ********************************
@@ -236,8 +245,10 @@ endif
 " Enable snipMate compatibility feature.
 let g:neosnippet#enable_snipmate_compatibility = 1
 " Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets,~/.vim/bundle/1398610'
+let s:neosnippet_directorys = [ '~/.vim/bundle/vim-snippets/snippets', '~/.vim/bundle/1398610', '~/.vim/bundle/svjunic-snip/snippets' ]
+let g:neosnippet#snippets_directory = join( s:neosnippet_directorys )
 
+autocmd BufRead,BufNewFile *.js NeoSnippetSource javascript.snip
 
 
 
@@ -315,7 +326,7 @@ filetype plugin on
 " syntastic.vim ****************************
 " jshintを入れる必要あり( npm install -g jshint )
 let g:syntastic_check_on_open = 0    "ファイルを開いたときはチェックしない
-let g:syntastic_check_on_wq = 0      "保存時にはチェック
+let g:syntastic_check_on_wq = 1      "保存時にはチェック
 let g:syntastic_auto_loc_list = 2    "エラーがあったら自動でロケーションリストを開く（0:自動で閉じない、1:自動で開いたり閉じたり、2:そもそも開かない）
 let g:syntastic_loc_list_height = 6  "エラー表示ウィンドウの高さ
 let g:syntastic_mode_map = {
@@ -355,3 +366,4 @@ set listchars=tab:\ \
 " The Usual
 hi CurlyBracket guifg=#00bfff
 match CurlyBracket /[{}]/
+

@@ -21,7 +21,7 @@ NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'git://github.com/Shougo/neosnippet.vim.git'
 NeoBundle "Shougo/neosnippet-snippets"
 NeoBundle 'git://github.com/honza/vim-snippets.git'
-NeoBundle 'gh:svjunic/javascript-snippet.git'
+NeoBundle 'gh:svjunic/svjunic-snip.git'
 
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'ujihisa/unite-locate'
