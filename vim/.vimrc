@@ -248,7 +248,6 @@ let g:neosnippet#enable_snipmate_compatibility = 1
 let s:neosnippet_directorys = [ '~/.vim/bundle/vim-snippets/snippets', '~/.vim/bundle/1398610', '~/.vim/bundle/svjunic-snip/snippets' ]
 let g:neosnippet#snippets_directory = join( s:neosnippet_directorys, ',' )
 
-"autocmd BufRead,BufNewFile *.js NeoSnippetSource javascript.snippet
 
 
 
