@@ -22,3 +22,4 @@ sub get_color {
 	my $number = sprintf '%3d', $color;
 	return qq/${bg}${color}m ${number} ${rs} ${fg}${color}m${number}${rs} /;
 }
+

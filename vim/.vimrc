@@ -1,4 +1,4 @@
-"Last Change: 04-Feb-2014."
+"Last Change: 07-Feb-2014."
 
 " ハイライト確認用
 function! _VimColorTest()
