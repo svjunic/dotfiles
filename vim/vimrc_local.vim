@@ -1,4 +1,4 @@
-"Last Change: 04-Feb-2014."
+"Last Change: 28-Feb-2014."
 """ vundle
 set nocompatible
 
@@ -45,6 +45,7 @@ NeoBundle 'vim-scripts/YankRing.vim'
 NeoBundle 'ref.vim'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'https://github.com/rbtnn/vimconsole.vim.git'
+NeoBundle 'nathanaelkane/vim-indent-guides'
 
 " front-end - html
 NeoBundle 'https://github.com/othree/html5.vim.git'
@@ -71,9 +72,9 @@ NeoBundle 'basyura/twibill.vim'
 NeoBundle 'basyura/bitly.vim'
 
 
-
 " ColorScheme
 NeoBundle 'gh:svjunic/RadicalGoodSpeed.vim.git'
+
 
 
 
