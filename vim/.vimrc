@@ -1,64 +1,64 @@
-"Last Change: 07-Feb-2014."
+"Last Change: 05-Mar-2014."
 
 " ハイライト確認用
 function! _VimColorTest()
-	so $VIMRUNTIME/syntax/colortest.vim
+  so $VIMRUNTIME/syntax/colortest.vim
 endfunction
 map <leader>vc :call _VimColorTest()<cr>
 
 function! _VimHighliteColorTest()
-	so $VIMRUNTIME/syntax/hitest.vim
+  so $VIMRUNTIME/syntax/hitest.vim
 endfunction
 map <leader>vhc :call _VimHighliteColorTest()<cr>
 
 " Irregular keymap
-nmap ˜ ~
+map ˜ ~
 nmap te :tabedit<cr>
 nmap tn :tabnext<cr>
 nmap tp :tabprevious<cr>
 
 " Font
 function! SetInit()
-	if has('win32')
-		" Windows
-		set lines=90
-		set columns=300
-		set guifont=MS_Gothic:h10:cSHIFTJIS
-	elseif has('mac')
-		set lines=90
-		set columns=300
-		set guifont=Ayuthaya:h11
-	elseif has('xfontset')
-		" UNIX用 (xfontsetを使用)
-		set guifontset=a14,r14,k14
-	endif
+  if has('win32')
+    " Windows
+    set lines=90
+    set columns=300
+    set guifont=MS_Gothic:h10:cSHIFTJIS
+  elseif has('mac')
+    set lines=90
+    set columns=300
+    set guifont=Ayuthaya:h11
+  elseif has('xfontset')
+    " UNIX用 (xfontsetを使用)
+    set guifontset=a14,r14,k14
+  endif
 
 endfunction!
 call SetInit()
 
 function! ToolbarToggle()
-	if &guioptions == 'egrLtTm'
-		"l:ll = str2nr(&lines,10)-2
-		"l:cc = str2nr(&columns,10)-2
-		"&lines   = l:ll
-		"&columns = l:cc
-		set lines=90
-		set columns=300
-		set guioptions+=T
-		set guioptions+=m
-	else
-		set guioptions-=T
-		set guioptions-=m
-	endif
+  if &guioptions == 'egrLtTm'
+    "l:ll = str2nr(&lines,10)-2
+    "l:cc = str2nr(&columns,10)-2
+    "&lines   = l:ll
+    "&columns = l:cc
+    set lines=90
+    set columns=300
+    set guioptions+=T
+    set guioptions+=m
+  else
+    set guioptions-=T
+    set guioptions-=m
+  endif
 endfunction
 map <leader>t :call ToolbarToggle()<cr>
 call ToolbarToggle()
 
 " :CopyCmdOutput
 func! s:func_copy_cmd_output(cmd)
-	redir @*>
-	silent execute a:cmd
-	redir END
+  redir @*>
+  silent execute a:cmd
+  redir END
 endfunc
 command! -nargs=1 -complete=command CopyCmdOutput call <SID>func_copy_cmd_output(<q-args>)
 
@@ -67,7 +67,6 @@ nnoremap <silent> ,cr :ChromeReload<CR>
 
 "" set clipboard=unnamed
 "" nnoremap <D-c> :!pbcopy;pbpaste<CR>
-
 
 
 autocmd BufRead,BufNewFile *.scss set filetype=scss
@@ -81,12 +80,12 @@ colorscheme radicalgoodspeed
 
 " Windows
 if has('win32')
-	" Insert : copy
-	map <Insert> "+y
+  " Insert : copy
+  map <Insert> "+y
 
-	" Shift-Insert : paste
-	map <S-Insert> "+gP
-	imap <S-Insert> <C-R>+
+  " Shift-Insert : paste
+  map <S-Insert> "+gP
+  imap <S-Insert> <C-R>+
 endif
 
 " Ctrl-L で検索ハイライトを消す
@@ -118,6 +117,7 @@ set fileformat=unix
 set fileformats=unix,dos
 set ambiwidth=double
 set number
+set foldmethod=marker
 
 " 文字コード指定でファイルを保存
 cabbrev ws set fenc=cp932<CR>:w
@@ -136,9 +136,9 @@ set nowrap
 
 " デフォルトテンプレートの読み込み
 if has('win32') || has('win64')
-	let $TEMPLATE_PATH = $VIM.'/template/'
+  let $TEMPLATE_PATH = $VIM.'/template/'
 else
-	let $TEMPLATE_PATH = expand('~/.vim/template/')
+  let $TEMPLATE_PATH = expand('~/.vim/template/')
 endif
 autocmd BufNewFile *.php 0r $TEMPLATE_PATH/php.txt
 autocmd BufNewFile *.js  0r $TEMPLATE_PATH/javascript.txt
@@ -192,7 +192,7 @@ let g:neocomplcache_enable_at_startup = 1 " 起動時に有効化
 
 "" オムニ補完無効
 if !exists('g:neocomplcache_omni_patterns')
-let g:neocomplcache_omni_patterns = {}
+  let g:neocomplcache_omni_patterns = {}
 endif
 let g:neocomplcache_omni_patterns['scss'] = ''
 let g:neocomplcache_omni_patterns['sass'] = ''
@@ -231,11 +231,11 @@ imap <C-l>    <Plug>(neosnippet_expand_or_jump)
 smap <C-l>    <Plug>(neosnippet_expand_or_jump)
 xmap <C-l>    <Plug>(neosnippet_expand_or_jump)
 imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: pumvisible() ? "\<C-n>" : "\<TAB>"
+      \ "\<Plug>(neosnippet_expand_or_jump)"
+      \: pumvisible() ? "\<C-n>" : "\<TAB>"
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: "\<TAB>"
+      \ "\<Plug>(neosnippet_expand_or_jump)"
+      \: "\<TAB>"
 
 " For snippet_complete marker.
 if has('conceal')
@@ -307,17 +307,29 @@ let g:html5_aria_attributes_complete = 0
 " ******************************************
 " YankRing.vim *****************************
 if has('win32')
-	let g:yankring_history_dir = expand('$HOME')
-	let g:yankring_history_file = 'yankring_history'
+  let g:yankring_history_dir = expand('$HOME')
+  let g:yankring_history_file = 'yankring_history'
 elseif has('mac')
-	let g:yankring_history_dir = '~/.vim'
-	let g:yankring_history_file = 'yankring_history'
+  let g:yankring_history_dir = '~/.vim'
+  let g:yankring_history_file = 'yankring_history'
 elseif has('xfontset')
 endif
 
 " filetype plugin
 filetype plugin on
 
+
+" ******************************************
+" indent-guides ****************************
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_guide_size = 1
+let g:indent_guides_start_level = 2
+set ts=2 sw=2 et
+set expandtab
+
+let g:indent_guides_auto_colors = 0
+""  autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234 guibg=#111111
+""  autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=53  guibg=#262143
 
 
 
@@ -365,4 +377,3 @@ set listchars=tab:\ \
 " The Usual
 hi CurlyBracket guifg=#00bfff
 match CurlyBracket /[{}]/
-
