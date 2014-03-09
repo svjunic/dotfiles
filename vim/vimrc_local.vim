@@ -1,4 +1,4 @@
-"Last Change: 28-Feb-2014."
+"Last Change: 09-Mar-2014."
 """ vundle
 set nocompatible
 
@@ -17,7 +17,8 @@ call neobundle#rc($PLUGIN_PATH)
 
 "Plugin Installing
 "NeoBundle 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'gh:Shougo/neocomplcache'
+NeoBundle 'gh:Shougo/neomru.vim.git'
 NeoBundle 'git://github.com/Shougo/neosnippet.vim.git'
 NeoBundle "Shougo/neosnippet-snippets"
 NeoBundle 'git://github.com/honza/vim-snippets.git'
