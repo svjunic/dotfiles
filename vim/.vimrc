@@ -1,13 +1,13 @@
-"Last Change: 05-Mar-2014."
+"Last Change: 31-Mar-2014."
 
 " ハイライト確認用
 function! _VimColorTest()
-  so $VIMRUNTIME/syntax/colortest.vim
+	so $VIMRUNTIME/syntax/colortest.vim
 endfunction
 map <leader>vc :call _VimColorTest()<cr>
 
 function! _VimHighliteColorTest()
-  so $VIMRUNTIME/syntax/hitest.vim
+	so $VIMRUNTIME/syntax/hitest.vim
 endfunction
 map <leader>vhc :call _VimHighliteColorTest()<cr>
 
@@ -16,49 +16,52 @@ map ˜ ~
 nmap te :tabedit<cr>
 nmap tn :tabnext<cr>
 nmap tp :tabprevious<cr>
+nmap tf :tabfirst<cr>
+nmap tl :tablast<cr>
+
 
 " Font
 function! SetInit()
-  if has('win32')
-    " Windows
-    set lines=90
-    set columns=300
-    set guifont=MS_Gothic:h10:cSHIFTJIS
-  elseif has('mac')
-    set lines=90
-    set columns=300
-    set guifont=Ayuthaya:h11
-  elseif has('xfontset')
-    " UNIX用 (xfontsetを使用)
-    set guifontset=a14,r14,k14
-  endif
+	if has('win32')
+		" Windows
+		set lines=90
+		set columns=300
+		set guifont=MS_Gothic:h10:cSHIFTJIS
+	elseif has('mac')
+		set lines=90
+		set columns=300
+		set guifont=Ayuthaya:h11
+	elseif has('xfontset')
+		" UNIX用 (xfontsetを使用)
+		set guifontset=a14,r14,k14
+	endif
 
 endfunction!
 call SetInit()
 
 function! ToolbarToggle()
-  if &guioptions == 'egrLtTm'
-    "l:ll = str2nr(&lines,10)-2
-    "l:cc = str2nr(&columns,10)-2
-    "&lines   = l:ll
-    "&columns = l:cc
-    set lines=90
-    set columns=300
-    set guioptions+=T
-    set guioptions+=m
-  else
-    set guioptions-=T
-    set guioptions-=m
-  endif
+	if &guioptions == 'egrLtTm'
+		"l:ll = str2nr(&lines,10)-2
+		"l:cc = str2nr(&columns,10)-2
+		"&lines   = l:ll
+		"&columns = l:cc
+		set lines=90
+		set columns=300
+		set guioptions+=T
+		set guioptions+=m
+	else
+		set guioptions-=T
+		set guioptions-=m
+	endif
 endfunction
 map <leader>t :call ToolbarToggle()<cr>
 call ToolbarToggle()
 
 " :CopyCmdOutput
 func! s:func_copy_cmd_output(cmd)
-  redir @*>
-  silent execute a:cmd
-  redir END
+	redir @*>
+	silent execute a:cmd
+	redir END
 endfunc
 command! -nargs=1 -complete=command CopyCmdOutput call <SID>func_copy_cmd_output(<q-args>)
 
@@ -80,12 +83,12 @@ colorscheme radicalgoodspeed
 
 " Windows
 if has('win32')
-  " Insert : copy
-  map <Insert> "+y
+	" Insert : copy
+	map <Insert> "+y
 
-  " Shift-Insert : paste
-  map <S-Insert> "+gP
-  imap <S-Insert> <C-R>+
+	" Shift-Insert : paste
+	map <S-Insert> "+gP
+	imap <S-Insert> <C-R>+
 endif
 
 " Ctrl-L で検索ハイライトを消す
@@ -100,6 +103,9 @@ set tabstop=4
 set nobackup
 set matchpairs=(:),{:},[:],<:>
 set pastetoggle=<Insert>
+
+" 高速ターミナル接続 
+set ttyfast
 
 " ステータスラインの設定
 set cmdheight=1
@@ -136,13 +142,12 @@ set nowrap
 
 " デフォルトテンプレートの読み込み
 if has('win32') || has('win64')
-  let $TEMPLATE_PATH = $VIM.'/template/'
+	let $TEMPLATE_PATH = $VIM.'/template/'
 else
-  let $TEMPLATE_PATH = expand('~/.vim/template/')
+	let $TEMPLATE_PATH = expand('~/.vim/template/')
 endif
 autocmd BufNewFile *.php 0r $TEMPLATE_PATH/php.txt
 autocmd BufNewFile *.js  0r $TEMPLATE_PATH/javascript.txt
-
 
 " ******************************************
 " vimgrep   ********************************
@@ -172,6 +177,13 @@ nnoremap <silent> ,uu :<C-u>Unite buffer file_mru<CR>
 " 全部乗せ
 nnoremap <silent> ,ua :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
 
+" アウトライン一覧
+nnoremap <silent> ,uo :Unite outline<CR>
+
+" Unite line 個人設定
+nnoremap <silent> ,ulb :Unite line -input=Backbone.*extend<CR>
+nnoremap <silent> ,ulf :Unite line -input=function<CR>
+
 " ウィンドウを分割して開く
 au FileType unite nnoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
 au FileType unite inoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
@@ -192,7 +204,7 @@ let g:neocomplcache_enable_at_startup = 1 " 起動時に有効化
 
 "" オムニ補完無効
 if !exists('g:neocomplcache_omni_patterns')
-  let g:neocomplcache_omni_patterns = {}
+let g:neocomplcache_omni_patterns = {}
 endif
 let g:neocomplcache_omni_patterns['scss'] = ''
 let g:neocomplcache_omni_patterns['sass'] = ''
@@ -213,7 +225,8 @@ let g:neocomplcache_enable_camel_case_completion = 1
 " 0:無効
 " 1:有効
 " 例）n_e_u_c -> neocomplcache_enable_underbar_completion
-let g:neocomplcache_enable_underbar_completion = 1
+" let g:neocomplcache_enable_underbar_completion = 1
+let g:neocomplcache_enable_underbar_completion = 0
 
 "" ファイルタイプ毎にdictファイルを設定
 "let g:neocomplcache_dictionary_filetype_lists = {
@@ -231,11 +244,11 @@ imap <C-l>    <Plug>(neosnippet_expand_or_jump)
 smap <C-l>    <Plug>(neosnippet_expand_or_jump)
 xmap <C-l>    <Plug>(neosnippet_expand_or_jump)
 imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-      \ "\<Plug>(neosnippet_expand_or_jump)"
-      \: pumvisible() ? "\<C-n>" : "\<TAB>"
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: pumvisible() ? "\<C-n>" : "\<TAB>"
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-      \ "\<Plug>(neosnippet_expand_or_jump)"
-      \: "\<TAB>"
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: "\<TAB>"
 
 " For snippet_complete marker.
 if has('conceal')
@@ -307,11 +320,11 @@ let g:html5_aria_attributes_complete = 0
 " ******************************************
 " YankRing.vim *****************************
 if has('win32')
-  let g:yankring_history_dir = expand('$HOME')
-  let g:yankring_history_file = 'yankring_history'
+	let g:yankring_history_dir = expand('$HOME')
+	let g:yankring_history_file = 'yankring_history'
 elseif has('mac')
-  let g:yankring_history_dir = '~/.vim'
-  let g:yankring_history_file = 'yankring_history'
+	let g:yankring_history_dir = '~/.vim'
+	let g:yankring_history_file = 'yankring_history'
 elseif has('xfontset')
 endif
 
