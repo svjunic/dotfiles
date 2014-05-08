@@ -1,4 +1,7 @@
-"Last Change: 31-Mar-2014."
+"Last Change: 08-May-2014."
+
+" undofile(.un~)ファイルを作らないように変更
+set noundofile
 
 " ハイライト確認用
 function! _VimColorTest()
@@ -13,11 +16,15 @@ map <leader>vhc :call _VimHighliteColorTest()<cr>
 
 " Irregular keymap
 map ˜ ~
-nmap te :tabedit<cr>
+
+" Tab関連
+" gt,gTでもいいけど
 nmap tn :tabnext<cr>
 nmap tp :tabprevious<cr>
+nmap te :tabedit<cr>
 nmap tf :tabfirst<cr>
 nmap tl :tablast<cr>
+
 
 
 " Font
