@@ -1,4 +1,4 @@
-"Last Change: 09-Mar-2014."
+"Last Change: 29-Apr-2014."
 """ vundle
 set nocompatible
 
@@ -62,6 +62,7 @@ NeoBundle 'https://github.com/vim-scripts/hexHighlight.vim.git'
 " front-end - javascript
 NeoBundle 'jelera/vim-javascript-syntax'
 NeoBundle 'leafgarland/typescript-vim'
+NeoBundle 'digitaltoad/vim-jade'
 
 " utility2
 NeoBundle 'SQLUtilities'
