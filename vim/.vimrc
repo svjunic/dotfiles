@@ -1,4 +1,8 @@
-"Last Change: 08-May-2014."
+"Last Change: 20-May-2014."
+
+
+" for linux
+command! -nargs=0 CdCurrent cd %:p:h
 
 " undofile(.un~)ファイルを作らないように変更
 set noundofile
