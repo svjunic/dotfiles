@@ -1,4 +1,4 @@
-"Last Change: 09-May-2014."
+"Last Change: 12-Jun-2014."
 """ vundle
 set nocompatible
 
@@ -51,6 +51,7 @@ NeoBundle 'nathanaelkane/vim-indent-guides'
 " front-end - html
 NeoBundle 'https://github.com/othree/html5.vim.git'
 NeoBundle 'https://github.com/mattn/emmet-vim.git'
+NeoBundle 'gh:svjunic/scss-snippets.git'
 
 NeoBundle 'digitaltoad/vim-jade.git'
 
