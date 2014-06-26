@@ -1,4 +1,4 @@
-"Last Change: 12-Jun-2014."
+"Last Change: 26-Jun-2014."
 """ vundle
 set nocompatible
 
@@ -72,6 +72,7 @@ NeoBundle 'git://github.com/tell-k/vim-browsereload-mac.git'
 NeoBundle 'basyura/TweetVim'
 NeoBundle 'basyura/twibill.vim'
 NeoBundle 'basyura/bitly.vim'
+NeoBundle 'koron/codic-vim'
 
 
 " ColorScheme

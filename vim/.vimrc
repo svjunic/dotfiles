@@ -1,4 +1,4 @@
-"Last Change: 20-May-2014."
+"Last Change: 25-Jun-2014."
 
 
 " for linux
@@ -194,6 +194,7 @@ nnoremap <silent> ,uo :Unite outline<CR>
 " Unite line 個人設定
 nnoremap <silent> ,ulb :Unite line -input=Backbone.*extend<CR>
 nnoremap <silent> ,ulf :Unite line -input=function<CR>
+nnoremap <silent> ,ull :Unite line<CR>
 
 " ウィンドウを分割して開く
 au FileType unite nnoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
