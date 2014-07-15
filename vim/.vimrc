@@ -1,4 +1,4 @@
-"Last Change: 25-Jun-2014."
+"Last Change: 15-Jul-2014."
 
 
 " for linux
@@ -29,6 +29,10 @@ nmap te :tabedit<cr>
 nmap tf :tabfirst<cr>
 nmap tl :tablast<cr>
 
+"" for hl_matchit
+let g:hl_matchit_enable_on_vim_startup = 1
+let g:hl_matchit_hl_groupname = 'Title'
+let g:hl_matchit_allow_ft_regexp = 'html\|vim\|ruby\|sh'
 
 
 " Font
@@ -195,6 +199,7 @@ nnoremap <silent> ,uo :Unite outline<CR>
 nnoremap <silent> ,ulb :Unite line -input=Backbone.*extend<CR>
 nnoremap <silent> ,ulf :Unite line -input=function<CR>
 nnoremap <silent> ,ull :Unite line<CR>
+nnoremap <silent> ,ums :Unite mapping source<CR>
 
 " ウィンドウを分割して開く
 au FileType unite nnoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
@@ -385,6 +390,13 @@ let g:syntastic_style_warning_symbol = '⚠'
 "set statusline += %{SyntasticStatuslineFlag()}
 "set statusline += %*
 "let g:syntastic_javascript_checker = 'jshint' "jshintを使う（これはデフォルトで設定されている）
+
+
+
+" ******************************************
+" coffee-syntax-script.vim *****************
+" coffeeで書き出されたjs見る用
+map <leader>cw :CoffeeWatch vert<cr>
 
 
 
