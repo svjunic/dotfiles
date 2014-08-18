@@ -1,4 +1,4 @@
-"Last Change: 15-Jul-2014."
+"Last Change: 18-Aug-2014."
 
 
 " for linux
@@ -21,6 +21,7 @@ map <leader>vhc :call _VimHighliteColorTest()<cr>
 " Irregular keymap
 map ˜ ~
 
+
 " Tab関連
 " gt,gTでもいいけど
 nmap tn :tabnext<cr>
@@ -33,7 +34,6 @@ nmap tl :tablast<cr>
 let g:hl_matchit_enable_on_vim_startup = 1
 let g:hl_matchit_hl_groupname = 'Title'
 let g:hl_matchit_allow_ft_regexp = 'html\|vim\|ruby\|sh'
-
 
 " Font
 function! SetInit()
@@ -87,8 +87,8 @@ nnoremap <silent> ,cr :ChromeReload<CR>
 "" nnoremap <D-c> :!pbcopy;pbpaste<CR>
 
 
-autocmd BufRead,BufNewFile *.scss set filetype=scss
-autocmd BufRead,BufNewFile *.sass set filetype=scss
+autocmd BufRead,BufNewFile *.scss set filetype=scss.css
+autocmd BufRead,BufNewFile *.sass set filetype=scss.css
 
 
 " ******************************************
@@ -109,7 +109,7 @@ endif
 " Ctrl-L で検索ハイライトを消す
 nmap <C-l> <C-l>:nohlsearch<CR>
 
-" syntax on
+" edit setting
 set list
 set nrformats-=octal
 set hlsearch
@@ -118,6 +118,9 @@ set tabstop=4
 set nobackup
 set matchpairs=(:),{:},[:],<:>
 set pastetoggle=<Insert>
+
+" omni補完のウィンドウを表示しない
+set completeopt=menuone
 
 " 高速ターミナル接続 
 set ttyfast
@@ -201,6 +204,7 @@ nnoremap <silent> ,ulf :Unite line -input=function<CR>
 nnoremap <silent> ,ull :Unite line<CR>
 nnoremap <silent> ,ums :Unite mapping source<CR>
 
+
 " ウィンドウを分割して開く
 au FileType unite nnoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
 au FileType unite inoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
@@ -213,21 +217,33 @@ au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
 
 
 
-
 " ******************************************
 " neocomplcache.vim ************************
-let g:neocomplcache_enable_at_startup = 1 " 起動時に有効化
-"NeoComplCacheEnable
 
-"" オムニ補完無効
+"NeoComplCacheEnable
+let g:neocomplcache_enable_at_startup = 1
+
+" Enable omni completion.
+autocmd FileType css,scss,sass setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+"autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType javascript setlocal omnifunc=tern#Complete
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" 通常のオムニ補完無効
 if !exists('g:neocomplcache_omni_patterns')
 let g:neocomplcache_omni_patterns = {}
 endif
-let g:neocomplcache_omni_patterns['scss'] = ''
-let g:neocomplcache_omni_patterns['sass'] = ''
+" パターンに引っかかったやつだけ使用
+"let g:neocomplcache_omni_patterns['scss'] = ''
+"let g:neocomplcache_omni_patterns['sass'] = ''
+
+
+let g:neocomplcache_enable_auto_close_preview = 0
 
 "" キャッシュする文字列の長さの最小値（デフォルト値4）
-let g:neocomplcache_min_syntax_length = 4
+let g:neocomplcache_min_syntax_length = 3
 
 "" 大文字が入力さた場合、限り大文字小文字の区別をする
 let g:neocomplcache_enable_smart_case = 1
@@ -250,6 +266,25 @@ let g:neocomplcache_enable_underbar_completion = 0
 "    \ 'default'    : '',
 "    \ 'perl'       : $HOME . '/.vim/dict/perl.dict'
 "    \ }
+
+
+inoremap <expr><C-g>     neocomplcache#undo_completion()
+inoremap <expr><C-l>     neocomplcache#complete_common_string()
+
+"    " Recommended key-mappings.
+"    " <CR>: close popup and save indent.
+"    inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+"    function! s:my_cr_function()
+"      return neocomplcache#smart_close_popup() . "\<CR>"
+"    endfunction
+"    " <TAB>: completion.
+"    inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+"    " <C-h>, <BS>: close popup and delete backword char.
+"    inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+"    inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+"    inoremap <expr><C-y>  neocomplcache#close_popup()
+"    inoremap <expr><C-e>  neocomplcache#cancel_popup()
+
 
 
 
@@ -398,6 +433,10 @@ let g:syntastic_style_warning_symbol = '⚠'
 " coffeeで書き出されたjs見る用
 map <leader>cw :CoffeeWatch vert<cr>
 
+
+" ******************************************
+" plasticboy/vim-markdown ******************
+au BufRead,BufNewFile *.md set filetype=markdown
 
 
 " ******************************************

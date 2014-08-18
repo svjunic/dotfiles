@@ -1,4 +1,4 @@
-"Last Change: 26-Jun-2014."
+"Last Change: 18-Aug-2014."
 """ vundle
 set nocompatible
 
@@ -43,7 +43,7 @@ NeoBundle 'Shougo/vimproc', {
 NeoBundle 'scrooloose/syntastic.git'
 NeoBundle 'surround.vim'
 NeoBundle 'vim-scripts/YankRing.vim'
-NeoBundle 'ref.vim'
+NeoBundle 'thinca/vim-ref'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'https://github.com/rbtnn/vimconsole.vim.git'
 NeoBundle 'nathanaelkane/vim-indent-guides'
@@ -52,7 +52,6 @@ NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'https://github.com/othree/html5.vim.git'
 NeoBundle 'https://github.com/mattn/emmet-vim.git'
 NeoBundle 'gh:svjunic/scss-snippets.git'
-
 NeoBundle 'digitaltoad/vim-jade.git'
 
 " front-end - css
@@ -62,7 +61,16 @@ NeoBundle 'https://github.com/vim-scripts/hexHighlight.vim.git'
 
 " front-end - javascript
 NeoBundle 'jelera/vim-javascript-syntax'
+NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'marijnh/tern_for_vim', {
+  \ 'build': {
+  \   'others': 'npm install'
+  \}}
 NeoBundle 'leafgarland/typescript-vim'
+NeoBundle 'clausreinke/typescript-tools'
+
+" other - syntax
+NeoBundle 'plasticboy/vim-markdown'
 
 " utility2
 NeoBundle 'SQLUtilities'
@@ -73,11 +81,11 @@ NeoBundle 'basyura/TweetVim'
 NeoBundle 'basyura/twibill.vim'
 NeoBundle 'basyura/bitly.vim'
 NeoBundle 'koron/codic-vim'
+NeoBundle 'vim-scripts/Align'
 
 
 " ColorScheme
 NeoBundle 'gh:svjunic/RadicalGoodSpeed.vim.git'
-
 
 
 
