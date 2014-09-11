@@ -1,4 +1,4 @@
-"Last Change: 18-Aug-2014."
+"Last Change: 11-Sep-2014."
 
 
 " for linux
@@ -121,6 +121,10 @@ set pastetoggle=<Insert>
 
 " omni補完のウィンドウを表示しない
 set completeopt=menuone
+"set completeopt+=menuone
+
+" 入力のオプションを複数行表示
+set wildmode=list:longest
 
 " 高速ターミナル接続 
 set ttyfast
@@ -202,8 +206,8 @@ nnoremap <silent> ,uo :Unite outline<CR>
 nnoremap <silent> ,ulb :Unite line -input=Backbone.*extend<CR>
 nnoremap <silent> ,ulf :Unite line -input=function<CR>
 nnoremap <silent> ,ull :Unite line<CR>
+nnoremap <silent> ,ulp :Unite line<CR>
 nnoremap <silent> ,ums :Unite mapping source<CR>
-
 
 " ウィンドウを分割して開く
 au FileType unite nnoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
@@ -386,13 +390,16 @@ filetype plugin on
 
 " ******************************************
 " indent-guides ****************************
-let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_enable_on_vim_startup = 0
 let g:indent_guides_guide_size = 1
 let g:indent_guides_start_level = 2
 set ts=2 sw=2 et
 set expandtab
 
 let g:indent_guides_auto_colors = 0
+
+" html開くとおもすぎて無理なので特定のファイルタイプだけ。
+""  autocmd FileType vim,python,ruby,javascript,css,scss,sass IndentGuidesEnable
 ""  autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234 guibg=#111111
 ""  autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=53  guibg=#262143
 
