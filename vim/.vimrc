@@ -1,4 +1,4 @@
-"Last Change: 11-Sep-2014."
+"Last Change: 18-Sep-2014."
 
 
 " for linux
@@ -444,6 +444,16 @@ map <leader>cw :CoffeeWatch vert<cr>
 " ******************************************
 " plasticboy/vim-markdown ******************
 au BufRead,BufNewFile *.md set filetype=markdown
+
+
+" ******************************************
+" vimshell.vim ********************************
+" 開いているバッファのディレクトリに移動してシェルに入る用
+nnoremap <silent> ,sh :call OpenVimShell()<CR>
+function! OpenVimShell()
+  CdCurrent
+  VimShellCurrentDir -popup
+endfunction
 
 
 " ******************************************
