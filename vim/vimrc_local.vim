@@ -1,4 +1,4 @@
-"Last Change: 18-Aug-2014."
+"Last Change: 15-Oct-2014."
 """ vundle
 set nocompatible
 
@@ -12,7 +12,9 @@ else
 	set rtp+=~/.vim/bundle/vimproc.vim
 	let $PLUGIN_PATH = expand('~/.vim/bundle/')
 endif
-call neobundle#rc($PLUGIN_PATH)
+call neobundle#begin(expand('~/.vim/bundle/'))
+NeoBundleFetch 'Shougo/neobundle.vim'
+call neobundle#end()
 
 
 "Plugin Installing
