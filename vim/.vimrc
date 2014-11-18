@@ -1,4 +1,4 @@
-"Last Change: 18-Sep-2014."
+"Last Change: 20-Oct-2014."
 
 
 " for linux
@@ -162,14 +162,17 @@ cabbrev eu e ++enc=utf-8
 " ウィンドウに1行で収まらない場合、ウィンドウ上では自動改行を行って表示しない
 set nowrap
 
-" デフォルトテンプレートの読み込み
-if has('win32') || has('win64')
-	let $TEMPLATE_PATH = $VIM.'/template/'
-else
-	let $TEMPLATE_PATH = expand('~/.vim/template/')
-endif
-autocmd BufNewFile *.php 0r $TEMPLATE_PATH/php.txt
-autocmd BufNewFile *.js  0r $TEMPLATE_PATH/javascript.txt
+" 単語とみなす文字の拡張
+set isk+=@-@
+
+"  " デフォルトテンプレートの読み込み
+"  if has('win32') || has('win64')
+"  	let $TEMPLATE_PATH = $VIM.'/template/'
+"  else
+"  	let $TEMPLATE_PATH = expand('~/.vim/template/')
+"  endif
+"  autocmd BufNewFile *.php 0r $TEMPLATE_PATH/php.txt
+"  autocmd BufNewFile *.js  0r $TEMPLATE_PATH/javascript.txt
 
 " ******************************************
 " vimgrep   ********************************
