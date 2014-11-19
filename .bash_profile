@@ -19,7 +19,10 @@ alias ls='ls -G'
 alias vi='Vim'
 alias vim='Vim'
 
-alias openf='sh /Users/macbookpro/bin/openf'
+alias openf='sh ~/bin/openf'
+alias gitlocal_refresh='sh ~/bin/gitlocal_refresh.sh'
+alias adbDebug='sh ~/bin/androidDebug.sh'
+alias tmux_alias='sh ~/bin/tmux/alias.sh'
 
 #####################################################################################################
 # MacVim
