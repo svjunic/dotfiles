@@ -17,3 +17,7 @@ echo "tmxu list-window  -------------------------------------"
 tmux list-window
 
 echo ""
+
+
+# panesの番号表示
+tmux display-panes
