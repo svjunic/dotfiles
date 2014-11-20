@@ -22,7 +22,6 @@ alias vim='Vim'
 alias openf='sh ~/bin/openf'
 alias gitlocal_refresh='sh ~/bin/gitlocal_refresh.sh'
 alias adbDebug='sh ~/bin/androidDebug.sh'
-alias tmux_alias='sh ~/bin/tmux/alias.sh'
 
 #####################################################################################################
 # MacVim
@@ -53,4 +52,16 @@ export PATH="/Applications/MacVim.app/Contents/MacOS:$PATH"
 # zsh
 #####################################################################################################
 # zsh
+
+
+#####################################################################################################
+# tmux
+#####################################################################################################
+
+if [ `which tmux` ]; then
+  # いつもつかってるalias追加
+  alias tmux_alias='sh ~/bin/tmux/alias.sh'
+  # セッションがあればアタッチ、なければ起動
+  tmux a || tmux
+fi
 
