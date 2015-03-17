@@ -1,5 +1,6 @@
-"Last Change: 20-Oct-2014."
+"Last Change: 01-Dec-2014."
 
+scriptencoding utf-8
 
 " for linux
 command! -nargs=0 CdCurrent cd %:p:h
