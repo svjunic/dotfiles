@@ -16,6 +16,7 @@
 # alias
 #####################################################################################################
 alias ls='ls -G'
+alias cdc='cd `pwd -P`'
 alias vi='Vim'
 alias vim='Vim'
 
@@ -47,6 +48,12 @@ export PATH="/Applications/MacVim.app/Contents/MacOS:$PATH"
 #####################################################################################################
 # git config --global credential.helper cache --timeout=86400
 # git config --global core.editor /Applications/MacVim.app/Contents/MacOS/Vim
+# 空コミット
+# git commit --allow-empty -m "make pull request"
+
+#差分ファイル出すとき用
+# git_diff_archive 識別子1 識別子2
+. ~/bin/git_diff_archive.sh
 
 #####################################################################################################
 # zsh
@@ -60,8 +67,9 @@ export PATH="/Applications/MacVim.app/Contents/MacOS:$PATH"
 
 if [ `which tmux` ]; then
   # いつもつかってるalias追加
-  alias tmux_alias='sh ~/bin/tmux/alias.sh'
+  . ~/bin/tmux/alias.sh
   # セッションがあればアタッチ、なければ起動
-  tmux a || tmux
+  # -dをつけると他の接続が全てデタッチされ、今回アタッチする画面サイズに調整してくれる。
+  tmux a -d || tmux
 fi
 
