@@ -1,4 +1,4 @@
-"Last Change: 01-Dec-2014."
+"Last Change: 26-May-2015."
 "
 scriptencoding utf-8
 
@@ -15,9 +15,10 @@ else
 	set rtp+=~/.vim/bundle/vimproc.vim
 	let $PLUGIN_PATH = expand('~/.vim/bundle/')
 endif
-call neobundle#begin(expand('~/.vim/bundle/'))
+
+call neobundle#begin(expand($PLUGIN_PATH))
+
 NeoBundleFetch 'Shougo/neobundle.vim'
-call neobundle#end()
 
 
 "Plugin Installing
@@ -87,7 +88,7 @@ NeoBundle 'basyura/twibill.vim'
 NeoBundle 'basyura/bitly.vim'
 NeoBundle 'koron/codic-vim'
 NeoBundle 'vim-scripts/Align'
-
+NeoBundle 'cohama/agit.vim'
 
 " ColorScheme
 NeoBundle 'gh:svjunic/RadicalGoodSpeed.vim.git'
@@ -110,5 +111,11 @@ NeoBundle 'gh:svjunic/RadicalGoodSpeed.vim.git'
 "NeoBundle 'thinca/vim-localrc'
 "NeoBundle 'motemen/hatena-vim'
 "NeoBundle 'mattn/unite-advent_calendar'
+
+call neobundle#end()
+
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
 
 filetype plugin indent on
