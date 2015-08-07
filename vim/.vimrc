@@ -1,4 +1,4 @@
-"Last Change: 04-Jun-2015."
+"Last Change: 07-Aug-2015."
 
 scriptencoding utf-8
 
@@ -188,29 +188,40 @@ nnoremap cl :<C-u>clast<CR>zz  " 最後へ
 
 " ******************************************
 " unite.vim ********************************
+
+"nmap <Space>u [unite]
+nmap ,u [unite]
+
 " 入力モードで開始する
 "let g:unite_enable_start_insert=1
 " バッファ一覧
-nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
+nnoremap <silent> [unite]b :<C-u>Unite buffer<CR>
 " ファイル一覧
-nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+nnoremap <silent> [unite]f :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
 " レジスタ一覧
-nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
+nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
 " 最近使用したファイル一覧
-nnoremap <silent> ,um :<C-u>Unite file_mru<CR>
+nnoremap <silent> [unite]m :<C-u>Unite file_mru<CR>
 " 常用セット
-nnoremap <silent> ,uu :<C-u>Unite buffer file_mru<CR>
+nnoremap <silent> [unite]u :<C-u>Unite buffer file_mru<CR>
 " 全部乗せ
-nnoremap <silent> ,ua :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
+nnoremap <silent> [unite]a :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
+
+"ブックマーク一覧
+nnoremap <silent> [unite]c :<C-u>Unite bookmark<CR>
+"ブックマークに追加
+nnoremap <silent> [unite]a :<C-u>UniteBookmarkAdd<CR>
 
 " アウトライン一覧
-nnoremap <silent> ,uo :Unite outline<CR>
+nnoremap <silent> [unite]uo :Unite outline<CR>
 
 " Unite line 個人設定
-nnoremap <silent> ,ulb :Unite line -input=Backbone.*extend<CR>
-nnoremap <silent> ,ulf :Unite line -input=function<CR>
-nnoremap <silent> ,ull :Unite line<CR>
-nnoremap <silent> ,ulp :Unite line<CR>
+nnoremap <silent> [unite]lb :Unite line -input=Backbone.*extend<CR>
+nnoremap <silent> [unite]lf :Unite line -input=function<CR>
+nnoremap <silent> [unite]ll :Unite line<CR>
+nnoremap <silent> [unite]lp :Unite line<CR>
+nnoremap <silent> [unite]ms :Unite mapping source<CR>
+
 nnoremap <silent> ,ums :Unite mapping source<CR>
 
 " ウィンドウを分割して開く
@@ -223,7 +234,13 @@ au FileType unite inoremap <silent> <buffer> <expr> <C-l> unite#do_action('vspli
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> q
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
 
-
+" PTコマンド使う
+nnoremap <silent> ,g :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
+if executable('pt')
+  let g:unite_source_grep_command = 'pt'
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor'
+  let g:unite_source_grep_recursive_opt = ''
+endif
 
 " ******************************************
 " neocomplcache.vim ************************
