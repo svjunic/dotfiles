@@ -1,12 +1,137 @@
-"Last Change: 07-Aug-2015."
+"Last Change: 28-Oct-2015."
 
+" {{{ Base
+" -----------------------------------------------------------------------------------------------------
 scriptencoding utf-8
+
+" undofile(.un~)ファイルを作らないように変更
+set noundofile
 
 " for linux
 command! -nargs=0 CdCurrent cd %:p:h
 
-" undofile(.un~)ファイルを作らないように変更
-set noundofile
+" }}}
+
+" {{{ NeoBundle
+" -----------------------------------------------------------------------------------------------------
+set nocompatible
+
+filetype off
+""rtp は runtimepath
+if has('win32') || has('win64')
+	set rtp+=$VIM/vimfiles/bundle/neobundle.vim
+	let $PLUGIN_PATH = $VIM.'/vimfiles/bundle/'
+else
+	set rtp+=~/.vim/bundle/neobundle.vim
+	set rtp+=~/.vim/bundle/vimproc.vim
+	let $PLUGIN_PATH = expand('~/.vim/bundle/')
+endif
+
+call neobundle#begin(expand($PLUGIN_PATH))
+
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+
+"Plugin Installing
+"NeoBundle 'Shougo/neobundle.vim'
+NeoBundle 'gh:Shougo/neocomplcache'
+NeoBundle 'gh:Shougo/neomru.vim.git'
+NeoBundle 'git://github.com/Shougo/neosnippet.vim.git'
+NeoBundle "Shougo/neosnippet-snippets"
+NeoBundle 'git://github.com/honza/vim-snippets.git'
+NeoBundle 'gh:svjunic/svjunic-snip.git'
+
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'ujihisa/unite-locate'
+NeoBundle 'Shougo/unite-outline'
+
+NeoBundle 'Shougo/vimshell'
+NeoBundle 'Shougo/vimproc', {
+\ 'build' : {
+\     'windows' : 'echo "Sorry, cannot update vimproc binary file in Windows."',
+\     'cygwin' : 'make -f make_cygwin.mak',
+\     'mac' : 'make -f make_mac.mak',
+\     'unix' : 'make -f make_unix.mak',
+\   },
+\ }
+
+
+" utility
+NeoBundle 'scrooloose/syntastic.git'
+NeoBundle 'surround.vim'
+NeoBundle 'vim-scripts/YankRing.vim'
+NeoBundle 'thinca/vim-ref'
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'https://github.com/rbtnn/vimconsole.vim.git'
+NeoBundle 'nathanaelkane/vim-indent-guides'
+
+" front-end - html
+NeoBundle 'https://github.com/othree/html5.vim.git'
+NeoBundle 'https://github.com/mattn/emmet-vim.git'
+NeoBundle 'gh:svjunic/scss-snippets.git'
+NeoBundle 'digitaltoad/vim-jade.git'
+
+" front-end - css
+NeoBundle 'cakebaker/scss-syntax.vim'
+NeoBundle 'https://gist.github.com/1398610.git'
+NeoBundle 'https://github.com/vim-scripts/hexHighlight.vim.git'
+
+" front-end - javascript
+NeoBundle 'jelera/vim-javascript-syntax'
+NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'marijnh/tern_for_vim', {
+  \ 'build': {
+  \   'others': 'npm install'
+  \}}
+NeoBundle 'leafgarland/typescript-vim'
+NeoBundle 'clausreinke/typescript-tools'
+
+" other - syntax
+NeoBundle 'plasticboy/vim-markdown'
+
+" utility2
+NeoBundle 'SQLUtilities'
+NeoBundle 'mattn/webapi-vim'
+NeoBundle 'tyru/open-browser.vim'
+NeoBundle 'git://github.com/tell-k/vim-browsereload-mac.git'
+NeoBundle 'basyura/TweetVim'
+NeoBundle 'basyura/twibill.vim'
+NeoBundle 'basyura/bitly.vim'
+NeoBundle 'koron/codic-vim'
+NeoBundle 'vim-scripts/Align'
+NeoBundle 'cohama/agit.vim'
+NeoBundle 'modsound/macdict-vim.git'
+
+" ColorScheme
+NeoBundle 'gh:svjunic/RadicalGoodSpeed.vim.git'
+
+
+"NeoBundle 'hail2u/vim-css3-syntax'
+"NeoBundle 'AtsushiM/sass-compile.vim'
+
+"NeoBundle 'violetyk/cake.vim'
+"NeoBundle 'taglist.vim'
+"NeoBundle 'TwitVim'
+"NeoBundle 'Shougo/vinarise'
+"NeoBundle 'fugitive.vim'
+"NeoBundle 'The-NERD-tree'
+"NeoBundle 'The-NERD-Commenter'
+"NeoBundle 'thinca/vim-localrc'
+"NeoBundle 'motemen/hatena-vim'
+"NeoBundle 'mattn/unite-advent_calendar'
+
+call neobundle#end()
+
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
+
+filetype plugin indent on
+
+" }}}
+
+" {{{ Common
+" -----------------------------------------------------------------------------------------------------
 
 " ハイライト確認用
 function! _VimColorTest()
@@ -127,7 +252,7 @@ set completeopt=menuone
 " 入力のオプションを複数行表示
 set wildmode=list:longest
 
-" 高速ターミナル接続 
+" 高速ターミナル接続
 set ttyfast
 
 " ステータスラインの設定
@@ -174,6 +299,10 @@ set isk+=@-@
 "  endif
 "  autocmd BufNewFile *.php 0r $TEMPLATE_PATH/php.txt
 "  autocmd BufNewFile *.js  0r $TEMPLATE_PATH/javascript.txt
+
+"" TODO 保存した時に行が変わってしまいうざい。silentとかつければいいのかな。とりまTODO
+" " 保存時に各行の末尾に空白があった場合、空白を削除
+" autocmd BufWritePre * :%s/\s\+$//ge
 
 " ******************************************
 " vimgrep   ********************************
@@ -390,7 +519,7 @@ let g:html5_aria_attributes_complete = 0
 "" let g:ref_alc_encoding = 'Shift-JIS' " 文字化けするならここで文字コードを指定してみる
 "" nmap ,ra :<C-u>Ref alc<Space>
 
-"" let g:ref_use_vimproc = 1 
+"" let g:ref_use_vimproc = 1
 
 
 
@@ -486,11 +615,11 @@ endfunction
 " cpan Image::Info
 "
 " 初期の言語を日本語に
-let g:user_emmet_settings = { 
-      \ 'variables': { 
-      \ 'lang' : 'ja' 
-      \ } 
-      \} 
+let g:user_emmet_settings = {
+      \ 'variables': {
+      \ 'lang' : 'ja'
+      \ }
+      \}
 
 
 " ******************************************
@@ -502,8 +631,21 @@ hi ZenkakuSpace cterm=reverse gui=reverse
 match ZenkakuSpace /　/
 
 " tab highlight
-set listchars=tab:\ \ 
+"set listchars=tab:\ \
+set listchars=tab:\ \|
 
 " The Usual
 hi CurlyBracket guifg=#00bfff
 match CurlyBracket /[{}]/
+
+" }}}
+
+" {{{ Unique
+" -----------------------------------------------------------------------------------------------------
+
+source $VIMRUNTIME/macros/matchit.vim
+
+" }}}
+
+
+
