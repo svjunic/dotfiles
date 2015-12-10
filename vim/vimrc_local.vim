@@ -1,4 +1,4 @@
-"Last Change: 26-May-2015."
+"Last Change: 10-Dec-2015."
 "
 scriptencoding utf-8
 
@@ -25,9 +25,9 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 "NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'gh:Shougo/neocomplcache'
 NeoBundle 'gh:Shougo/neomru.vim.git'
-NeoBundle 'git://github.com/Shougo/neosnippet.vim.git'
+NeoBundle 'gh:Shougo/neosnippet.vim.git'
 NeoBundle "Shougo/neosnippet-snippets"
-NeoBundle 'git://github.com/honza/vim-snippets.git'
+NeoBundle 'gh:honza/vim-snippets.git'
 NeoBundle 'gh:svjunic/svjunic-snip.git'
 
 NeoBundle 'Shougo/unite.vim'
@@ -47,6 +47,11 @@ NeoBundle 'Shougo/vimproc', {
 
 " utility
 NeoBundle 'scrooloose/syntastic.git'
+" NeoBundle 'scrooloose/syntastic.git', {
+" \   'build': {
+" \     'others': 'npm install -g jshint'
+" \   }
+" \ }
 NeoBundle 'surround.vim'
 NeoBundle 'vim-scripts/YankRing.vim'
 NeoBundle 'thinca/vim-ref'
@@ -82,19 +87,17 @@ NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'SQLUtilities'
 NeoBundle 'mattn/webapi-vim'
 NeoBundle 'tyru/open-browser.vim'
-NeoBundle 'git://github.com/tell-k/vim-browsereload-mac.git'
+NeoBundle 'gh:tell-k/vim-browsereload-mac.git'
 NeoBundle 'basyura/TweetVim'
 NeoBundle 'basyura/twibill.vim'
 NeoBundle 'basyura/bitly.vim'
 NeoBundle 'koron/codic-vim'
 NeoBundle 'vim-scripts/Align'
 NeoBundle 'cohama/agit.vim'
+NeoBundle 'modsound/macdict-vim.git'
 
 " ColorScheme
 NeoBundle 'gh:svjunic/RadicalGoodSpeed.vim.git'
-
-
-
 
 
 
