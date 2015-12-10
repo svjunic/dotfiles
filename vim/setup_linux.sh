@@ -13,10 +13,8 @@ then
   mkdir ${VIM_BUNDLE}
 fi
 
-cat ./vimrc_local.vim ./.vimrc > .vimrc.linux
-
 echo "copy .vimrc ~/"
-cp .vimrc.linux ~/.vimrc
+cp .vimrc ~/.vimrc
 
 echo "git clone neobundle"
 git clone git://github.com/Shougo/neobundle.vim.git $VIM_BUNDLE/neobundle.vim
