@@ -1,4 +1,4 @@
-"Last Change: 28-Oct-2015."
+"Last Change: 11-Dec-2015."
 
 " {{{ Base
 " -----------------------------------------------------------------------------------------------------
@@ -36,9 +36,9 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 "NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'gh:Shougo/neocomplcache'
 NeoBundle 'gh:Shougo/neomru.vim.git'
-NeoBundle 'git://github.com/Shougo/neosnippet.vim.git'
+NeoBundle 'gh:Shougo/neosnippet.vim.git'
 NeoBundle "Shougo/neosnippet-snippets"
-NeoBundle 'git://github.com/honza/vim-snippets.git'
+NeoBundle 'gh:honza/vim-snippets.git'
 NeoBundle 'gh:svjunic/svjunic-snip.git'
 
 NeoBundle 'Shougo/unite.vim'
@@ -93,7 +93,7 @@ NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'SQLUtilities'
 NeoBundle 'mattn/webapi-vim'
 NeoBundle 'tyru/open-browser.vim'
-NeoBundle 'git://github.com/tell-k/vim-browsereload-mac.git'
+NeoBundle 'gh:tell-k/vim-browsereload-mac.git'
 NeoBundle 'basyura/TweetVim'
 NeoBundle 'basyura/twibill.vim'
 NeoBundle 'basyura/bitly.vim'
