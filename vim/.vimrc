@@ -101,6 +101,7 @@ NeoBundle 'koron/codic-vim'
 NeoBundle 'vim-scripts/Align'
 NeoBundle 'cohama/agit.vim'
 NeoBundle 'modsound/macdict-vim.git'
+NeoBundle 'chase/vim-ansible-yaml'
 
 " ColorScheme
 NeoBundle 'gh:svjunic/RadicalGoodSpeed.vim.git'
@@ -637,6 +638,13 @@ set listchars=tab:\ \|
 " The Usual
 hi CurlyBracket guifg=#00bfff
 match CurlyBracket /[{}]/
+
+
+
+" ******************************************
+" vim-ansible-yaml *************************
+let g:ansible_options = {'ignore_blank_lines': 0}
+
 
 " }}}
 
