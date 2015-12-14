@@ -1,4 +1,4 @@
-"Last Change: 11-Dec-2015."
+"Last Change: 14-Dec-2015."
 
 " {{{ Base
 " -----------------------------------------------------------------------------------------------------
@@ -58,6 +58,11 @@ NeoBundle 'Shougo/vimproc', {
 
 " utility
 NeoBundle 'scrooloose/syntastic.git'
+" NeoBundle 'scrooloose/syntastic.git', {
+" \   'build': {
+" \     'others': 'npm install -g jshint'
+" \   }
+" \ }
 NeoBundle 'surround.vim'
 NeoBundle 'vim-scripts/YankRing.vim'
 NeoBundle 'thinca/vim-ref'
@@ -216,6 +221,13 @@ nnoremap <silent> ,cr :ChromeReload<CR>
 
 autocmd BufRead,BufNewFile *.scss set filetype=scss.css
 autocmd BufRead,BufNewFile *.sass set filetype=scss.css
+
+"" htmlのとじタグを</でいれる
+augroup MyXML
+  autocmd!
+  autocmd Filetype xml inoremap <buffer> </ </<C-x><C-o>
+  autocmd Filetype html inoremap <buffer> </ </<C-x><C-o>
+augroup END
 
 
 " ******************************************
@@ -642,9 +654,15 @@ match CurlyBracket /[{}]/
 
 
 " ******************************************
+" tern_for_vim *****************************
+let g:tern_map_keys=1
+let g:tern#is_show_argument_hints_enabled=1
+
+
+
+" ******************************************
 " vim-ansible-yaml *************************
 let g:ansible_options = {'ignore_blank_lines': 0}
-
 
 " }}}
 
