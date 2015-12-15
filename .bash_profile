@@ -37,10 +37,18 @@ alias tmux-session-clear='tmux kill-session -a'
 #####################################################################################################
 # function
 #####################################################################################################
+# 不要ファイルを一度に削除したかった。
 function ccc () {
   rm `find ./* -name .DS*`
   rm `find ./* -name *.swp`
   rm `find ./* -name Thumbs.db`
+  return
+}
+
+# scss 単体コンパイル
+function scss_compile () {
+  filename=$(echo $1 | sed 's/.scss$//g')
+  scss --compass ${filename}.scss ${filename}.css -C --sourcemap=none --style compressed
   return
 }
 
