@@ -1,4 +1,4 @@
-"Last Change: 14-Dec-2015."
+"Last Change: 16-Dec-2015."
 
 " {{{ Base
 " -----------------------------------------------------------------------------------------------------
@@ -34,12 +34,12 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
 "Plugin Installing
 "NeoBundle 'Shougo/neobundle.vim'
-NeoBundle 'gh:Shougo/neocomplcache'
-NeoBundle 'gh:Shougo/neomru.vim.git'
-NeoBundle 'gh:Shougo/neosnippet.vim.git'
+NeoBundle 'gh:Shougo/neocomplete'
+NeoBundle 'gh:Shougo/neomru.vim'
+NeoBundle 'gh:Shougo/neosnippet.vim'
 NeoBundle "Shougo/neosnippet-snippets"
-NeoBundle 'gh:honza/vim-snippets.git'
-NeoBundle 'gh:svjunic/svjunic-snip.git'
+NeoBundle 'gh:honza/vim-snippets'
+NeoBundle 'gh:svjunic/svjunic-snip'
 
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'ujihisa/unite-locate'
@@ -57,8 +57,8 @@ NeoBundle 'Shougo/vimproc', {
 
 
 " utility
-NeoBundle 'scrooloose/syntastic.git'
-" NeoBundle 'scrooloose/syntastic.git', {
+NeoBundle 'scrooloose/syntastic'
+" NeoBundle 'scrooloose/syntastic', {
 " \   'build': {
 " \     'others': 'npm install -g jshint'
 " \   }
@@ -67,19 +67,18 @@ NeoBundle 'surround.vim'
 NeoBundle 'vim-scripts/YankRing.vim'
 NeoBundle 'thinca/vim-ref'
 NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'https://github.com/rbtnn/vimconsole.vim.git'
+NeoBundle 'gh:rbtnn/vimconsole.vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 
 " front-end - html
-NeoBundle 'https://github.com/othree/html5.vim.git'
-NeoBundle 'https://github.com/mattn/emmet-vim.git'
-NeoBundle 'gh:svjunic/scss-snippets.git'
-NeoBundle 'digitaltoad/vim-jade.git'
+NeoBundle 'gh:othree/html5.vim'
+NeoBundle 'gh:mattn/emmet-vim'
+NeoBundle 'gh:svjunic/scss-snippets'
+NeoBundle 'digitaltoad/vim-jade'
 
 " front-end - css
 NeoBundle 'cakebaker/scss-syntax.vim'
-NeoBundle 'https://gist.github.com/1398610.git'
-NeoBundle 'https://github.com/vim-scripts/hexHighlight.vim.git'
+NeoBundle 'gh:vim-scripts/hexHighlight.vim'
 
 " front-end - javascript
 NeoBundle 'jelera/vim-javascript-syntax'
@@ -98,18 +97,18 @@ NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'SQLUtilities'
 NeoBundle 'mattn/webapi-vim'
 NeoBundle 'tyru/open-browser.vim'
-NeoBundle 'gh:tell-k/vim-browsereload-mac.git'
+NeoBundle 'gh:tell-k/vim-browsereload-mac'
 NeoBundle 'basyura/TweetVim'
 NeoBundle 'basyura/twibill.vim'
 NeoBundle 'basyura/bitly.vim'
 NeoBundle 'koron/codic-vim'
 NeoBundle 'vim-scripts/Align'
 NeoBundle 'cohama/agit.vim'
-NeoBundle 'modsound/macdict-vim.git'
+NeoBundle 'modsound/macdict-vim'
 NeoBundle 'chase/vim-ansible-yaml'
 
 " ColorScheme
-NeoBundle 'gh:svjunic/RadicalGoodSpeed.vim.git'
+NeoBundle 'gh:svjunic/RadicalGoodSpeed.vim'
 
 
 "NeoBundle 'hail2u/vim-css3-syntax'
@@ -385,74 +384,90 @@ if executable('pt')
 endif
 
 " ******************************************
-" neocomplcache.vim ************************
+" neocomplete.vim **************************
 
-"NeoComplCacheEnable
-let g:neocomplcache_enable_at_startup = 1
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+"inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+
+" Close popup by <Space>.
+inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
 
 " Enable omni completion.
-autocmd FileType css,scss,sass setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 "autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType javascript setlocal omnifunc=tern#Complete
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
-" 通常のオムニ補完無効
-if !exists('g:neocomplcache_omni_patterns')
-let g:neocomplcache_omni_patterns = {}
-endif
-" パターンに引っかかったやつだけ使用
-"let g:neocomplcache_omni_patterns['scss'] = ''
-"let g:neocomplcache_omni_patterns['sass'] = ''
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? "\<C-y>" : "\<CR>"
+endfunction
 
+" {{{ 使ってないオプション
 
-let g:neocomplcache_enable_auto_close_preview = 0
+" let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
-"" キャッシュする文字列の長さの最小値（デフォルト値4）
-let g:neocomplcache_min_syntax_length = 3
+"" Define dictionary.
+" let g:neocomplete#sources#dictionary#dictionaries = {
+"     \ 'default' : '',
+"     \ 'vimshell' : $HOME.'/.vimshell_hist',
+"     \ 'scheme' : $HOME.'/.gosh_completions'
+"         \ }
 
-"" 大文字が入力さた場合、限り大文字小文字の区別をする
-let g:neocomplcache_enable_smart_case = 1
+"" Define keyword.
+"if !exists('g:neocomplete#keyword_patterns')
+"    let g:neocomplete#keyword_patterns = {}
+"endif
+"let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
-" キャメルケースの候補展開
-" 0:無効
-" 1:有効
-" 例）DooDooo -> DD
-let g:neocomplcache_enable_camel_case_completion = 1
+" AutoComplPop like behavior.
+"let g:neocomplete#enable_auto_select = 1
 
-" アンダースコアの候補展開
-" 0:無効
-" 1:有効
-" 例）n_e_u_c -> neocomplcache_enable_underbar_completion
-" let g:neocomplcache_enable_underbar_completion = 1
-let g:neocomplcache_enable_underbar_completion = 0
+" Shell like behavior(not recommended).
+"set completeopt+=longest
+"let g:neocomplete#enable_auto_select = 1
+"let g:neocomplete#disable_auto_complete = 1
+"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
-"" ファイルタイプ毎にdictファイルを設定
-"let g:neocomplcache_dictionary_filetype_lists = {
-"    \ 'default'    : '',
-"    \ 'perl'       : $HOME . '/.vim/dict/perl.dict'
-"    \ }
+"" Enable heavy omni completion.
+"if !exists('g:neocomplete#sources#omni#input_patterns')
+"  let g:neocomplete#sources#omni#input_patterns = {}
+"endif
+"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
+"" For perlomni.vim setting.
+"" https://github.com/c9s/perlomni.vim
+"let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
-inoremap <expr><C-g>     neocomplcache#undo_completion()
-inoremap <expr><C-l>     neocomplcache#complete_common_string()
-
-"    " Recommended key-mappings.
-"    " <CR>: close popup and save indent.
-"    inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-"    function! s:my_cr_function()
-"      return neocomplcache#smart_close_popup() . "\<CR>"
-"    endfunction
-"    " <TAB>: completion.
-"    inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-"    " <C-h>, <BS>: close popup and delete backword char.
-"    inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-"    inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-"    inoremap <expr><C-y>  neocomplcache#close_popup()
-"    inoremap <expr><C-e>  neocomplcache#cancel_popup()
-
-
+" }}}
 
 
 
@@ -671,7 +686,8 @@ let g:ansible_options = {'ignore_blank_lines': 0}
 
 source $VIMRUNTIME/macros/matchit.vim
 
+" ******************************************
+" Test Code ********************************
+
 " }}}
-
-
 
