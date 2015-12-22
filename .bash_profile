@@ -12,7 +12,7 @@ export LSCOLORS=gxfxcxdxbxegedabagacad
 # export PATH="/usr/local/bin:$PATH:/usr/local/sbin"
 # 
 # source ~/.nvm/nvm.sh
-# nvm use v0.10.28
+# nvm use v5.0.0
 # npm_dir=${NVM_PATH}_modules
 # 
 # echo "set NODE_PATH for node.js"
@@ -33,6 +33,9 @@ alias adbDebug='sh ~/bin/androidDebug.sh'
 
 alias tmux-session-clear='tmux kill-session -a'
 
+# ディレクトリの容量表示
+alias dud='du -d 1 -h '
+
 
 #####################################################################################################
 # function
@@ -46,9 +49,20 @@ function ccc () {
 }
 
 # scss 単体コンパイル
-function scss_compile () {
+function scss1compile () {
   filename=$(echo $1 | sed 's/.scss$//g')
   scss --compass ${filename}.scss ${filename}.css -C --sourcemap=none --style compressed
+  return
+}
+function scss1watch () {
+  filename=$(echo $1 | sed 's/.scss$//g')
+  scss --watch${filename}.scss:${filename}.css -C --sourcemap=none --style compressed
+  return
+}
+function scsswwatch () {
+  input=$1
+  output=$2
+  scss --watch ${input}:${output} -C --sourcemap=none --style compressed
   return
 }
 

@@ -1,4 +1,18 @@
-"Last Change: 16-Dec-2015."
+"Last Change: 22-Dec-2015."
+
+"                     __             .__        
+"  ________  __      |__|__ __  ____ |__| ____  
+"  /  ___|  \/ /      |  |  |  \/    \|  |/ ___\ 
+"  \___ \ \   /       |  |  |  /   |  \  \  \___ 
+" /____  > \_/ /\ /\__|  |____/|___|  /__|\___  >
+"      \/      \/ \______|          \/        \/ 
+"              .__                                    
+"        ___  _|__| ____________  ____                
+"        \  \/ /  |/     \_  __ \/ ___\               
+"         \   /|  |  Y Y  \  | \|  \___               
+"       /\ \_/ |__|__|_|  /__|   \___  >              
+"       \/              \/           \/               
+
 
 " {{{ Base
 " -----------------------------------------------------------------------------------------------------
@@ -37,7 +51,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'gh:Shougo/neocomplete'
 NeoBundle 'gh:Shougo/neomru.vim'
 NeoBundle 'gh:Shougo/neosnippet.vim'
-NeoBundle "Shougo/neosnippet-snippets"
+NeoBundle "gh:Shougo/neosnippet-snippets"
 NeoBundle 'gh:honza/vim-snippets'
 NeoBundle 'gh:svjunic/svjunic-snip'
 
@@ -400,17 +414,18 @@ let g:neocomplete#sources#syntax#min_keyword_length = 3
 
 " Plugin key-mappings.
 inoremap <expr><C-g>     neocomplete#undo_completion()
-"inoremap <expr><C-l>     neocomplete#complete_common_string()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+inoremap <expr><CR>   pumvisible() ? "\<C-n>" . neocomplete#close_popup()  : "<CR>"
 
 " <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " <C-h>, <BS>: close popup and delete backword char.
 inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 
 " Close popup by <Space>.
-inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+" inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -433,13 +448,6 @@ endfunction
 
 " let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
-"" Define dictionary.
-" let g:neocomplete#sources#dictionary#dictionaries = {
-"     \ 'default' : '',
-"     \ 'vimshell' : $HOME.'/.vimshell_hist',
-"     \ 'scheme' : $HOME.'/.gosh_completions'
-"         \ }
-
 "" Define keyword.
 "if !exists('g:neocomplete#keyword_patterns')
 "    let g:neocomplete#keyword_patterns = {}
@@ -454,6 +462,13 @@ endfunction
 "let g:neocomplete#enable_auto_select = 1
 "let g:neocomplete#disable_auto_complete = 1
 "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+
+"" Define dictionary.
+"let g:neocomplete#sources#dictionary#dictionaries = {
+"  \ 'default' : '',
+"  \ 'vimshell' : $HOME.'/.vimshell_hist',
+"  \ 'scheme' : $HOME.'/.gosh_completions'
+"  \ }
 
 "" Enable heavy omni completion.
 "if !exists('g:neocomplete#sources#omni#input_patterns')
@@ -473,10 +488,14 @@ endfunction
 
 " ******************************************
 " neosnippet.vim ***************************
-"control+l でスニペット展開
-imap <C-l>    <Plug>(neosnippet_expand_or_jump)
-smap <C-l>    <Plug>(neosnippet_expand_or_jump)
-xmap <C-l>    <Plug>(neosnippet_expand_or_jump)
+
+"" デフォルトスニペット無効
+"let g:neosnippet#disable_runtime_snippets = { '_' : 1 }
+
+"control+k でスニペット展開
+imap <C-k>    <Plug>(neosnippet_expand_or_jump)
+smap <C-k>    <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>    <Plug>(neosnippet_expand_or_jump)
 imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)"
 \: pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -491,10 +510,10 @@ endif
 
 " Enable snipMate compatibility feature.
 let g:neosnippet#enable_snipmate_compatibility = 1
+
 " Tell Neosnippet about the other snippets
 let s:neosnippet_directorys = [ '~/.vim/bundle/vim-snippets/snippets', '~/.vim/bundle/1398610', '~/.vim/bundle/svjunic-snip/snippets' ]
 let g:neosnippet#snippets_directory = join( s:neosnippet_directorys, ',' )
-
 
 
 
