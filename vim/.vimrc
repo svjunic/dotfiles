@@ -1,4 +1,4 @@
-"Last Change: 22-Dec-2015."
+"Last Change: 15-Feb-2016."
 
 "                     __             .__        
 "  ________  __      |__|__ __  ____ |__| ____  
@@ -87,7 +87,6 @@ NeoBundle 'nathanaelkane/vim-indent-guides'
 " front-end - html
 NeoBundle 'gh:othree/html5.vim'
 NeoBundle 'gh:mattn/emmet-vim'
-NeoBundle 'gh:svjunic/scss-snippets'
 NeoBundle 'digitaltoad/vim-jade'
 
 " front-end - css
