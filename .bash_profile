@@ -37,7 +37,8 @@ alias vi='Vim'
 alias vim='Vim'
 
 alias openf='sh ~/bin/openf'
-alias gitlocal_refresh='sh ~/bin/gitlocal_refresh.sh'
+alias gitlmm='git log origin/master..master'
+#alias gitlocal_refresh='sh ~/bin/gitlocal_refresh.sh'
 alias adbDebug='sh ~/bin/androidDebug.sh'
 
 alias tmux-session-clear='tmux kill-session -a'
