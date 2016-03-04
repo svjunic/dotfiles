@@ -96,7 +96,7 @@ NeoBundle 'gh:vim-scripts/hexHighlight.vim'
 " front-end - javascript
 NeoBundle 'jelera/vim-javascript-syntax'
 NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'marijnh/tern_for_vim', {
+NeoBundle 'ternjs/tern_for_vim', {
   \ 'build': {
   \   'others': 'npm install'
   \}}
