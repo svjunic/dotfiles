@@ -1,4 +1,4 @@
-"Last Change: 15-Feb-2016."
+"Last Change: 09-Mar-2016."
 
 "                     __             .__        
 "  ________  __      |__|__ __  ____ |__| ____  
@@ -21,8 +21,17 @@ scriptencoding utf-8
 " undofile(.un~)ファイルを作らないように変更
 set noundofile
 
+" 検索の大文字小文字を無視
+set ic
+
 " for linux
 command! -nargs=0 CdCurrent cd %:p:h
+
+" コマンドラインモードでTABキーによるファイル名補完を有効にする
+set wildmenu wildmode=list:longest,full
+
+" コマンドラインの履歴を10000件保存する
+set history=10000
 
 " }}}
 
@@ -312,6 +321,18 @@ cabbrev eu e ++enc=utf-8
 
 " ウィンドウに1行で収まらない場合、ウィンドウ上では自動改行を行って表示しない
 set nowrap
+
+" インデント付きで折り返す
+if (v:version == 704 && has('patch338')) || v:version >= 705
+  set breakindent
+endif
+
+" 論理行でなく表示行で移動する
+nnoremap j gj
+vnoremap j gj
+nnoremap k gk
+vnoremap k gk
+
 
 " 単語とみなす文字の拡張
 set isk+=@-@
@@ -703,6 +724,13 @@ let g:ansible_options = {'ignore_blank_lines': 0}
 " -----------------------------------------------------------------------------------------------------
 
 source $VIMRUNTIME/macros/matchit.vim
+
+" 自動読み込み
+" http://vim-jp.org/vim-users-jp/2011/03/12/Hack-206.html
+augroup vimrc-checktime
+  autocmd!
+  autocmd WinEnter * checktime
+augroup END
 
 " ******************************************
 " Test Code ********************************
