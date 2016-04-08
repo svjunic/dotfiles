@@ -17,7 +17,7 @@ git merge
 git pull
 
 # ./configure --with-features=huge --enable-gui=gnome2 --enable-fail-if-missing
-./configure --with-features=huge --enable-gui=gnome2 --enable-fail-if-missing --prefix=/user/local/lib
+./configure --with-features=huge --enable-gui=gnome2 --enable-fail-if-missing --prefix=/usr/local/lib
 
 
 # GTK2 GUI版
