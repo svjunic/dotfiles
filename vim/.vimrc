@@ -1,4 +1,4 @@
-"Last Change: 09-Mar-2016."
+"Last Change: 20-May-2016."
 
 "                     __             .__        
 "  ________  __      |__|__ __  ____ |__| ____  
@@ -249,6 +249,10 @@ augroup MyXML
   autocmd Filetype xml inoremap <buffer> </ </<C-x><C-o>
   autocmd Filetype html inoremap <buffer> </ </<C-x><C-o>
 augroup END
+
+" 日本語のヘルプだけconcealを有効にする
+set conceallevel=0
+autocmd BufRead,BufNewFile *.jax set conceallevel=2
 
 
 " ******************************************
@@ -523,10 +527,11 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)"
 \: "\<TAB>"
 
-" For snippet_complete marker.
-if has('conceal')
-  set conceallevel=2 concealcursor=i
-endif
+" json等編集時にじゃまになったので、一旦無効
+"" For snippet_complete marker.
+"if has('conceal')
+"  set conceallevel=2 concealcursor=i
+"endif
 
 " Enable snipMate compatibility feature.
 let g:neosnippet#enable_snipmate_compatibility = 1
