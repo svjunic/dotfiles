@@ -1,5 +1,10 @@
-#!/bin/bash
+#!/bin/sh
 
+VIM_HOME=$HOME/.vim
+VIM_BUNDLE=$HOME/.vim/bundle
+
+
+## コンパイル
 # 参考:http://vim-jp.org/docs/build_linux.html
 
 sudo apt-get build-dep vim
@@ -10,6 +15,7 @@ sudo apt-get install lua5.2 liblua5.2-dev
 sudo apt-get install luajit libluajit-5.1
 sudo apt-get install autoconf automake cproto
 git clone https://github.com/vim/vim.git
+
 
 cd vim
 git fetch
@@ -30,3 +36,23 @@ make
 sudo make install
 
 
+## .tern-projectの設定ファイル移動
+mv vim/.tern-project ~/.tern-project
+
+
+## いつもの
+if [ ! -d ${VIM_HOME} ]
+then
+  mkdir ${VIM_HOME}
+fi
+
+if [ ! -d ${VIM_BUNDLE} ]
+then
+  mkdir ${VIM_BUNDLE}
+fi
+
+echo "copy .vimrc ~/"
+cp .vimrc ~/.vimrc
+
+echo "git clone neobundle"
+git clone git://github.com/Shougo/neobundle.vim.git $VIM_BUNDLE/neobundle.vim

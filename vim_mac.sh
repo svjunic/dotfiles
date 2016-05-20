@@ -3,6 +3,17 @@
 VIM_HOME=$HOME/.vim
 VIM_BUNDLE=$HOME/.vim/bundle
 
+if [ ! -d ${MACVIM_RESOURCES_VIM} ]
+then
+  echo 'MacVim is not installed.'
+  exit
+fi
+
+
+## .tern-projectの設定ファイル移動
+mv vim/.tern-project ~/.tern-project
+
+
 if [ ! -d ${VIM_HOME} ]
 then
   mkdir ${VIM_HOME}
@@ -14,7 +25,10 @@ then
 fi
 
 echo "copy .vimrc ~/"
-cp .vimrc ~/.vimrc
+cp .vimrc ~/
+
+echo "copy .gvimrc ~/"
+cp .gvimrc ~/
 
 echo "git clone neobundle"
 git clone git://github.com/Shougo/neobundle.vim.git $VIM_BUNDLE/neobundle.vim
