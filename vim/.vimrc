@@ -1,4 +1,4 @@
-"Last Change: 20-May-2016."
+"Last Change: 31-May-2016."
 
 "                     __             .__        
 "  ________  __      |__|__ __  ____ |__| ____  
@@ -80,12 +80,16 @@ NeoBundle 'Shougo/vimproc', {
 
 
 " utility
-NeoBundle 'scrooloose/syntastic'
 " NeoBundle 'scrooloose/syntastic', {
 " \   'build': {
 " \     'others': 'npm install -g jshint'
 " \   }
 " \ }
+NeoBundle 'scrooloose/syntastic', {
+\   'build': {
+\     'others': 'sudo easy_install http://closure-linter.googlecode.com/files/closure_linter-latest.tar.gz'
+\   }
+\ }
 NeoBundle 'surround.vim'
 NeoBundle 'vim-scripts/YankRing.vim'
 NeoBundle 'thinca/vim-ref'
@@ -120,14 +124,16 @@ NeoBundle 'SQLUtilities'
 NeoBundle 'mattn/webapi-vim'
 NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'gh:tell-k/vim-browsereload-mac'
-NeoBundle 'basyura/TweetVim'
-NeoBundle 'basyura/twibill.vim'
-NeoBundle 'basyura/bitly.vim'
 NeoBundle 'koron/codic-vim'
 NeoBundle 'vim-scripts/Align'
 NeoBundle 'cohama/agit.vim'
 NeoBundle 'modsound/macdict-vim'
 NeoBundle 'chase/vim-ansible-yaml'
+
+" Twitter
+NeoBundle 'basyura/TweetVim'
+NeoBundle 'basyura/twibill.vim'
+NeoBundle 'basyura/bitly.vim'
 
 " ColorScheme
 NeoBundle 'gh:svjunic/RadicalGoodSpeed.vim'
@@ -654,6 +660,8 @@ let g:syntastic_style_warning_symbol = '⚠'
 "set statusline += %{SyntasticStatuslineFlag()}
 "set statusline += %*
 "let g:syntastic_javascript_checker = 'jshint' "jshintを使う（これはデフォルトで設定されている）
+"let g:syntastic_javascript_checkers = ['eslint','jshint','gjslint']
+let g:syntastic_javascript_checkers = ['gjslint']
 
 
 
