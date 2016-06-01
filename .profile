@@ -17,21 +17,21 @@ PS1="\u \t[\w] $ "
 ## #####################################################################################################
 ## # nvm
 ## #####################################################################################################
-## # echo "add PATH for node.js"
-## # export PATH="/usr/local/bin:$PATH:/usr/local/sbin"
-## # 
-## # source ~/.nvm/nvm.sh
-## # nvm use v5.0.0
-## # npm_dir=${NVM_PATH}_modules
-## # 
-## # echo "set NODE_PATH for node.js"
-## # export NODE_PATH=$npm_dir
+echo "add PATH for node.js"
+export PATH="/usr/local/bin:$PATH:/usr/local/sbin"
+
+source ~/.nvm/nvm.sh
+nvm use v5.0.0
+npm_dir=${NVM_PATH}_modules
+
+echo "set NODE_PATH for node.js"
+export NODE_PATH=$npm_dir
 
 
 #####################################################################################################
 # alias
 #####################################################################################################
-alias ls='ls -G'
+alias ls='ls --color=auto'
 alias cdc='cd `pwd -P`'
 #alias vi='Vim'
 #alias vim='Vim'
