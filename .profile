@@ -37,8 +37,8 @@ alias cdc='cd `pwd -P`'
 #alias vim='Vim'
 
 alias openf='sh ~/bin/openf'
-#alias gitlmm='git log origin/master..master'
-#alias gitlocal_refresh='sh ~/bin/gitlocal_refresh.sh'
+alias gitdiff='git difftool --tool=vimdiff --no-prompt'
+alias gitlmm='git log origin/master..master'
 #alias adbDebug='sh ~/bin/androidDebug.sh'
 
 alias tmux-session-clear='tmux kill-session -a'
