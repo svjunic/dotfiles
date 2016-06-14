@@ -1,4 +1,4 @@
-"Last Change: 31-May-2016."
+"Last Change: 14-Jun-2016."
 
 "                     __             .__        
 "  ________  __      |__|__ __  ____ |__| ____  
@@ -120,6 +120,7 @@ NeoBundle 'clausreinke/typescript-tools'
 NeoBundle 'plasticboy/vim-markdown'
 
 " utility2
+NeoBundle 'editorconfig/editorconfig-vim'
 NeoBundle 'SQLUtilities'
 NeoBundle 'mattn/webapi-vim'
 NeoBundle 'tyru/open-browser.vim'
