@@ -662,8 +662,7 @@ let g:syntastic_style_warning_symbol = '⚠'
 "set statusline += %{SyntasticStatuslineFlag()}
 "set statusline += %*
 "let g:syntastic_javascript_checker = 'jshint' "jshintを使う（これはデフォルトで設定されている）
-"let g:syntastic_javascript_checkers = ['eslint','jshint','gjslint']
-let g:syntastic_javascript_checkers = ['gjslint']
+let g:syntastic_javascript_checkers = ['eslint','jshint','gjslint']
 
 
 
