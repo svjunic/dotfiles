@@ -1,4 +1,4 @@
-"Last Change: 14-Jun-2016."
+"Last Change: 15-Jun-2016."
 
 "                     __             .__        
 "  ________  __      |__|__ __  ____ |__| ____  
@@ -637,6 +637,7 @@ let g:indent_guides_auto_colors = 0
 " ******************************************
 " syntastic.vim ****************************
 " jshintを入れる必要あり( npm install -g jshint )
+" eshintを入れる必要あり( npm install -g eslint )
 let g:syntastic_check_on_open = 0    "ファイルを開いたときはチェックしない
 let g:syntastic_check_on_wq = 1      "保存時にはチェック
 let g:syntastic_auto_loc_list = 2    "エラーがあったら自動でロケーションリストを開く（0:自動で閉じない、1:自動で開いたり閉じたり、2:そもそも開かない）
