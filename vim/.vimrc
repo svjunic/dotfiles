@@ -1,4 +1,4 @@
-"Last Change: 15-Jun-2016."
+"Last Change: 21-Jun-2016."
 
 "                     __             .__        
 "  ________  __      |__|__ __  ____ |__| ____  
@@ -701,6 +701,17 @@ let g:user_emmet_settings = {
       \ 'lang' : 'ja'
       \ }
       \}
+
+"c-kがneosnippetとかぶっていて変な動きになっていた模様
+"これで一旦様子見る
+let g:user_emmet_leader_key='<C-Z>'
+imap <C-L>    :<C-Z>,
+
+" 全部のモードで動く
+let g:user_emmet_mode='a'
+
+let g:user_emmet_install_global = 0
+autocmd FileType html,jade,css,scss,sass EmmetInstall
 
 
 " ******************************************
