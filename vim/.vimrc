@@ -34,7 +34,7 @@ set wildmenu wildmode=list:longest,full
 set history=10000
 
 " .swpができるディレクトリの変更
-set directory=~/.vim/tmp
+set directory=.,~/.vim/tmp
 
 " }}}
 
