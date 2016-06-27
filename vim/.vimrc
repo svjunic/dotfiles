@@ -1,4 +1,4 @@
-"Last Change: 21-Jun-2016."
+"Last Change: 27-Jun-2016."
 
 "                     __             .__
 "  ________  __      |__|__ __  ____ |__| ____
@@ -32,6 +32,9 @@ set wildmenu wildmode=list:longest,full
 
 " コマンドラインの履歴を10000件保存する
 set history=10000
+
+" .swpができるディレクトリの変更
+set directory=~/.vim/tmp
 
 " }}}
 
