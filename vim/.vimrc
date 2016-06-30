@@ -1,4 +1,4 @@
-"Last Change: 27-Jun-2016."
+"Last Change: 30-Jun-2016."
 
 "                     __             .__
 "  ________  __      |__|__ __  ____ |__| ____
@@ -34,7 +34,7 @@ set wildmenu wildmode=list:longest,full
 set history=10000
 
 " .swpができるディレクトリの変更
-set directory=.,~/.vim/tmp
+"set directory=.,~/.vim/tmp
 
 " }}}
 
@@ -290,6 +290,7 @@ set hlsearch
 set shiftwidth=4
 set tabstop=4
 set nobackup
+set nowritebackup
 set matchpairs=(:),{:},[:],<:>
 set pastetoggle=<Insert>
 
