@@ -1,4 +1,4 @@
-"Last Change: 30-Jun-2016."
+"Last Change: 30-Aug-2016."
 
 "                     __             .__
 "  ________  __      |__|__ __  ____ |__| ____
@@ -156,6 +156,9 @@ NeoBundle 'gh:svjunic/RadicalGoodSpeed.vim'
 "NeoBundle 'thinca/vim-localrc'
 "NeoBundle 'motemen/hatena-vim'
 "NeoBundle 'mattn/unite-advent_calendar'
+
+" 次整理した時に入れたい
+"NeoBundle 'heavenshell/vim-jsdoc'
 
 call neobundle#end()
 
