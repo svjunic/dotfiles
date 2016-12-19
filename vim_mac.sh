@@ -11,7 +11,9 @@ fi
 
 
 ## .tern-projectの設定ファイル移動
-mv vim/.tern-project ~/.tern-project
+cp vim/.tern-project ~/.tern-project
+cp vim/.eslintrc ~/.eslintrc
+cp vim/.agignore ~/.agignore
 
 
 if [ ! -d ${VIM_HOME} ]
