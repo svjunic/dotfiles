@@ -37,7 +37,7 @@ sudo make install
 
 
 ## .tern-projectの設定ファイル移動
-mv vim/.tern-project ~/.tern-project
+cp vim/.tern-project ~/.tern-project
 
 
 ## いつもの
