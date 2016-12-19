@@ -1,17 +1,17 @@
-"Last Change: 31-May-2016."
+"Last Change: 30-Aug-2016."
 
-"                     __             .__        
-"  ________  __      |__|__ __  ____ |__| ____  
-"  /  ___|  \/ /      |  |  |  \/    \|  |/ ___\ 
-"  \___ \ \   /       |  |  |  /   |  \  \  \___ 
+"                     __             .__
+"  ________  __      |__|__ __  ____ |__| ____
+"  /  ___|  \/ /      |  |  |  \/    \|  |/ ___\
+"  \___ \ \   /       |  |  |  /   |  \  \  \___
 " /____  > \_/ /\ /\__|  |____/|___|  /__|\___  >
-"      \/      \/ \______|          \/        \/ 
-"              .__                                    
-"        ___  _|__| ____________  ____                
-"        \  \/ /  |/     \_  __ \/ ___\               
-"         \   /|  |  Y Y  \  | \|  \___               
-"       /\ \_/ |__|__|_|  /__|   \___  >              
-"       \/              \/           \/               
+"      \/      \/ \______|          \/        \/
+"              .__
+"        ___  _|__| ____________  ____
+"        \  \/ /  |/     \_  __ \/ ___\
+"         \   /|  |  Y Y  \  | \|  \___
+"       /\ \_/ |__|__|_|  /__|   \___  >
+"       \/              \/           \/
 
 
 " {{{ Base
@@ -32,6 +32,9 @@ set wildmenu wildmode=list:longest,full
 
 " コマンドラインの履歴を10000件保存する
 set history=10000
+
+" .swpができるディレクトリの変更
+"set directory=.,~/.vim/tmp
 
 " }}}
 
@@ -120,6 +123,7 @@ NeoBundle 'clausreinke/typescript-tools'
 NeoBundle 'plasticboy/vim-markdown'
 
 " utility2
+NeoBundle 'editorconfig/editorconfig-vim'
 NeoBundle 'SQLUtilities'
 NeoBundle 'mattn/webapi-vim'
 NeoBundle 'tyru/open-browser.vim'
@@ -152,6 +156,9 @@ NeoBundle 'gh:svjunic/RadicalGoodSpeed.vim'
 "NeoBundle 'thinca/vim-localrc'
 "NeoBundle 'motemen/hatena-vim'
 "NeoBundle 'mattn/unite-advent_calendar'
+
+" 次整理した時に入れたい
+"NeoBundle 'heavenshell/vim-jsdoc'
 
 call neobundle#end()
 
@@ -286,6 +293,7 @@ set hlsearch
 set shiftwidth=4
 set tabstop=4
 set nobackup
+set nowritebackup
 set matchpairs=(:),{:},[:],<:>
 set pastetoggle=<Insert>
 
@@ -636,6 +644,7 @@ let g:indent_guides_auto_colors = 0
 " ******************************************
 " syntastic.vim ****************************
 " jshintを入れる必要あり( npm install -g jshint )
+" eshintを入れる必要あり( npm install -g eslint )
 let g:syntastic_check_on_open = 0    "ファイルを開いたときはチェックしない
 let g:syntastic_check_on_wq = 1      "保存時にはチェック
 let g:syntastic_auto_loc_list = 2    "エラーがあったら自動でロケーションリストを開く（0:自動で閉じない、1:自動で開いたり閉じたり、2:そもそも開かない）
@@ -660,8 +669,7 @@ let g:syntastic_style_warning_symbol = '⚠'
 "set statusline += %{SyntasticStatuslineFlag()}
 "set statusline += %*
 "let g:syntastic_javascript_checker = 'jshint' "jshintを使う（これはデフォルトで設定されている）
-"let g:syntastic_javascript_checkers = ['eslint','jshint','gjslint']
-let g:syntastic_javascript_checkers = ['gjslint']
+let g:syntastic_javascript_checkers = ['eslint','jshint','gjslint']
 
 
 
@@ -700,6 +708,18 @@ let g:user_emmet_settings = {
       \ 'lang' : 'ja'
       \ }
       \}
+
+"c-kがneosnippetとかぶっていて変な動きになっていた模様
+"これで一旦様子見る
+let g:user_emmet_leader_key='<C-E>'
+imap <C-L>    <C-E>,
+vmap <C-L>    <C-E>,
+
+" 全部のモードで動く
+let g:user_emmet_mode='a'
+
+let g:user_emmet_install_global = 0
+autocmd FileType html,jade,css,scss,sass EmmetInstall
 
 
 " ******************************************
