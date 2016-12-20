@@ -1,4 +1,4 @@
-"Last Change: 19-Dec-2016."
+"Last Change: 20-Dec-2016."
 
 "                     __             .__
 "  ________  __      |__|__ __  ____ |__| ____
@@ -154,10 +154,25 @@ NeoBundle 'scrooloose/syntastic', {
 " frontend
 NeoBundle 'gh:mattn/emmet-vim'
 NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'ternjs/tern_for_vim', {
+"NeoBundle 'ternjs/tern_for_vim', {
+"  \ 'build': {
+"  \   'others': 'npm install'
+"  \}}
+NeoBundleLazy 'ternjs/tern_for_vim', {
+  \ 'autoload' : {
+  \   'filetypes' : 'javascript',
+  \ },
   \ 'build': {
   \   'others': 'npm install'
   \}}
+
+"NeoBundleLazy 'gh:marijnh/tern_for_vim.git', {
+"      \ 'disabled' : !has('python'),
+"      \ 'autoload' : {
+"      \   'filetypes' : 'javascript',
+"      \ },
+"      \ 'build' : 'npm install',
+"      \ }
 
 " ColorScheme
 NeoBundle 'gh:svjunic/RadicalGoodSpeed.vim'
@@ -294,6 +309,42 @@ endfunction
 
 "" }}}
 
+"" {{{ neosnippet.vim
+
+"" デフォルトスニペット無効
+"let g:neosnippet#disable_runtime_snippets = { '_' : 1 }
+
+"control+k でスニペット展開
+imap <C-k>    <Plug>(neosnippet_expand_or_jump)
+smap <C-k>    <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>    <Plug>(neosnippet_expand_or_jump)
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: "\<TAB>"
+
+" json等編集時にじゃまになったので、一旦無効
+"" For snippet_complete marker.
+"if has('conceal')
+"  set conceallevel=2 concealcursor=i
+"endif
+
+" Enable snipMate compatibility feature.
+let g:neosnippet#enable_snipmate_compatibility = 1
+
+" Tell Neosnippet about the other snippets
+let s:neosnippet_directorys = [ '~/.vim/bundle/vim-snippets/snippets', '~/.vim/bundle/1398610', '~/.vim/bundle/svjunic-snip/snippets' ]
+let g:neosnippet#snippets_directory = join( s:neosnippet_directorys, ',' )
+"" }}}
+
+"" {{{ netrw.vim
+let g:netrw_use_errorwindow = 1
+let g:netrw_liststyle       = 4
+"" }}}
+
+
 "" {{{ emmet.vim
 " 画像の縦横取得するときにPerlのImage::Info使っているので入ってないと動かない
 " perl -MImage::Info -e ''
@@ -337,7 +388,7 @@ endfunction
 map <leader>cw :CoffeeWatch vert<cr>
 " }}}
 
-" syntastic.vim ****************************
+" {{{ syntastic.vim
 " jshintを入れる必要あり( npm install -g jshint )
 " eshintを入れる必要あり( npm install -g eslint )
 let g:syntastic_check_on_open = 0    "ファイルを開いたときはチェックしない
