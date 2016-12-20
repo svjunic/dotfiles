@@ -11,9 +11,9 @@ fi
 
 
 ## .tern-projectの設定ファイル移動
-cp vim/.tern-project ~/.tern-project
-cp vim/.eslintrc ~/.eslintrc
-cp vim/.agignore ~/.agignore
+cp vim/.tern-project ~/
+cp vim/.eslintrc ~/
+cp vim/.agignore ~/
 
 
 if [ ! -d ${VIM_HOME} ]
@@ -27,10 +27,10 @@ then
 fi
 
 echo "copy .vimrc ~/"
-cp .vimrc ~/
+cp vim/.vimrc ~/
 
 echo "copy .gvimrc ~/"
-cp .gvimrc ~/
+cp vim/.gvimrc ~/
 
 echo "git clone neobundle"
 git clone git://github.com/Shougo/neobundle.vim.git $VIM_BUNDLE/neobundle.vim
