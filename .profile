@@ -144,3 +144,21 @@ if [ `which tmux` ]; then
   tmux a -d || tmux
 fi
 
+
+#####################################################################################################
+# peco
+#####################################################################################################
+function cde {
+  local dir=$(find ./* -type d | peco)
+  if [ ! -z "$dir" ] ; then
+      cd "$dir"
+  fi
+}
+
+function cdf () {
+  local dir=$(find ./* -type f | peco)
+  if [ ! -z "$dir" ] ; then
+    vi "$dir"
+  fi
+}
+
