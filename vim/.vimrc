@@ -1,4 +1,4 @@
-"Last Change: 20-Dec-2016."
+"Last Change: 21-Feb-2017."
 
 "                     __             .__
 "  ________  __      |__|__ __  ____ |__| ____
@@ -145,6 +145,7 @@ NeoBundle 'Shougo/vimproc', {
       \ }
 
 " utility
+NeoBundle 'vim-sciprts/Align'
 NeoBundle 'scrooloose/syntastic', {
       \   'build': {
       \     'others': 'npm install -g eslint && npm install -g jshint'
