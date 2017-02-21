@@ -95,6 +95,10 @@ cabbrev eu e ++enc=utf-8
 
 " 日本語があるときにちらつく問題
 set conceallevel=0
+
+" 検索のハイライト外す
+nmap <C-l> <C-l>:nohlsearch<CR>
+
 " }}}
 
 " {{{ NeoBundle
