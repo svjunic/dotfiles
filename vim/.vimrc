@@ -1,4 +1,4 @@
-"Last Change: 21-Feb-2017."
+"Last Change: 22-Feb-2017."
 
 "                     __             .__
 "  ________  __      |__|__ __  ____ |__| ____
@@ -15,6 +15,7 @@
 
 
 " {{{ base set
+syntax on
 
 scriptencoding utf-8
 
