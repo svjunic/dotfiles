@@ -150,7 +150,7 @@ NeoBundle 'Shougo/vimproc', {
       \ }
 
 " utility
-NeoBundle 'vim-sciprts/Align'
+NeoBundle 'vim-scripts/Align'
 NeoBundle 'scrooloose/syntastic', {
       \   'build': {
       \     'others': 'npm install -g eslint && npm install -g jshint'
