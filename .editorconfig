@@ -1,0 +1,32 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+trim_trailing_whitespace = true
+#以下はVimプラグインでは有効にならない
+insert_final_newline = true
+
+[*.html]
+indent_style = space
+tab_width = 0
+
+#[*.php]
+#indent_style = tab
+#tab_width = 4
+
+#[*.{js,css,scss}]
+#indent_style = space
+#indent_size = 2
+
+[*.php]
+indent_style = tab
+tab_width = 2
+
+[*.js]
+indent_style = space
+indent_size = 2
+
+[*.css]
+indent_style = space
+indent_size = 2
