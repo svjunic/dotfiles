@@ -1,4 +1,4 @@
-"Last Change: 22-Feb-2017."
+"Last Change: 29-Jun-2017."
 
 "                     __             .__
 "  ________  __      |__|__ __  ____ |__| ____
@@ -156,6 +156,7 @@ NeoBundle 'scrooloose/syntastic', {
       \     'others': 'npm install -g eslint && npm install -g jshint'
       \   }
       \ }
+NeoBundle 'editorconfig/editorconfig-vim'
 
 " frontend
 NeoBundle 'gh:mattn/emmet-vim'
