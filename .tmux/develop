@@ -1,0 +1,11 @@
+# 横分割
+split-window -h
+resize-pane -L 100
+
+# 左パネル選択
+select-pane -t 0
+
+# 縦分割
+split-window -v
+
+select-pane -t 2

@@ -1,0 +1,3 @@
+# 横分割
+split-window -h
+resize-pane -L 100

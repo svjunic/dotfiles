@@ -1,0 +1,32 @@
+[credential]
+  helper = cache --timeout=3600
+
+[core]
+  editor = /Applications/MacVim.app/Contents/MacOS/Vim
+  excludesfile = /Users/macbookpro/.gitignore_global
+
+[filter "media"]
+  clean = git-media-clean %f
+  smudge = git-media-smudge %f
+
+[push]
+  default = matching
+
+#[diff]
+#  external = gitvimdiff
+
+[color]
+  ui = auto
+
+[alias]
+  co = checkout
+  ci = commit
+  st = status
+  br = branch
+  hist = log --pretty=format:\\\"%h %ad | %s%d [%an]\\\" --graph --date=short
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  lga = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+
+[user]
+  name = sv.junic
+  email = xxxxx
