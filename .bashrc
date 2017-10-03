@@ -17,26 +17,37 @@ PS1="\u \t[\w] $ "
 #####################################################################################################
 # nvm
 #####################################################################################################
-# echo "add PATH for node.js"
-# export PATH="/usr/local/bin:$PATH:/usr/local/sbin"
-# 
-# source ~/.nvm/nvm.sh
-# nvm use v5.0.0
-# npm_dir=${NVM_PATH}_modules
-# 
-# echo "set NODE_PATH for node.js"
-# export NODE_PATH=$npm_dir
+echo "add PATH for node.js"
+export PATH="/usr/local/bin:$PATH:/usr/local/sbin"
+
+source ~/.nvm/nvm.sh
+nvm use v7.10.0
+npm_dir=${NVM_PATH}_modules
+
+echo "set NODE_PATH for node.js"
+export NODE_PATH=$npm_dir
 
 
 #####################################################################################################
 # alias
 #####################################################################################################
-alias ls='ls -G'
+case "${OSTYPE}" in
+darwin*)
+  alias ls="ls -G"
+  alias ll="ls -lG"
+  alias la="ls -laG"
+  alias openf='sh ~/bin/openf'
+  ;;
+linux*)
+  alias ls='ls --color'
+  alias ll='ls -l --color'
+  alias la='ls -la --color'
+  ;;
+esac
 alias cdc='cd `pwd -P`'
 alias vi='Vim'
 alias vim='Vim'
 
-alias openf='sh ~/bin/openf'
 alias gitdiff='git difftool --tool=vimdiff --no-prompt'
 alias gitlmm='git log origin/master..master'
 #alias adbDebug='sh ~/bin/androidDebug.sh'
@@ -80,8 +91,9 @@ function scsswwatch () {
 #####################################################################################################
 # MacVim
 #####################################################################################################
-export PATH="/Applications/MacVim.app/Contents/MacOS:$PATH"
-
+if [ "$(uname)" == 'Darwin' ]; then
+  export PATH="/Applications/MacVim.app/Contents/MacOS:$PATH"
+fi
 
 #####################################################################################################
 # cordova
@@ -113,7 +125,7 @@ export PATH="/Applications/MacVim.app/Contents/MacOS:$PATH"
 git config --global color.ui auto
 git config --global alias.co checkout
 git config --global alias.ci commit
-# git config --global alias.st status
+#git config --global alias.st status
 git config --global alias.br branch
 git config --global alias.hist 'log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short'
 
@@ -144,3 +156,45 @@ if [ `which tmux` ]; then
   tmux a -d || tmux
 fi
 
+
+#####################################################################################################
+# peco
+#####################################################################################################
+function cdd {
+  local dir=$(find ./* -type d | peco)
+  if [ ! -z "$dir" ] ; then
+      cd "$dir"
+  fi
+}
+
+function cdf () {
+  local dir=$(find ./* -type f | peco)
+  if [ ! -z "$dir" ] ; then
+    vi "$dir"
+  fi
+}
+
+
+#####################################################################################################
+# github
+#####################################################################################################
+source ~/bin/git-completion.bash
+source ~/bin/git-prompt.sh
+GIT_PS1_SHOWUPSTREAM=1
+GIT_PS1_SHOWSTASHSTATE=1
+export PS1='\[\e[0;37m\e[40m\]\u\[\e[0m\]:\[\e[0;96m\e[40m\]\w\[\e[1;92m\e[40m\]$(__git_ps1)\[\e[0m\] $ '
+
+
+#####################################################################################################
+# function
+#####################################################################################################
+# ctrl+fで次の単語に移動
+bind '"\C-f": forward-word'
+# ctrl+bで前の単語に移動
+bind '"\C-b": backward-word'
+
+
+#####################################################################################################
+# fake-dev
+#####################################################################################################
+alias fake-dev="nginx -p . -c ~/.fake-dev.conf"

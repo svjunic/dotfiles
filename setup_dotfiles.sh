@@ -9,7 +9,6 @@ if [ `uname` = "Darwin" ]; then
   bash ./vim_mac.sh
 elif [ `uname` = "Linux" ]; then
   #Linux用のコード
-  cp .profile ~/.profile
   cp .bashrc ~/.bashrc
   cp .eslintrc ~/
   cp .tmux.conf ~/.tmux.conf
