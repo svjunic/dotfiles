@@ -4,11 +4,13 @@
 # tmux
 #####################################################################################################
 
-# areas
-alias tmuxw='sh ~/bin/tmux/window.sh'
-alias tmuxi='sh ~/bin/tmux/info.sh'
+# 横分割
+tmux split-window -h
+tmux resize-pane -L 100
 
+# 左パネル選択
+select-pane -t 1
 
-alias tmuxw='tmux source-file ~/.tmux/develop'
-alias tmuxd='tmux source-file ~/.tmux/develop2'
-alias tmuxi='sh ~/bin/tmux/info.sh'
+# 縦分割
+tmux split-window -v
+
