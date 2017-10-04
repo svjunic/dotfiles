@@ -36,7 +36,7 @@ darwin*)
   alias ls="ls -G"
   alias ll="ls -lG"
   alias la="ls -laG"
-  alias openf='sh ~/bin/openf'
+  alias openf='sh ~/bash/openf'
   ;;
 linux*)
   alias ls='ls --color'
@@ -50,7 +50,7 @@ alias vim='Vim'
 
 alias gitdiff='git difftool --tool=vimdiff --no-prompt'
 alias gitlmm='git log origin/master..master'
-#alias adbDebug='sh ~/bin/androidDebug.sh'
+#alias adbDebug='sh ~/bash/androidDebug.sh'
 
 alias tmux-session-clear='tmux kill-session -a'
 
@@ -118,10 +118,10 @@ fi
 
 #差分ファイル出すとき用
 # git_diff_archive 識別子1 識別子2
-. ~/bin/git_diff_archive.sh
+. ~/bash/git_diff_archive.sh
 
 # peco,vim,pt
-. ~/bin/ptvim.sh
+. ~/bash/ptvim.sh
 git config --global color.ui auto
 git config --global alias.co checkout
 git config --global alias.ci commit
@@ -150,7 +150,7 @@ git config --global alias.log 'log --all --branches --graph'
 
 if [ `which tmux` ]; then
   # いつもつかってるalias追加
-  . ~/bin/tmux/alias.sh
+  . ~/bash/tmux/alias.sh
   # セッションがあればアタッチ、なければ起動
   # -dをつけると他の接続が全てデタッチされ、今回アタッチする画面サイズに調整してくれる。
   tmux a -d || tmux
@@ -178,8 +178,8 @@ function cdf () {
 #####################################################################################################
 # github
 #####################################################################################################
-source ~/bin/git-completion.bash
-source ~/bin/git-prompt.sh
+source ~/bash/git-completion.bash
+source ~/bash/git-prompt.sh
 GIT_PS1_SHOWUPSTREAM=1
 GIT_PS1_SHOWSTASHSTATE=1
 export PS1='\[\e[0;37m\e[40m\]\u\[\e[0m\]:\[\e[0;96m\e[40m\]\w\[\e[1;92m\e[40m\]$(__git_ps1)\[\e[0m\] $ '
