@@ -37,6 +37,9 @@ set history=10000
 " omni補完のウィンドウを表示しない
 set completeopt=menuone
 
+" バックスペースを使えるように
+set backspace=indent,eol,start
+
 " ウィンドウに1行で収まらない場合、ウィンドウ上では自動改行を行って表示しない
 set nowrap
 
