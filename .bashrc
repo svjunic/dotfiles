@@ -21,41 +21,11 @@ echo "add PATH for node.js"
 export PATH="/usr/local/bin:$PATH:/usr/local/sbin"
 
 source ~/.nvm/nvm.sh
-nvm use v7.10.0
+nvm use v8.7.0
 npm_dir=${NVM_PATH}_modules
 
 echo "set NODE_PATH for node.js"
 export NODE_PATH=$npm_dir
-
-
-#####################################################################################################
-# alias
-#####################################################################################################
-case "${OSTYPE}" in
-darwin*)
-  alias ls="ls -G"
-  alias ll="ls -lG"
-  alias la="ls -laG"
-  alias openf='sh ~/bash/openf'
-  ;;
-linux*)
-  alias ls='ls --color'
-  alias ll='ls -l --color'
-  alias la='ls -la --color'
-  ;;
-esac
-alias cdc='cd `pwd -P`'
-alias vi='Vim'
-alias vim='Vim'
-
-alias gitdiff='git difftool --tool=vimdiff --no-prompt'
-alias gitlmm='git log origin/master..master'
-#alias adbDebug='sh ~/bash/androidDebug.sh'
-
-alias tmux-session-clear='tmux kill-session -a'
-
-# ディレクトリの容量表示
-alias dud='du -d 1 -h '
 
 
 #####################################################################################################
@@ -149,11 +119,11 @@ git config --global alias.log 'log --all --branches --graph'
 #####################################################################################################
 
 if [ `which tmux` ]; then
-  # いつもつかってるalias追加
-  . ~/bash/tmux/alias.sh
-  # セッションがあればアタッチ、なければ起動
-  # -dをつけると他の接続が全てデタッチされ、今回アタッチする画面サイズに調整してくれる。
-  tmux a -d || tmux
+  if ! [ -n "$TMUX" ]; then
+    tmux a -d || tmux
+  else
+    . ~/bash/tmux/alias.sh
+  fi
 fi
 
 
@@ -197,4 +167,33 @@ bind '"\C-b": backward-word'
 #####################################################################################################
 # fake-dev
 #####################################################################################################
-alias fake-dev="nginx -p . -c ~/.fake-dev.conf"
+#alias fake-dev="nginx -p . -c ~/.fake-dev.conf"
+
+
+#####################################################################################################
+# alias
+#####################################################################################################
+case "${OSTYPE}" in
+darwin*)
+  alias ls="ls -G"
+  alias ll="ls -lG"
+  alias la="ls -laG"
+  alias openf='sh ~/bash/openf'
+  ;;
+linux*)
+  alias ls='ls --color'
+  alias ll='ls -l --color'
+  alias la='ls -la --color'
+  ;;
+esac
+alias cdc='cd `pwd -P`'
+alias vi='vim'
+alias vim='vim'
+
+alias gitdiff='git difftool --tool=vimdiff --no-prompt'
+alias gitlmm='git log origin/master..master'
+#alias adbDebug='sh ~/bash/androidDebug.sh'
+alias tmux-session-clear='tmux kill-session -a'
+
+# ディレクトリの容量表示
+alias dud='du -d 1 -h '
