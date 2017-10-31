@@ -164,10 +164,6 @@ NeoBundle 'editorconfig/editorconfig-vim'
 " frontend
 NeoBundle 'gh:mattn/emmet-vim'
 NeoBundle 'kchmck/vim-coffee-script'
-"NeoBundle 'ternjs/tern_for_vim', {
-"  \ 'build': {
-"  \   'others': 'npm install'
-"  \}}
 NeoBundleLazy 'ternjs/tern_for_vim', {
   \ 'autoload' : {
   \   'filetypes' : 'javascript',
@@ -176,13 +172,14 @@ NeoBundleLazy 'ternjs/tern_for_vim', {
   \   'others': 'npm install'
   \}}
 
-"NeoBundleLazy 'gh:marijnh/tern_for_vim.git', {
-"      \ 'disabled' : !has('python'),
-"      \ 'autoload' : {
-"      \   'filetypes' : 'javascript',
-"      \ },
-"      \ 'build' : 'npm install',
-"      \ }
+" syntax
+NeoBundleLazy 'digitaltoad/vim-pug',{
+      \ "autoload" : {"filetypes" :[ "pug", "jade" ]}
+      \}
+
+NeoBundleLazy 'leafgarland/typescript-vim',{
+      \ "autoload" : {"filetypes" :[ "ts" ]}
+      \}
 
 " ColorScheme
 NeoBundle 'gh:svjunic/RadicalGoodSpeed.vim'
