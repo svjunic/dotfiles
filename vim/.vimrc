@@ -452,8 +452,7 @@ hi ZenkakuSpace cterm=reverse gui=reverse
 match ZenkakuSpace /　/
 
 " tab highlight
-"set listchars=tab:\ \
-set listchars=tab:\ \|
+set listchars=tab:_\|,eol:$
 
 " The Usual
 hi CurlyBracket guifg=#00bfff
