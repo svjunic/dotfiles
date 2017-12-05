@@ -1,6 +1,7 @@
 {
   "env": {
     "browser": true,
+    "node": true,
     "es6": true
   },
   "extends": "eslint:recommended",
@@ -30,8 +31,7 @@
     ]
   },
   globals: {
-    "_jQuery"     : true,
-    "_$"          : true,
-    "SiteUtility" : true
+    "jQuery"     : true,
+    "$"          : true
   }
 }
