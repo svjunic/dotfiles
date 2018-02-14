@@ -1,4 +1,4 @@
-"Last Change: 29-Jun-2017."
+"Last Change: 14-Feb-2018."
 
 "                     __             .__
 "  ________  __      |__|__ __  ____ |__| ____
@@ -36,9 +36,6 @@ set history=10000
 
 " omni補完のウィンドウを表示しない
 set completeopt=menuone
-
-" バックスペースを使えるように
-set backspace=indent,eol,start
 
 " ウィンドウに1行で収まらない場合、ウィンドウ上では自動改行を行って表示しない
 set nowrap
@@ -164,6 +161,10 @@ NeoBundle 'editorconfig/editorconfig-vim'
 " frontend
 NeoBundle 'gh:mattn/emmet-vim'
 NeoBundle 'kchmck/vim-coffee-script'
+"NeoBundle 'ternjs/tern_for_vim', {
+"  \ 'build': {
+"  \   'others': 'npm install'
+"  \}}
 NeoBundleLazy 'ternjs/tern_for_vim', {
   \ 'autoload' : {
   \   'filetypes' : 'javascript',
@@ -172,14 +173,19 @@ NeoBundleLazy 'ternjs/tern_for_vim', {
   \   'others': 'npm install'
   \}}
 
-" syntax
-NeoBundleLazy 'digitaltoad/vim-pug',{
-      \ "autoload" : {"filetypes" :[ "pug", "jade" ]}
-      \}
+NeoBundleLazy 'ruanyl/vim-fixmyjs', {
+  \ 'autoload' : {
+  \   'filetypes' : 'javascript',
+  \ }}
 
-NeoBundleLazy 'leafgarland/typescript-vim',{
-      \ "autoload" : {"filetypes" :[ "ts" ]}
-      \}
+
+"NeoBundleLazy 'gh:marijnh/tern_for_vim.git', {
+"      \ 'disabled' : !has('python'),
+"      \ 'autoload' : {
+"      \   'filetypes' : 'javascript',
+"      \ },
+"      \ 'build' : 'npm install',
+"      \ }
 
 " ColorScheme
 NeoBundle 'gh:svjunic/RadicalGoodSpeed.vim'
@@ -422,8 +428,19 @@ let g:syntastic_style_warning_symbol = '⚠'
 "set statusline += %{SyntasticStatuslineFlag()}
 "set statusline += %*
 "let g:syntastic_javascript_checker = 'jshint' "jshintを使う（これはデフォルトで設定されている）
-let g:syntastic_javascript_checkers = ['eslint','jshint','gjslint']
+"let g:syntastic_javascript_checkers = ['eslint','jshint','gjslint']
+let g:syntastic_javascript_checkers = ['eslint']
 
+" }}}
+
+" {{{ ruanyl/vim-fixmyjs
+let g:fixmyjs_engine = 'eslint'
+let g:fixmyjs_rc_local = 1
+" htmlのとじタグを</でいれる
+augroup EslintFix
+  autocmd!
+  autocmd BufWrite *.js,*.mjs,*.jsx Fixmyjs
+augroup END
 " }}}
 
 " {{{ autogroup & autocmd
@@ -452,7 +469,8 @@ hi ZenkakuSpace cterm=reverse gui=reverse
 match ZenkakuSpace /　/
 
 " tab highlight
-set listchars=tab:_\|,eol:$
+"set listchars=tab:\ \
+set listchars=tab:\ \|
 
 " The Usual
 hi CurlyBracket guifg=#00bfff
