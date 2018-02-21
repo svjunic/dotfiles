@@ -1,5 +1,4 @@
 {
-  "plugins": ["prettier"],
   "env": {
     "browser": true,
     "node": true,
@@ -7,8 +6,8 @@
     "jquery": true
   },
   "extends": [
-    "plugin:prettier/recommended",
-    "eslint:recommended"
+    "eslint:recommended",
+    "plugin:prettier/recommended"
   ],
   "parserOptions": {
     "sourceType": "module"
