@@ -32,11 +32,11 @@
       "single"
     ],
     "semi": [
-      "false",
+      "error",
       "always"
     ],
     "space-before-function-paren": [
-      "error",
+      "false",
       "never"
     ],
     "prettier/prettier": [
