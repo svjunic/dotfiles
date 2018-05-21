@@ -13,13 +13,15 @@
     "sourceType": "module"
   },
   "rules": {
-    "no-console"  : 0,
-    "no-alert"    : 0,
-    "no-debugger" : 1,
+    "no-console": 0,
+    "no-alert": 0,
+    "no-debugger": 1,
     "indent": [
       "error",
       2,
-      {"SwitchCase": 1}
+      {
+        "SwitchCase": 1
+      }
     ],
     "linebreak-style": [
       "error",
@@ -30,14 +32,19 @@
       "single"
     ],
     "semi": [
-      "error",
+      "false",
       "always"
+    ],
+    "space-before-function-paren": [
+      "error",
+      "never"
     ],
     "prettier/prettier": [
       "error",
       {
         "singleQuote": true,
-        "bracketSpacing": true
+        "bracketSpacing": true,
+        "printWidth": 10000
       }
     ]
   }
