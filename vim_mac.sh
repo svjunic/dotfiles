@@ -1,7 +1,6 @@
 #!/bin/sh
 
 VIM_HOME=$HOME/.vim
-VIM_BUNDLE=$HOME/.vim/bundle
 
 if [ ! -d ${MACVIM_RESOURCES_VIM} ]
 then
@@ -9,12 +8,7 @@ then
   exit
 fi
 
-
-## .tern-projectの設定ファイル移動
-cp vim/.tern-project ~/
-cp vim/.eslintrc ~/
-cp vim/.agignore ~/
-
+#cp vim/.tern-project ~/
 
 if [ ! -d ${VIM_HOME} ]
 then
@@ -32,5 +26,10 @@ cp vim/.vimrc ~/
 echo "copy .gvimrc ~/"
 cp vim/.gvimrc ~/
 
-echo "git clone neobundle"
-git clone git://github.com/Shougo/neobundle.vim.git $VIM_BUNDLE/neobundle.vim
+echo "dein install"
+mkdir -p ~/.cache/dein
+curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
+sh ./installer.sh ~/.cache/dein
+
+echo "copy my vimscript"
+rsync -r vim/vim/ ~/.vim/vim
