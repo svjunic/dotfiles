@@ -20,6 +20,11 @@ then
   mkdir ${VIM_BUNDLE}
 fi
 
+echo "npm install"
+npm i -g eslint
+npm i -g prettier
+npm i -g prettier-eslint-cli
+
 echo "copy .vimrc ~/"
 cp vim/.vimrc ~/
 
