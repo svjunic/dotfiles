@@ -1,4 +1,4 @@
-"Last Change: 05-Jun-2018."
+"Last Change: 06-Jun-2018."
 
 "                     __             .__
 "  ________  __      |__|__ __  ____ |__| ____
@@ -23,6 +23,10 @@ source ~/.vim/vim/auto.vim
 source ~/.vim/vim/keymap.vim
 
 source ~/.vim/vim/unite.vim
+
+source ~/.vim/vim/ale.vim
+
+source ~/.vim/vim/emmet.vim
 
 " {{{ Origin Code
 " 各環境でvimscriptで何かする時用
