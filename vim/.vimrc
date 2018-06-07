@@ -22,6 +22,7 @@ source ~/.vim/vim/unite.vim
 source ~/.vim/vim/ale.vim
 source ~/.vim/vim/emmet.vim
 source ~/.vim/vim/deoplete.vim
+source ~/.vim/vim/deoplete-ternjs.vim
 
 " {{{ Origin Code
 " 各環境でvimscriptで何かする時用

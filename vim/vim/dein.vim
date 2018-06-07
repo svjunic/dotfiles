@@ -16,7 +16,7 @@ if dein#load_state('~/.cache/dein')
     call dein#add('roxma/nvim-yarp')
     call dein#add('roxma/vim-hug-neovim-rpc')
   endif
-  call dein#add('carlitux/deoplete-ternjs', { 'build': 'npm install -g tern', 'on_ft':['javascript','jsx','mjs','vue'] })
+  call dein#add('carlitux/deoplete-ternjs', { 'build':{ 'mac': 'npm install -g tern', 'unix': 'npm install -g tern' }, 'on_ft':['js','javascript','jsx','mjs','vue'] })
   call dein#add('Shougo/unite.vim')
   call dein#add('Shougo/unite-outline')
   call dein#add('Shougo/neomru.vim')
