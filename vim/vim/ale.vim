@@ -13,3 +13,6 @@ let g:ale_fix_on_save = 1
 
 " ローカルの設定ファイルを考慮する
 let g:ale_javascript_prettier_use_local_config = 1
+
+" エラー行の表示部分を常に表示する
+let g:ale_sign_column_always = 1

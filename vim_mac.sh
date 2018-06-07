@@ -25,6 +25,11 @@ npm i -g eslint
 npm i -g prettier
 npm i -g prettier-eslint-cli
 
+echo "python3 install"
+brew uninstall --ignore-dependencies python
+brew install python3
+brew install vim --with-python3
+
 echo "copy .vimrc ~/"
 cp vim/.vimrc ~/
 
