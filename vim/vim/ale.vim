@@ -7,6 +7,9 @@ let g:ale_completion_enabled = 1
 " 保存時にpretteirをかけてeslintをする
 let g:ale_fixers = {}
 let g:ale_fixers['javascript'] = ['prettier-eslint']
+let g:ale_fixers['mjs'] = ['prettier-eslint']
+let g:ale_fixers['jsx'] = ['prettier-eslint']
+let g:ale_fixers['vue'] = ['prettier-eslint']
 
 " ファイル保存時に実行
 let g:ale_fix_on_save = 1

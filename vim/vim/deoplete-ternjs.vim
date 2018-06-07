@@ -1,5 +1,5 @@
 " Set bin if you have many instalations
-let g:deoplete#sources#ternjs#tern_bin = '/path/to/tern_bin'
+let g:deoplete#sources#ternjs#tern_bin = '~/.nvm/versions/node/v9.2.1/bin/tern'
 let g:deoplete#sources#ternjs#timeout = 1
 
 " Whether to include the types of the completions in the result data. Default: 0
@@ -50,12 +50,11 @@ let g:deoplete#sources#ternjs#in_literal = 0
 
 "Add extra filetypes
 let g:deoplete#sources#ternjs#filetypes = [
-                \ 'jsx',
-                \ 'javascript.jsx',
+                \ 'mjs',
                 \ 'vue',
-                \ '...'
+                \ 'jsx',
                 \ ]
-If you are using tern_for_vim, you also want to use the same tern command with deoplete-ternjs
+"If you are using tern_for_vim, you also want to use the same tern command with deoplete-ternjs
 
 " Use tern_for_vim.
 let g:tern#command = ["tern"]
