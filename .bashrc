@@ -21,9 +21,11 @@ echo "add PATH for node.js"
 export PATH="/usr/local/bin:$PATH:/usr/local/sbin"
 
 source ~/.nvm/nvm.sh
-nvm use v8.7.0
+#nvm use v8.7.0
+nvm use v9.2.1
 npm_dir=${NVM_PATH}_modules
 
+alias node="node --experimental-modules"
 echo "set NODE_PATH for node.js"
 export NODE_PATH=$npm_dir
 
@@ -33,9 +35,9 @@ export NODE_PATH=$npm_dir
 #####################################################################################################
 # 不要ファイルを一度に削除したかった。
 function ccc () {
-  rm `find ./* -name .DS*`
-  rm `find ./* -name *.swp`
-  rm `find ./* -name Thumbs.db`
+  rm `find . -name .DS*`
+  rm `find . -name *.swp`
+  rm `find . -name Thumbs.db`
   return
 }
 
@@ -57,13 +59,6 @@ function scsswwatch () {
   return
 }
 
-
-#####################################################################################################
-# MacVim
-#####################################################################################################
-if [ "$(uname)" == 'Darwin' ]; then
-  export PATH="/Applications/MacVim.app/Contents/MacOS:$PATH"
-fi
 
 #####################################################################################################
 # cordova
@@ -188,7 +183,6 @@ linux*)
 esac
 alias cdc='cd `pwd -P`'
 alias vi='vim'
-alias vim='vim'
 
 alias gitdiff='git difftool --tool=vimdiff --no-prompt'
 alias gitlmm='git log origin/master..master'
@@ -197,3 +191,5 @@ alias tmux-session-clear='tmux kill-session -a'
 
 # ディレクトリの容量表示
 alias dud='du -d 1 -h '
+
+alias gitfilemode='git config core.filemode'
