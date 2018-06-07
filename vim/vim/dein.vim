@@ -9,13 +9,14 @@ if dein#load_state('~/.cache/dein')
 
   call dein#add('~/.cache/dein')
 
+  " added plugin {{{
+
   call dein#add('Shougo/deoplete.nvim')
   if !has('nvim')
     call dein#add('roxma/nvim-yarp')
     call dein#add('roxma/vim-hug-neovim-rpc')
   endif
-
-  " added plugin {{{
+  call dein#add('carlitux/deoplete-ternjs', { 'build': 'npm install -g tern', 'on_ft':['javascript','jsx','mjs','vue'] })
   call dein#add('Shougo/unite.vim')
   call dein#add('Shougo/unite-outline')
   call dein#add('Shougo/neomru.vim')
@@ -29,8 +30,6 @@ if dein#load_state('~/.cache/dein')
   else
     call dein#add('vim-syntastic/syntastic')
   endif
-
-  call dein#add('ternjs/tern_for_vim', { 'build': 'npm install', 'on_ft':'javascript' })
 
   call dein#add('svjunic/RadicalGoodSpeed.vim')
   call dein#add('svjunic/svjunic-snip')
