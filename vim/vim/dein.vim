@@ -22,6 +22,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('Shougo/neomru.vim')
   call dein#add('ujihisa/unite-locate')
   call dein#add('thinca/vim-quickrun')
+  call dein#add('vim-scripts/YankRing.vim')
   call dein#add('tpope/vim-surround')
   call dein#add('mattn/emmet-vim')
 
