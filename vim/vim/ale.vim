@@ -1,5 +1,5 @@
 " Equivalent to the above.
-let b:ale_linters = {'javascript': ['eslint']}
+let g:ale_linters = {'javascript': ['eslint']}
 
 " Enable completion where available.
 let g:ale_completion_enabled = 1
@@ -11,8 +11,20 @@ let g:ale_fixers.mjs = ['prettier', 'eslint']
 let g:ale_fixers.jsx = ['prettier', 'eslint']
 let g:ale_fixers.vue = ['prettier', 'eslint']
 
+" 圧縮ファイルのときはなるべく動かさない
+let g:ale_pattern_options = {
+\ '\.min\.js$': {'ale_linters': [], 'ale_fixers': []},
+\ '\.min\.css$': {'ale_linters': [], 'ale_fixers': []},
+\}
+
 " ファイル保存時に実行
 let g:ale_fix_on_save = 1
+
+" 変更されてからlint実行までのdelay
+let g:ale_lint_delay=10
+
+"" ステータスバーの表示
+"let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 
 " ローカルの設定ファイルを考慮する
 let g:ale_javascript_prettier_use_local_config = 1
