@@ -18,7 +18,14 @@ let g:ale_pattern_options = {
 \}
 
 " ファイル保存時に実行
-let g:ale_fix_on_save = 1
+function! ALE_FIX_TOGGLE()
+  if !exists('g:ale_fix_on_save') || g:ale_fix_on_save == 0
+    let g:ale_fix_on_save = 1
+  else 
+    let g:ale_fix_on_save = 0
+  endif
+endfunction
+call ALE_FIX_TOGGLE()
 
 " 変更されてからlint実行までのdelay
 let g:ale_lint_delay=10
