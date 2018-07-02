@@ -1,4 +1,6 @@
 " Set bin if you have many instalations
+"let g:deoplete#sources#ternjs#tern_bin = '~/.nvm/versions/node/v9.2.1/bin/tern'
+"let g:deoplete#sources#ternjs#tern_bin = $HOME."/.nvm/versions/node/v9.2.1/bin/tern"
 let g:deoplete#sources#ternjs#tern_bin = '~/.nvm/versions/node/v9.2.1/bin/tern'
 let g:deoplete#sources#ternjs#timeout = 1
 
@@ -57,5 +59,6 @@ let g:deoplete#sources#ternjs#filetypes = [
 "If you are using tern_for_vim, you also want to use the same tern command with deoplete-ternjs
 
 " Use tern_for_vim.
+let g:tern#is_show_argument_hints_enabled = 1
 let g:tern#command = ["tern"]
 let g:tern#arguments = ["--persistent"]

@@ -24,9 +24,13 @@ echo "npm install"
 npm i -g eslint
 npm i -g prettier
 npm i -g prettier-eslint-cli
+#npm i -g prettier/plugin-php
 
 echo "python3 install"
 brew uninstall --ignore-dependencies python
+brew uninstall --ignore-dependencies vim
+brew upgrade python3
+brew upgrade vim
 brew install python3
 brew install vim --with-python3
 
