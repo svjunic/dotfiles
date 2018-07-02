@@ -31,8 +31,11 @@ brew uninstall --ignore-dependencies python
 brew uninstall --ignore-dependencies vim
 brew upgrade python3
 brew upgrade vim
+
 brew install python3
 brew install vim --with-python3
+
+pip3 install --upgrade neovim
 
 echo "copy .vimrc ~/"
 cp vim/.vimrc ~/
