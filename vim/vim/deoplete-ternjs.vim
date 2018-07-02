@@ -1,6 +1,5 @@
 " Set bin if you have many instalations
 "let g:deoplete#sources#ternjs#tern_bin = '~/.nvm/versions/node/v9.2.1/bin/tern'
-"let g:deoplete#sources#ternjs#tern_bin = $HOME."/.nvm/versions/node/v9.2.1/bin/tern"
 let g:deoplete#sources#ternjs#tern_bin = '~/.nvm/versions/node/v9.2.1/bin/tern'
 let g:deoplete#sources#ternjs#timeout = 1
 
