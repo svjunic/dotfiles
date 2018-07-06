@@ -31,11 +31,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('tpope/vim-surround')
   call dein#add('mattn/emmet-vim')
 
-  if has('job') && has('channel') && has('timers')
-    call dein#add('w0rp/ale')
-  else
-    call dein#add('vim-syntastic/syntastic')
-  endif
+  call dein#add('w0rp/ale')
 
   call dein#add('svjunic/RadicalGoodSpeed.vim')
   call dein#add('svjunic/svjunic-snip')
@@ -46,9 +42,8 @@ if dein#load_state('~/.cache/dein')
 endif
 
 filetype plugin indent on
+syntax enable
 
 if dein#check_install()
   call dein#install()
 endif
-
-syntax enable

@@ -1,4 +1,3 @@
-"" {{{ emmet.vim
 " 画像の縦横取得するときにPerlのImage::Info使っているので入ってないと動かない
 " perl -MImage::Info -e ''
 " これで確認
@@ -20,4 +19,3 @@ vmap <C-L>    <C-E>,
 let g:user_emmet_mode='a'
 
 let g:user_emmet_install_global = 0
-"" }}}
