@@ -1,8 +1,6 @@
 " ファイルタイプ識別
 autocmd FileType html,jade,css,scss,sass EmmetInstall
 
-autocmd FileType html,jade,css,scss,sass EmmetInstall
-
 autocmd Filetype javascript ALELint
 
 autocmd BufRead,BufNewFile *.scss set filetype=scss.css

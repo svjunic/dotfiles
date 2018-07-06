@@ -82,5 +82,8 @@ cabbrev eu e ++enc=utf-8
 " 日本語があるときにちらつく問題
 set conceallevel=0
 
+" バックスペースが効かなくなる問題対策
+set backspace=indent,eol,start
+
 " 検索のハイライト外す
 nmap <C-l> <C-l>:nohlsearch<CR>
