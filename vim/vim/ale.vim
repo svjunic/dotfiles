@@ -1,5 +1,8 @@
 " Equivalent to the above.
-let g:ale_linters = {'javascript': ['eslint']}
+let g:ale_linters = {
+\ 'html': ['htmlhint'],
+\ 'javascript': ['eslint']
+\}
 
 " Enable completion where available.
 let g:ale_completion_enabled = 1

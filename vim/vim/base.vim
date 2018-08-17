@@ -87,3 +87,6 @@ set backspace=indent,eol,start
 
 " 検索のハイライト外す
 nmap <C-l> <C-l>:nohlsearch<CR>
+
+" スペルチェックから日本語を除外
+set spelllang=en,cjk
