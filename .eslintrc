@@ -1,37 +1,48 @@
 {
   "env": {
     "browser": true,
-    "es6": true
+    "node": true,
+    "es6": true,
+    "jquery": true
   },
-  "extends": "eslint:recommended",
+  "plugins": ["eslint-plugin-prettier"],
+  "extends": ["eslint:recommended", "plugin:prettier/recommended"],
   "parserOptions": {
     "sourceType": "module"
   },
+  globals: {
+    "$" : true,
+    "jQuery" : true,
+    "YT" : true,
+    "FB" : true,
+    "twttr" : true
+  },
   "rules": {
-    "no-console"  : 0,
-    "no-alert"    : 0,
-    "no-debugger" : 1,
+    "no-console": 0,
+    "no-alert": 0,
+    "no-debugger": 1,
+    "no-var": 1,
+    "no-eq-null": 1,
+    "no-implicit-coercion": 1,
+    "no-implied-eval": 1,
     "indent": [
       "error",
       2,
-      {"SwitchCase": 1}
+      {
+        "SwitchCase": 1
+      }
     ],
-    "linebreak-style": [
+    "linebreak-style": ["error", "unix"],
+    "quotes": ["error", "single"],
+    "semi": ["error", "always"],
+    "space-before-function-paren": 0,
+    "prettier/prettier": [
       "error",
-      "unix"
-    ],
-    "quotes": [
-      "error",
-      "single"
-    ],
-    "semi": [
-      "error",
-      "always"
+      {
+        "singleQuote": true,
+        "bracketSpacing": true,
+        "printWidth": 10000
+      }
     ]
-  },
-  globals: {
-    "_jQuery"     : true,
-    "_$"          : true,
-    "SiteUtility" : true
   }
 }
