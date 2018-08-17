@@ -58,6 +58,24 @@ function scsswwatch () {
   scss --watch ${input}:${output} -C --sourcemap=none --style compressed
   return
 }
+function up() {
+  if [ ! -z $1 ]; then
+    level=$1
+  fi
+
+  expr $level + 1 > /dev/null 2>&1
+  ret=$?
+
+  cmd='cd ./'
+
+  if [ $ret -lt 2 ]; then
+    for i in `seq 1 $level`
+    do
+      cmd="$cmd../"
+    done
+    eval $cmd;
+  fi
+}
 
 
 #####################################################################################################

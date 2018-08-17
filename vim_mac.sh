@@ -29,6 +29,7 @@ fi
 
 echo "npm install"
 npm i -g eslint
+npm i -g htmlhint
 npm i -g prettier
 npm i -g prettier-eslint-cli
 #npm i -g prettier/plugin-php

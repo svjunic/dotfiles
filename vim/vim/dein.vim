@@ -27,9 +27,11 @@ if dein#load_state('~/.cache/dein')
   "call dein#add('ternjs/tern_for_vim', { 'build':'npm install' })
   call dein#add('carlitux/deoplete-ternjs', { 'on_ft':['js','javascript','jsx','mjs','vue'] })
   call dein#add('thinca/vim-quickrun')
-  call dein#add('vim-scripts/YankRing.vim')
   call dein#add('tpope/vim-surround')
   call dein#add('mattn/emmet-vim')
+
+  call dein#add('vim-scripts/YankRing.vim')
+  call dein#add('vim-scripts/Align')
 
   call dein#add('w0rp/ale')
 
