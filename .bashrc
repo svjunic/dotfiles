@@ -21,41 +21,13 @@ echo "add PATH for node.js"
 export PATH="/usr/local/bin:$PATH:/usr/local/sbin"
 
 source ~/.nvm/nvm.sh
-nvm use v7.10.0
+#nvm use v8.7.0
+nvm use v9.2.1
 npm_dir=${NVM_PATH}_modules
 
+alias node="node --experimental-modules"
 echo "set NODE_PATH for node.js"
 export NODE_PATH=$npm_dir
-
-
-#####################################################################################################
-# alias
-#####################################################################################################
-case "${OSTYPE}" in
-darwin*)
-  alias ls="ls -G"
-  alias ll="ls -lG"
-  alias la="ls -laG"
-  alias openf='sh ~/bash/openf'
-  ;;
-linux*)
-  alias ls='ls --color'
-  alias ll='ls -l --color'
-  alias la='ls -la --color'
-  ;;
-esac
-alias cdc='cd `pwd -P`'
-alias vi='Vim'
-alias vim='Vim'
-
-alias gitdiff='git difftool --tool=vimdiff --no-prompt'
-alias gitlmm='git log origin/master..master'
-#alias adbDebug='sh ~/bash/androidDebug.sh'
-
-alias tmux-session-clear='tmux kill-session -a'
-
-# ディレクトリの容量表示
-alias dud='du -d 1 -h '
 
 
 #####################################################################################################
@@ -63,9 +35,9 @@ alias dud='du -d 1 -h '
 #####################################################################################################
 # 不要ファイルを一度に削除したかった。
 function ccc () {
-  rm `find ./* -name .DS*`
-  rm `find ./* -name *.swp`
-  rm `find ./* -name Thumbs.db`
+  rm `find . -name .DS*`
+  rm `find . -name *.swp`
+  rm `find . -name Thumbs.db`
   return
 }
 
@@ -86,14 +58,25 @@ function scsswwatch () {
   scss --watch ${input}:${output} -C --sourcemap=none --style compressed
   return
 }
+function up() {
+  if [ ! -z $1 ]; then
+    level=$1
+  fi
 
+  expr $level + 1 > /dev/null 2>&1
+  ret=$?
 
-#####################################################################################################
-# MacVim
-#####################################################################################################
-if [ "$(uname)" == 'Darwin' ]; then
-  export PATH="/Applications/MacVim.app/Contents/MacOS:$PATH"
-fi
+  cmd='cd ./'
+
+  if [ $ret -lt 2 ]; then
+    for i in `seq 1 $level`
+    do
+      cmd="$cmd../"
+    done
+    eval $cmd;
+  fi
+}
+
 
 #####################################################################################################
 # cordova
@@ -149,11 +132,11 @@ git config --global alias.log 'log --all --branches --graph'
 #####################################################################################################
 
 if [ `which tmux` ]; then
-  # いつもつかってるalias追加
-  . ~/bash/tmux/alias.sh
-  # セッションがあればアタッチ、なければ起動
-  # -dをつけると他の接続が全てデタッチされ、今回アタッチする画面サイズに調整してくれる。
-  tmux a -d || tmux
+  if ! [ -n "$TMUX" ]; then
+    tmux a -d || tmux
+  else
+    . ~/bash/tmux/alias.sh
+  fi
 fi
 
 
@@ -197,4 +180,34 @@ bind '"\C-b": backward-word'
 #####################################################################################################
 # fake-dev
 #####################################################################################################
-alias fake-dev="nginx -p . -c ~/.fake-dev.conf"
+#alias fake-dev="nginx -p . -c ~/.fake-dev.conf"
+
+
+#####################################################################################################
+# alias
+#####################################################################################################
+case "${OSTYPE}" in
+darwin*)
+  alias ls="ls -G"
+  alias ll="ls -lG"
+  alias la="ls -laG"
+  alias openf='sh ~/bash/openf'
+  ;;
+linux*)
+  alias ls='ls --color'
+  alias ll='ls -l --color'
+  alias la='ls -la --color'
+  ;;
+esac
+alias cdc='cd `pwd -P`'
+alias vi='vim'
+
+alias gitdiff='git difftool --tool=vimdiff --no-prompt'
+alias gitlmm='git log origin/master..master'
+#alias adbDebug='sh ~/bash/androidDebug.sh'
+alias tmux-session-clear='tmux kill-session -a'
+
+# ディレクトリの容量表示
+alias dud='du -d 1 -h '
+
+alias gitfilemode='git config core.filemode'
