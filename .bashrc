@@ -153,7 +153,7 @@ function cdd {
 function cdf () {
   local dir=$(find ./* -type f | peco)
   if [ ! -z "$dir" ] ; then
-    vi "$dir"
+    vim "$dir"
   fi
 }
 
