@@ -15,3 +15,11 @@ autocmd BufRead,BufNewFile *.js,*.mjs,*.jsx,*.vue set filetype=javascript
 "   autocmd Filetype html inoremap <buffer> </ </<C-x><C-o>
 " augroup END
 " }}}
+
+" scssのときだけリロードの確認を頻繁に行う
+augroup scss
+  autocmd!
+  autocmd BufRead,BufNewFile *.scss set autoread
+  autocmd CursorMoved,CursorMovedI *.scss checktime
+augroup END
+
