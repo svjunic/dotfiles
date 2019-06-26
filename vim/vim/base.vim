@@ -90,3 +90,6 @@ nmap <C-l> <C-l>:nohlsearch<CR>
 
 " スペルチェックから日本語を除外
 set spelllang=en,cjk
+
+" 1行が長いファイルでsyntaxで重くならないように
+set synmaxcol=1000

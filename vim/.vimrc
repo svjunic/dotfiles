@@ -23,6 +23,7 @@ source ~/.vim/vim/deoplete.vim
 source ~/.vim/vim/deoplete-ternjs.vim
 source ~/.vim/vim/neosnippet.vim
 source ~/.vim/vim/matchit.vim
+source ~/.vim/vim/match-tag-always.vim
 
 source ~/.vim/vim/auto.vim
 source ~/.vim/vim/base.vim
