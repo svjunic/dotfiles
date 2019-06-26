@@ -33,6 +33,8 @@ npm i -g htmlhint
 npm i -g prettier
 npm i -g prettier-eslint-cli
 #npm i -g prettier/plugin-php
+npm i -g eslint-plugin-prettier
+npm i -g eslint-conifg-prettier
 
 echo "python3.6 install"
 brew uninstall --ignore-dependencies python3

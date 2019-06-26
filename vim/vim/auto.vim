@@ -1,12 +1,13 @@
 " ファイルタイプ識別
-autocmd FileType html,jade,css,scss,sass EmmetInstall
+autocmd FileType html,jade,css,scss,sass,vue EmmetInstall
 
-autocmd Filetype javascript ALELint
+autocmd Filetype javascript,vue ALELint
 
 autocmd BufRead,BufNewFile *.scss set filetype=scss.css
 autocmd BufRead,BufNewFile *.sass set filetype=scss.css
 autocmd BufRead,BufNewFile *.md set filetype=markdown
-autocmd BufRead,BufNewFile *.js,*.mjs,*.jsx,*.vue set filetype=javascript
+autocmd BufRead,BufNewFile *.js,*.mjs,*.jsx set filetype=javascript
+autocmd BufRead,BufNewFile *.vue set filetype=vue
 
 " " htmlのとじタグを</でいれる
 " augroup MyXML
@@ -22,4 +23,5 @@ augroup scss
   autocmd BufRead,BufNewFile *.scss set autoread
   autocmd CursorMoved,CursorMovedI *.scss checktime
 augroup END
+
 
