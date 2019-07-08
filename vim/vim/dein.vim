@@ -52,6 +52,9 @@ if dein#load_state('~/.cache/dein')
   " javascript syntax
   call dein#add('othree/yajs.vim')
 
+  " pug syntax
+  call dein#add('digitaltoad/vim-pug')
+
   " the highlights the enclosing html/xml tags
   call dein#add('Valloric/MatchTagAlways')
 
