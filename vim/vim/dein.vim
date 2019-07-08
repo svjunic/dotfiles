@@ -39,7 +39,6 @@ if dein#load_state('~/.cache/dein')
   call dein#add('thinca/vim-quickrun')
   call dein#add('tpope/vim-surround')
   call dein#add('mattn/emmet-vim')
-  call dein#add('othree/html5.vim')
   call dein#add('posva/vim-vue')
 
   call dein#add('vim-scripts/YankRing.vim')
