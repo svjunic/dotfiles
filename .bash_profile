@@ -1,3 +1,4 @@
+echo 'include .bash_profile'
 test -r ~/.bashrc && . ~/.bashrc
 
 if [ -f ~/.bashrc_local ]; then

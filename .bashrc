@@ -21,8 +21,7 @@ echo "add PATH for node.js"
 export PATH="/usr/local/bin:$PATH:/usr/local/sbin"
 
 source ~/.nvm/nvm.sh
-#nvm use v8.7.0
-nvm use v9.2.1
+nvm use --lts
 npm_dir=${NVM_PATH}_modules
 
 alias node="node --experimental-modules"
@@ -61,6 +60,8 @@ function scsswwatch () {
 function up() {
   if [ ! -z $1 ]; then
     level=$1
+  else
+    level=1
   fi
 
   expr $level + 1 > /dev/null 2>&1
