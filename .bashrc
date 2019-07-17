@@ -78,6 +78,17 @@ function up() {
   fi
 }
 
+# ag
+function agg() {
+  if [ ! -z $1 ]; then
+    path=$1
+  else
+    path=''
+  fi
+
+  eval 'ag -l -u --depth -1 '${path}' ./*';
+}
+
 
 #####################################################################################################
 # cordova
@@ -203,8 +214,11 @@ esac
 alias cdc='cd `pwd -P`'
 alias vi='vim'
 
+# github
+alias gitst='git st'
 alias gitdiff='git difftool --tool=vimdiff --no-prompt'
 alias gitlmm='git log origin/master..master'
+
 #alias adbDebug='sh ~/bash/androidDebug.sh'
 alias tmux-session-clear='tmux kill-session -a'
 
