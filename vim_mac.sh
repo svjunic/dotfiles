@@ -46,11 +46,8 @@ brew install vim --with-python3
 #pip install --upgrade pip
 #pip3 install --upgrade neovim
 
-echo "copy .vimrc ~/"
-cp vim/.vimrc ~/
-
-echo "copy .gvimrc ~/"
-cp vim/.gvimrc ~/
+echo "create symlink .vimrc ~/"
+ln -s vim/.vimrc !/.vimrc
 
 echo "dein install"
 mkdir -p ~/.cache/dein
