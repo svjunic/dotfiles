@@ -28,13 +28,13 @@ then
 fi
 
 echo "npm install"
-npm i -g eslint
+npm i -g eslint@5
 npm i -g htmlhint
 npm i -g prettier
 npm i -g prettier-eslint-cli
 #npm i -g prettier/plugin-php
 npm i -g eslint-plugin-prettier
-npm i -g eslint-conifg-prettier
+npm i -g eslint-config-prettier
 
 echo "python3.6 install"
 brew uninstall --ignore-dependencies python3
@@ -46,11 +46,8 @@ brew install vim --with-python3
 #pip install --upgrade pip
 #pip3 install --upgrade neovim
 
-echo "copy .vimrc ~/"
-cp vim/.vimrc ~/
-
-echo "copy .gvimrc ~/"
-cp vim/.gvimrc ~/
+echo "create symlink .vimrc ~/"
+ln -s vim/.vimrc !/.vimrc
 
 echo "dein install"
 mkdir -p ~/.cache/dein

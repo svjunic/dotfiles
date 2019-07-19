@@ -21,8 +21,7 @@ echo "add PATH for node.js"
 export PATH="/usr/local/bin:$PATH:/usr/local/sbin"
 
 source ~/.nvm/nvm.sh
-#nvm use v8.7.0
-nvm use v9.2.1
+nvm use --lts
 npm_dir=${NVM_PATH}_modules
 
 alias node="node --experimental-modules"
@@ -61,6 +60,8 @@ function scsswwatch () {
 function up() {
   if [ ! -z $1 ]; then
     level=$1
+  else
+    level=1
   fi
 
   expr $level + 1 > /dev/null 2>&1
@@ -75,6 +76,17 @@ function up() {
     done
     eval $cmd;
   fi
+}
+
+# ag
+function agg() {
+  if [ ! -z $1 ]; then
+    path=$1
+  else
+    path=''
+  fi
+
+  eval 'ag -l -u --depth -1 '${path}' ./*';
 }
 
 
@@ -202,8 +214,11 @@ esac
 alias cdc='cd `pwd -P`'
 alias vi='vim'
 
+# github
+alias gitst='git st'
 alias gitdiff='git difftool --tool=vimdiff --no-prompt'
 alias gitlmm='git log origin/master..master'
+
 #alias adbDebug='sh ~/bash/androidDebug.sh'
 alias tmux-session-clear='tmux kill-session -a'
 
@@ -211,3 +226,5 @@ alias tmux-session-clear='tmux kill-session -a'
 alias dud='du -d 1 -h '
 
 alias gitfilemode='git config core.filemode'
+
+alias spwget='wget --user-agent="Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1" '

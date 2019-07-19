@@ -8,6 +8,7 @@ autocmd BufRead,BufNewFile *.sass set filetype=scss.css
 autocmd BufRead,BufNewFile *.md set filetype=markdown
 autocmd BufRead,BufNewFile *.js,*.mjs,*.jsx set filetype=javascript
 autocmd BufRead,BufNewFile *.vue set filetype=vue
+autocmd BufRead,BufNewFile *.pug set filetype=pug
 
 " " htmlのとじタグを</でいれる
 " augroup MyXML
