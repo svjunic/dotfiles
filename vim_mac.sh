@@ -28,7 +28,7 @@ then
 fi
 
 echo "npm install"
-npm i -g eslint
+npm i -g eslint@5
 npm i -g htmlhint
 npm i -g prettier
 npm i -g prettier-eslint-cli
