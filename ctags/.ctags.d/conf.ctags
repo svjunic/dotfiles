@@ -1,0 +1,15 @@
+--exclude=.git
+--exclude=log
+--exclude=node_modules
+--exclude=_common_files
+--exclude=dist
+--exclude=dest
+--exclude=jquery.*.js
+--exclude=jquery-*.js
+--exclude=vendor
+--exclude=*.min.js
+
+--append=yes
+--recurse=yes
+
+--languages=PHP,Javascript
