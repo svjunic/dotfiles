@@ -9,8 +9,7 @@ then
   exit
 fi
 
-#cp vim/.tern-project ~/
-
+echo "create directory"
 if [ ! -d ${VIM_HOME} ]
 then
   mkdir ${VIM_HOME}
@@ -47,12 +46,10 @@ brew install vim --with-python3
 #pip3 install --upgrade neovim
 
 echo "create symlink .vimrc ~/"
-ln -s vim/.vimrc !/.vimrc
+ln -s vim/.tern-project ~/.tern-project
+ln -s vim/.vimrc ~/.vimrc
+ln -s vim/vim ~/.vim/vim
 
 echo "dein install"
-mkdir -p ~/.cache/dein
 curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
 sh ./installer.sh ~/.cache/dein
-
-echo "copy my vimscript"
-rsync -r vim/vim/ ~/.vim/vim
