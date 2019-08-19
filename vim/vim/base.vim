@@ -93,3 +93,6 @@ set spelllang=en,cjk
 
 " 1行が長いファイルでsyntaxで重くならないように
 set synmaxcol=1000
+
+" ctagファイルを検索
+set tags=./tags;$HOME
