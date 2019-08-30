@@ -48,9 +48,9 @@ brew install vim --with-python3
 #pip3 install --upgrade neovim
 
 echo "create symlink .vimrc ~/"
-ln -s ${pwd}vim/.tern-project ~/.tern-project
-ln -s ${pwd}vim/.vimrc ~/.vimrc
-ln -s ${pwd}vim/vim ~/.vim/vim
+ln -s ${pwd}/vim/.tern-project ~/.tern-project
+ln -s ${pwd}/vim/.vimrc ~/.vimrc
+ln -s ${pwd}/vim/vim ~/.vim/vim
 
 echo "dein install"
 curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
