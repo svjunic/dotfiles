@@ -47,7 +47,7 @@ brew install python3
 brew install vim
 
 #pip install --upgrade pip
-#pip3 install --upgrade neovim
+pip3 install --upgrade neovim
 
 echo "create symlink .vimrc ~/"
 ln -s ${pwd}/vim/.tern-project ~/.tern-project
