@@ -42,7 +42,9 @@ brew uninstall --ignore-dependencies python3
 brew uninstall --ignore-dependencies vim
 
 brew install python3
-brew install vim --with-python3
+#brew install vim --with-python3
+# --with-python3はもういらないぽい
+brew install vim
 
 #pip install --upgrade pip
 #pip3 install --upgrade neovim
