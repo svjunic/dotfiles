@@ -47,7 +47,7 @@ brew install python3
 brew install vim
 
 #pip install --upgrade pip
-#pip3 install --upgrade neovim
+pip3 install --upgrade neovim
 
 echo "create symlink .vimrc ~/"
 ln -s ${pwd}/vim/.tern-project ~/.tern-project
@@ -57,3 +57,5 @@ ln -s ${pwd}/vim/vim ~/.vim/vim
 echo "dein install"
 curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
 sh ./installer.sh ~/.cache/dein
+
+echo "ターミナルを再起動するのじゃ・・・そのままだとリハッシュがはしらないぞ・・・"
