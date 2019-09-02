@@ -57,6 +57,11 @@ if dein#load_state('~/.cache/dein')
 
   " the highlights the enclosing html/xml tags
   call dein#add('Valloric/MatchTagAlways')
+  
+  " git
+  call dein#add('tpope/vim-fugitive')
+  call dein#add('tpope/vim-rhubarb')
+  call dein#add('airblade/vim-gitgutter')
 
   call dein#add('svjunic/RadicalGoodSpeed.vim')
   call dein#add('svjunic/svjunic-snip')
