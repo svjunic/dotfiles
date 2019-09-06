@@ -14,20 +14,7 @@
 "       \/              \/           \/
 
 source ~/.vim/vim/dein.vim
-source ~/.vim/vim/netrw.vim
 source ~/.vim/vim/keymap.vim
-source ~/.vim/vim/unite.vim
-source ~/.vim/vim/ale.vim
-source ~/.vim/vim/emmet.vim
-source ~/.vim/vim/deoplete.vim
-source ~/.vim/vim/deoplete-ternjs.vim
-source ~/.vim/vim/neosnippet.vim
-source ~/.vim/vim/matchit.vim
-source ~/.vim/vim/match-tag-always.vim
-source ~/.vim/vim/vim-fugitive.vim
-source ~/.vim/vim/vim-rhubarb.vim
-source ~/.vim/vim/vim-gitgutter.vim
-
 source ~/.vim/vim/auto.vim
 source ~/.vim/vim/base.vim
 
