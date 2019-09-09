@@ -1,4 +1,5 @@
 {
+  // eslintのfixがtslintのfixに追いついたら消す
   "defaultSeverity": "error",
   "extends": [
     "tslint:recommended"
