@@ -1,8 +1,19 @@
 [[plugins]]
-repo = 'Shougo/dein.vim'
+repo = 'Shougo/dein'
 
 [[plugins]]
-repo = 'Shougo/vimproc.vim'
+repo = 'Shougo/deoplete.nvim'
+hook_add = '''
+  "" 起動時に有効化
+  "call deoplete#enable()
+  
+  " 上記で動かないので、原因わかるまでの暫定対応
+  autocmd VimEnter * call deoplete#enable()
+  autocmd BufRead,BufNewFile * call deoplete#enable()
+'''
+
+[[plugins]]
+repo = 'Shougo/vimproc'
 hook_post_update = '''
   if dein#util#_is_windows()
     let cmd = 'tools\\update-dll-mingw'
@@ -17,7 +28,7 @@ hook_post_update = '''
 '''
 
 [[plugins]]
-repo = 'Shougo/unite.vim'
+repo = 'Shougo/unite'
 hook_add = '''
   nmap ,u [unite]
   
@@ -79,14 +90,35 @@ hook_add = '''
 
 [[plugins]]
 repo = 'Shougo/unite-outline'
-on_source = 'unite.vim'
+on_source = 'Shougo/unite'
 
 [[plugins]]
 repo = 'ujihisa/unite-locate'
-on_source = 'unite.vim'
+on_source = 'Shougo/unite'
 
 [[plugins]]
-repo = 'Shougo/neomru.vim'
+repo = 'Shougo/neomru'
+
+[[plugins]]
+repo = 'Shougo/neosnippet'
+hook_add='''
+  "Ctrl+Kにターゲットジャンプ割当
+  imap <C-k> <Plug>(neosnippet_expand_or_jump)
+  smap <C-k> <Plug>(neosnippet_expand_or_jump)
+  xmap <C-k> <Plug>(neosnippet_expand_target)
+  
+  if has('conceal')
+    set conceallevel=2 concealcursor=niv
+  endif
+  
+  let s:neosnippet_directorys = [ '~/.cache/dein/repos/github.com/svjunic/svjunic-snip/snippets' ]
+  let g:neosnippet#snippets_directory = join( s:neosnippet_directorys, ',' )
+'''
+depends = ['neosnippet-snippets', 'svjunic/svjunic-snip']
+
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+on_i = 1
 
 [[plugins]]
 repo = 'cespare/vim-toml'
@@ -185,8 +217,7 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'svjunic/RadicalGoodSpeed.vim'
+repo = 'svjunic/RadicalGoodSpeed'
 
 [[plugins]]
 repo = 'svjunic/svjunic-snip'
-
