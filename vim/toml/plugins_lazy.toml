@@ -1,12 +1,4 @@
 [[plugins]]
-repo = 'Shougo/neosnippet.vim'
-on_i = 1
-
-[[plugins]]
-repo = 'Shougo/neosnippet-snippets'
-on_i = 1
-
-[[plugins]]
 repo = 'ternjs/tern_for_vim'
 build = 'npm install'
 on_ft= ['javascript']
@@ -15,7 +7,7 @@ on_i = 1
 [[plugins]]
 repo = 'carlitux/deoplete-ternjs'
 on_i = 1
-on_ft= ['javascript']
+on_ft= ['javascript', 'typescript']
 hook_add = '''
   " Set bin if you have many instalations
   "let g:deoplete#sources#ternjs#tern_bin = '~/.nvm/versions/node/v9.2.1/bin/tern'
