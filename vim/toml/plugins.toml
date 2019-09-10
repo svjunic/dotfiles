@@ -163,7 +163,7 @@ hook_add = '''
   let g:ale_linters = {
   \ 'html': ['htmlhint'],
   \ 'javascript': ['eslint'],
-  \ 'typescript': ['eslint']
+  \ 'typescript': ['eslint', 'tsserver']
   \}
   
   " Enable completion where available.
@@ -179,8 +179,8 @@ hook_add = '''
   let g:ale_fixers.jsx = ['prettier', 'eslint']
   let g:ale_fixers.vue = ['prettier', 'eslint']
   " tslintのfixはeslintのfixが追いつくまで
-  let g:ale_fixers.typescript = ['prettier', 'tslint', 'eslint']
-  "let g:ale_fixers.typescript = ['prettier', 'eslint']
+  "let g:ale_fixers.typescript = ['prettier', 'tslint', 'eslint']
+  let g:ale_fixers.typescript = ['prettier', 'eslint']
   
   " 圧縮ファイルのときはなるべく動かさない
   let g:ale_pattern_options = {
