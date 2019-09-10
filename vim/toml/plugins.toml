@@ -1,5 +1,5 @@
 [[plugins]]
-repo = 'Shougo/dein'
+repo = 'Shougo/dein.vim'
 
 [[plugins]]
 repo = 'Shougo/deoplete.nvim'
@@ -28,7 +28,7 @@ hook_post_update = '''
 '''
 
 [[plugins]]
-repo = 'Shougo/unite'
+repo = 'Shougo/unite.vim'
 hook_add = '''
   nmap ,u [unite]
   
@@ -97,7 +97,7 @@ repo = 'ujihisa/unite-locate'
 on_source = 'Shougo/unite'
 
 [[plugins]]
-repo = 'Shougo/neomru'
+repo = 'Shougo/neomru.vim'
 
 [[plugins]]
 repo = 'Shougo/neosnippet'
