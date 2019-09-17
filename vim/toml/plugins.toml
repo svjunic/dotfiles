@@ -236,7 +236,6 @@ hook_add = '''
   
   " normalモードでgitと打つと変化の部分トグル
   nmap <silent> ,gd :GitGutterToggle<CR>
-  nmap <silent> ,gl :GitGutterToggle<CR>
 '''
 
 [[plugins]]
