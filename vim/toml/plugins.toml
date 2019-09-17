@@ -218,6 +218,10 @@ hook_add = '''
 
 [[plugins]]
 repo = 'tpope/vim-fugitive'
+hook_add = '''
+  nmap <silent> ,gb :Gblame<CR>
+  nmap <silent> ,gl :Glog<CR>
+'''
 
 [[plugins]]
 repo = 'tpope/vim-rhubarb'
@@ -231,7 +235,8 @@ hook_add = '''
   let g:gitgutter_map_keys = 0
   
   " normalモードでgitと打つと変化の部分トグル
-  nmap <silent> gitdiff :GitGutterToggle<CR>
+  nmap <silent> ,gd :GitGutterToggle<CR>
+  nmap <silent> ,gl :GitGutterToggle<CR>
 '''
 
 [[plugins]]
