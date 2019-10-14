@@ -1,18 +1,63 @@
 #####################################################################################################
-# 共通設定
+# zsh共通設定
 #####################################################################################################
-# 色の変更
-export LSCOLORS=gxfxcxdxbxegedabagacad
 
-# ターミナルのカスタマイズ
-# \h  ホスト名（最初の.まで）
-# \H  ホスト名
-# \t  時間（24時間形式）
-# \u  ユーザー名
-# \w  現在のディレクトリ(フルパス)
-# \W  現在のディレクトリ名
-#PS1="\u: \W $"
-PS1="\u \t[\w] $ "
+# 慣れてから考える標準設定
+#bindkey -e
+bindkey -v
+
+# ヒストリの設定
+HISTFILE=~/.zsh_history
+HISTSIZE=1000000
+SAVEHIST=1000000
+
+# ディレクトリの履歴
+# cd のあとでtabを押したときに履歴で移動できる
+setopt auto_pushd
+
+# 日本語ファイル名を表示可能にする
+setopt print_eight_bit
+
+# beep を無効にする
+setopt no_beep
+
+## "~hoge" が特定のパス名に展開されるようにする（ブックマークのようなもの）
+## 例： cd ~hoge と入力すると /long/path/to/hogehoge ディレクトリに移動
+# hash -d hoge=/long/path/to/hogehoge
+
+# pushd したとき、ディレクトリがすでにスタックに含まれていればスタックに追加しない
+setopt pushd_ignore_dups
+
+# どういう意味を持つかは `man zshexpn` の FILENAME GENERATION を参照
+setopt extended_glob
+
+
+# ctrl+f, ctrl+<-で次の単語に移動
+#TODO
+
+# ctrl+b, ctrl+->で次の単語に移動
+#TODO
+
+# ^R で履歴検索をするときに * でワイルドカードを使用出来るようにする
+bindkey '^R' history-incremental-pattern-search-backward
+
+# プロンプト系
+# 参考）
+# http://tkengo.github.io/blog/2013/05/12/zsh-vcs-info/
+# http://www.sirochro.com/note/terminal-zsh-prompt-customize/
+autoload -Uz vcs_info
+setopt prompt_subst
+zstyle ':vcs_info:git:*' check-for-changes true
+zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
+zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
+zstyle ':vcs_info:*' formats "%F{green}%c%u[%b]%f"
+zstyle ':vcs_info:*' actionformats '[%b|%a]'
+precmd () { vcs_info }
+
+PS1='sv.junic$ '
+RPROMPT="%{${fg[blue]}%}[%~]%{${reset_color}%}"
+RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
+
 
 #####################################################################################################
 # nvm
@@ -173,21 +218,7 @@ function cdf () {
 #####################################################################################################
 # github
 #####################################################################################################
-source ~/bash/git-completion.bash
-source ~/bash/git-prompt.sh
-GIT_PS1_SHOWUPSTREAM=1
-GIT_PS1_SHOWSTASHSTATE=1
-export PS1='\[\e[0;37m\e[40m\]\u\[\e[0m\]:\[\e[0;96m\e[40m\]\w\[\e[1;92m\e[40m\]$(__git_ps1)\[\e[0m\] $ '
-
-
-#####################################################################################################
-# function
-#####################################################################################################
-# ctrl+fで次の単語に移動
-bind '"\C-f": forward-word'
-# ctrl+bで前の単語に移動
-bind '"\C-b": backward-word'
-
+# vcsでおｋぽいので削除
 
 #####################################################################################################
 # fake-dev

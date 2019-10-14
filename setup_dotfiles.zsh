@@ -4,8 +4,8 @@ pwd=`pwd -P`
 
 if [ `uname` = "Darwin" ]; then
   #mac用のコード
-  ln -s ${pwd}/.bash_profile ~/.bash_profile
-  ln -s ${pwd}/.bashrc ~/.bashrc
+  ln -s ${pwd}/.zprofile ~/.zprofile
+  ln -s ${pwd}/.zbashrc ~/.zbashrc
   ln -s ${pwd}/.eslintrc ~/.eslintrc
   ln -s ${pwd}/.tmux ~/.tmux
   ln -s ${pwd}/.tmux.conf ~/.tmux.conf
