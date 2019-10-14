@@ -1,9 +1,5 @@
-echo 'include .zbash_profile'
-test -r ~/.zbashrc && . ~/.zbashrc
+#!/bin/zsh
 
-if [ -f ~/.bashrc_local ]; then
-  test -r ~/.zbashrc_local && . ~/.zbashrc_local
-fi
+echo 'include .zprofile'
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
-
