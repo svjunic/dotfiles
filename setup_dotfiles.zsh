@@ -4,6 +4,7 @@ pwd=`pwd -P`
 
 if [ `uname` = "Darwin" ]; then
   #mac用のコード
+  ln -s ${pwd}/.zlogin ~/.zlogin
   ln -s ${pwd}/.zprofile ~/.zprofile
   ln -s ${pwd}/.zbashrc ~/.zbashrc
   ln -s ${pwd}/.eslintrc ~/.eslintrc
