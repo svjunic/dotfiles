@@ -243,3 +243,20 @@ repo = 'svjunic/RadicalGoodSpeed'
 
 [[plugins]]
 repo = 'svjunic/svjunic-snip'
+
+[[plugins]]
+repo = 'Valloric/MatchTagAlways'
+on_ft = ['html', 'vue', 'typescript', 'javascript']
+hook_add = '''
+  "let g:mta_use_matchparen_group = 1
+  
+  let g:mta_filetypes = {
+      \ 'html' : 1,
+      \ 'xhtml' : 1,
+      \ 'xml' : 1,
+      \ 'javascript' : 1,
+      \ 'jsx' : 1,
+      \ 'vue' : 1,
+      \ 'typescript' : 1,
+      \}
+'''
