@@ -5,10 +5,9 @@
     "es6": true,
     "jquery": true
   },
-  "plugins": ["eslint-plugin-prettier"],
-  "extends": ["eslint:recommended", "plugin:prettier/recommended"],
   "parserOptions": {
-    "sourceType": "module"
+    "sourceType": "module",
+    "ecmaVersion": 2018
   },
   globals: {
     "$" : true,
@@ -17,6 +16,7 @@
     "FB" : true,
     "twttr" : true
   },
+  "root": true,
   "rules": {
     "no-console": 0,
     "no-alert": 0,

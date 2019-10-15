@@ -81,12 +81,12 @@ function up() {
 # ag
 function agg() {
   if [ ! -z $1 ]; then
-    path=$1
+    query=$1
   else
-    path=''
+    query=''
   fi
 
-  eval 'ag -l -u --depth -1 '${path}' ./*';
+  eval 'ag -l -u --depth -1 '${query}' ./*';
 }
 
 
