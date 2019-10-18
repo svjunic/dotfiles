@@ -148,9 +148,6 @@ repo = 'thinca/vim-quickrun'
 repo = 'tpope/vim-surround'
 
 [[plugins]]
-repo = 'posva/vim-vue'
-
-[[plugins]]
 repo = 'vim-scripts/YankRing.vim'
 
 [[plugins]]
