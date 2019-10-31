@@ -37,6 +37,7 @@ npm i -g prettier-eslint-cli
 #npm i -g prettier/plugin-php
 npm i -g eslint-plugin-prettier
 npm i -g eslint-config-prettier
+npm i -g vue-language-server
 
 echo "python3.6 install"
 brew uninstall --ignore-dependencies python3
