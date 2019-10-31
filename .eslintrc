@@ -1,4 +1,10 @@
 {
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 2018
+  },
+
   "env": {
     "browser": true,
     "node": true,
@@ -11,10 +17,6 @@
   //"plugins": [
   //  "prettier"
   //],
-  "parserOptions": {
-    "sourceType": "module",
-    "ecmaVersion": 2018
-  },
   globals: {
     "$" : true,
     "jQuery" : true,

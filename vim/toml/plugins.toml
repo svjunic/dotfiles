@@ -34,6 +34,30 @@ hook_post_update = '''
 '''
 
 [[plugins]]
+repo = 'Shougo/vimproc.vim'
+hook_post_update = '''
+  call dein#add('Shougo/vimproc', {'build': {
+    \     'windows' : 'tools\\update-dll-mingw',
+    \     'cygwin'  : 'make -f make_cygwin.mak',
+    \     'mac'     : 'make -f make_mac.mak',
+    \     'linux'   : 'make',
+    \     'unix'    : 'gmake',
+    \    },
+    \ })
+'''
+hook_add = '''
+    if has('mac')
+      let g:vimproc_dll_path = '$HOME/.vim/utils/dein/repos/github.com/Shougo/vimproc.vim/lib/vimproc_mac.so'
+    elseif has('unix')
+      let g:vimproc_dll_path = '$HOME/.vim/utils/dein/repos/github.com/Shougo/vimproc.vim/lib/vimproc_linux64.so'
+    elseif has('win32')
+      let g:vimproc_dll_path = $HOME . '.vim/utils/dein/repos/github.com/Shougo/vimproc.vim/vimproc_win32.dll'
+    elseif has('linux')
+      let g:vimproc_dll_path = $HOME . '.vim/utils/dein/repos/github.com/Shougo/vimproc.vim/vimproc_win64.dll'
+    endif
+'''
+
+[[plugins]]
 repo = 'Shougo/unite.vim'
 depends = ['neomru.vim', 'unite-locate', 'unite-outline']
 hook_add = '''
