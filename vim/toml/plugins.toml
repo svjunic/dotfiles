@@ -160,7 +160,8 @@ hook_add = '''
   let g:ale_linters = {
   \ 'html': ['htmlhint'],
   \ 'javascript': ['eslint'],
-  \ 'typescript': ['eslint', 'tsserver']
+  \ 'typescript': ['eslint', 'tsserver'],
+  \ 'vue': ['vls']
   \}
   
   " Enable completion where available.
