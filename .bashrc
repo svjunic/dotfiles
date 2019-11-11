@@ -32,8 +32,6 @@ function load_npm () {
   export PATH="/usr/local/bin:$PATH:/usr/local/sbin"
   
   source ~/.nvm/nvm.sh
-  nvm use --lts
-  npm_dir=${NVM_PATH}_modules
   
   alias node="node --experimental-modules"
   echo "set NODE_PATH for node.js"
@@ -155,8 +153,11 @@ if [ `which tmux` ]; then
 
   if ! [ -n "$TMUX" ]; then
     load_npm
+    nvm use --lts
+    npm_dir=${NVM_PATH}_modules
     tmux a -d || tmux
   else
+    load_npm
     . ~/bash/tmux/alias.sh
   fi
 fi
