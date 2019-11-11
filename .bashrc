@@ -24,23 +24,22 @@ export LSCOLORS=gxfxcxdxbxegedabagacad
 #PS1="\u \t[\w] $ "
 
 #####################################################################################################
-# nvm
-#####################################################################################################
-echo "add PATH for node.js"
-export PATH="/usr/local/bin:$PATH:/usr/local/sbin"
-
-source ~/.nvm/nvm.sh
-nvm use --lts
-npm_dir=${NVM_PATH}_modules
-
-alias node="node --experimental-modules"
-echo "set NODE_PATH for node.js"
-export NODE_PATH=$npm_dir
-
-
-#####################################################################################################
 # function
 #####################################################################################################
+# load nvm
+function load_npm () {
+  echo "add PATH for node.js"
+  export PATH="/usr/local/bin:$PATH:/usr/local/sbin"
+  
+  source ~/.nvm/nvm.sh
+  nvm use --lts
+  npm_dir=${NVM_PATH}_modules
+  
+  alias node="node --experimental-modules"
+  echo "set NODE_PATH for node.js"
+  export NODE_PATH=$npm_dir
+}
+
 # 不要ファイルを一度に削除したかった。
 function ccc () {
   rm `find . -name .DS*`
@@ -153,7 +152,9 @@ git config --global alias.log 'log --all --branches --graph'
 #####################################################################################################
 
 if [ `which tmux` ]; then
+
   if ! [ -n "$TMUX" ]; then
+    load_npm
     tmux a -d || tmux
   else
     . ~/bash/tmux/alias.sh
