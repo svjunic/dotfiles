@@ -5,6 +5,7 @@ npm i -g tslint
 npm i -g htmlhint
 npm i -g prettier
 npm i -g prettier-eslint-cli
+npm i -g tern
 #npm i -g prettier/plugin-php
 #npm i -g eslint-plugin-prettier
 #npm i -g eslint-config-prettier
