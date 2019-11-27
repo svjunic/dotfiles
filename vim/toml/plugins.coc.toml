@@ -3,22 +3,35 @@ repo = 'neoclide/coc.nvim'
 merge = 0
 rev = 'release'
 hook_add = '''
+  let g:coc_global_extensions = [
+    \   'coc-css',
+    \   'coc-snippets',
+    \   'coc-tsserver',
+    \   'coc-vetur',
+    \ ]
+
   " use <tab> for trigger completion and navigate to the next complete item
   function! s:check_back_space() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~ '\s'
   endfunction
-  inoremap <silent><expr> <TAB>
+
+  " プルダウン確定
+  inoremap <silent><expr> <C-y>
     \ pumvisible() ? coc#_select_confirm() :
     \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
     \ <SID>check_back_space() ? "\<TAB>" :
     \ coc#refresh()
-  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-  " navigate completion list
+
+
+  "inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+  " プルダウン
   inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
   inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
   inoremap <expr> <Down> pumvisible() ? "\<C-n>" : "\<Down>"
   inoremap <expr> <Up> pumvisible() ? "\<C-p>" : "\<Up>"
+
   " Close preview window when completion is done
   autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
   " confirm complete (select the first completion item and confirm completion when no item have selected)
@@ -53,8 +66,12 @@ hook_add = '''
       call CocAction('doHover')
     endif
   endfunction
-  " Highlight symbol under cursor on CursorHold
-  autocmd CursorHold * silent call CocActionAsync('highlight')
+
+  augroup coc
+    autocmd!
+    autocmd User CocDiagnosticChange call lightline#update()
+    autocmd CursorHoldI * silent call CocActionAsync('highlight') | call CocActionAsync('doHover')
+  augroup END
 '''
 
 
@@ -112,10 +129,10 @@ build = 'npm install'
 #depends = 'coc.nvim'
 #build = 'npm install'
 
-#[[plugins]]
-#repo = 'neoclide/coc-json'
-#depends = 'coc.nvim'
-#build = 'npm install'
+[[plugins]]
+repo = 'neoclide/coc-json'
+depends = 'coc.nvim'
+build = 'npm install'
 
 #[[plugins]]
 #repo = 'neoclide/coc-lists'
@@ -141,10 +158,10 @@ build = 'npm install'
 #depends = 'coc.nvim'
 #build = 'npm install'
 
-#[[plugins]]
-#repo = 'neoclide/coc-snippets'
-#depends = 'coc.nvim'
-#build = 'npm install'
+[[plugins]]
+repo = 'neoclide/coc-snippets'
+depends = 'coc.nvim'
+build = 'npm install'
 
 #[[plugins]]
 #repo = 'neoclide/coc-solargraph'

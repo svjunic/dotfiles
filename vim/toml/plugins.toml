@@ -140,26 +140,26 @@ hook_add = '''
   nnoremap <silent> [unite]u :<C-u>Unite buffer file_mru<CR>
 '''
 
-[[plugins]]
-repo = 'Shougo/neosnippet'
-hook_add='''
-  "Ctrl+Kにターゲットジャンプ割当
-  imap <C-k> <Plug>(neosnippet_expand_or_jump)
-  smap <C-k> <Plug>(neosnippet_expand_or_jump)
-  xmap <C-k> <Plug>(neosnippet_expand_target)
-  
-  if has('conceal')
-    set conceallevel=2 concealcursor=niv
-  endif
-  
-  let s:neosnippet_directorys = [ '~/.cache/dein/repos/github.com/svjunic/svjunic-snip/snippets' ]
-  let g:neosnippet#snippets_directory = join( s:neosnippet_directorys, ',' )
-'''
-depends = ['neosnippet-snippets', 'svjunic/svjunic-snip']
-
-[[plugins]]
-repo = 'Shougo/neosnippet-snippets'
-on_i = 1
+# [[plugins]]
+# repo = 'Shougo/neosnippet'
+# hook_add='''
+#   "Ctrl+Iにターゲットジャンプ割当
+#   imap <C-i> <Plug>(neosnippet_expand_or_jump)
+#   smap <C-i> <Plug>(neosnippet_expand_or_jump)
+#   xmap <C-i> <Plug>(neosnippet_expand_target)
+#
+#   if has('conceal')
+#     set conceallevel=2 concealcursor=niv
+#   endif
+#
+#   let s:neosnippet_directorys = [ '~/.cache/dein/repos/github.com/svjunic/svjunic-snip/snippets' ]
+#   let g:neosnippet#snippets_directory = join( s:neosnippet_directorys, ',' )
+# '''
+# depends = ['neosnippet-snippets', 'svjunic/svjunic-snip']
+#
+#[[plugins]]
+#repo = 'Shougo/neosnippet-snippets'
+#on_i = 1
 
 [[plugins]]
 repo = 'cespare/vim-toml'
