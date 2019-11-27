@@ -44,6 +44,7 @@ brew install vim
 
 echo "create symlink .vimrc ~/"
 ln -s ${pwd}/vim/.vimrc ~/.vimrc
+ln -s ${pwd}/vim/coc-settings.json ~/.vim/coc-settings.json
 ln -s ${pwd}/vim/vim ~/.vim/vim
 ln -s ${pwd}/vim/toml ~/.vim/toml
 
