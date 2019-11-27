@@ -36,10 +36,8 @@ make
 sudo make install
 
 
-## .tern-projectの設定ファイル移動
-cp vim/.tern-project ~/.tern-project
 cp vim/.eslintrc ~/.eslintrc
-cp vim/.agignore ~/.gitgnore
+cp vim._gitignore ~/.gitgnore
 
 
 ## いつもの
