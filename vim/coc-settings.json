@@ -1,6 +1,7 @@
 {
   "suggest.noselect": true,
   "suggest.preferCompleteThanJumpPlaceholder": true,
+
   "languageserver": {
     "clangd": {
       "command": "clangd",
@@ -23,5 +24,9 @@
         }
       }
     }
-  }
+  },
+
+
+  "snippets.priority" : 100,
+  "snippets.autoTrigger" : true
 }
