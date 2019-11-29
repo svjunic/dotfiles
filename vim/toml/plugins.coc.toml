@@ -3,28 +3,13 @@ repo = 'neoclide/coc.nvim'
 merge = 0
 rev = 'release'
 hook_add = '''
-  let g:coc_global_extensions = [
-    \   'coc-css',
-    \   'coc-snippets',
-    \   'coc-tsserver',
-    \   'coc-vetur',
-    \ ]
-
-  " use <tab> for trigger completion and navigate to the next complete item
-  function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
-  endfunction
-
-  " プルダウン確定
-  inoremap <silent><expr> <C-y>
-    \ pumvisible() ? coc#_select_confirm() :
-    \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-    \ <SID>check_back_space() ? "\<TAB>" :
-    \ coc#refresh()
-
-
-  "inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+  "let g:coc_global_extensions = [
+  "  \   'coc-json',
+  "  \   'coc-css',
+  "  \   'coc-snippets',
+  "  \   'coc-tsserver',
+  "  \   'coc-vetur',
+  "  \ ]
 
   " プルダウン
   inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
@@ -89,11 +74,11 @@ hook_add = '''
 #  CocInstall coc-highlight
 #'''
 
-[[plugins]]
-repo = 'neoclide/coc-css'
-depends = 'coc.nvim'
-on_ft = ['css','less','wxss','scss']
-build = 'npm install'
+#[[plugins]]
+#repo = 'neoclide/coc-css'
+#depends = 'coc.nvim'
+#on_ft = ['css','less','wxss','scss']
+#build = 'npm install'
 
 #[[plugins]]
 #name = 'coc-dictionary'
@@ -129,10 +114,10 @@ build = 'npm install'
 #depends = 'coc.nvim'
 #build = 'npm install'
 
-[[plugins]]
-repo = 'neoclide/coc-json'
-depends = 'coc.nvim'
-build = 'npm install'
+#[[plugins]]
+#repo = 'neoclide/coc-json'
+#depends = 'coc.nvim'
+#build = 'npm install'
 
 #[[plugins]]
 #repo = 'neoclide/coc-lists'
@@ -158,10 +143,10 @@ build = 'npm install'
 #depends = 'coc.nvim'
 #build = 'npm install'
 
-[[plugins]]
-repo = 'neoclide/coc-snippets'
-depends = 'coc.nvim'
-build = 'npm install'
+#[[plugins]]
+#repo = 'neoclide/coc-snippets'
+#depends = 'coc.nvim'
+#build = 'npm install'
 
 #[[plugins]]
 #repo = 'neoclide/coc-solargraph'
@@ -178,11 +163,11 @@ build = 'npm install'
 #depends = 'coc.nvim'
 #build = 'npm install'
 
-[[plugins]]
-repo = 'neoclide/coc-tsserver'
-depends = 'coc.nvim'
-on_ft = ['typescript']
-build = 'npm install'
+#[[plugins]]
+#repo = 'neoclide/coc-tsserver'
+#depends = 'coc.nvim'
+#on_ft = ['typescript']
+#build = 'npm install'
 
 #[[plugins]]
 #name = 'coc-tag'
@@ -196,11 +181,11 @@ build = 'npm install'
 #depends = 'coc.nvim'
 #build = 'npm install'
 
-[[plugins]]
-repo = 'neoclide/coc-vetur'
-depends = 'coc.nvim'
-on_ft = ['vue']
-build = 'npm install'
+#[[plugins]]
+#repo = 'neoclide/coc-vetur'
+#depends = 'coc.nvim'
+#on_ft = ['vue']
+#build = 'npm install'
 
 #[[plugins]]
 #name = 'coc-word'

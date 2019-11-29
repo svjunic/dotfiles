@@ -2,21 +2,25 @@
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
-repo = 'roxma/nvim-yarp' # NeoVim でない時に deoplete 必要
+repo = 'wsdjeg/dein-ui.vim'
 
-[[plugins]]
-repo = 'roxma/vim-hug-neovim-rpc' # NeoVim でない時に deoplete 必要
 
-[[plugins]]
-repo = 'Shougo/deoplete.nvim'
-hook_add = '''
-  "" 起動時に有効化
-  "call deoplete#enable()
-  
-  " 上記で動かないので、原因わかるまでの暫定対応
-  autocmd VimEnter * call deoplete#enable()
-  autocmd BufRead,BufNewFile * call deoplete#enable()
-'''
+#[[plugins]]
+#repo = 'roxma/nvim-yarp' # NeoVim でない時に deoplete 必要
+#
+#[[plugins]]
+#repo = 'roxma/vim-hug-neovim-rpc' # NeoVim でない時に deoplete 必要
+#
+#[[plugins]]
+#repo = 'Shougo/deoplete.nvim'
+#hook_add = '''
+#  "" 起動時に有効化
+#  "call deoplete#enable()
+#  
+#  " 上記で動かないので、原因わかるまでの暫定対応
+#  autocmd VimEnter * call deoplete#enable()
+#  autocmd BufRead,BufNewFile * call deoplete#enable()
+#'''
 
 [[plugins]]
 repo = 'Shougo/vimproc'
@@ -147,19 +151,19 @@ hook_add = '''
 #   imap <C-i> <Plug>(neosnippet_expand_or_jump)
 #   smap <C-i> <Plug>(neosnippet_expand_or_jump)
 #   xmap <C-i> <Plug>(neosnippet_expand_target)
-#
+# 
 #   if has('conceal')
 #     set conceallevel=2 concealcursor=niv
 #   endif
-#
+# 
 #   let s:neosnippet_directorys = [ '~/.cache/dein/repos/github.com/svjunic/svjunic-snip/snippets' ]
 #   let g:neosnippet#snippets_directory = join( s:neosnippet_directorys, ',' )
 # '''
 # depends = ['neosnippet-snippets', 'svjunic/svjunic-snip']
-#
-#[[plugins]]
-#repo = 'Shougo/neosnippet-snippets'
-#on_i = 1
+# 
+# [[plugins]]
+# repo = 'Shougo/neosnippet-snippets'
+# on_i = 1
 
 [[plugins]]
 repo = 'cespare/vim-toml'
@@ -267,6 +271,7 @@ repo = 'svjunic/RadicalGoodSpeed'
 
 [[plugins]]
 repo = 'svjunic/svjunic-snip'
+rev = 'hotfix/coc'
 
 [[plugins]]
 repo = 'Valloric/MatchTagAlways'
