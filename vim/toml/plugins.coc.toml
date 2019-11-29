@@ -3,13 +3,13 @@ repo = 'neoclide/coc.nvim'
 merge = 0
 rev = 'release'
 hook_add = '''
-  "let g:coc_global_extensions = [
-  "  \   'coc-json',
-  "  \   'coc-css',
-  "  \   'coc-snippets',
-  "  \   'coc-tsserver',
-  "  \   'coc-vetur',
-  "  \ ]
+  let g:coc_global_extensions = [
+    \   'coc-json',
+    \   'coc-css',
+    \   'coc-snippets',
+    \   'coc-tsserver',
+    \   'coc-vetur',
+    \ ]
 
   " プルダウン
   inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
