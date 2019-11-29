@@ -1,15 +1,22 @@
 {
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 2018
+  },
+
   "env": {
     "browser": true,
     "node": true,
     "es6": true,
     "jquery": true
   },
-  "plugins": ["eslint-plugin-prettier"],
-  "extends": ["eslint:recommended", "plugin:prettier/recommended"],
-  "parserOptions": {
-    "sourceType": "module"
-  },
+  //"extends": [
+  //  "prettier",
+  //],
+  //"plugins": [
+  //  "prettier"
+  //],
   globals: {
     "$" : true,
     "jQuery" : true,
@@ -36,13 +43,13 @@
     "quotes": ["error", "single"],
     "semi": ["error", "always"],
     "space-before-function-paren": 0,
-    "prettier/prettier": [
-      "error",
-      {
-        "singleQuote": true,
-        "bracketSpacing": true,
-        "printWidth": 10000
-      }
-    ]
+    //"prettier/prettier": [
+    //  "error",
+    //  {
+    //    "singleQuote": true,
+    //    "bracketSpacing": true,
+    //    "printWidth": 10000
+    //  }
+    //]
   }
 }

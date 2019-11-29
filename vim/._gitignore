@@ -1,0 +1,16 @@
+.DS_Store
+.DS_Store?
+._*
+*.swp
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.project
+.idea
+.sass-cache
+node_modules
+
+pack
+
+# .gitkeep

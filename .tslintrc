@@ -1,0 +1,11 @@
+{
+  // eslintのfixがtslintのfixに追いついたら消す
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint:recommended"
+  ],
+  "jsRules": {},
+  "rules": {
+    "no-console": [ false ]
+  }
+}
