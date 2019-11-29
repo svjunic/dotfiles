@@ -85,11 +85,18 @@ set conceallevel=0
 " バックスペースが効かなくなる問題対策
 set backspace=indent,eol,start
 
-" 検索のハイライト外す
-nmap <C-l> <C-l>:nohlsearch<CR>
-
 " スペルチェックから日本語を除外
 set spelllang=en,cjk
 
 " 1行が長いファイルでsyntaxで重くならないように
 set synmaxcol=1000
+
+" ctagファイルを検索
+set tags=./tags;$HOME
+
+" matcht.vimの読み込み
+source $VIMRUNTIME/macros/matchit.vim
+let g:hl_matchit_enable_on_vim_startup = 1
+let g:hl_matchit_hl_groupname = 'Title'
+let g:hl_matchit_allow_ft_regexp = 'html\|vim\|ruby\|sh'
+

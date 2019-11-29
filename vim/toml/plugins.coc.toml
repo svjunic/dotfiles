@@ -1,0 +1,205 @@
+[[plugins]]
+repo = 'neoclide/coc.nvim'
+merge = 0
+rev = 'release'
+hook_add = '''
+  let g:coc_global_extensions = [
+    \   'coc-json',
+    \   'coc-css',
+    \   'coc-snippets',
+    \   'coc-tsserver',
+    \   'coc-vetur',
+    \ ]
+
+  " プルダウン
+  inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
+  inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+  inoremap <expr> <Down> pumvisible() ? "\<C-n>" : "\<Down>"
+  inoremap <expr> <Up> pumvisible() ? "\<C-p>" : "\<Up>"
+
+  " Close preview window when completion is done
+  autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+  " confirm complete (select the first completion item and confirm completion when no item have selected)
+  inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : 
+                                             \"\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+  nmap <silent> <Leader>c :CocList<Space>commands<CR>
+  nmap <silent> <Leader>s :CocList<Space>words<CR>
+  nmap <silent> <Leader>f :CocList<Space>files<CR>
+  nmap <silent> <Leader>m :CocList<Space>mru<CR>
+  nmap <silent> <Leader>g :CocList<Space>grep<CR>
+  nmap <silent> <Leader>b :CocList<Space>buffers<CR>
+  nmap <silent> <Leader>e :CocList diagnostics<CR>
+  nmap <silent> <Leader>F <Plug>(coc-format)
+  vmap <silent> <Leader>F <Plug>(coc-format-selected)
+  xmap <silent> <Leader>F <Plug>(coc-format-selected)
+  nmap <silent> <Leader>R <Plug>(coc-rename)
+  nmap <silent> <Leader>A <Plug>(coc-codeaction)
+  vmap <silent> <Leader>A <Plug>(coc-codeaction-selected)
+  xmap <silent> <Leader>A <Plug>(coc-codeaction-selected)
+  nmap <silent> <Leader>[ <Plug>(coc-diagnostic-prev)
+  nmap <silent> <Leader>] <Plug>(coc-diagnostic-next)
+  nmap <silent> <Leader>d <Plug>(coc-definition)
+  nmap <silent> <Leader>y <Plug>(coc-type-definition)
+  nmap <silent> <Leader>p <Plug>(coc-implementation)
+  nmap <silent> <Leader>r <Plug>(coc-references)
+  nmap <silent> <Leader>q <Plug>(coc-fix-current)
+  nnoremap <silent> <Leader>k :call <SID>show_documentation()<CR>
+  function! s:show_documentation()
+    if (index(['vim','help'], &filetype) >= 0)
+      execute 'h '.expand('<cword>')
+    else
+      call CocAction('doHover')
+    endif
+  endfunction
+
+  augroup coc
+    autocmd!
+    autocmd User CocDiagnosticChange call lightline#update()
+    autocmd CursorHoldI * silent call CocActionAsync('highlight') | call CocActionAsync('doHover')
+  augroup END
+'''
+
+
+#[[plugins]]
+#repo = 'iamcco/coc-angular'
+#depends = 'coc.nvim'
+#build = 'npm install'
+
+#[[plugins]]
+#repo = 'neoclide/coc-highlight'
+#depends = 'coc.nvim'
+#build = 'npm install'
+#hook_add = '''
+#  autocmd CursorHold * silent call CocActionAsync('highlight')
+#  CocInstall coc-highlight
+#'''
+
+#[[plugins]]
+#repo = 'neoclide/coc-css'
+#depends = 'coc.nvim'
+#on_ft = ['css','less','wxss','scss']
+#build = 'npm install'
+
+#[[plugins]]
+#name = 'coc-dictionary'
+#repo = 'neoclide/coc-sources'
+#rtp = 'packages/dictionary'
+#depends = 'coc.nvim'
+#build = 'npm install'
+
+#[[plugins]]
+#name = 'coc-emoji'
+#repo = 'neoclide/coc-sources'
+#rtp = 'packages/emoji'
+#depends = 'coc.nvim'
+#build = 'npm install'
+
+#[[plugins]]
+#repo = 'neoclide/coc-git'
+#depends = 'coc.nvim'
+#build = 'npm install'
+
+#[[plugins]]
+#repo = 'neoclide/coc-highlight'
+#depends = 'coc.nvim'
+#build = 'npm install'
+
+#[[plugins]]
+#repo = 'neoclide/coc-html'
+#depends = 'coc.nvim'
+#build = 'npm install'
+
+#[[plugins]]
+#repo = 'neoclide/coc-java'
+#depends = 'coc.nvim'
+#build = 'npm install'
+
+#[[plugins]]
+#repo = 'neoclide/coc-json'
+#depends = 'coc.nvim'
+#build = 'npm install'
+
+#[[plugins]]
+#repo = 'neoclide/coc-lists'
+#depends = 'coc.nvim'
+#build = 'npm install'
+
+#[[plugins]]
+#repo = 'neoclide/coc-neco'
+#depends = 'coc.nvim'
+
+#[[plugins]]
+#repo = 'marlonfan/coc-phpls'
+#depends = 'coc.nvim'
+#build = 'npm install'
+
+#[[plugins]]
+#repo = 'neoclide/coc-python'
+#depends = 'coc.nvim'
+#build = 'npm install'
+
+#[[plugins]]
+#repo = 'neoclide/coc-rls'
+#depends = 'coc.nvim'
+#build = 'npm install'
+
+#[[plugins]]
+#repo = 'neoclide/coc-snippets'
+#depends = 'coc.nvim'
+#build = 'npm install'
+
+#[[plugins]]
+#repo = 'neoclide/coc-solargraph'
+#depends = 'coc.nvim'
+#build = 'npm install'
+
+#[[plugins]]
+#repo = 'fannheyward/coc-sql'
+#depends = 'coc.nvim'
+#build = 'npm install'
+
+#[[plugins]]
+#repo = 'neoclide/coc-tabnine'
+#depends = 'coc.nvim'
+#build = 'npm install'
+
+#[[plugins]]
+#repo = 'neoclide/coc-tsserver'
+#depends = 'coc.nvim'
+#on_ft = ['typescript']
+#build = 'npm install'
+
+#[[plugins]]
+#name = 'coc-tag'
+#repo = 'neoclide/coc-sources'
+#rtp = 'packages/tag'
+#depends = 'coc.nvim'
+#build = 'npm install'
+
+#[[plugins]]
+#repo = 'iamcco/coc-vimlsp'
+#depends = 'coc.nvim'
+#build = 'npm install'
+
+#[[plugins]]
+#repo = 'neoclide/coc-vetur'
+#depends = 'coc.nvim'
+#on_ft = ['vue']
+#build = 'npm install'
+
+#[[plugins]]
+#name = 'coc-word'
+#repo = 'neoclide/coc-sources'
+#rtp = 'packages/word'
+#depends = 'coc.nvim'
+#build = 'npm install'
+
+#[[plugins]]
+#repo = 'neoclide/coc-yaml'
+#depends = 'coc.nvim'
+#build = 'npm install'
+
+#[[plugins]]
+#repo = 'fannheyward/coc-xml'
+#depends = 'coc.nvim'
+#build = 'npm install'

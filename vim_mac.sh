@@ -1,5 +1,7 @@
 #!/bin/sh
 
+pwd=`pwd -P`
+
 VIM_HOME=$HOME/.vim
 VIM_CACHE=$HOME/.cache
 
@@ -9,8 +11,7 @@ then
   exit
 fi
 
-#cp vim/.tern-project ~/
-
+echo "create directory"
 if [ ! -d ${VIM_HOME} ]
 then
   mkdir ${VIM_HOME}
@@ -27,32 +28,28 @@ then
   mkdir ${VIM_BUNDLE}
 fi
 
-echo "npm install"
-npm i -g eslint@5
-npm i -g htmlhint
-npm i -g prettier
-npm i -g prettier-eslint-cli
-#npm i -g prettier/plugin-php
-npm i -g eslint-plugin-prettier
-npm i -g eslint-config-prettier
-
 echo "python3.6 install"
 brew uninstall --ignore-dependencies python3
 brew uninstall --ignore-dependencies vim
 
 brew install python3
-brew install vim --with-python3
-
 #pip install --upgrade pip
-#pip3 install --upgrade neovim
+pip3 install --upgrade neovim
+
+#brew install vim --with-python3
+# --with-python3はもういらないぽい
+brew install neovim
+
+brew install vim
 
 echo "create symlink .vimrc ~/"
-ln -s vim/.vimrc !/.vimrc
+ln -s ${pwd}/vim/.vimrc ~/.vimrc
+ln -s ${pwd}/vim/coc-settings.json ~/.vim/coc-settings.json
+ln -s ${pwd}/vim/vim ~/.vim/vim
+ln -s ${pwd}/vim/toml ~/.vim/toml
 
 echo "dein install"
-mkdir -p ~/.cache/dein
 curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
 sh ./installer.sh ~/.cache/dein
 
-echo "copy my vimscript"
-rsync -r vim/vim/ ~/.vim/vim
+echo "ターミナルを再起動するのじゃ・・・そのままだとリハッシュがはしらないぞ・・・"
