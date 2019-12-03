@@ -270,6 +270,9 @@ hook_add = '''
 repo = 'svjunic/RadicalGoodSpeed'
 
 [[plugins]]
+repo = 'svjunic/snortist-color.vim'
+
+[[plugins]]
 repo = 'svjunic/svjunic-snip'
 rev = 'hotfix/coc'
 
@@ -289,3 +292,11 @@ hook_add = '''
       \ 'typescript' : 1,
       \}
 '''
+
+[[plugins]]
+repo = 'othree/yajs.vim'
+on_ft= ['javascript']
+
+[[plugins]]
+repo = 'othree/es.next.syntax.vim'
+on_ft= ['javascript']
