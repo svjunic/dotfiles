@@ -1,5 +1,6 @@
 echo "npm install"
 npm i -g eslint@5
+npm i -g eslint-plugin-vue
 npm i -g babel-eslint@8
 npm i -g tslint
 npm i -g htmlhint

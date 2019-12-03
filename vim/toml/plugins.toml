@@ -185,15 +185,17 @@ repo = 'vim-scripts/Align'
 repo = 'w0rp/ale'
 hook_add = '''
   "" Equivalent to the above.
-  "let g:ale_linters = {
-  "\ 'html': ['htmlhint'],
-  "\ 'javascript': ['eslint'],
-  "\ 'typescript': ['eslint', 'tsserver'],
-  "\ 'vue': ['vls']
-  "\}
+  let g:ale_linters = {
+  \ 'html': ['htmlhint'],
+  \ 'javascript': ['eslint'],
+  \ 'typescript': ['eslint', 'tsserver'],
+  \ 'vue': ['vls']
+  \}
   
   " Enable completion where available.
-  let g:ale_completion_enabled = 1
+  "let g:ale_completion_enabled = 1
+  " 有効にするとcoc?と組み合わさってめちゃくちゃ重くなるっぽい（vueで確認）
+  let g:ale_completion_enabled = 0
 
   "" ローカルで新しいeslint入れられてどうしようもないので、解消するまでグローバルでしのいでみる
   let g:ale_use_global_executables = 1
@@ -300,3 +302,10 @@ on_ft= ['javascript']
 [[plugins]]
 repo = 'othree/es.next.syntax.vim'
 on_ft= ['javascript']
+
+[[plugins]]
+repo = 'posva/vim-vue'
+on_ft= ['vue']
+hook_add = '''
+  autocmd FileType vue syntax sync fromstart
+'''

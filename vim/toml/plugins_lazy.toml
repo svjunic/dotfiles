@@ -110,13 +110,6 @@ repo = 'digitaltoad/vim-pug'
 on_ft= ['pug','jade']
 
 [[plugins]]
-repo = 'posva/vim-vue'
-on_ft= ['vue']
-hook_add = '''
-  autocmd FileType vue syntax sync fromstart
-'''
-
-[[plugins]]
 repo = 'jparise/vim-graphql'
 on_ft= ['graphql']
 hook_add = '''
