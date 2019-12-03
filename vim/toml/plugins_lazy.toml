@@ -75,10 +75,6 @@
 # '''
 
 [[plugins]]
-repo = 'othree/yajs.vim'
-on_ft= ['javascript']
-
-[[plugins]]
 repo = 'mattn/emmet-vim'
 on_ft= ['css','scss']
 hook_add = '''
