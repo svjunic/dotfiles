@@ -1,4 +1,5 @@
 {
+  "snippets.shortcut": "SN",
   "suggest.noselect": false,
   "suggest.preferCompleteThanJumpPlaceholder": true,
 
@@ -25,8 +26,6 @@
       }
     }
   },
-
-
   "snippets.priority" : 100,
   "snippets.autoTrigger" : true
 }
