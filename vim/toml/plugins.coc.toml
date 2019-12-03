@@ -12,11 +12,11 @@ hook_add = '''
     \ ]
 
 
-  " プルダウン
-  inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
-  inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
-  inoremap <expr> <Down> pumvisible() ? "\<C-n>" : "\<Down>"
-  inoremap <expr> <Up> pumvisible() ? "\<C-p>" : "\<Up>"
+  "" プルダウン
+  "inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
+  "inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+  "inoremap <expr> <Down> pumvisible() ? "\<C-n>" : "\<Down>"
+  "inoremap <expr> <Up> pumvisible() ? "\<C-p>" : "\<Up>"
 
   " Close preview window when completion is done
   autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
@@ -58,6 +58,12 @@ hook_add = '''
     autocmd User CocDiagnosticChange call lightline#update()
     autocmd CursorHoldI * silent call CocActionAsync('highlight') | call CocActionAsync('doHover')
   augroup END
+
+  " default 定義ジャンプ系？
+  nmap <silent> gd <Plug>(coc-definition)
+  nmap <silent> gy <Plug>(coc-type-definition)
+  nmap <silent> gi <Plug>(coc-implementation)
+  nmap <silent> gr <Plug>(coc-references)
 
   " space + h VSCでいうホバーしたときにでる情報の標示
   nmap <silent> <space>h :<C-u>call CocAction('doHover')<cr>
