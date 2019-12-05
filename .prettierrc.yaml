@@ -7,8 +7,20 @@ overrides:
       tabWidth: 2
       useTabs: false
       semi: true
+
   - files: "*.html"
     options:
-      printWidth: 150
+      printWidth: 250
+      tabWidth: 2
+      useTabs: false
+
+  - files: "*.css"
+    options:
+      tabWidth: 2
+      useTabs: false
+
+  - files: "*.scss"
+    options:
+      printWidth: 100000
       tabWidth: 2
       useTabs: false
