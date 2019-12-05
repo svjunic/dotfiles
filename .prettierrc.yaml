@@ -1,0 +1,14 @@
+overrides:
+  - files: "*.js"
+    options:
+      printWidth: 150
+      singleQuote: true
+      bracketSpacing: true
+      tabWidth: 2
+      useTabs: false
+      semi: true
+  - files: "*.html"
+    options:
+      printWidth: 150
+      tabWidth: 2
+      useTabs: false
