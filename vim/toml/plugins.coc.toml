@@ -65,6 +65,12 @@ hook_add = '''
   nmap <silent> gi <Plug>(coc-implementation)
   nmap <silent> gr <Plug>(coc-references)
 
+  " references
+  nmap <silent> <space>r <Plug>(coc-references)
+
+  " commands
+  nmap <silent> <space>c :CocList<Space>commands<CR>
+
   " space + h VSCでいうホバーしたときにでる情報の標示
   nmap <silent> <space>h :<C-u>call CocAction('doHover')<cr>
 
