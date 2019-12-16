@@ -94,9 +94,9 @@ function load_npm () {
 
 # 不要ファイルを一度に削除したかった。
 function ccc () {
-  rm `find . -name .DS*`
-  rm `find . -name *.swp`
-  rm `find . -name Thumbs.db`
+  rm `find . -name '.DS*'`
+  rm `find . -name '*.swp'`
+  rm `find . -name 'Thumbs.db'`
   return
 }
 
