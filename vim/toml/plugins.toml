@@ -242,9 +242,9 @@ hook_add = '''
   " エラー行の表示部分を常に表示する
   let g:ale_sign_column_always = 1
   
-  " ctrl+j/kでエラー行に移動
-  nmap <silent> <C-j> <Plug>(ale_next_wrap)
-  nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+  "" ctrl+j/kでエラー行に移動
+  "nmap <silent> <C-j> <Plug>(ale_next_wrap)
+  "nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 '''
 
 [[plugins]]
@@ -273,7 +273,7 @@ hook_add = '''
 repo = 'svjunic/RadicalGoodSpeed'
 
 [[plugins]]
-repo = 'svjunic/snortist-color.vim'
+repo = 'svjunic/snortist-theme.vim'
 
 [[plugins]]
 repo = 'svjunic/svjunic-snip'
