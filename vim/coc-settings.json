@@ -3,29 +3,15 @@
   "suggest.noselect": false,
   "suggest.preferCompleteThanJumpPlaceholder": true,
 
-  "languageserver": {
-    "clangd": {
-      "command": "clangd",
-      "args": ["--background-index"],
-      "rootPatterns": ["compile_flags.txt", "compile_commands.json", ".vim/", ".git/", ".hg/"],
-      "filetypes": ["c", "cpp", "objc", "objcpp"]
-    },
-    "dockerfile": {
-      "command": "docker-langserver",
-      "filetypes": ["dockerfile"],
-      "args": ["--stdio"]
-    },
-    "haskell": {
-      "command": "hie-wrapper",
-      "rootPatterns": [".stack.yaml", "cabal.config", "package.yaml"],
-      "filetypes": ["hs", "lhs", "haskell"],
-      "initializationOptions": {
-        "languageServerHaskell": {
-          "hlintOn": true
-        }
-      }
-    }
-  },
+  "tsserver.enableJavascript" : true,
+  "javascript.format.enabled" : true,
+
   "snippets.priority" : 100,
-  "snippets.autoTrigger" : true
+  "snippets.autoTrigger" : true,
+
+  "snippets.extends": {
+    "javascriptreact": ["javascript"],
+    "typescript": ["javascript"]
+  }
+
 }
