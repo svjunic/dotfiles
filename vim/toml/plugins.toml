@@ -43,7 +43,7 @@ hook_add='''
   nnoremap <silent> [denite]r :<C-u>Denite file/rec -split=horizontal file:new<CR>
 
   " 最近開いたファイル
-  nnoremap <silent> [denite]m :<C-u>Denite -direction=topleft -cursor-wrap=true file_mru<CR> 
+  nnoremap <silent> [denite]m :<C-u>Denite -direction=topleft file_mru<CR> 
  
   " カレントディレクトリ以下のファイルから指定した文字列を検索
   nnoremap <silent> [denite]gr :<C-u>Denite grep -buffer-name=search<CR>
