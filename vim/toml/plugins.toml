@@ -35,7 +35,10 @@ hook_add='''
   
   " カレントディレクトリ以下を再帰的に表示
   nnoremap <silent> [denite]r :<C-u>Denite file/rec -split=floating file:new<CR>
-  
+
+  " 最近開いたファイル
+  nnoremap <silent> [denite]m :<C-u>Denite -direction=topleft -cursor-wrap=true file_mru<CR> 
+ 
   " カレントディレクトリ以下のファイルから指定した文字列を検索
   nnoremap <silent> [denite]gr :<C-u>Denite grep -buffer-name=search<CR>
   
@@ -48,6 +51,11 @@ hook_add='''
   " Neovim内で実行したコマンドを表示
   nnoremap <silent> [denite]c :<C-u>Denite command_history -split=floating<CR>
 
+  " file/rec に ag を設定
+  call denite#custom#var('file/rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+
+  " 特定ディレクトリをリスティングしない
+  call denite#custom#filter('matcher/ignore_globs', 'ignore_globs', ['.git', '.svn', 'node_modules'])
 
   autocmd FileType denite call s:denite_my_settings()
   function! s:denite_my_settings() abort
