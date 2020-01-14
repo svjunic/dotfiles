@@ -23,18 +23,24 @@ repo = 'Shougo/denite.nvim'
 depends = ['roxma/vim-hug-neovim-rpc','roxma/vim-hug-neovim-rpc']
 hook_add='''
   nmap ,d [denite]
+  
+  " vim8だとfloatingは対応していないのでバグった。エラーがでなかったが、ドキュメントにかいてあった。
 
   " カレントディレクトリとバッファを表示
-  nnoremap <silent> [denite]a :<C-u>Denite file buffer -split=floating file:new<CR>
+  "nnoremap <silent> [denite]a :<C-u>Denite file buffer -split=floating file:new<CR>
+  nnoremap <silent> [denite]a :<C-u>Denite file buffer -split=horizontal file:new<CR>
   
   " バッファを表示
-  nnoremap <silent> [denite]b :<C-u>Denite buffer -split=floating file:new<CR>
+  "nnoremap <silent> [denite]b :<C-u>Denite buffer -split=floating file:new<CR>
+  nnoremap <silent> [denite]b :<C-u>Denite buffer -split=horizontal file:new<CR>
   
   " カレントディレクトリを表示
-  nnoremap <silent> [denite]f :<C-u>Denite file -split=floating file:new<CR>
+  "nnoremap <silent> [denite]f :<C-u>Denite file -split=floating file:new<CR>
+  nnoremap <silent> [denite]f :<C-u>Denite file -split=horizontal file:new<CR>
   
   " カレントディレクトリ以下を再帰的に表示
-  nnoremap <silent> [denite]r :<C-u>Denite file/rec -split=floating file:new<CR>
+  "nnoremap <silent> [denite]r :<C-u>Denite file/rec -split=floating file:new<CR>
+  nnoremap <silent> [denite]r :<C-u>Denite file/rec -split=horizontal file:new<CR>
 
   " 最近開いたファイル
   nnoremap <silent> [denite]m :<C-u>Denite -direction=topleft -cursor-wrap=true file_mru<CR> 
@@ -49,7 +55,8 @@ hook_add='''
   nnoremap <silent> [denite]gs :<C-u>Denite -resume -buffer-name=search<CR>
   
   " Neovim内で実行したコマンドを表示
-  nnoremap <silent> [denite]c :<C-u>Denite command_history -split=floating<CR>
+  "nnoremap <silent> [denite]c :<C-u>Denite command_history -split=floating<CR>
+  nnoremap <silent> [denite]c :<C-u>Denite command_history -split=horizontal<CR>
 
   " file/rec に ag を設定
   call denite#custom#var('file/rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
