@@ -7,7 +7,6 @@ set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
 
 let s:dein_dir = expand('~/.cache/dein')
-
 let g:toml_dir    = expand('~/.vim/toml')
 let s:toml      = g:toml_dir . '/plugins.toml'
 let s:toml_lazy = g:toml_dir . '/plugins_lazy.toml'
@@ -16,6 +15,11 @@ let s:toml_coc      = g:toml_dir . '/plugins.coc.toml'
 
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
+
+  if !has('nvim')
+    call dein#add('roxma/nvim-yarp')
+    call dein#add('roxma/vim-hug-neovim-rpc')
+  endif
 
   call dein#load_toml(s:toml,      {'lazy': 0})
 
