@@ -49,13 +49,14 @@ hook_add='''
   nnoremap <silent> [denite]m :<C-u>Denite file_mru<CR> 
  
   " カレントディレクトリ以下のファイルから指定した文字列を検索
-  nnoremap <silent> [denite]gr :<C-u>Denite grep -buffer-name=search<CR>
+  "nnoremap <silent> [denite]gr :<C-u>Denite grep -buffer-name=search<CR>
+  nnoremap <silent> [denite]gr :<C-u>Denite -auto-action=preview grep -buffer-name=search<CR>
   
   " カレントディレクトリ以下のファイルからカーソル下の文字列を検索
-  nnoremap <silent> [denite], :<C-u>DeniteCursorWord grep -buffer-name=search line<CR>
+  nnoremap <silent> [denite], :<C-u>DeniteCursorWord -auto-action=preview grep -buffer-name=search line<CR>
   
   " grepした結果を再表示
-  nnoremap <silent> [denite]gs :<C-u>Denite -resume -buffer-name=search<CR>
+  nnoremap <silent> [denite]gs :<C-u>Denite -auto-action=preview -resume -buffer-name=search<CR>
   
   " Neovim内で実行したコマンドを表示
   "nnoremap <silent> [denite]c :<C-u>Denite command_history -split=floating<CR>
@@ -93,29 +94,30 @@ hook_post_update = '''
   let g:dein#plugin.build = cmd
 '''
 
-[[plugins]]
-repo = 'Shougo/vimproc.vim'
-hook_post_update = '''
-  call dein#add('Shougo/vimproc', {'build': {
-    \     'windows' : 'tools\\update-dll-mingw',
-    \     'cygwin'  : 'make -f make_cygwin.mak',
-    \     'mac'     : 'make -f make_mac.mak',
-    \     'linux'   : 'make',
-    \     'unix'    : 'gmake',
-    \    },
-    \ })
-'''
-hook_add = '''
-    if has('mac')
-      let g:vimproc_dll_path = '$HOME/.vim/utils/dein/repos/github.com/Shougo/vimproc.vim/lib/vimproc_mac.so'
-    elseif has('unix')
-      let g:vimproc_dll_path = '$HOME/.vim/utils/dein/repos/github.com/Shougo/vimproc.vim/lib/vimproc_linux64.so'
-    elseif has('win32')
-      let g:vimproc_dll_path = $HOME . '.vim/utils/dein/repos/github.com/Shougo/vimproc.vim/vimproc_win32.dll'
-    elseif has('linux')
-      let g:vimproc_dll_path = $HOME . '.vim/utils/dein/repos/github.com/Shougo/vimproc.vim/vimproc_win64.dll'
-    endif
-'''
+#なんでか２つ読み込んでた？
+#[[plugins]]
+#repo = 'Shougo/vimproc.vim'
+#hook_post_update = '''
+#  call dein#add('Shougo/vimproc', {'build': {
+#    \     'windows' : 'tools\\update-dll-mingw',
+#    \     'cygwin'  : 'make -f make_cygwin.mak',
+#    \     'mac'     : 'make -f make_mac.mak',
+#    \     'linux'   : 'make',
+#    \     'unix'    : 'gmake',
+#    \    },
+#    \ })
+#'''
+#hook_add = '''
+#    if has('mac')
+#      let g:vimproc_dll_path = '$HOME/.vim/utils/dein/repos/github.com/Shougo/vimproc.vim/lib/vimproc_mac.so'
+#    elseif has('unix')
+#      let g:vimproc_dll_path = '$HOME/.vim/utils/dein/repos/github.com/Shougo/vimproc.vim/lib/vimproc_linux64.so'
+#    elseif has('win32')
+#      let g:vimproc_dll_path = $HOME . '.vim/utils/dein/repos/github.com/Shougo/vimproc.vim/vimproc_win32.dll'
+#    elseif has('linux')
+#      let g:vimproc_dll_path = $HOME . '.vim/utils/dein/repos/github.com/Shougo/vimproc.vim/vimproc_win64.dll'
+#    endif
+#'''
 
 ### {{{ お世話になったunite.vim
 # [[plugins]]
