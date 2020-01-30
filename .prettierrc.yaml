@@ -42,3 +42,12 @@ overrides:
       tabWidth: 2
       useTabs: false
       semi: true
+
+  - files: "*.tsx"
+    options:
+      printWidth: 150
+      singleQuote: true
+      bracketSpacing: true
+      tabWidth: 2
+      useTabs: false
+      semi: true
