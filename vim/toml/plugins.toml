@@ -26,31 +26,9 @@ repo = 'Shougo/denite.nvim'
 depends = ['roxma/vim-hug-neovim-rpc','roxma/vim-hug-neovim-rpc', 'Shougo/neomru.vim']
 hook_add='''
   nmap ,d [denite]
-  
-  " vim8だとfloatingは対応していないのでバグった。エラーがでなかったが、ドキュメントにかいてあった。
-
-  " カレントディレクトリとバッファを表示
-  "nnoremap <silent> [denite]a :<C-u>Denite file buffer -split=floating file:new<CR>
-  nnoremap <silent> [denite]a :<C-u>Denite file buffer -split=horizontal file:new<CR>
-  
-  " バッファを表示
-  "nnoremap <silent> [denite]b :<C-u>Denite buffer -split=floating file:new<CR>
-  nnoremap <silent> [denite]b :<C-u>Denite buffer -split=horizontal file:new<CR>
-  
-  " カレントディレクトリを表示
-  "nnoremap <silent> [denite]f :<C-u>Denite file -split=floating file:new<CR>
-  nnoremap <silent> [denite]f :<C-u>Denite file -split=horizontal file:new<CR>
-  
-  " カレントディレクトリ以下を再帰的に表示
-  "nnoremap <silent> [denite]r :<C-u>Denite file/rec -split=floating file:new<CR>
-  nnoremap <silent> [denite]r :<C-u>Denite file/rec -split=horizontal file:new<CR>
 
   " 最近開いたファイル
   nnoremap <silent> [denite]m :<C-u>Denite file_mru<CR> 
- 
-  " カレントディレクトリ以下のファイルから指定した文字列を検索
-  "nnoremap <silent> [denite]gr :<C-u>Denite grep -buffer-name=search<CR>
-  nnoremap <silent> [denite]gr :<C-u>Denite -auto-action=preview grep -buffer-name=search<CR>
   
   " カレントディレクトリ以下のファイルからカーソル下の文字列を検索
   nnoremap <silent> [denite], :<C-u>DeniteCursorWord -auto-action=preview grep -buffer-name=search line<CR>
@@ -58,9 +36,43 @@ hook_add='''
   " grepした結果を再表示
   nnoremap <silent> [denite]gs :<C-u>Denite -auto-action=preview -resume -buffer-name=search<CR>
   
-  " Neovim内で実行したコマンドを表示
-  "nnoremap <silent> [denite]c :<C-u>Denite command_history -split=floating<CR>
-  nnoremap <silent> [denite]c :<C-u>Denite command_history -split=horizontal<CR>
+  if has('nvim')
+    " カレントディレクトリとバッファを表示
+    nnoremap <silent> [denite]a :<C-u>Denite file buffer -split=floating file:new<CR>
+    
+    " バッファを表示
+    nnoremap <silent> [denite]b :<C-u>Denite buffer -split=floating file:new<CR>
+    
+    " カレントディレクトリを表示
+    nnoremap <silent> [denite]f :<C-u>Denite file -split=floating file:new<CR>
+    
+    " カレントディレクトリ以下を再帰的に表示
+    nnoremap <silent> [denite]r :<C-u>Denite file/rec -split=floating file:new<CR>
+ 
+    " カレントディレクトリ以下のファイルから指定した文字列を検索
+    nnoremap <silent> [denite]gr :<C-u>Denite grep -buffer-name=search<CR>
+
+    " Neovim内で実行したコマンドを表示
+    nnoremap <silent> [denite]c :<C-u>Denite command_history -split=floating<CR>
+  else
+    " カレントディレクトリとバッファを表示
+    nnoremap <silent> [denite]a :<C-u>Denite file buffer -split=horizontal file:new<CR>
+    
+    " バッファを表示
+    nnoremap <silent> [denite]b :<C-u>Denite buffer -split=horizontal file:new<CR>
+    
+    " カレントディレクトリを表示
+    nnoremap <silent> [denite]f :<C-u>Denite file -split=horizontal file:new<CR>
+    
+    " カレントディレクトリ以下を再帰的に表示
+    nnoremap <silent> [denite]r :<C-u>Denite file/rec -split=horizontal file:new<CR>
+ 
+    " カレントディレクトリ以下のファイルから指定した文字列を検索
+    nnoremap <silent> [denite]gr :<C-u>Denite -auto-action=preview grep -buffer-name=search<CR>
+
+    " Neovim内で実行したコマンドを表示
+    nnoremap <silent> [denite]c :<C-u>Denite command_history -split=horizontal<CR>
+  endif
 
   " matcher/ignore_globs 以外のお好みの matcher を指定する
   call denite#custom#source('file/rec', 'matchers', ['matcher/fuzzy', 'matcher/substring'])
