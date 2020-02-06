@@ -56,3 +56,5 @@ curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh >
 sh ./installer.sh ~/.cache/dein
 
 echo "ターミナルを再起動するのじゃ・・・そのままだとリハッシュがはしらないぞ・・・"
+# nvimでpython3関連のエラーが出たら疑ってみる
+# https://blog.fakiyer.com/entry/2018/11/20/101826
