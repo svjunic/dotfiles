@@ -280,7 +280,7 @@ hook_add = '''
   " tslintのfixはeslintのfixが追いつくまで
   "let g:ale_fixers.typescript = ['prettier', 'tslint', 'eslint']
   let g:ale_fixers.typescript = ['prettier', 'eslint']
-  "let g:ale_fixers.typescriptreact = ['prettier', 'eslint']
+  "let g:alefixers.typescriptreact = ['prettier', 'eslint']
   let g:ale_fixers.typescriptreact = ['prettier', 'eslint']
   "let g:ale_fixers.typescript = ['eslint']
   

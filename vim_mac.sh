@@ -42,8 +42,11 @@ brew install neovim
 
 brew install vim
 
+mkdir -p ~/.config/nvim
+
 echo "create symlink .vimrc ~/"
 ln -s ${pwd}/vim/.vimrc ~/.vimrc
+ln -s ${pwd}/vim/.vimrc ~/.config/nvim/init.vim
 ln -s ${pwd}/vim/coc-settings.json ~/.vim/coc-settings.json
 ln -s ${pwd}/vim/vim ~/.vim/vim
 ln -s ${pwd}/vim/toml ~/.vim/toml
