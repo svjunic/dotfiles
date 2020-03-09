@@ -404,4 +404,10 @@ hook_add = '''
 '''
 
 [[plugins]]
+repo = 'leafgarland/typescript-vim'
+
+[[plugins]]
+repo = 'peitalin/vim-jsx-typescript'
+
+[[plugins]]
 repo = 'rizzatti/dash.vim'
