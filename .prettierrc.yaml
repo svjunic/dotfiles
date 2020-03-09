@@ -10,7 +10,7 @@ overrides:
 
   - files: "*.html"
     options:
-      printWidth: 250
+      printWidth: 1000000000
       tabWidth: 2
       useTabs: false
 
