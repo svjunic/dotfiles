@@ -36,7 +36,7 @@ overrides:
 
   - files: "*.ts"
     options:
-      printWidth: 150
+      printWidth: 450
       singleQuote: true
       bracketSpacing: true
       tabWidth: 2
@@ -45,7 +45,7 @@ overrides:
 
   - files: "*.tsx"
     options:
-      printWidth: 150
+      printWidth: 450
       singleQuote: true
       bracketSpacing: true
       tabWidth: 2
