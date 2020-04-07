@@ -409,5 +409,8 @@ repo = 'leafgarland/typescript-vim'
 [[plugins]]
 repo = 'peitalin/vim-jsx-typescript'
 
+[[plugins]]
+repo = 'ap/vim-css-color'
+
 # [[plugins]]
 # repo = 'rizzatti/dash.vim'

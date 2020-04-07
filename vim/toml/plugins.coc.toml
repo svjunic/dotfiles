@@ -4,12 +4,15 @@ merge = 0
 rev = 'release'
 hook_add = '''
   let g:coc_global_extensions = [
-    \   'coc-json',
+    \   'coc-html',
     \   'coc-css',
+    \   'coc-json',
     \   'coc-snippets',
     \   'coc-tsserver',
     \   'coc-vetur',
     \ ]
+
+  "\   'coc-angular',
 
 
   "" プルダウン
