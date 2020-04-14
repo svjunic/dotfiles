@@ -1,4 +1,6 @@
 {
+  "diagnostic.enable": true,
+
   "snippets.shortcut": "SN",
   "suggest.noselect": false,
   "suggest.preferCompleteThanJumpPlaceholder": true,
@@ -12,6 +14,13 @@
   "snippets.extends": {
     "javascriptreact": ["javascript"],
     "typescript": ["javascript"]
-  }
+  },
 
+  "eslint.filetypes": [
+    "javascript",
+    "vue",
+    "typescript",
+    "typescriptreact"
+  ]'
+  "eslint.autoFixOnSave": true
 }

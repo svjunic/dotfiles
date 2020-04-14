@@ -61,4 +61,6 @@ let g:coc_snippet_prev = '<c-k>'
 " " Use <C-j> for both expand and jump (make expand higher priority.)
 " imap <C-j> <Plug>(coc-snippets-expand-jump)
 
-nmap <F12> :Dash <cword><CR>
+" CoC のエラー表示
+highlight CocErrorSign ctermfg=15 ctermbg=196
+highlight CocWarningSign ctermfg=0 ctermbg=172
