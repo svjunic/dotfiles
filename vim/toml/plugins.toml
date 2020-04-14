@@ -262,7 +262,7 @@ repo = 'vim-scripts/YankRing.vim'
 repo = 'vim-scripts/Align'
 
 [[plugins]]
-repo = 'w0rp/ale'
+repo = 'dense-analysis/ale'
 hook_add = '''
   "" Equivalent to the above.
   let g:ale_linters = {
