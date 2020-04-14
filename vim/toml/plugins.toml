@@ -273,7 +273,7 @@ hook_add = '''
   "\}
   
   " Enable completion where available.
-  "let g:ale_completion_enabled = 1
+  "let g:ale_completion_enabled = 0
   " 有効にするとcoc?と組み合わさってめちゃくちゃ重くなるっぽい（vueで確認）
   let g:ale_completion_enabled = 0
 

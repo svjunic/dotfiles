@@ -1,7 +1,12 @@
 {
-  "diagnostic.errorSign": "!!",
-  "diagnostic.warningSign": "?",
-  "diagnostic.infoSign": "?",
+  "diagnostic.enableSign": true,
+  "diagnostic.hintSign": ">>",
+  "diagnostic.warningSign": "⚠",
+  "diagnostic.infoSign": ">",
+
+  "diagnostic.enable": true,
+  "diagnostic.enableMessage": "always",
+  "diagnostic.enableHighlightLineNumber": true,
 
   "snippets.shortcut": "SN",
   "suggest.noselect": false,
