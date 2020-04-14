@@ -1,4 +1,8 @@
 {
+  "diagnostic.errorSign": "!!",
+  "diagnostic.warningSign": "?",
+  "diagnostic.infoSign": "?",
+
   "snippets.shortcut": "SN",
   "suggest.noselect": false,
   "suggest.preferCompleteThanJumpPlaceholder": true,
@@ -13,5 +17,4 @@
     "javascriptreact": ["javascript"],
     "typescript": ["javascript"]
   }
-
 }
