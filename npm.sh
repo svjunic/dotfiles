@@ -1,3 +1,6 @@
+echo "installing neovim-client"
+npm i -g neovim
+
 echo "npm install"
 npm i -g eslint@5
 npm i -g eslint-plugin-vue
