@@ -14,9 +14,9 @@
 "       \/              \/           \/
 
 source ~/.vim/vim/dein.vim
+source ~/.vim/vim/base.vim
 source ~/.vim/vim/keymap.vim
 source ~/.vim/vim/auto.vim
-source ~/.vim/vim/base.vim
 
 " {{{ Origin Code
 " 各環境でvimscriptで何かする時用
