@@ -262,18 +262,18 @@ repo = 'vim-scripts/YankRing.vim'
 repo = 'vim-scripts/Align'
 
 [[plugins]]
-repo = 'w0rp/ale'
+repo = 'dense-analysis/ale'
 hook_add = '''
   "" Equivalent to the above.
-  let g:ale_linters = {
-  \ 'html': ['htmlhint'],
-  \ 'javascript': ['eslint'],
-  \ 'typescript': ['eslint', 'tsserver'],
-  \ 'vue': ['vls']
-  \}
+  "let g:ale_linters = {
+  "\ 'html': ['htmlhint'],
+  "\ 'javascript': ['eslint'],
+  "\ 'typescript': ['eslint', 'tsserver'],
+  "\ 'vue': ['vls']
+  "\}
   
   " Enable completion where available.
-  "let g:ale_completion_enabled = 1
+  "let g:ale_completion_enabled = 0
   " 有効にするとcoc?と組み合わさってめちゃくちゃ重くなるっぽい（vueで確認）
   let g:ale_completion_enabled = 0
 
@@ -410,4 +410,7 @@ repo = 'leafgarland/typescript-vim'
 repo = 'peitalin/vim-jsx-typescript'
 
 [[plugins]]
-repo = 'rizzatti/dash.vim'
+repo = 'ap/vim-css-color'
+
+# [[plugins]]
+# repo = 'rizzatti/dash.vim'

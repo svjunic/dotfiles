@@ -4,12 +4,15 @@ merge = 0
 rev = 'release'
 hook_add = '''
   let g:coc_global_extensions = [
-    \   'coc-json',
+    \   'coc-html',
     \   'coc-css',
+    \   'coc-json',
     \   'coc-snippets',
     \   'coc-tsserver',
     \   'coc-vetur',
     \ ]
+
+  "\   'coc-angular',
 
 
   "" プルダウン
@@ -60,8 +63,8 @@ hook_add = '''
   augroup END
 
   " default 定義ジャンプ系？
-  nmap <silent> <C-j> <Plug>(coc-diagnostic-prev)
-  nmap <silent> <C-k> <Plug>(coc-diagnostic-next)
+  nmap <silent> <C-j> <Plug>(coc-diagnostic-next)
+  nmap <silent> <C-k> <Plug>(coc-diagnostic-prev)
 
   " default 定義ジャンプ系？
   nmap <silent> gd <Plug>(coc-definition)
