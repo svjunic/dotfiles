@@ -363,6 +363,9 @@ repo = 'svjunic/svjunic-snip'
 rev = 'hotfix/coc'
 
 [[plugins]]
+repo = 'mlaursen/vim-react-snippets.git'
+
+[[plugins]]
 repo = 'Valloric/MatchTagAlways'
 on_ft = ['html', 'vue', 'typescript', 'javascript']
 hook_add = '''

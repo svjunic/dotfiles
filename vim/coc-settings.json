@@ -21,5 +21,8 @@
   "snippets.extends": {
     "javascriptreact": ["javascript"],
     "typescript": ["javascript"]
-  }
+  },
+
+  "typescript.suggest.autoImports" : true,
+  "javascript.suggest.autoImports" : true
 }
