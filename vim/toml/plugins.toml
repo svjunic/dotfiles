@@ -271,7 +271,9 @@ hook_add = '''
   "\ 'typescript': ['eslint', 'tsserver'],
   "\ 'vue': ['vls']
   "\}
-  
+
+  "let g:ale_linter_aliases = {'typescriptreact': 'typescript'}
+
   " Enable completion where available.
   "let g:ale_completion_enabled = 0
   " 有効にするとcoc?と組み合わさってめちゃくちゃ重くなるっぽい（vueで確認）
@@ -289,13 +291,11 @@ hook_add = '''
   let g:ale_fixers.mjs = ['prettier', 'eslint']
   let g:ale_fixers.jsx = ['prettier', 'eslint']
   let g:ale_fixers.vue = ['prettier', 'eslint']
-  " tslintのfixはeslintのfixが追いつくまで
-  "let g:ale_fixers.typescript = ['prettier', 'tslint', 'eslint']
   let g:ale_fixers.typescript = ['prettier', 'eslint']
-  "let g:alefixers.typescriptreact = ['prettier', 'eslint']
   let g:ale_fixers.typescriptreact = ['prettier', 'eslint']
-  "let g:ale_fixers.typescript = ['eslint']
-  
+  let g:ale_fixers.typescripttsx= ['prettier', 'eslint']
+ 
+ 
   " 圧縮ファイルのときはなるべく動かさない
   let g:ale_pattern_options = {
   \ '\.min\.js$': {'ale_linters': [], 'ale_fixers': []},
@@ -414,6 +414,12 @@ repo = 'peitalin/vim-jsx-typescript'
 
 [[plugins]]
 repo = 'ap/vim-css-color'
+
+[[plugins]]
+repo = 'yasuharu519/vim-codic'
+hook_add = '''
+  nmap <silent> ,cd :VimCodic<CR>
+'''
 
 # [[plugins]]
 # repo = 'rizzatti/dash.vim'
