@@ -1,5 +1,10 @@
 echo 'include .bashrc'
 
+if [ `which nvim` ]; then
+  alias vi="nvim"
+  alias vim="nvim"
+fi
+
 #####################################################################################################
 # bash共通設定
 #####################################################################################################
@@ -166,14 +171,28 @@ fi
 #####################################################################################################
 # peco
 #####################################################################################################
+function cdf () {
+  local dir=$(find ./* -type f | grep -v 'node_modules' | peco)
+  if [ ! -z "$dir" ] ; then
+    vim "$dir"
+  fi
+}
+
 function cdd {
+  local dir=$(find ./* -type d | grep -v 'node_modules' | peco)
+  if [ ! -z "$dir" ] ; then
+      cd "$dir"
+  fi
+}
+
+function cddf {
   local dir=$(find ./* -type d | peco)
   if [ ! -z "$dir" ] ; then
       cd "$dir"
   fi
 }
 
-function cdf () {
+function cdff () {
   local dir=$(find ./* -type f | peco)
   if [ ! -z "$dir" ] ; then
     vim "$dir"
