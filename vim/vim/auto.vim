@@ -31,3 +31,6 @@ augroup END
 " tsxがts判定になるのを防ぐ
 autocmd BufNewFile,BufRead *.tsx let b:tsx_ext_found = 1
 autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
+
+" jsonをjsoncとして開きたい
+autocmd BufRead,BufNewFile *.json set filetype=jsonc
