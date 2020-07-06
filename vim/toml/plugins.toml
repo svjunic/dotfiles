@@ -407,6 +407,9 @@ hook_add = '''
 '''
 
 [[plugins]]
+repo = 'kevinoid/vim-jsonc'
+
+[[plugins]]
 repo = 'leafgarland/typescript-vim'
 
 [[plugins]]
