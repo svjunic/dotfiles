@@ -94,9 +94,9 @@ function load_npm () {
 
 # 不要ファイルを一度に削除したかった。
 function ccc () {
-  rm `find . -name .DS*`
-  rm `find . -name *.swp`
-  rm `find . -name Thumbs.db`
+  rm `find . -name '.DS*'`
+  rm `find . -name '*.swp'`
+  rm `find . -name 'Thumbs.db'`
   return
 }
 
@@ -220,14 +220,28 @@ fi
 #####################################################################################################
 # peco
 #####################################################################################################
+function cdf () {
+  local dir=$(find ./* -type f | grep -v 'node_modules' | peco)
+  if [ ! -z "$dir" ] ; then
+    vim "$dir"
+  fi
+}
+
 function cdd {
+  local dir=$(find ./* -type d | grep -v 'node_modules' | peco)
+  if [ ! -z "$dir" ] ; then
+      cd "$dir"
+  fi
+}
+
+function cddf {
   local dir=$(find ./* -type d | peco)
   if [ ! -z "$dir" ] ; then
       cd "$dir"
   fi
 }
 
-function cdf () {
+function cdff () {
   local dir=$(find ./* -type f | peco)
   if [ ! -z "$dir" ] ; then
     vim "$dir"

@@ -42,8 +42,11 @@ brew install neovim
 
 brew install vim
 
+mkdir -p ~/.config/nvim
+
 echo "create symlink .vimrc ~/"
 ln -s ${pwd}/vim/.vimrc ~/.vimrc
+ln -s ${pwd}/vim/.vimrc ~/.config/nvim/init.vim
 ln -s ${pwd}/vim/coc-settings.json ~/.vim/coc-settings.json
 ln -s ${pwd}/vim/vim ~/.vim/vim
 ln -s ${pwd}/vim/toml ~/.vim/toml
@@ -53,3 +56,5 @@ curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh >
 sh ./installer.sh ~/.cache/dein
 
 echo "ターミナルを再起動するのじゃ・・・そのままだとリハッシュがはしらないぞ・・・"
+# nvimでpython3関連のエラーが出たら疑ってみる
+# https://blog.fakiyer.com/entry/2018/11/20/101826
