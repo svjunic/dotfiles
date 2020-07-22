@@ -390,12 +390,12 @@ on_ft= ['javascript']
 repo = 'othree/es.next.syntax.vim'
 on_ft= ['javascript']
 
-# [[plugins]]
-# repo = 'posva/vim-vue'
-# on_ft= ['vue']
-# hook_add = '''
-#   autocmd FileType vue syntax sync fromstart
-# '''
+#[[plugins]]
+#repo = 'posva/vim-vue'
+#on_ft= ['vue']
+#hook_add = '''
+#  autocmd FileType vue syntax sync fromstart
+#'''
 
 [[plugins]]
 repo = 'leafOfTree/vim-vue-plugin'
@@ -404,6 +404,7 @@ hook_add = '''
   let g:vim_vue_plugin_load_full_syntax = 1
   "let g:vim_vue_plugin_use_pug = 1
   let g:vim_vue_plugin_use_sass = 1
+  let g:vim_vue_plugin_use_typescript = 1
 '''
 
 [[plugins]]
