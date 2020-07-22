@@ -12,7 +12,12 @@
   "suggest.noselect": false,
   "suggest.preferCompleteThanJumpPlaceholder": true,
 
+  "tsserver.locale": "ja-jp",
   "tsserver.enableJavascript" : true,
+
+  //vetur typescript
+  "vetur.useWorkspaceDependencies": true,
+
   "javascript.format.enabled" : true,
 
   "snippets.priority" : 100,
