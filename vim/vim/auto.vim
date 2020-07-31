@@ -1,3 +1,6 @@
+" ハイライトの追加
+autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('Todo', '\W\zs\(TODO\|FIXME\|CHANGED\|XXX\|BUG\|HACK\|NOTE\|INFO\|IDEA\)')
+
 " ファイルタイプ識別
 autocmd FileType html,jade,css,scss,sass,vue,typescript,typescript.tsx EmmetInstall
 
@@ -28,3 +31,6 @@ augroup END
 " tsxがts判定になるのを防ぐ
 autocmd BufNewFile,BufRead *.tsx let b:tsx_ext_found = 1
 autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
+
+" jsonをjsoncとして開きたい
+autocmd BufRead,BufNewFile *.json set filetype=jsonc
