@@ -1,9 +1,23 @@
 {
+  "diagnostic.enableSign": true,
+  "diagnostic.hintSign": ">>",
+  "diagnostic.warningSign": "⚠",
+  "diagnostic.infoSign": ">",
+
+  "diagnostic.enable": true,
+  "diagnostic.enableMessage": "always",
+  "diagnostic.enableHighlightLineNumber": true,
+
   "snippets.shortcut": "SN",
   "suggest.noselect": false,
   "suggest.preferCompleteThanJumpPlaceholder": true,
 
+  "tsserver.locale": "ja-jp",
   "tsserver.enableJavascript" : true,
+
+  //vetur typescript
+  "vetur.useWorkspaceDependencies": true,
+
   "javascript.format.enabled" : true,
 
   "snippets.priority" : 100,
@@ -12,6 +26,8 @@
   "snippets.extends": {
     "javascriptreact": ["javascript"],
     "typescript": ["javascript"]
-  }
+  },
 
+  "typescript.suggest.autoImports" : true,
+  "javascript.suggest.autoImports" : true
 }

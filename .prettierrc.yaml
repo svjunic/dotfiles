@@ -7,6 +7,8 @@ overrides:
       tabWidth: 2
       useTabs: false
       semi: true
+      trailingComma: "es5"
+      arrowParens: "always"
 
   - files: "*.html"
     options:
@@ -33,6 +35,8 @@ overrides:
       tabWidth: 2
       useTabs: false
       semi: true
+      trailingComma: "es5"
+      arrowParens: "always"
 
   - files: "*.ts"
     options:
@@ -42,6 +46,8 @@ overrides:
       tabWidth: 2
       useTabs: false
       semi: true
+      trailingComma: "es5"
+      arrowParens: "always"
 
   - files: "*.tsx"
     options:
@@ -51,3 +57,5 @@ overrides:
       tabWidth: 2
       useTabs: false
       semi: true
+      trailingComma: "es5"
+      arrowParens: "always"

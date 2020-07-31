@@ -13,6 +13,7 @@ hook_add = '''
     \ ]
 
   "\   'coc-angular',
+  "\   'coc-tabnine',
 
 
   "" プルダウン
@@ -63,8 +64,8 @@ hook_add = '''
   augroup END
 
   " default 定義ジャンプ系？
-  nmap <silent> <C-j> <Plug>(coc-diagnostic-prev)
-  nmap <silent> <C-k> <Plug>(coc-diagnostic-next)
+  nmap <silent> <C-j> <Plug>(coc-diagnostic-next)
+  nmap <silent> <C-k> <Plug>(coc-diagnostic-prev)
 
   " default 定義ジャンプ系？
   nmap <silent> gd <Plug>(coc-definition)

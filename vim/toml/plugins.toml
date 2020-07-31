@@ -262,18 +262,20 @@ repo = 'vim-scripts/YankRing.vim'
 repo = 'vim-scripts/Align'
 
 [[plugins]]
-repo = 'w0rp/ale'
+repo = 'dense-analysis/ale'
 hook_add = '''
   "" Equivalent to the above.
-  let g:ale_linters = {
-  \ 'html': ['htmlhint'],
-  \ 'javascript': ['eslint'],
-  \ 'typescript': ['eslint', 'tsserver'],
-  \ 'vue': ['vls']
-  \}
-  
+  "let g:ale_linters = {
+  "\ 'html': ['htmlhint'],
+  "\ 'javascript': ['eslint'],
+  "\ 'typescript': ['eslint', 'tsserver'],
+  "\ 'vue': ['vls']
+  "\}
+
+  "let g:ale_linter_aliases = {'typescriptreact': 'typescript'}
+
   " Enable completion where available.
-  "let g:ale_completion_enabled = 1
+  "let g:ale_completion_enabled = 0
   " 有効にするとcoc?と組み合わさってめちゃくちゃ重くなるっぽい（vueで確認）
   let g:ale_completion_enabled = 0
 
@@ -289,13 +291,11 @@ hook_add = '''
   let g:ale_fixers.mjs = ['prettier', 'eslint']
   let g:ale_fixers.jsx = ['prettier', 'eslint']
   let g:ale_fixers.vue = ['prettier', 'eslint']
-  " tslintのfixはeslintのfixが追いつくまで
-  "let g:ale_fixers.typescript = ['prettier', 'tslint', 'eslint']
   let g:ale_fixers.typescript = ['prettier', 'eslint']
-  "let g:alefixers.typescriptreact = ['prettier', 'eslint']
   let g:ale_fixers.typescriptreact = ['prettier', 'eslint']
-  "let g:ale_fixers.typescript = ['eslint']
-  
+  let g:ale_fixers.typescripttsx= ['prettier', 'eslint']
+ 
+ 
   " 圧縮ファイルのときはなるべく動かさない
   let g:ale_pattern_options = {
   \ '\.min\.js$': {'ale_linters': [], 'ale_fixers': []},
@@ -363,6 +363,9 @@ repo = 'svjunic/svjunic-snip'
 rev = 'hotfix/coc'
 
 [[plugins]]
+repo = 'mlaursen/vim-react-snippets.git'
+
+[[plugins]]
 repo = 'Valloric/MatchTagAlways'
 on_ft = ['html', 'vue', 'typescript', 'javascript']
 hook_add = '''
@@ -387,12 +390,12 @@ on_ft= ['javascript']
 repo = 'othree/es.next.syntax.vim'
 on_ft= ['javascript']
 
-# [[plugins]]
-# repo = 'posva/vim-vue'
-# on_ft= ['vue']
-# hook_add = '''
-#   autocmd FileType vue syntax sync fromstart
-# '''
+#[[plugins]]
+#repo = 'posva/vim-vue'
+#on_ft= ['vue']
+#hook_add = '''
+#  autocmd FileType vue syntax sync fromstart
+#'''
 
 [[plugins]]
 repo = 'leafOfTree/vim-vue-plugin'
@@ -401,7 +404,11 @@ hook_add = '''
   let g:vim_vue_plugin_load_full_syntax = 1
   "let g:vim_vue_plugin_use_pug = 1
   let g:vim_vue_plugin_use_sass = 1
+  let g:vim_vue_plugin_use_typescript = 1
 '''
+
+[[plugins]]
+repo = 'kevinoid/vim-jsonc'
 
 [[plugins]]
 repo = 'leafgarland/typescript-vim'
@@ -411,6 +418,12 @@ repo = 'peitalin/vim-jsx-typescript'
 
 [[plugins]]
 repo = 'ap/vim-css-color'
+
+[[plugins]]
+repo = 'yasuharu519/vim-codic'
+hook_add = '''
+  nmap <silent> ,cd :VimCodic<CR>
+'''
 
 # [[plugins]]
 # repo = 'rizzatti/dash.vim'
