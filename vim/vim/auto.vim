@@ -9,7 +9,7 @@ autocmd Filetype javascript,vue,typescript,typescript.tsx ALELint
 autocmd BufRead,BufNewFile *.scss set filetype=scss
 autocmd BufRead,BufNewFile *.sass set filetype=scss
 autocmd BufRead,BufNewFile *.md set filetype=markdown
-autocmd BufRead,BufNewFile *.js,*.mjs,*.jsx set filetype=javascript
+autocmd BufRead,BufNewFile *.js,*.mjs,*.cjs,*.jsx set filetype=javascript
 autocmd BufRead,BufNewFile *.vue set filetype=vue
 autocmd BufRead,BufNewFile *.pug set filetype=pug
 
