@@ -84,9 +84,9 @@ export NODE_PATH=$npm_dir
 function load_npm () {
   echo "add PATH for node.js"
   export PATH="/usr/local/bin:$PATH:/usr/local/sbin"
-  
+
   source ~/.nvm/nvm.sh
-  
+
   alias node="node --experimental-modules"
   echo "set NODE_PATH for node.js"
   export NODE_PATH=$npm_dir
@@ -173,7 +173,7 @@ function agg() {
 
 #差分ファイル出すとき用
 # git_diff_archive 識別子1 識別子2
-. ~/bash/git_diff_archive.sh
+. ~/zsh/git_diff_archive.sh
 
 # peco,vim,pt
 . ~/bash/ptvim.sh
