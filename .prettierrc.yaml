@@ -40,7 +40,7 @@ overrides:
 
   - files: "*.ts"
     options:
-      printWidth: 450
+      printWidth: 150
       singleQuote: true
       bracketSpacing: true
       tabWidth: 2
@@ -59,3 +59,11 @@ overrides:
       semi: true
       trailingComma: "es5"
       arrowParens: "always"
+
+  - files: "*.pug"
+    options:
+      printWidth: 10000
+      singleQuote: true
+      tabWidth: 2
+      useTabs: false
+      semi: true
