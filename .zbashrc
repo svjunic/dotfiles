@@ -173,7 +173,7 @@ function agg() {
 
 #差分ファイル出すとき用
 # git_diff_archive 識別子1 識別子2
-. ~/zsh/git_diff_archive.sh
+. ~/zsh/git_diff_archive.zsh
 
 # peco,vim,pt
 . ~/bash/ptvim.sh
