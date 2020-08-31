@@ -74,11 +74,25 @@ hook_add='''
     nnoremap <silent> [denite]c :<C-u>Denite command_history -split=horizontal<CR>
   endif
 
+
+	" file/recで特定のディレクトリを除外する
+	let s:ignore_globs = ['.git', '.svn', 'node_modules']
+	call denite#custom#var('file/rec', 'command', [
+			\ 'ag',
+			\ '--follow',
+			\ ] + map(deepcopy(s:ignore_globs), { k, v -> '--ignore=' . v }) + [
+			\ '--nocolor',
+			\ '--nogroup',
+			\ '-g',
+			\ ''
+			\ ])
+
   " matcher/ignore_globs 以外のお好みの matcher を指定する
   call denite#custom#source('file/rec', 'matchers', ['matcher/fuzzy', 'matcher/substring'])
 
   "" 特定ディレクトリをリスティングしない
-  call denite#custom#filter('matcher/ignore_globs', 'ignore_globs', ['.git', '.svn', 'node_modules'])
+  "call denite#custom#filter('matcher/ignore_globs', 'ignore_globs', ['.git', '.svn', '*node_modules*'])
+  call denite#custom#filter('matcher/ignore_globs', 'ignore_globs', ['.git', '.svn'])
 
   " file/rec に ag を設定
   call denite#custom#var('grep', 'command', ['ag'])
