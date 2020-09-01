@@ -7,6 +7,8 @@ overrides:
       tabWidth: 2
       useTabs: false
       semi: true
+      trailingComma: "es5"
+      arrowParens: "always"
 
   - files: "*.html"
     options:
@@ -33,8 +35,21 @@ overrides:
       tabWidth: 2
       useTabs: false
       semi: true
+      trailingComma: "es5"
+      arrowParens: "always"
 
   - files: "*.ts"
+    options:
+      printWidth: 150
+      singleQuote: true
+      bracketSpacing: true
+      tabWidth: 2
+      useTabs: false
+      semi: true
+      trailingComma: "es5"
+      arrowParens: "always"
+
+  - files: "*.tsx"
     options:
       printWidth: 450
       singleQuote: true
@@ -42,12 +57,13 @@ overrides:
       tabWidth: 2
       useTabs: false
       semi: true
+      trailingComma: "es5"
+      arrowParens: "always"
 
-  - files: "*.tsx"
+  - files: "*.pug"
     options:
-      printWidth: 450
+      printWidth: 10000
       singleQuote: true
-      bracketSpacing: true
       tabWidth: 2
       useTabs: false
       semi: true

@@ -13,6 +13,7 @@ hook_add = '''
     \ ]
 
   "\   'coc-angular',
+  "\   'coc-tabnine',
 
 
   "" プルダウン
