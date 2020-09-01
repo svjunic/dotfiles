@@ -28,3 +28,6 @@ augroup END
 " tsxがts判定になるのを防ぐ
 autocmd BufNewFile,BufRead *.tsx let b:tsx_ext_found = 1
 autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
+
+" jsonc対応
+autocmd FileType json syntax match Comment +\/\/.\+$+
