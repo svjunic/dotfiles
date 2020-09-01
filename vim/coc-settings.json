@@ -1,12 +1,9 @@
 {
-  "diagnostic.enableSign": true,
-  "diagnostic.hintSign": ">>",
+  // 効かない
+  "diagnostic.infoSign": "i",
+  "diagnostic.hintSign": "➤",
   "diagnostic.warningSign": "⚠",
-  "diagnostic.infoSign": ">",
-
-  "diagnostic.enable": true,
-  "diagnostic.enableMessage": "always",
-  "diagnostic.enableHighlightLineNumber": true,
+  "diagnostic.errorSign": "✖",
 
   "snippets.shortcut": "SN",
   "suggest.noselect": false,
