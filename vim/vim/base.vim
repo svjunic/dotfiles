@@ -1,7 +1,7 @@
 syntax on
 
-"colorscheme radicalgoodspeed
-colorscheme snortist-theme
+colorscheme radicalgoodspeed
+"colorscheme snortist-theme
 
 scriptencoding utf-8
 
