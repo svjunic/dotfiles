@@ -4,7 +4,7 @@ autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('Todo', '\W\zs\(
 " ファイルタイプ識別
 autocmd FileType html,jade,css,scss,sass,vue,typescript,typescript.tsx EmmetInstall
 
-autocmd Filetype javascript,vue,typescript,typescript.tsx ALELint
+"autocmd Filetype javascript,vue,typescript,typescript.tsx ALELint
 
 autocmd BufRead,BufNewFile *.scss set filetype=scss
 autocmd BufRead,BufNewFile *.sass set filetype=scss

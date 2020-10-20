@@ -1,9 +1,15 @@
 {
   // 効かない
+  //"diagnostic.infoSign": "i",
+  //"diagnostic.hintSign": "➤",
+  //"diagnostic.warningSign": "⚠",
+  //"diagnostic.errorSign": "✖",
+  "diagnostic.enableMessage": true,
+  "diagnostic.enableSign": true,
   "diagnostic.infoSign": "i",
-  "diagnostic.hintSign": "➤",
-  "diagnostic.warningSign": "⚠",
-  "diagnostic.errorSign": "✖",
+  "diagnostic.hintSign": "h",
+  "diagnostic.warningSign": "w",
+  "diagnostic.errorSign": "e",
 
   "snippets.shortcut": "SN",
   "suggest.noselect": false,
@@ -26,5 +32,14 @@
   },
 
   "typescript.suggest.autoImports" : true,
-  "javascript.suggest.autoImports" : true
+  "javascript.suggest.autoImports" : true,
+
+  // coc-eslint
+  "eslint.enable": true,
+  "eslint.filetypes": ["javascript", "vue", "typescript", "typescriptreact"],
+  "eslint.autoFixOnSave": true,
+  //"eslint.codeAction.disableRuleComment":{ "enable": true, "location": "sameLine" }
+
+  // coc-pretiter
+  "coc.preferences.formatOnSaveFiletypes": ["javascript", "vue", "typescript", "typescriptreact","css", "markdown"]
 }
