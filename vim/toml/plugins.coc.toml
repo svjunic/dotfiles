@@ -61,7 +61,7 @@ hook_add = '''
 
   augroup coc
     autocmd!
-    autocmd User CocDiagnosticChange call lightline#update()
+    "autocmd User CocDiagnosticChange call lightline#update()
     autocmd CursorHoldI * silent call CocActionAsync('highlight') | call CocActionAsync('doHover')
   augroup END
 
