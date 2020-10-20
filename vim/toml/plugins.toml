@@ -75,17 +75,17 @@ hook_add='''
   endif
 
 
-	" file/recで特定のディレクトリを除外する
-	let s:ignore_globs = ['.git', '.svn', 'node_modules']
-	call denite#custom#var('file/rec', 'command', [
-			\ 'ag',
-			\ '--follow',
-			\ ] + map(deepcopy(s:ignore_globs), { k, v -> '--ignore=' . v }) + [
-			\ '--nocolor',
-			\ '--nogroup',
-			\ '-g',
-			\ ''
-			\ ])
+  " file/recで特定のディレクトリを除外する
+  let s:ignore_globs = ['.git', '.svn', 'node_modules']
+  call denite#custom#var('file/rec', 'command', [
+      \ 'ag',
+      \ '--follow',
+      \ ] + map(deepcopy(s:ignore_globs), { k, v -> '--ignore=' . v }) + [
+      \ '--nocolor',
+      \ '--nogroup',
+      \ '-g',
+      \ ''
+      \ ])
 
   " matcher/ignore_globs 以外のお好みの matcher を指定する
   call denite#custom#source('file/rec', 'matchers', ['matcher/fuzzy', 'matcher/substring'])
