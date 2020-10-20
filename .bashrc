@@ -1,10 +1,9 @@
 echo 'include .bashrc'
 
-# NOTE: signのカラムの表示がなぜかできない、nvim設定方法違う？
-# if [ `which nvim` ]; then
-#   alias vi="nvim"
-#   alias vim="nvim"
-# fi
+if [ `which nvim` ]; then
+  alias vi="nvim"
+  alias vim="nvim"
+fi
 
 #####################################################################################################
 # bash共通設定
@@ -36,9 +35,9 @@ export LSCOLORS=gxfxcxdxbxegedabagacad
 function load_npm () {
   echo "add PATH for node.js"
   export PATH="/usr/local/bin:$PATH:/usr/local/sbin"
-  
+
   source ~/.nvm/nvm.sh
-  
+
   alias node="node --experimental-modules"
   echo "set NODE_PATH for node.js"
   export NODE_PATH=$npm_dir
