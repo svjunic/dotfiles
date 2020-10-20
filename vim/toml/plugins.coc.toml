@@ -93,6 +93,8 @@ hook_add = '''
   " space + rnで変数Rename
   nmap <silent> <space>rn <Plug>(coc-rename)
 
+  " space + a でエラー一覧を出してジャンプ用
+  nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
 '''
 
 ### {{{ いらないぽい

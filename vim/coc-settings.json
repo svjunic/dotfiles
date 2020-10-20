@@ -1,15 +1,15 @@
 {
-  // 効かない
+  "diagnostic.signOffset": 9999999,
+  "diagnostic.enableMessage": true,
+  //"diagnostic.enable": true,
   //"diagnostic.infoSign": "i",
   //"diagnostic.hintSign": "➤",
   //"diagnostic.warningSign": "⚠",
   //"diagnostic.errorSign": "✖",
-  "diagnostic.enableMessage": true,
-  "diagnostic.enableSign": true,
   "diagnostic.infoSign": "i",
   "diagnostic.hintSign": "h",
-  "diagnostic.warningSign": "w",
-  "diagnostic.errorSign": "e",
+  "diagnostic.warningSign": ">",
+  "diagnostic.errorSign": ">>",
 
   "snippets.shortcut": "SN",
   "suggest.noselect": false,
@@ -36,10 +36,10 @@
 
   // coc-eslint
   "eslint.enable": true,
-  "eslint.filetypes": ["javascript", "vue", "typescript", "typescriptreact"],
+  "eslint.filetypes": ["javascript", "vue", "typescript", "typescriptreact", "typescript.tsx"],
   "eslint.autoFixOnSave": true,
   //"eslint.codeAction.disableRuleComment":{ "enable": true, "location": "sameLine" }
 
   // coc-pretiter
-  "coc.preferences.formatOnSaveFiletypes": ["javascript", "vue", "typescript", "typescriptreact","css", "markdown"]
+  "coc.preferences.formatOnSaveFiletypes": ["javascript", "vue", "typescript", "typescriptreact", "typescript.tsx", "css", "markdown"]
 }
