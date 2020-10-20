@@ -1,9 +1,10 @@
 echo 'include .bashrc'
 
-if [ `which nvim` ]; then
-  alias vi="nvim"
-  alias vim="nvim"
-fi
+# NOTE: signのカラムの表示がなぜかできない、nvim設定方法違う？
+# if [ `which nvim` ]; then
+#   alias vi="nvim"
+#   alias vim="nvim"
+# fi
 
 #####################################################################################################
 # bash共通設定

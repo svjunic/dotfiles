@@ -152,3 +152,9 @@ function! s:get_syn_info()
 endfunction
 command! SyntaxInfo call s:get_syn_info()
 
+
+" 仮
+set signcolumn=yes
+"highlight CocErrorSign ctermfg=15 ctermbg=196
+"highlight CocWarningSign ctermfg=0 ctermbg=172
+set updatetime=300
