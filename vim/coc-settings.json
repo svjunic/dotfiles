@@ -1,6 +1,5 @@
 {
   "diagnostic.signOffset": 9999999,
-  "diagnostic.enableMessage": true,
   //"diagnostic.enable": true,
   //"diagnostic.infoSign": "i",
   //"diagnostic.hintSign": "➤",
