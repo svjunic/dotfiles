@@ -16,10 +16,9 @@ let s:toml_coc      = g:toml_dir . '/plugins.coc.toml'
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
+  " 参考： https://qiita.com/delphinus/items/cd221a450fd23506e81a
   call dein#load_toml(s:toml,      {'lazy': 0})
-
-  call dein#load_toml(s:toml_coc,  {'lazy': 0})
-
+  call dein#load_toml(s:toml_coc,  {'lazy': 1})
   call dein#load_toml(s:toml_lazy, {'lazy': 1})
 
   if !has('nvim')

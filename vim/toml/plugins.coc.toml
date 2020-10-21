@@ -2,6 +2,13 @@
 repo = 'neoclide/coc.nvim'
 merge = 0
 rev = 'release'
+hook_source = '''
+  " coc highlight
+  highlight CocHintSign ctermfg=10
+  highlight CocInfoSign ctermfg=14
+  highlight CocErrorSign ctermfg=202
+  highlight CocWarningSign ctermfg=226
+'''
 hook_add = '''
   let g:coc_global_extensions = [
     \   'coc-html',
