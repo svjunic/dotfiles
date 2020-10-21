@@ -37,6 +37,12 @@ endif
 " 単語とみなす文字の拡張
 set isk+=@-@
 
+" エラー表示する部分を表示する
+set signcolumn=yes
+
+" swapファイルに書き込まれる時間の間隔
+set updatetime=300
+
 set list
 set nrformats-=octal
 set hlsearch
@@ -151,10 +157,3 @@ function! s:get_syn_info()
         \ " guibg: " . linkedSyn.guibg
 endfunction
 command! SyntaxInfo call s:get_syn_info()
-
-
-" 仮
-set signcolumn=yes
-"highlight CocErrorSign ctermfg=15 ctermbg=196
-"highlight CocWarningSign ctermfg=0 ctermbg=172
-set updatetime=300
