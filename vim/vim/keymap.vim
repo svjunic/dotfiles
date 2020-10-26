@@ -38,3 +38,5 @@ vnoremap k gk
 
 nmap si :SyntaxInfo<CR>
 
+" Cocのフロートウィンドウが閉じない場合
+nmap <Esc> :call coc#util#float_hide() <CR>
