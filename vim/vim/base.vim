@@ -157,3 +157,6 @@ function! s:get_syn_info()
         \ " guibg: " . linkedSyn.guibg
 endfunction
 command! SyntaxInfo call s:get_syn_info()
+
+"" Cocのフロートウィンドウが閉じない場合 の対応仮
+"let g:node_client_debug = 1
