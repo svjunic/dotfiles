@@ -29,6 +29,7 @@ module.exports = {
     "no-implied-eval": 1,
     "linebreak-style": ["error", "unix"],
     "space-before-function-paren": 0,
+    "curly": 1,
     quotes: ["error", "single", { avoidEscape: true }],
     indent: [
       "error",
