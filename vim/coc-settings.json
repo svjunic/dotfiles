@@ -42,5 +42,5 @@
   //"eslint.codeAction.disableRuleComment":{ "enable": true, "location": "sameLine" }
 
   // coc-pretiter
-  "coc.preferences.formatOnSaveFiletypes": ["javascript", "vue", "typescript", "typescriptreact", "typescript.tsx", "css", "markdown"]
+  "coc.preferences.formatOnSaveFiletypes": ["javascript", "vue", "typescript", "typescriptreact", "typescript.tsx", "css", "scss", "markdown"]
 }
