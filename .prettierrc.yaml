@@ -35,7 +35,7 @@ overrides:
 
   - files: "*.vue"
     options:
-      printWidth: 300
+      printWidth: 500
       singleQuote: true
       bracketSpacing: true
       tabWidth: 2
