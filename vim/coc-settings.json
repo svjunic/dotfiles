@@ -35,7 +35,8 @@
 
   // coc-eslint
   "eslint.enable": true,
-  "eslint.filetypes": ["javascript", "vue", "typescript", "typescriptreact", "typescript.tsx"],
+  //"eslint.filetypes": ["javascript", "vue", "typescript", "typescriptreact", "typescript.tsx"],
+  "eslint.filetypes": ["js","jsx","ts","tsx","mjs"],
   "eslint.autoFixOnSave": true,
   //"eslint.codeAction.disableRuleComment":{ "enable": true, "location": "sameLine" }
 
