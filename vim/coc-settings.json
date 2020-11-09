@@ -38,6 +38,7 @@
   //"eslint.filetypes": ["javascript", "vue", "typescript", "typescriptreact", "typescript.tsx"],
   "eslint.filetypes": ["js","jsx","ts","tsx","mjs"],
   "eslint.autoFixOnSave": true,
+  "eslint.packageManager": "npm",
   //"eslint.codeAction.disableRuleComment":{ "enable": true, "location": "sameLine" }
 
   // coc-pretiter
