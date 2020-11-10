@@ -42,5 +42,8 @@
   //"eslint.codeAction.disableRuleComment":{ "enable": true, "location": "sameLine" }
 
   // coc-pretiter
-  "coc.preferences.formatOnSaveFiletypes": ["javascript", "vue", "typescript", "typescriptreact", "typescript.tsx", "css", "scss", "markdown"]
+  // 保存したときにフォーマット
+  "coc.preferences.formatOnSaveFiletypes": ["javascript", "vue", "typescript", "typescriptreact", "typescript.tsx", "css", "scss", "markdown"],
+  // vueファイルが何故かデフォルトで無効になっていたので初期化
+  "prettier.disableLanguages": []
 }
