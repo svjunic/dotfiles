@@ -139,6 +139,11 @@ git config --global alias.st  'status --branch --short'
 git config --global alias.sl  'log --all --branches --decorate --graph --oneline'
 git config --global alias.log 'log --all --branches --graph'
 
+# -no-ff でふぉるとに
+git config --global --add merge.ff false
+# pullは fast-forword
+git config --global --add pull.ff only
+
 #git config --global alias.log 'log --all --branches --graph'
 #git show-branch --merge-base master HEAD
 #git diff `git show-branch --merge-base master HEAD` HEAD
