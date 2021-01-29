@@ -1,4 +1,9 @@
 echo 'include .zbashrc'
+
+
+# メモ：このcacheは消しても問題ない
+# //sudo rm -rf /System/Library/Caches/* /Library/Caches/* ~/Library/Caches/*
+
 #####################################################################################################
 # zsh共通設定
 #####################################################################################################
@@ -84,9 +89,9 @@ export NODE_PATH=$npm_dir
 function load_npm () {
   echo "add PATH for node.js"
   export PATH="/usr/local/bin:$PATH:/usr/local/sbin"
-  
+
   source ~/.nvm/nvm.sh
-  
+
   alias node="node --experimental-modules"
   echo "set NODE_PATH for node.js"
   export NODE_PATH=$npm_dir
@@ -173,7 +178,7 @@ function agg() {
 
 #差分ファイル出すとき用
 # git_diff_archive 識別子1 識別子2
-. ~/bash/git_diff_archive.sh
+. ~/zsh/git_diff_archive.zsh
 
 # peco,vim,pt
 . ~/bash/ptvim.sh
@@ -279,7 +284,8 @@ linux*)
   ;;
 esac
 alias cdc='cd `pwd -P`'
-alias vi='vim'
+#alias vi='vim'
+alias vi='nvim'
 
 # github
 alias gitst='git st'

@@ -1,5 +1,5 @@
+// 適当に使ってたおれおれテンプレ
 {
-  "parser": "babel-eslint",
   "parserOptions": {
     "sourceType": "module",
     "ecmaVersion": 2018

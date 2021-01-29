@@ -4,12 +4,12 @@ autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('Todo', '\W\zs\(
 " ファイルタイプ識別
 autocmd FileType html,jade,css,scss,sass,vue,typescript,typescript.tsx EmmetInstall
 
-autocmd Filetype javascript,vue,typescript,typescript.tsx ALELint
+"autocmd Filetype javascript,vue,typescript,typescript.tsx ALELint
 
 autocmd BufRead,BufNewFile *.scss set filetype=scss
 autocmd BufRead,BufNewFile *.sass set filetype=scss
 autocmd BufRead,BufNewFile *.md set filetype=markdown
-autocmd BufRead,BufNewFile *.js,*.mjs,*.jsx set filetype=javascript
+autocmd BufRead,BufNewFile *.js,*.mjs,*.cjs,*.jsx set filetype=javascript
 autocmd BufRead,BufNewFile *.vue set filetype=vue
 autocmd BufRead,BufNewFile *.pug set filetype=pug
 
@@ -31,6 +31,9 @@ augroup END
 " tsxがts判定になるのを防ぐ
 autocmd BufNewFile,BufRead *.tsx let b:tsx_ext_found = 1
 autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
+
+" jsonc対応
+autocmd FileType json syntax match Comment +\/\/.\+$+
 
 " jsonをjsoncとして開きたい
 autocmd BufRead,BufNewFile *.json set filetype=jsonc

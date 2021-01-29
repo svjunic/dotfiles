@@ -2,6 +2,13 @@
 repo = 'neoclide/coc.nvim'
 merge = 0
 rev = 'release'
+hook_source = '''
+  " coc highlight
+  highlight CocHintSign ctermfg=10
+  highlight CocInfoSign ctermfg=14
+  highlight CocErrorSign ctermfg=202
+  highlight CocWarningSign ctermfg=226
+'''
 hook_add = '''
   let g:coc_global_extensions = [
     \   'coc-html',
@@ -10,9 +17,12 @@ hook_add = '''
     \   'coc-snippets',
     \   'coc-tsserver',
     \   'coc-vetur',
+    \   'coc-prettier',
+    \   'coc-eslint',
     \ ]
 
   "\   'coc-angular',
+  "\   'coc-tabnine',
 
 
   "" プルダウン
@@ -24,7 +34,7 @@ hook_add = '''
   " Close preview window when completion is done
   autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
   " confirm complete (select the first completion item and confirm completion when no item have selected)
-  inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : 
+  inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() :
                                              \"\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
   " nmap <silent> <Leader>c :CocList<Space>commands<CR>
   " nmap <silent> <Leader>s :CocList<Space>words<CR>
@@ -58,8 +68,8 @@ hook_add = '''
 
   augroup coc
     autocmd!
-    autocmd User CocDiagnosticChange call lightline#update()
-    autocmd CursorHoldI * silent call CocActionAsync('highlight') | call CocActionAsync('doHover')
+    "autocmd User CocDiagnosticChange call lightline#update()
+    "autocmd CursorHoldI * silent call CocActionAsync('highlight') | call CocActionAsync('doHover')
   augroup END
 
   " default 定義ジャンプ系？
@@ -90,6 +100,8 @@ hook_add = '''
   " space + rnで変数Rename
   nmap <silent> <space>rn <Plug>(coc-rename)
 
+  " space + a でエラー一覧を出してジャンプ用
+  nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
 '''
 
 ### {{{ いらないぽい

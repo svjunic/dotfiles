@@ -1,18 +1,25 @@
 {
-  "diagnostic.enableSign": true,
-  "diagnostic.hintSign": ">>",
-  "diagnostic.warningSign": "⚠",
-  "diagnostic.infoSign": ">",
-
-  "diagnostic.enable": true,
-  "diagnostic.enableMessage": "always",
-  "diagnostic.enableHighlightLineNumber": true,
+  "diagnostic.signOffset": 9999999,
+  //"diagnostic.enable": true,
+  //"diagnostic.infoSign": "i",
+  //"diagnostic.hintSign": "➤",
+  //"diagnostic.warningSign": "⚠",
+  //"diagnostic.errorSign": "✖",
+  "diagnostic.infoSign": "i",
+  "diagnostic.hintSign": "h",
+  "diagnostic.warningSign": ">",
+  "diagnostic.errorSign": ">>",
 
   "snippets.shortcut": "SN",
   "suggest.noselect": false,
   "suggest.preferCompleteThanJumpPlaceholder": true,
 
+  "tsserver.locale": "ja-jp",
   "tsserver.enableJavascript" : true,
+
+  //vetur typescript
+  "vetur.useWorkspaceDependencies": true,
+
   "javascript.format.enabled" : true,
 
   "snippets.priority" : 100,
@@ -24,5 +31,21 @@
   },
 
   "typescript.suggest.autoImports" : true,
-  "javascript.suggest.autoImports" : true
+  "javascript.suggest.autoImports" : true,
+
+  // coc-eslint
+  "eslint.enable": true,
+  //"eslint.filetypes": ["javascript", "vue", "typescript", "typescriptreact", "typescript.tsx"],
+  "eslint.filetypes": ["js","jsx","ts","tsx","mjs"],
+  "eslint.autoFixOnSave": true,
+  "eslint.packageManager": "npm",
+  //"eslint.codeAction.disableRuleComment":{ "enable": true, "location": "sameLine" }
+
+  // coc-pretiter
+  // 保存したときにフォーマット
+  "coc.preferences.formatOnSaveFiletypes": ["javascript", "vue", "typescript", "typescriptreact", "typescript.tsx", "css", "scss", "markdown", "php"],
+  //"coc.preferences.formatOnSaveFiletypes": [],
+  // vueファイルが何故かデフォルトで無効になっていたので初期化
+  "prettier.disableLanguages": [],
+  "prettier.ignorePath": ".prettierignore"
 }
