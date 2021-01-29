@@ -119,6 +119,8 @@ function agg() {
 #####################################################################################################
 # git config --global credential.helper cache --timeout=86400
 # git config --global core.editor /Applications/MacVim.app/Contents/MacOS/Vim
+# gitignoreを設置したくないときに切り分けとして使えなくもない
+# git config --global core.excludesfile ~/.gitignore
 # 空コミット
 # git commit --allow-empty -m "make pull request"
 
