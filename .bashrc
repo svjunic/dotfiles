@@ -35,9 +35,9 @@ export LSCOLORS=gxfxcxdxbxegedabagacad
 function load_npm () {
   echo "add PATH for node.js"
   export PATH="/usr/local/bin:$PATH:/usr/local/sbin"
-  
+
   source ~/.nvm/nvm.sh
-  
+
   alias node="node --experimental-modules"
   echo "set NODE_PATH for node.js"
   export NODE_PATH=$npm_dir
@@ -119,6 +119,8 @@ function agg() {
 #####################################################################################################
 # git config --global credential.helper cache --timeout=86400
 # git config --global core.editor /Applications/MacVim.app/Contents/MacOS/Vim
+# gitignoreを設置したくないときに切り分けとして使えなくもない
+# git config --global core.excludesfile ~/.gitignore
 # 空コミット
 # git commit --allow-empty -m "make pull request"
 
@@ -138,6 +140,11 @@ git config --global alias.hist 'log --pretty=format:\"%h %ad | %s%d [%an]\" --gr
 git config --global alias.st  'status --branch --short'
 git config --global alias.sl  'log --all --branches --decorate --graph --oneline'
 git config --global alias.log 'log --all --branches --graph'
+
+# -no-ff でふぉるとに
+git config --global --add merge.ff false
+# pullは fast-forword
+git config --global --add pull.ff only
 
 #git config --global alias.log 'log --all --branches --graph'
 #git show-branch --merge-base master HEAD

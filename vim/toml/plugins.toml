@@ -1,3 +1,11 @@
+# NOTE: https://qiita.com/delphinus/items/cd221a450fd23506e81a
+## hook の名前         実行されるタイミング                            lazy OFF   lazy ON
+## hook_add            プラグインが dein.vim によって追加されたとき    OK         OK
+## hook_source         プラグインが読み込まれる直前                    NG         OK
+## hook_post_source    プラグインが読み込まれた直後                    NG         OK
+## hook_post_update    プラグインが更新された直後                      OK         OK
+## hook_done_update    プラグイン全ての更新が終わった直後              OK         OK
+
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
@@ -10,7 +18,7 @@ repo = 'wsdjeg/dein-ui.vim'
 #hook_add = '''
 #  "" 起動時に有効化
 #  "call deoplete#enable()
-#  
+#
 #  " 上記で動かないので、原因わかるまでの暫定対応
 #  autocmd VimEnter * call deoplete#enable()
 #  autocmd BufRead,BufNewFile * call deoplete#enable()
@@ -28,27 +36,27 @@ hook_add='''
   nmap ,d [denite]
 
   " 最近開いたファイル
-  nnoremap <silent> [denite]m :<C-u>Denite file_mru<CR> 
-  
+  nnoremap <silent> [denite]m :<C-u>Denite file_mru<CR>
+
   " カレントディレクトリ以下のファイルからカーソル下の文字列を検索
   nnoremap <silent> [denite], :<C-u>DeniteCursorWord -auto-action=preview grep -buffer-name=search line<CR>
-  
+
   " grepした結果を再表示
   nnoremap <silent> [denite]gs :<C-u>Denite -auto-action=preview -resume -buffer-name=search<CR>
-  
+
   if has('nvim')
     " カレントディレクトリとバッファを表示
     nnoremap <silent> [denite]a :<C-u>Denite file buffer -split=floating file:new<CR>
-    
+
     " バッファを表示
     nnoremap <silent> [denite]b :<C-u>Denite buffer -split=floating file:new<CR>
-    
+
     " カレントディレクトリを表示
     nnoremap <silent> [denite]f :<C-u>Denite file -split=floating file:new<CR>
-    
+
     " カレントディレクトリ以下を再帰的に表示
     nnoremap <silent> [denite]r :<C-u>Denite file/rec -split=floating file:new<CR>
- 
+
     " カレントディレクトリ以下のファイルから指定した文字列を検索
     nnoremap <silent> [denite]gr :<C-u>Denite grep -buffer-name=search<CR>
 
@@ -57,16 +65,16 @@ hook_add='''
   else
     " カレントディレクトリとバッファを表示
     nnoremap <silent> [denite]a :<C-u>Denite file buffer -split=horizontal file:new<CR>
-    
+
     " バッファを表示
     nnoremap <silent> [denite]b :<C-u>Denite buffer -split=horizontal file:new<CR>
-    
+
     " カレントディレクトリを表示
     nnoremap <silent> [denite]f :<C-u>Denite file -split=horizontal file:new<CR>
-    
+
     " カレントディレクトリ以下を再帰的に表示
     nnoremap <silent> [denite]r :<C-u>Denite file/rec -split=horizontal file:new<CR>
- 
+
     " カレントディレクトリ以下のファイルから指定した文字列を検索
     nnoremap <silent> [denite]gr :<C-u>Denite -auto-action=preview grep -buffer-name=search<CR>
 
@@ -74,11 +82,25 @@ hook_add='''
     nnoremap <silent> [denite]c :<C-u>Denite command_history -split=horizontal<CR>
   endif
 
+
+  " file/recで特定のディレクトリを除外する
+  let s:ignore_globs = ['.git', '.svn', 'node_modules']
+  call denite#custom#var('file/rec', 'command', [
+      \ 'ag',
+      \ '--follow',
+      \ ] + map(deepcopy(s:ignore_globs), { k, v -> '--ignore=' . v }) + [
+      \ '--nocolor',
+      \ '--nogroup',
+      \ '-g',
+      \ ''
+      \ ])
+
   " matcher/ignore_globs 以外のお好みの matcher を指定する
   call denite#custom#source('file/rec', 'matchers', ['matcher/fuzzy', 'matcher/substring'])
 
   "" 特定ディレクトリをリスティングしない
-  call denite#custom#filter('matcher/ignore_globs', 'ignore_globs', ['.git', '.svn', 'node_modules'])
+  "call denite#custom#filter('matcher/ignore_globs', 'ignore_globs', ['.git', '.svn', '*node_modules*'])
+  call denite#custom#filter('matcher/ignore_globs', 'ignore_globs', ['.git', '.svn'])
 
   " file/rec に ag を設定
   call denite#custom#var('grep', 'command', ['ag'])
@@ -145,52 +167,52 @@ hook_post_update = '''
 # depends = ['neomru.vim', 'unite-locate', 'unite-outline']
 # hook_add = '''
 #   nmap ,u [unite]
-#   
+#
 #   " 入力モードで開始する
 #   "let g:unite_enable_start_insert=1
-# 
+#
 #   " バッファ一覧
 #   nnoremap <silent> [unite]b :<C-u>Unite buffer<CR>
-# 
+#
 #   " ファイル一覧
 #   nnoremap <silent> [unite]f :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
-# 
+#
 #   " レジスタ一覧
 #   nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
-# 
+#
 #   " 全部乗せ
 #   nnoremap <silent> [unite]a :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
-#   
+#
 #   "ブックマーク一覧
 #   nnoremap <silent> [unite]c :<C-u>Unite bookmark<CR>
-# 
+#
 #   "ブックマークに追加
 #   nnoremap <silent> [unite]a :<C-u>UniteBookmarkAdd<CR>
-#   
+#
 #   " unite grep
 #   noremap <silent> [unite]g :Unite grep<CR>
-#   
+#
 #   " Unite line 個人設定
 #   nnoremap <silent> [unite]lb :Unite line -input=Backbone.*extend<CR>
 #   nnoremap <silent> [unite]lf :Unite line -input=function<CR>
 #   nnoremap <silent> [unite]ll :Unite line<CR>
 #   nnoremap <silent> [unite]lp :Unite line<CR>
 #   nnoremap <silent> [unite]ms :Unite mapping source<CR>
-#   
+#
 #   nnoremap <silent> ,ums :Unite mapping source<CR>
-#   
+#
 #   " ウィンドウを分割して開く
 #   au FileType unite nnoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
 #   au FileType unite inoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
-#   
+#
 #   " ウィンドウを縦に分割して開く
 #   au FileType unite nnoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
 #   au FileType unite inoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
-#   
+#
 #   " ESCキーを2回押すと終了する
 #   au FileType unite nnoremap <silent> <buffer> <ESC><ESC> q
 #   au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
-#   
+#
 #   " NOTE: http://qiita.com/0829/items/7053b6e3371592e4fbe6
 #   " unite grep に ag(The Silver Searcher) を使う
 #   if executable('ag')
@@ -199,7 +221,7 @@ hook_post_update = '''
 #     let g:unite_source_grep_recursive_opt = ''
 #   endif
 # '''
-# 
+#
 # [[plugins]]
 # repo = 'Shougo/unite-outline'
 # on_source = ['Shougo/unite.vim']
@@ -207,18 +229,18 @@ hook_post_update = '''
 #   " アウトライン一覧
 #   nnoremap <silent> [unite]uo :Unite outline<CR>
 # '''
-# 
+#
 # [[plugins]]
 # repo = 'ujihisa/unite-locate'
 # on_source = ['Shougo/unite.vim']
-# 
+#
 # [[plugins]]
 # repo = 'Shougo/neomru.vim'
 # on_source = ['Shougo/unite.vim']
 # hook_add = '''
 #   " 最近使用したファイル一覧
 #   nnoremap <silent> [unite]m :<C-u>Unite file_mru<CR>
-# 
+#
 #   " 常用セット
 #   nnoremap <silent> [unite]u :<C-u>Unite buffer file_mru<CR>
 # '''
@@ -231,16 +253,16 @@ hook_post_update = '''
 #   imap <C-i> <Plug>(neosnippet_expand_or_jump)
 #   smap <C-i> <Plug>(neosnippet_expand_or_jump)
 #   xmap <C-i> <Plug>(neosnippet_expand_target)
-# 
+#
 #   if has('conceal')
 #     set conceallevel=2 concealcursor=niv
 #   endif
-# 
+#
 #   let s:neosnippet_directorys = [ '~/.cache/dein/repos/github.com/svjunic/svjunic-snip/snippets' ]
 #   let g:neosnippet#snippets_directory = join( s:neosnippet_directorys, ',' )
 # '''
 # depends = ['neosnippet-snippets', 'svjunic/svjunic-snip']
-# 
+#
 # [[plugins]]
 # repo = 'Shougo/neosnippet-snippets'
 # on_i = 1
@@ -261,73 +283,75 @@ repo = 'vim-scripts/YankRing.vim'
 [[plugins]]
 repo = 'vim-scripts/Align'
 
-[[plugins]]
-repo = 'dense-analysis/ale'
-hook_add = '''
-  "" Equivalent to the above.
-  "let g:ale_linters = {
-  "\ 'html': ['htmlhint'],
-  "\ 'javascript': ['eslint'],
-  "\ 'typescript': ['eslint', 'tsserver'],
-  "\ 'vue': ['vls']
-  "\}
-
-  "let g:ale_linter_aliases = {'typescriptreact': 'typescript'}
-
-  " Enable completion where available.
-  "let g:ale_completion_enabled = 0
-  " 有効にするとcoc?と組み合わさってめちゃくちゃ重くなるっぽい（vueで確認）
-  let g:ale_completion_enabled = 0
-
-  "" ローカルで新しいeslint入れられてどうしようもないので、解消するまでグローバルでしのいでみる
-  let g:ale_use_global_executables = 1
- 
-  " 保存時にpretteirをかけてeslintをする
-  let g:ale_fixers = {}
-  let g:ale_fixers.css = ['prettier']
-  let g:ale_fixers.scss = ['prettier']
-  let g:ale_fixers.html = ['prettier']
-  let g:ale_fixers.javascript = ['prettier', 'eslint']
-  let g:ale_fixers.mjs = ['prettier', 'eslint']
-  let g:ale_fixers.jsx = ['prettier', 'eslint']
-  let g:ale_fixers.vue = ['prettier', 'eslint']
-  let g:ale_fixers.typescript = ['prettier', 'eslint']
-  let g:ale_fixers.typescriptreact = ['prettier', 'eslint']
-  let g:ale_fixers.typescripttsx= ['prettier', 'eslint']
- 
- 
-  " 圧縮ファイルのときはなるべく動かさない
-  let g:ale_pattern_options = {
-  \ '\.min\.js$': {'ale_linters': [], 'ale_fixers': []},
-  \ '\.min\.css$': {'ale_linters': [], 'ale_fixers': []},
-  \}
-  
-  " ファイル保存時に実行
-  function! ALE_FIX_TOGGLE()
-    if !exists('g:ale_fix_on_save') || g:ale_fix_on_save == 0
-      let g:ale_fix_on_save = 1
-    else 
-      let g:ale_fix_on_save = 0
-    endif
-  endfunction
-  call ALE_FIX_TOGGLE()
-  
-  " 変更されてからlint実行までのdelay
-  let g:ale_lint_delay=10
-  
-  "" ステータスバーの表示
-  "let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
-  
-  " ローカルの設定ファイルを考慮する
-  let g:ale_javascript_prettier_use_local_config = 1
-  
-  " エラー行の表示部分を常に表示する
-  let g:ale_sign_column_always = 1
-  
-  "" ctrl+j/kでエラー行に移動
-  "nmap <silent> <C-j> <Plug>(ale_next_wrap)
-  "nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-'''
+# [[plugins]]
+# repo = 'dense-analysis/ale'
+# hook_add = '''
+#   "" Equivalent to the above.
+#   "let g:ale_linters = {
+#   "\ 'html': ['htmlhint'],
+#   "\ 'javascript': ['eslint'],
+#   "\ 'typescript': ['eslint', 'tsserver'],
+#   "\ 'vue': ['vls'],
+#   "\}
+#
+#   "let g:ale_linter_aliases = {'typescriptreact': 'typescript'}
+#
+#   " Enable completion where available.
+#   "let g:ale_completion_enabled = 0
+#   " 有効にするとcoc?と組み合わさってめちゃくちゃ重くなるっぽい（vueで確認）
+#   let g:ale_completion_enabled = 0
+#
+#   "" ローカルで新しいeslint入れられてどうしようもないので、解消するまでグローバルでしのいでみる
+#   let g:ale_use_global_executables = 1
+#
+#   "" 保存時にpretteirをかけてeslintをする
+#   "let g:ale_fixers = {}
+#   "let g:ale_fixers.css = ['prettier']
+#   "let g:ale_fixers.scss = ['prettier']
+#   "let g:ale_fixers.html = ['prettier']
+#   "let g:ale_fixers.xml = ['prettier']
+#   "let g:ale_fixers.pug = ['prettier']
+#   "let g:ale_fixers.javascript = ['prettier', 'eslint']
+#   "let g:ale_fixers.mjs = ['prettier', 'eslint']
+#   "let g:ale_fixers.jsx = ['prettier', 'eslint']
+#   "let g:ale_fixers.vue = ['prettier', 'eslint']
+#   "let g:ale_fixers.typescript = ['prettier', 'eslint']
+#   "let g:ale_fixers.typescriptreact = ['prettier', 'eslint']
+#   "let g:ale_fixers.typescripttsx= ['prettier', 'eslint']
+#
+#
+#   "" 圧縮ファイルのときはなるべく動かさない
+#   "let g:ale_pattern_options = {
+#   "\ '\.min\.js$': {'ale_linters': [], 'ale_fixers': []},
+#   "\ '\.min\.css$': {'ale_linters': [], 'ale_fixers': []},
+#   "\}
+#
+#   "" ファイル保存時に実行
+#   "function! ALE_FIX_TOGGLE()
+#   "  if !exists('g:ale_fix_on_save') || g:ale_fix_on_save == 0
+#   "    let g:ale_fix_on_save = 1
+#   "  else
+#   "    let g:ale_fix_on_save = 0
+#   "  endif
+#   "endfunction
+#   "call ALE_FIX_TOGGLE()
+#
+#   " 変更されてからlint実行までのdelay
+#   let g:ale_lint_delay=10
+#
+#   "" ステータスバーの表示
+#   "let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+#
+#   " ローカルの設定ファイルを考慮する
+#   let g:ale_javascript_prettier_use_local_config = 1
+#
+#   " エラー行の表示部分を常に表示する
+#   let g:ale_sign_column_always = 1
+#
+#   "" ctrl+j/kでエラー行に移動
+#   "nmap <silent> <C-j> <Plug>(ale_next_wrap)
+#   "nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+# '''
 
 [[plugins]]
 repo = 'tpope/vim-fugitive'
@@ -339,17 +363,17 @@ hook_add = '''
 [[plugins]]
 repo = 'tpope/vim-rhubarb'
 
-[[plugins]]
-repo = 'airblade/vim-gitgutter'
-hook_add = '''
-  " aleとかぶるので基本off
-  let g:gitgutter_enabled = 0
-  let g:gitgutter_highlight_lines = 0
-  let g:gitgutter_map_keys = 0
-  
-  " normalモードでgitと打つと変化の部分トグル
-  nmap <silent> ,gd :GitGutterToggle<CR>
-'''
+#[[plugins]]
+#repo = 'airblade/vim-gitgutter'
+#hook_add = '''
+#  " aleとかぶるので基本off
+#  let g:gitgutter_enabled = 0
+#  let g:gitgutter_highlight_lines = 0
+#  let g:gitgutter_map_keys = 0
+#
+#  " normalモードでgitと打つと変化の部分トグル
+#  nmap <silent> ,gd :GitGutterToggle<CR>
+#'''
 
 [[plugins]]
 repo = 'svjunic/RadicalGoodSpeed'
@@ -370,7 +394,7 @@ repo = 'Valloric/MatchTagAlways'
 on_ft = ['html', 'vue', 'typescript', 'javascript']
 hook_add = '''
   "let g:mta_use_matchparen_group = 1
-  
+
   let g:mta_filetypes = {
       \ 'html' : 1,
       \ 'xhtml' : 1,
@@ -390,12 +414,12 @@ on_ft= ['javascript']
 repo = 'othree/es.next.syntax.vim'
 on_ft= ['javascript']
 
-# [[plugins]]
-# repo = 'posva/vim-vue'
-# on_ft= ['vue']
-# hook_add = '''
-#   autocmd FileType vue syntax sync fromstart
-# '''
+#[[plugins]]
+#repo = 'posva/vim-vue'
+#on_ft= ['vue']
+#hook_add = '''
+#  autocmd FileType vue syntax sync fromstart
+#'''
 
 [[plugins]]
 repo = 'leafOfTree/vim-vue-plugin'
@@ -404,6 +428,7 @@ hook_add = '''
   let g:vim_vue_plugin_load_full_syntax = 1
   "let g:vim_vue_plugin_use_pug = 1
   let g:vim_vue_plugin_use_sass = 1
+  let g:vim_vue_plugin_use_typescript = 1
 '''
 
 [[plugins]]
@@ -424,5 +449,18 @@ hook_add = '''
   nmap <silent> ,cd :VimCodic<CR>
 '''
 
+[[plugins]]
+repo = 'editorconfig/editorconfig-vim'
+
 # [[plugins]]
 # repo = 'rizzatti/dash.vim'
+
+[[plugins]]
+repo = 'simeji/winresizer'
+hook_add = '''
+  "後で考える
+  "let g:winresizer_start_key='<C-A>'
+  "let g:winresizer_gui_start_key='<C-A>'
+'''
+
+
