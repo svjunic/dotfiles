@@ -1,5 +1,5 @@
 {
-  "diagnostic.signOffset": 9999999,
+  //"diagnostic.signOffset": 9999999,
   //"diagnostic.enable": true,
   //"diagnostic.infoSign": "i",
   //"diagnostic.hintSign": "➤",
@@ -34,17 +34,17 @@
   "javascript.suggest.autoImports" : true,
 
   // coc-eslint
-  "eslint.enable": true,
-  //"eslint.filetypes": ["javascript", "vue", "typescript", "typescriptreact", "typescript.tsx"],
-  "eslint.filetypes": ["js","jsx","ts","tsx","mjs"],
+  "eslint.validate": ["javascript", "vue", "typescript", "typescriptreact", "typescript.tsx"],
+  "eslint.probe": ["javascript", "vue", "typescript", "typescriptreact", "typescript.tsx"],
+  //"eslint.filetypes": ["js","jsx","ts","tsx","mjs"],
   "eslint.autoFixOnSave": true,
   "eslint.packageManager": "npm",
   //"eslint.codeAction.disableRuleComment":{ "enable": true, "location": "sameLine" }
 
   // coc-pretiter
   // 保存したときにフォーマット
-  "coc.preferences.formatOnSaveFiletypes": ["javascript", "vue", "typescript", "typescriptreact", "typescript.tsx", "css", "scss", "markdown", "php"],
-  //"coc.preferences.formatOnSaveFiletypes": [],
+  //"coc.preferences.formatOnSaveFiletypes": ["javascript", "vue", "typescript", "typescriptreact", "typescript.tsx", "css", "scss", "markdown", "php"],
+  "coc.preferences.formatOnSaveFiletypes": [],
   // vueファイルが何故かデフォルトで無効になっていたので初期化
   "prettier.disableLanguages": [],
   "prettier.ignorePath": ".prettierignore"
