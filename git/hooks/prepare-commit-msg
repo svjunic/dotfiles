@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# 直前のコミットの１行目を拾ってきて設定するズボラhooks
+
+if [ "$2" == "" ] ; then
+  MESSAGE=`git log -n 1 | awk 'NR==5'`
+  #MESSAGE=`git branch --contains=HEAD | grep '*' | sed -e 's/^\* //' | awk -F '/' '{printf "%s %s\n ", $3, $2} '`
+  printf "%2s\n", ${MESSAGE} > $1
+fi
+
