@@ -8,6 +8,7 @@ autocmd FileType html,jade,css,scss,sass,vue,typescript,typescript.tsx EmmetInst
 
 autocmd BufRead,BufNewFile *.scss set filetype=scss
 autocmd BufRead,BufNewFile *.sass set filetype=scss
+autocmd BufRead,BufNewFile *.styl set filetype=stylus
 autocmd BufRead,BufNewFile *.md set filetype=markdown
 autocmd BufRead,BufNewFile *.js,*.mjs,*.cjs,*.jsx set filetype=javascript
 autocmd BufRead,BufNewFile *.vue set filetype=vue

@@ -116,6 +116,12 @@ hook_add = '''
 '''
 
 [[plugins]]
+repo = 'wavded/vim-stylus'
+on_ft= ['stylus']
+hook_add = '''
+'''
+
+[[plugins]]
 repo = 'nelsyeung/twig.vim'
 on_ft= ['twig']
 

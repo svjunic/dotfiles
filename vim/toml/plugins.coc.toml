@@ -19,6 +19,7 @@ hook_add = '''
     \   'coc-vetur',
     \   'coc-prettier',
     \   'coc-eslint',
+    \   'coc-spell-checker',
     \ ]
 
   "\   'coc-angular',
