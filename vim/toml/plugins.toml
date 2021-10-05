@@ -267,9 +267,9 @@ hook_post_update = '''
 # repo = 'Shougo/neosnippet-snippets'
 # on_i = 1
 
-[[plugins]]
-repo = 'cespare/vim-toml'
-on_ft = 'toml'
+#[[plugins]]
+#repo = 'cespare/vim-toml'
+#on_ft = 'toml'
 
 [[plugins]]
 repo = 'thinca/vim-quickrun'
@@ -375,6 +375,14 @@ repo = 'tpope/vim-rhubarb'
 #  nmap <silent> ,gd :GitGutterToggle<CR>
 #'''
 
+## mark機能
+#[[plugins]]
+#repo = 'visualmark.vim'
+#hook_add = '''
+#  nmap <silent> ,mk <Plug>Vm_toggle_sign
+#  nmap <silent> <unique> mm <Plug>Vm_toggle_sign
+#'''
+
 [[plugins]]
 repo = 'svjunic/RadicalGoodSpeed'
 rev= 'develop'
@@ -387,7 +395,7 @@ repo = 'svjunic/svjunic-snip'
 rev = 'hotfix/coc'
 
 [[plugins]]
-repo = 'mlaursen/vim-react-snippets.git'
+repo = 'mlaursen/vim-react-snippets'
 
 [[plugins]]
 repo = 'Valloric/MatchTagAlways'

@@ -167,10 +167,12 @@ if [ `which tmux` ]; then
     load_npm
     nvm use --lts
     npm_dir=${NVM_PATH}_modules
-    tmux a -d || tmux
+    tmux a -d || tmux -u
   else
     load_npm
+    nvm use --lts
     . ~/bash/tmux/alias.sh
+    tmux source-file ~/.tmux.conf
   fi
 fi
 
