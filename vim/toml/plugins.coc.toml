@@ -92,11 +92,14 @@ hook_add = '''
   " space + h VSCでいうホバーしたときにでる情報の標示
   nmap <silent> <space>h :<C-u>call CocAction('doHover')<cr>
 
-  " space + df 宣言位置移動;
+  " space + df 宣言位置移動
   nmap <silent> <space>df <Plug>(coc-definition)
 
   " space + rf 変数を使っている箇所に移動
   nmap <silent> <space>rf <Plug>(coc-references)
+
+  " space + td 型の定義に移動
+  nmap <silent> <space>td <Plug>(coc-type-definition)
 
   " space + rnで変数Rename
   nmap <silent> <space>rn <Plug>(coc-rename)
