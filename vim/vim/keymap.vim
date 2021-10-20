@@ -17,6 +17,10 @@ match CurlyBracket /[{}]/
 """ 基本形
 map ˜ ~
 
+" Buffer
+nmap bn :next<cr>
+nmap bp :prev<cr>
+
 " Tab
 nmap tn :tabnext<cr>
 nmap tp :tabprevious<cr>
