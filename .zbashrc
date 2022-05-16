@@ -74,7 +74,7 @@ echo "add PATH for node.js"
 export PATH="/usr/local/bin:$PATH:/usr/local/sbin"
 
 source ~/.nvm/nvm.sh
-nvm use --lts
+#nvm use --lts
 npm_dir=${NVM_PATH}_modules
 
 alias node="node --experimental-modules"
@@ -212,7 +212,7 @@ if [ `which tmux` ]; then
 
   if ! [ -n "$TMUX" ]; then
     load_npm
-    nvm use --lts
+    #nvm use --lts
     npm_dir=${NVM_PATH}_modules
     tmux a -d || tmux
   else
@@ -291,6 +291,7 @@ alias vi='nvim'
 alias gitst='git st'
 alias gitdiff='git difftool --tool=vimdiff --no-prompt'
 alias gitlmm='git log origin/master..master'
+alias gitlg='git log --graph'
 
 #alias adbDebug='sh ~/bash/androidDebug.sh'
 alias tmux-session-clear='tmux kill-session -a'
