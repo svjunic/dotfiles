@@ -44,7 +44,7 @@
 
   // coc-pretiter
   // 保存したときにフォーマット
-  "coc.preferences.formatOnSaveFiletypes": ["javascript", "vue", "typescript", "typescriptreact", "typescript.tsx", "css", "scss", "markdown", "php"]
+  "coc.preferences.formatOnSaveFiletypes": ["javascript", "vue", "typescript", "typescriptreact", "typescript.tsx", "css", "scss", "markdown", "php", "pug"]
   //"coc.preferences.formatOnSaveFiletypes": ["markdown","javascript"]
   //"coc.preferences.formatOnSaveFiletypes": ["markdown"]
   // vueファイルが何故かデフォルトで無効になっていたので初期化

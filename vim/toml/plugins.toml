@@ -470,5 +470,3 @@ hook_add = '''
   "let g:winresizer_start_key='<C-A>'
   "let g:winresizer_gui_start_key='<C-A>'
 '''
-
-
