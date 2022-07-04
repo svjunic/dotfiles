@@ -28,10 +28,24 @@ repo = 'wsdjeg/dein-ui.vim'
 [[plugins]]
 repo = 'Shougo/neomru.vim'
 
+[[plugins]]
+repo = 'nvim-treesitter/nvim-treesitter'
+merged = 0
+on_event = 'BufRead'
+hook_post_update = 'TSUpdate'
+
 ## denite.vim依存
 [[plugins]]
+repo = 'roxma/nvim-yarp'
+if   = '''! has('nvim')'''
+
+[[plugins]]
+repo = 'roxma/vim-hug-neovim-rpc'
+if   = '''! has('nvim')'''
+
+[[plugins]]
 repo = 'Shougo/denite.nvim'
-depends = ['roxma/vim-hug-neovim-rpc','roxma/vim-hug-neovim-rpc', 'Shougo/neomru.vim']
+# depends = ['roxma/vim-hug-neovim-rpc', 'Shougo/neomru.vim']
 hook_add='''
   nmap ,d [denite]
 
@@ -457,8 +471,8 @@ hook_add = '''
   nmap <silent> ,cd :VimCodic<CR>
 '''
 
-[[plugins]]
-repo = 'editorconfig/editorconfig-vim'
+#[[plugins]]
+#repo = 'editorconfig/editorconfig-vim'
 
 # [[plugins]]
 # repo = 'rizzatti/dash.vim'
