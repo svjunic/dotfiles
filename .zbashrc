@@ -292,6 +292,9 @@ alias gitst='git st'
 alias gitdiff='git difftool --tool=vimdiff --no-prompt'
 alias gitlmm='git log origin/master..master'
 alias gitlg='git log --graph'
+function gitbase () {
+  git show-branch | grep '*' | grep -v "$(git rev-parse --abbrev-ref HEAD)" | head -1 | awk -F'[]~^[]' '{print $2}'
+}
 
 #alias adbDebug='sh ~/bash/androidDebug.sh'
 alias tmux-session-clear='tmux kill-session -a'

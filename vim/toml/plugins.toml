@@ -471,8 +471,8 @@ hook_add = '''
   nmap <silent> ,cd :VimCodic<CR>
 '''
 
-#[[plugins]]
-#repo = 'editorconfig/editorconfig-vim'
+[[plugins]]
+repo = 'editorconfig/editorconfig-vim'
 
 # [[plugins]]
 # repo = 'rizzatti/dash.vim'
