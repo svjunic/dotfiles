@@ -64,7 +64,7 @@ if has("win32")
   let &termencoding = &encoding
 endif
 set encoding=utf-8
-set fileencodings=ucs-bom,utf-8,iso-2022-jp,euc-jp,cp932
+set fileencodings=ucs-bom,utf-8,cp932,iso-2022-jp,euc-jp
 set fileformat=unix
 set fileformats=unix,dos
 set ambiwidth=double
@@ -118,6 +118,8 @@ let g:netrw_sizestyle="H"
 let g:netrw_timefmt="%Y/%m/%d(%a) %H:%M:%S"
 " プレビューウィンドウを垂直分割で表示する
 let g:netrw_preview=1
+" vで開いたときに右に出す
+let g:netrw_altv=1
 
 " ハイライト確認用
 function! s:get_syn_id(transparent)
