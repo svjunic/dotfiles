@@ -286,6 +286,7 @@ esac
 alias cdc='cd `pwd -P`'
 #alias vi='vim'
 alias vi='nvim'
+alias vimdiff='nvim -d '
 
 # github
 alias gitst='git st'

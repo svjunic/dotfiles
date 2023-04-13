@@ -444,6 +444,9 @@ on_ft= ['javascript']
 #'''
 
 [[plugins]]
+repo = 'wuelnerdotexe/vim-astro'
+
+[[plugins]]
 repo = 'leafOfTree/vim-vue-plugin'
 on_ft= ['vue']
 hook_add = '''

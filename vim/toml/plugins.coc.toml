@@ -16,13 +16,14 @@ hook_add = '''
     \   'coc-json',
     \   'coc-snippets',
     \   'coc-tsserver',
-    \   'coc-vetur',
+    \   '@yaegassy/coc-volar',
     \   'coc-prettier',
     \   'coc-eslint',
     \   'coc-spell-checker',
     \   'coc-phpls',
     \ ]
 
+  "\   'coc-vetur',
   "\   'coc-angular',
   "\   'coc-tabnine',
 
@@ -58,7 +59,7 @@ hook_add = '''
   " nmap <silent> <Leader>y <Plug>(coc-type-definition)
   " nmap <silent> <Leader>p <Plug>(coc-implementation)
   " nmap <silent> <Leader>r <Plug>(coc-references)
-  " nmap <silent> <Leader>q <Plug>(coc-fix-current)
+  " nmap <silent> <Leader>qf <Plug>(coc-fix-current)
   " nnoremap <silent> <Leader>k :call <SID>show_documentation()<CR>
   " function! s:show_documentation()
   "   if (index(['vim','help'], &filetype) >= 0)
@@ -74,11 +75,11 @@ hook_add = '''
     "autocmd CursorHoldI * silent call CocActionAsync('highlight') | call CocActionAsync('doHover')
   augroup END
 
-  " default 定義ジャンプ系？
+  " メッセージ表示箇所ジャンプ
   nmap <silent> <C-j> <Plug>(coc-diagnostic-next)
   nmap <silent> <C-k> <Plug>(coc-diagnostic-prev)
 
-  " default 定義ジャンプ系？
+  " 定義ジャンプ
   nmap <silent> gd <Plug>(coc-definition)
   nmap <silent> gy <Plug>(coc-type-definition)
   nmap <silent> gi <Plug>(coc-implementation)
@@ -109,7 +110,7 @@ hook_add = '''
   nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
 '''
 
-### {{{ いらないぽい
+### {{{
 
 #[[plugins]]
 #repo = 'iamcco/coc-angular'
