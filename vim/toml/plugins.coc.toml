@@ -108,6 +108,9 @@ hook_add = '''
 
   " space + a でエラー一覧を出してジャンプ用
   nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+
+  " 補完確定
+  inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 '''
 
 ### {{{
