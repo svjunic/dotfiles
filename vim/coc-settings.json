@@ -60,7 +60,8 @@
   ],
   "cSpell.userWords": [
     "fileoverview"
-  ]
+  ],
+  "snippets.ultisnips.pythonPrompt": false
   //"coc.preferences.formatOnSaveFiletypes": ["markdown","javascript"]
   //"coc.preferences.formatOnSaveFiletypes": ["markdown"]
   // vueファイルが何故かデフォルトで無効になっていたので初期化

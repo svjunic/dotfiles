@@ -68,21 +68,6 @@ PROMPT="sv.junic$ "
 export LSCOLORS=gxfxcxdxbxegedabagacad
 
 #####################################################################################################
-# nvm
-#####################################################################################################
-echo "add PATH for node.js"
-export PATH="/usr/local/bin:$PATH:/usr/local/sbin"
-
-source ~/.nvm/nvm.sh
-#nvm use --lts
-npm_dir=${NVM_PATH}_modules
-
-alias node="node --experimental-modules"
-echo "set NODE_PATH for node.js"
-export NODE_PATH=$npm_dir
-
-
-#####################################################################################################
 # function
 #####################################################################################################
 # load nvm
@@ -205,21 +190,48 @@ git config --global alias.log 'log --all --branches --graph'
 
 
 #####################################################################################################
+# nvm
+#####################################################################################################
+function npm () {
+  echo 'npm function'
+  unset -f npm
+  load_npm
+
+  if [ ! -z $1 ]; then
+    npm $@
+  fi
+}
+
+function node_vi () {
+  unalias vi
+  alias vi='nvim'
+  
+  if ! (type "node" > /dev/null 2>&1) ; then
+    load_npm
+  fi
+
+  if [ ! -z $1 ]; then
+    nvim $@
+  else
+    nvim
+  fi
+}
+
+#####################################################################################################
 # tmux
 #####################################################################################################
 
 if [ `which tmux` ]; then
 
   if ! [ -n "$TMUX" ]; then
-    load_npm
     #nvm use --lts
     npm_dir=${NVM_PATH}_modules
     tmux a -d || tmux
   else
-    load_npm
     . ~/bash/tmux/alias.sh
   fi
 fi
+
 
 
 #####################################################################################################
@@ -285,7 +297,8 @@ linux*)
 esac
 alias cdc='cd `pwd -P`'
 #alias vi='vim'
-alias vi='nvim'
+#alias vi='nvim'
+alias vi='node_vi'
 alias vimdiff='nvim -d '
 
 # github
