@@ -1,3 +1,4 @@
+source ~/.profile
 echo 'include .bash_profile'
 
 test -r ~/.bashrc && . ~/.bashrc

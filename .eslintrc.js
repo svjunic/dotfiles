@@ -5,6 +5,8 @@
 //
 module.exports = {
   root: true,
+  //extends: ["eslint:recommended", "google"],
+  extends: "eslint:recommended",
   env: {
     "browser": true,
     "node": true,
@@ -39,4 +41,6 @@ module.exports = {
       },
     ],
   },
+  //{{{ プロジェクトに影響することがあったのでルールは一旦除外
+  //}}}
 };
