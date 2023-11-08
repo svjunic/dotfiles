@@ -28,10 +28,24 @@ repo = 'wsdjeg/dein-ui.vim'
 [[plugins]]
 repo = 'Shougo/neomru.vim'
 
+[[plugins]]
+repo = 'nvim-treesitter/nvim-treesitter'
+merged = 0
+on_event = 'BufRead'
+hook_post_update = 'TSUpdate'
+
 ## denite.vim依存
 [[plugins]]
+repo = 'roxma/nvim-yarp'
+if   = '''! has('nvim')'''
+
+[[plugins]]
+repo = 'roxma/vim-hug-neovim-rpc'
+if   = '''! has('nvim')'''
+
+[[plugins]]
 repo = 'Shougo/denite.nvim'
-depends = ['roxma/vim-hug-neovim-rpc','roxma/vim-hug-neovim-rpc', 'Shougo/neomru.vim']
+# depends = ['roxma/vim-hug-neovim-rpc', 'Shougo/neomru.vim']
 hook_add='''
   nmap ,d [denite]
 
@@ -267,9 +281,9 @@ hook_post_update = '''
 # repo = 'Shougo/neosnippet-snippets'
 # on_i = 1
 
-[[plugins]]
-repo = 'cespare/vim-toml'
-on_ft = 'toml'
+#[[plugins]]
+#repo = 'cespare/vim-toml'
+#on_ft = 'toml'
 
 [[plugins]]
 repo = 'thinca/vim-quickrun'
@@ -375,6 +389,14 @@ repo = 'tpope/vim-rhubarb'
 #  nmap <silent> ,gd :GitGutterToggle<CR>
 #'''
 
+## mark機能
+#[[plugins]]
+#repo = 'visualmark.vim'
+#hook_add = '''
+#  nmap <silent> ,mk <Plug>Vm_toggle_sign
+#  nmap <silent> <unique> mm <Plug>Vm_toggle_sign
+#'''
+
 [[plugins]]
 repo = 'svjunic/RadicalGoodSpeed'
 rev= 'develop'
@@ -386,8 +408,8 @@ repo = 'svjunic/snortist-theme.vim'
 repo = 'svjunic/svjunic-snip'
 rev = 'hotfix/coc'
 
-[[plugins]]
-repo = 'mlaursen/vim-react-snippets.git'
+#[[plugins]]
+#repo = 'mlaursen/vim-react-snippets'
 
 [[plugins]]
 repo = 'Valloric/MatchTagAlways'
@@ -420,6 +442,9 @@ on_ft= ['javascript']
 #hook_add = '''
 #  autocmd FileType vue syntax sync fromstart
 #'''
+
+[[plugins]]
+repo = 'wuelnerdotexe/vim-astro'
 
 [[plugins]]
 repo = 'leafOfTree/vim-vue-plugin'
@@ -462,5 +487,3 @@ hook_add = '''
   "let g:winresizer_start_key='<C-A>'
   "let g:winresizer_gui_start_key='<C-A>'
 '''
-
-

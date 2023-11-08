@@ -28,11 +28,41 @@ export LSCOLORS=gxfxcxdxbxegedabagacad
 ##PS1="\u: \W $"
 #PS1="\u \t[\w] $ "
 
+# 個別バイナリのパス
+export PATH=$PATH:$HOME/bin/
+
+#####################################################################################################
+# lima VM
+#####################################################################################################
+# limactl start
+
+# export DOCKER_HOST=ssh://localhost:60006
+
+### メモ書き
+### https://qiita.com/yoichiwo7/items/44aff38674134ad87da3
+### https://korosuke613.hatenablog.com/entry/2021/09/18/docker-on-lima
+### 今の最新のCLI
+# wget https://download.docker.com/mac/static/stable/x86_64/docker-20.10.12.tgz
+### Install Docker CLI
+# mkdir -p $HOME/bin
+# tar xzvf docker-20.10.8.tgz
+# mv docker/docker $HOME/bin/.
+# chmod 755 $HOME/bin/docker
+### パス通すとかは各々してください
+
+### lima VM のインストール
+# brew install lima
+# limactl start
+# lima uname -r
+# curl -fsSL https://get.docker.com | lima
+
+### limactl start はbashrcとかに記述して勝手に起動するようにしても可能
+
 #####################################################################################################
 # function
 #####################################################################################################
 # load nvm
-function load_npm () {
+function load_nvm () {
   echo "add PATH for node.js"
   export PATH="/usr/local/bin:$PATH:/usr/local/sbin"
 
@@ -164,13 +194,15 @@ git config --global --add pull.ff only
 if [ `which tmux` ]; then
 
   if ! [ -n "$TMUX" ]; then
-    load_npm
-    nvm use --lts
+    load_nvm
+    #nvm use --lts
     npm_dir=${NVM_PATH}_modules
-    tmux a -d || tmux
+    tmux a -d || tmux -u
   else
-    load_npm
+    load_nvm
+    #nvm use --lts
     . ~/bash/tmux/alias.sh
+    tmux source-file ~/.tmux.conf
   fi
 fi
 

@@ -25,3 +25,13 @@ source ~/.vim/vim/dein.vim
 source ~/.vim/vim/base.vim
 source ~/.vim/vim/keymap.vim
 source ~/.vim/vim/auto.vim
+
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+    disable = {}
+  }
+}
+EOF
