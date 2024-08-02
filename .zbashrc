@@ -221,8 +221,7 @@ function node_vi () {
 # tmux
 #####################################################################################################
 
-if [ `which tmux` ]; then
-
+if [[ -n "$ITERM_SESSION_ID" ]] && ! [ -n "$TMUX" ]; then
   if ! [ -n "$TMUX" ]; then
     #nvm use --lts
     npm_dir=${NVM_PATH}_modules
@@ -231,8 +230,6 @@ if [ `which tmux` ]; then
     . ~/bash/tmux/alias.sh
   fi
 fi
-
-
 
 #####################################################################################################
 # peco
