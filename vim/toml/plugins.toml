@@ -487,3 +487,14 @@ hook_add = '''
   "let g:winresizer_start_key='<C-A>'
   "let g:winresizer_gui_start_key='<C-A>'
 '''
+
+[[plugins]]
+repo = 'github/copilot.vim'
+
+[[plugins]]
+repo = 'nvim-lua/plenary.nvim'
+
+[[plugins]]
+repo = 'CopilotC-Nvim/CopilotChat.nvim'
+depends = ['github/copilot.vim', 'nvim-lua/plenary.nvim']
+branch = 'canary'
