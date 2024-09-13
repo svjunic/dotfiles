@@ -35,3 +35,7 @@ require'nvim-treesitter.configs'.setup {
   }
 }
 EOF
+
+"lua << EOF
+"require'copilot_chat_config.init'
+"EOF
