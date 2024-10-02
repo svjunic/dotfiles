@@ -17,9 +17,9 @@ let s:toml_coc      = g:toml_dir . '/plugins.coc.toml'
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
-  if has('nvim')
-    call dein#add('nvim-treesitter/nvim-treesitter', { 'merged': 0 })
-  endif
+  "if has('nvim')
+  "  call dein#add('nvim-treesitter/nvim-treesitter', { 'merged': 0 })
+  "endif
 
   " 参考： https://qiita.com/delphinus/items/cd221a450fd23506e81a
   call dein#load_toml(s:toml,      {'lazy': 0})
