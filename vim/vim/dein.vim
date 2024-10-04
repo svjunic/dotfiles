@@ -36,3 +36,15 @@ if dein#check_install()
   call dein#install()
 endif
 
+
+call ddu#start({
+  \ 'sources': [
+    \ { 'name': 'file' },
+    \ ],
+  \ })
+
+if !exists('g:ddu#start')
+  let g:ddu#start = 0
+endif
+
+
