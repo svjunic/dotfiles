@@ -1,0 +1,44 @@
+[[plugins]]
+repo = 'Shougo/ddu.vim'
+depends = ['denops.vim']
+hook_add = '''
+  nmap ,d [ddu]
+  nnoremap <silent> [ddu]f <Cmd>call ddu#start({'name': 'filer', 'sources': [{'name': 'file', 'params': {}}]})<CR>
+  nnoremap <silent> [ddu]p <Cmd>call ddu#start({'name': 'file_rec', 'sources': [{'name': 'file_rec'}]})<CR>
+
+  nnoremap <silent> [ddu]gr <Cmd>call ddu#start({'name': 'grep', 'sources': [{'name': 'rg', 'params': {'input': input('Pattern: ')}}]})<CR>
+  nnoremap <silent> [ddu]b <Cmd>call ddu#start({'name': 'buffer', 'sources': [{'name': 'buffer'}]})<CR>
+'''
+
+[[plugins]]
+repo = 'Shougo/ddu-ui-ff'
+
+[[plugins]]
+repo = 'Shougo/ddu-ui-filer'
+
+[[plugins]]
+repo = 'Shougo/ddu-source-file'
+
+[[plugins]]
+repo = 'Shougo/ddu-source-file_rec'
+
+[[plugins]]
+repo = 'Shougo/ddu-filter-converter_display_word'
+
+[[plugins]]
+repo = 'Shougo/ddu-filter-matcher_substring'
+
+[[plugins]]
+repo = 'Shougo/ddu-filter-matcher_ignore_files'
+
+[[plugins]]
+repo = 'Shougo/ddu-kind-file'
+
+[[plugins]]
+repo = 'Shougo/ddu-filter-sorter_alpha'
+
+[[plugins]]
+repo = 'shun/ddu-source-rg'
+
+[[plugins]]
+repo = 'Shougo/ddu-commands.vim'

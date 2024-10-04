@@ -22,6 +22,7 @@ endif
 " }}}
 
 source ~/.vim/vim/dein.vim
+source ~/.vim/vim/ddu.vim
 source ~/.vim/vim/base.vim
 source ~/.vim/vim/keymap.vim
 source ~/.vim/vim/auto.vim
