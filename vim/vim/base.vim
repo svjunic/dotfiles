@@ -1,5 +1,7 @@
 syntax on
 
+set nocompatible
+
 colorscheme radicalgoodspeed
 "colorscheme snortist-theme
 
@@ -165,4 +167,4 @@ command! SyntaxInfo call s:get_syn_info()
 " hook うまく動かず
 " let g:coc_start_at_startup = 1 もうまく動かず
 " coc起動
-CocStart
+"CocStart

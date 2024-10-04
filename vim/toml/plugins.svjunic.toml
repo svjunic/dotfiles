@@ -1,0 +1,12 @@
+[[plugins]]
+repo = 'svjunic/RadicalGoodSpeed'
+rev= 'develop'
+
+#[[plugins]]
+#repo = 'svjunic/snortist-theme.vim'
+
+#[[plugins]]
+#repo = 'svjunic/svjunic-snip'
+#rev = 'hotfix/coc'
+
+
