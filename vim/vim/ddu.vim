@@ -163,7 +163,7 @@ call ddu#custom#patch_local('filer', #{
    nnoremap <buffer><silent> d <Cmd>call ddu#ui#do_action('itemAction', {'name': 'delete'})<CR>
    nnoremap <buffer><silent> r <Cmd>call ddu#ui#do_action('itemAction', {'name': 'rename'})<CR>
    nnoremap <buffer><silent> mv <Cmd>call ddu#ui#do_action('itemAction', {'name': 'move'})<CR>
-   nnoremap <buffer><silent> n <Cmd>call ddu#ui#do_action('itemAction', {'name': 'newFile'})<CR>
+   nnoremap <buffer><silent> nw <Cmd>call ddu#ui#do_action('itemAction', {'name': 'newFile'})<CR>
    nnoremap <buffer><silent> mk <Cmd>call ddu#ui#do_action('itemAction', {'name': 'newDirectory'})<CR>
    nnoremap <buffer><silent> yy <Cmd>call ddu#ui#do_action('itemAction', {'name': 'yank'})<CR>
  endfunction
