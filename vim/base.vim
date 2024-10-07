@@ -161,10 +161,3 @@ function! s:get_syn_info()
         \ " guibg: " . linkedSyn.guibg
 endfunction
 command! SyntaxInfo call s:get_syn_info()
-
-"" Cocのフロートウィンドウが閉じない場合 の対応仮
-"let g:node_client_debug = 1
-" hook うまく動かず
-" let g:coc_start_at_startup = 1 もうまく動かず
-" coc起動
-"CocStart
