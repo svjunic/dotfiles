@@ -26,6 +26,11 @@ repo = 'tpope/vim-surround'
 
 [[plugins]]
 repo = 'vim-scripts/YankRing.vim'
+hook_add = '''
+  nmap ,y [yankring]
+  nnoremap <silent> [yankring] <Cmd>YRShow<CR>
+'''
+
 
 [[plugins]]
 repo = 'vim-scripts/Align'
