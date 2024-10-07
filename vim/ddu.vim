@@ -42,17 +42,12 @@ call ddu#custom#patch_global(#{
     \       previewHeight: &lines - (&lines / 5),
     \     }
     \   },
-    \   sourceOptions: #{
-    \     _: #{
-    \       sorters: ['sorter_alpha'],
-    \     },
-    \   },
     \   filterParams: #{
     \     matcher_substring: #{
     \       highlightMatched: 'Title',
     \     },
     \     matcher_ignore_files: #{
-    \       ignoreGlobs: ['.git'],
+    \       ignoredDirectories: ['.git', 'node_modules']
     \     },
     \   },
     \   kindOptions: #{
