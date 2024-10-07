@@ -38,9 +38,6 @@ repo = 'Shougo/ddu-filter-matcher_ignore_files'
 repo = 'Shougo/ddu-kind-file'
 
 [[plugins]]
-repo = 'Shougo/ddu-filter-sorter_alpha'
-
-[[plugins]]
 repo = 'shun/ddu-source-rg'
 
 [[plugins]]

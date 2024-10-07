@@ -161,3 +161,6 @@ function! s:get_syn_info()
         \ " guibg: " . linkedSyn.guibg
 endfunction
 command! SyntaxInfo call s:get_syn_info()
+
+let g:denops#debug = 1
+let g:ddu#enable_debug = 1
