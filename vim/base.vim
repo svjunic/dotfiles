@@ -162,6 +162,8 @@ function! s:get_syn_info()
 endfunction
 command! SyntaxInfo call s:get_syn_info()
 
-" ddu, denops デバッグ用
+CocStart
+
+"" ddu, denops デバッグ用
 "let g:denops#debug = 1
 "let g:ddu#enable_debug = 1

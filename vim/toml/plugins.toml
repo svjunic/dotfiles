@@ -19,6 +19,24 @@ on_event = 'BufRead'
 hook_post_update = 'TSUpdate'
 
 [[plugins]]
+repo = 'github/copilot.vim'
+
+[[plugins]]
+repo = 'nvim-lua/plenary.nvim'
+
+[[plugins]]
+repo = 'nvim-telescope/telescope.nvim'
+
+[[plugins]]
+repo = 'CopilotC-Nvim/CopilotChat.nvim'
+depends = ['github/copilot.vim', 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim']
+branch = 'canary'
+hook_add = '''
+  nmap ,cc [copilot_chat]
+'''
+
+
+[[plugins]]
 repo = 'thinca/vim-quickrun'
 
 [[plugins]]

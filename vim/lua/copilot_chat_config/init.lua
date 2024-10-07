@@ -28,3 +28,26 @@ require("CopilotChat").setup {
   }
 }
 
+-- 参考にしました。ありがとうございます。
+-- https://qiita.com/lx-sasabo/items/97c49d0f354ea3bdd525
+
+-- telescope を使ってアクションプロンプトを表示する
+function ShowCopilotChatActionPrompt()
+  local actions = require("CopilotChat.actions")
+  require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
+end
+
+-- キーマッピング
+-- <leader>ccp (Copilot Chat Prompt の略) でアクションプロンプトを表示する
+vim.api.nvim_set_keymap("n", "[copilot_chat]p", "<cmd>lua ShowCopilotChatActionPrompt()<cr>", { noremap = true, silent = true })
+
+-- バッファの内容全体を使って Copilot とチャットする
+function CopilotChatBuffer()
+  local input = vim.fn.input("Quick Chat: ")
+  if input ~= "" then
+    require("CopilotChat").ask(input, { selection = require("CopilotChat.select").buffer })
+  end
+end
+
+-- <leader>ccq (Copilot Chat Quick) で Copilot とチャットする
+vim.api.nvim_set_keymap("n", "[copilot_chat]q", "<cmd>lua CopilotChatBuffer()<cr>", { noremap = true, silent = true })

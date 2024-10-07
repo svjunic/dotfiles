@@ -22,6 +22,7 @@ endif
 " }}}
 
 set runtimepath+=~/.vim
+set runtimepath+=~/.cache/dein/repos/github.com/CopilotC-Nvim/CopilotChat.nvim
 
 source ~/.vim/dein.vim
 source ~/.vim/ddu.vim
