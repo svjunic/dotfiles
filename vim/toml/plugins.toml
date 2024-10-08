@@ -33,6 +33,7 @@ depends = ['github/copilot.vim', 'nvim-lua/plenary.nvim', 'nvim-telescope/telesc
 branch = 'canary'
 hook_add = '''
   nmap ,cc [copilot_chat]
+  nnoremap <silent> [copilot_chat]c <Cmd>CopilotChat<CR>
 '''
 
 
