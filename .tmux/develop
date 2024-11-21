@@ -9,3 +9,5 @@ select-pane -t 0
 split-window -v
 
 select-pane -t 2
+
+set-option -ga terminal-overrides ',xterm-256color:Tc'
