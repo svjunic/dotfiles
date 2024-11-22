@@ -1,5 +1,8 @@
 syntax on
 
+"set termguicolors
+set notermguicolors
+
 set nocompatible
 
 colorscheme radicalgoodspeed
