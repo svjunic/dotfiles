@@ -3,11 +3,11 @@ repo = 'Shougo/ddu.vim'
 depends = ['denops.vim']
 hook_add = '''
   nmap ,d [ddu]
-  nnoremap <silent> [ddu]f <Cmd>call ddu#start({'name': 'filer', 'sources': [{'name': 'file', 'params': {}}]})<CR>
-  nnoremap <silent> [ddu]r <Cmd>call ddu#start({'name': 'file_rec', 'sources': [{'name': 'file_rec'}]})<CR>
-
-  nnoremap <silent> [ddu]gr <Cmd>call ddu#start({'name': 'grep', 'sources': [{'name': 'rg', 'params': {'input': input('Pattern: ')}}]})<CR>
-  nnoremap <silent> [ddu]b <Cmd>call ddu#start({'name': 'buffer', 'sources': [{'name': 'buffer'}]})<CR>
+  nnoremap <silent> [ddu]f  <Cmd>call ddu#start({'name': 'filer',        'sources': [{'name': 'file', 'params': {}}]})<CR>
+  nnoremap <silent> [ddu]r  <Cmd>call ddu#start({'name': 'file_rec',     'sources': [{'name': 'file_rec'}]})<CR>
+  nnoremap <silent> [ddu]gr <Cmd>call ddu#start({'name': 'grep',         'sources': [{'name': 'rg', 'params': {'input': input('Pattern: ')}}]})<CR>
+  nnoremap <silent> [ddu]b  <Cmd>call ddu#start({'name': 'buffer',       'sources': [{'name': 'buffer'}]})<CR>
+  "nnoremap <silent> [ddu]m  <Cmd>call ddu#start({'name': 'path_history', 'sources': [{'name': 'path_history'}]})<CR>
 '''
 
 [[plugins]]
@@ -24,6 +24,9 @@ repo = 'Shougo/ddu-source-file_rec'
 
 [[plugins]]
 repo = 'Shougo/ddu-source-buffer'
+
+[[plugins]]
+repo = 'Shougo/ddu-source-path_history'
 
 [[plugins]]
 repo = 'Shougo/ddu-filter-converter_display_word'

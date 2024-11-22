@@ -171,5 +171,22 @@ call ddu#custom#patch_local('filer', #{
  endfunction
 
 " ----------
+"call ddu#custom#patch_local('path_history', #{
+"    \   ui: 'ff',
+"    \   sourceOptions: #{
+"    \     _: #{
+"    \       matchers: ['matcher_ignore_files'],
+"    \     },
+"    \   },
+"    \   columnParams: #{},
+"    \ })
+"
+"call ddu#custom#action('kind', 'file', 'uiCd', { args -> UiCdAction(args) })
+"function! UiCdAction(args)
+"  let path = a:args.items[0].action.path
+"  let directory = path->isdirectory() ? path : path->fnamemodify(':h')
+"
+"  call ddu#ui#filer#do_action('itemAction', { name: 'narrow', params: #{ path: directory } })
+"endfunction
 
 " autocmd TabEnter,CursorHold,FocusGained <buffer> call ddu#ui#do_action('checkItems')

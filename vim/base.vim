@@ -162,6 +162,10 @@ function! s:get_syn_info()
 endfunction
 command! SyntaxInfo call s:get_syn_info()
 
+let g:copilot_filetypes = {
+  \ '*' : v:false,
+  \ }
+
 CocStart
 
 "" ddu, denops デバッグ用
