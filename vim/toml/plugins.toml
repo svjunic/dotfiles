@@ -50,7 +50,6 @@ hook_add = '''
   nnoremap <silent> [yankring] <Cmd>YRShow<CR>
 '''
 
-
 [[plugins]]
 repo = 'vim-scripts/Align'
 
@@ -70,6 +69,9 @@ hook_add = '''
       \ 'typescript' : 1,
       \}
 '''
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
 
 # # {{{ いまは使ってなさそう
 # #[[plugins]]
