@@ -19,6 +19,9 @@ on_event = 'BufRead'
 hook_post_update = 'TSUpdate'
 
 [[plugins]]
+repo = 'nvim-treesitter/playground'
+
+[[plugins]]
 repo = 'github/copilot.vim'
 
 [[plugins]]
