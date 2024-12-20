@@ -2,10 +2,14 @@ local select = require('CopilotChat.select')
 
 require("CopilotChat").setup {
   debug = true, -- Enable debugging
+  max_message_length = 60000,
 
   -- プロンプトの設定
   -- デフォルトは英語なので日本語でオーバーライドしています
   prompts = {
+    Review= {
+      prompt = '/COPILOT_REVIEW カーソル上のコードを日本語でレビューしてください。',
+    },
     Explain = {
       prompt = '/COPILOT_EXPLAIN カーソル上のコードの説明を段落をつけて書いてください。',
     },
