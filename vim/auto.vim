@@ -46,3 +46,4 @@ autocmd FileType scss       let g:copilot_filetypes.scss       = v:true
 autocmd FileType css        let g:copilot_filetypes.css        = v:true
 autocmd FileType html       let g:copilot_filetypes.html       = v:true
 autocmd FileType pug        let g:copilot_filetypes.pug        = v:true
+autocmd FileType json       let g:copilot_filetypes.json       = v:true
