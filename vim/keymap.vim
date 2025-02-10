@@ -40,7 +40,12 @@ vnoremap j gj
 nnoremap k gk
 vnoremap k gk
 
-nmap si :SyntaxInfo<CR>
-
 " Cocのフロートウィンドウが閉じない場合
-nmap <Esc> :call coc#util#float_hide() <CR>
+nmap <Esc> :call call coc#float#close_all() <CR>
+
+
+" ハイライト確認用
+function! s:sv_set_dev_HighlightMapping()
+  nnoremap <silent> <space> :TSHighlightCapturesUnderCursor<CR>
+endfunction
+command! SVSetDevHightlightMapping call s:sv_set_dev_HighlightMapping()

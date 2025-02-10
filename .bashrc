@@ -302,3 +302,5 @@ if [ `which avn` ]; then
 else
   [[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
 fi
+. "/Users/sv.junic/.deno/env"
+source /usr/local/etc/bash_completion.d/deno.bash
