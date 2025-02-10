@@ -196,11 +196,23 @@ git config --global alias.log 'log --all --branches --graph'
 #####################################################################################################
 function npm () {
   echo 'npm function'
+  unset -f npx
   unset -f npm
   load_npm
 
   if [ ! -z $1 ]; then
     npm $@
+  fi
+}
+
+function npx () {
+  echo 'npm function'
+  unset -f npx
+  unset -f npm
+  load_npm
+
+  if [ ! -z $1 ]; then
+    npx $@
   fi
 }
 
@@ -308,6 +320,8 @@ alias gitlg='git log --graph'
 function gitbase () {
   git show-branch | grep '*' | grep -v "$(git rev-parse --abbrev-ref HEAD)" | head -1 | awk -F'[]~^[]' '{print $2}'
 }
+
+alias gs='gh copilot suggest'
 
 #alias adbDebug='sh ~/bash/androidDebug.sh'
 alias tmux-session-clear='tmux kill-session -a'

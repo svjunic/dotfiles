@@ -1,8 +1,13 @@
+local context = require('CopilotChat.context')
 local select = require('CopilotChat.select')
+local buffer = require('CopilotChat.select').buffer
+local utils = require('CopilotChat.utils')
 
 require("CopilotChat").setup {
   debug = true, -- Enable debugging
   max_message_length = 60000,
+  -- model = 'o3-mini', -- デフォルトのモデルを指定
+  model = 'claude-3.5-sonnet', -- デフォルトのモデルを指定
 
   -- プロンプトの設定
   -- デフォルトは英語なので日本語でオーバーライドしています
@@ -28,7 +33,25 @@ require("CopilotChat").setup {
     FixDiagnostic = {
       prompt = 'ファイル内の次のような診断上の問題を解決してください：',
       selection = select.diagnostics,
-    }
+    },
+    -- FixDiagnostic = {
+    --   prompt = "/COPILOT_FIX このコードには問題があります。バグを修正したコードに書き直してください。日本語で返答ください。",
+    -- },
+    GenerateTest = {
+      prompt = "/COPILOT_GENERATE このコードのテストコードを作成してください。日本語で返答ください。",
+    },
+
+    Commit = {
+      prompt = "変更のコミットメッセージをcommitizenの規約に従って日本語で書いてください。タイトルは最大50文字、メッセージは72文字で折り返してください。メッセージ全体をgitcommit言語のコードブロックで囲んでください。",
+      selection = context.gitdiff,
+    },
+    CommitStaged = {
+      prompt = "変更のコミットメッセージをcommitizenの規約に従って日本語で書いてください。タイトルは最大50文字、メッセージは72文字で折り返してください。メッセージ全体をgitcommit言語のコードブロックで囲んでください。",
+      selection = function(source)
+        local context = require("CopilotChat.select")
+        return context.gitdiff(source, true)
+      end,
+    },
   }
 }
 
