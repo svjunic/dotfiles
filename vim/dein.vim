@@ -6,6 +6,10 @@ let s:dein_src = '~/.cache/dein/repos/github.com/Shougo/dein.vim'
 
 execute 'set runtimepath+=' .. s:dein_src
 
+" DeinUpdate
+let g:spacevim_plugin_manager_processes = 16
+let g:spacevim_plugin_manager_max_processes = 16
+
 let g:toml_dir     = expand('~/.vim/toml')
 let s:toml_general = g:toml_dir . '/general.toml'
 let s:toml         = g:toml_dir . '/plugins.toml'
