@@ -40,9 +40,6 @@ vnoremap j gj
 nnoremap k gk
 vnoremap k gk
 
-" Cocのフロートウィンドウが閉じない場合
-nmap <Esc> :call call coc#float#close_all() <CR>
-
 
 " ハイライト確認用
 function! s:sv_set_dev_HighlightMapping()
