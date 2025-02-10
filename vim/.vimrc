@@ -21,17 +21,16 @@ endif
 " :CopyCmdOutput
 " }}}
 
-source ~/.vim/vim/dein.vim
-source ~/.vim/vim/base.vim
-source ~/.vim/vim/keymap.vim
-source ~/.vim/vim/auto.vim
+set runtimepath+=~/.vim
+set runtimepath+=~/.cache/dein/repos/github.com/CopilotC-Nvim/CopilotChat.nvim
 
+source ~/.vim/dein.vim
+source ~/.vim/ddu.vim
+source ~/.vim/base.vim
+source ~/.vim/keymap.vim
+source ~/.vim/auto.vim
 
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  highlight = {
-    enable = true,
-    disable = {}
-  }
-}
+lua << EOF
+require'treesitter_config.init'
+require'copilot_chat_config.init'
 EOF

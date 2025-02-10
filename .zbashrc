@@ -76,6 +76,8 @@ function load_npm () {
   export PATH="/usr/local/bin:$PATH:/usr/local/sbin"
 
   source ~/.nvm/nvm.sh
+  nvm use v20.18.0
+  #nvm use --lts
 
   alias node="node --experimental-modules"
   echo "set NODE_PATH for node.js"
@@ -194,11 +196,23 @@ git config --global alias.log 'log --all --branches --graph'
 #####################################################################################################
 function npm () {
   echo 'npm function'
+  unset -f npx
   unset -f npm
   load_npm
 
   if [ ! -z $1 ]; then
     npm $@
+  fi
+}
+
+function npx () {
+  echo 'npm function'
+  unset -f npx
+  unset -f npm
+  load_npm
+
+  if [ ! -z $1 ]; then
+    npx $@
   fi
 }
 
@@ -221,8 +235,7 @@ function node_vi () {
 # tmux
 #####################################################################################################
 
-if [ `which tmux` ]; then
-
+if [[ -n "$ITERM_SESSION_ID" ]] && ! [ -n "$TMUX" ]; then
   if ! [ -n "$TMUX" ]; then
     #nvm use --lts
     npm_dir=${NVM_PATH}_modules
@@ -231,8 +244,6 @@ if [ `which tmux` ]; then
     . ~/bash/tmux/alias.sh
   fi
 fi
-
-
 
 #####################################################################################################
 # peco
@@ -310,6 +321,8 @@ function gitbase () {
   git show-branch | grep '*' | grep -v "$(git rev-parse --abbrev-ref HEAD)" | head -1 | awk -F'[]~^[]' '{print $2}'
 }
 
+alias gs='gh copilot suggest'
+
 #alias adbDebug='sh ~/bash/androidDebug.sh'
 alias tmux-session-clear='tmux kill-session -a'
 
@@ -320,3 +333,5 @@ alias gitfilemode='git config core.filemode'
 
 alias spwget='wget --user-agent="Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1" '
 # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+alias vimdiff='nvim -d'
