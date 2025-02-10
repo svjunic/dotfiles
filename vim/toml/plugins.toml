@@ -22,6 +22,48 @@ hook_post_update = 'TSUpdate'
 repo = 'nvim-treesitter/playground'
 
 [[plugins]]
+repo = 'neovim/nvim-lspconfig'
+hook_add = '''
+  lua << EOF
+  local lspconfig = require('lspconfig')
+
+  -- LSPサーバーの設定
+  -- TypeScript
+  lspconfig.ts_ls.setup{}
+  -- Vue
+  lspconfig.volar.setup{}
+  -- HTML
+  lspconfig.html.setup{}
+  -- CSS
+  lspconfig.cssls.setup{}
+  -- JSON
+  lspconfig.jsonls.setup{}
+  -- PHP
+  lspconfig.intelephense.setup{}
+
+  -- キーマッピング
+  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {silent = true})
+  vim.keymap.set('n', 'gy', vim.lsp.buf.type_definition, {silent = true})
+  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, {silent = true})
+  vim.keymap.set('n', 'gr', vim.lsp.buf.references, {silent = true})
+  vim.keymap.set('n', '<space>h', vim.lsp.buf.hover, {silent = true})
+  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, {silent = true})
+  vim.keymap.set('n', '<space>a', vim.lsp.buf.code_action, {silent = true})
+  vim.keymap.set('n', '<C-j>', vim.diagnostic.goto_next, {silent = true})
+  vim.keymap.set('n', '<C-k>', vim.diagnostic.goto_prev, {silent = true})
+
+  -- 診断表示の設定
+  vim.diagnostic.config({
+    virtual_text = true,
+    signs = true,
+    underline = true,
+    update_in_insert = false,
+    severity_sort = true,
+  })
+EOF
+'''
+
+[[plugins]]
 repo = 'github/copilot.vim'
 
 [[plugins]]
