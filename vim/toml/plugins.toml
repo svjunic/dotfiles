@@ -42,15 +42,19 @@ hook_add = '''
   lspconfig.intelephense.setup{}
 
   -- キーマッピング
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {silent = true})
-  vim.keymap.set('n', 'gy', vim.lsp.buf.type_definition, {silent = true})
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, {silent = true})
-  vim.keymap.set('n', 'gr', vim.lsp.buf.references, {silent = true})
-  vim.keymap.set('n', '<space>h', vim.lsp.buf.hover, {silent = true})
-  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, {silent = true})
-  vim.keymap.set('n', '<space>a', vim.lsp.buf.code_action, {silent = true})
-  vim.keymap.set('n', '<C-j>', vim.diagnostic.goto_next, {silent = true})
-  vim.keymap.set('n', '<C-k>', vim.diagnostic.goto_prev, {silent = true})
+  local opts = { silent = true }
+  vim.keymap.set('n', 'gd'       , vim.lsp.buf.definition     , opts)
+  vim.keymap.set('n', 'gD'       , vim.lsp.buf.declaration    , opts)
+  vim.keymap.set('n', 'gy'       , vim.lsp.buf.type_definition, opts)
+  vim.keymap.set('n', 'gi'       , vim.lsp.buf.implementation , opts)
+  vim.keymap.set('n', 'gr'       , vim.lsp.buf.references     , opts)
+  vim.keymap.set('n', '<space>h' , vim.lsp.buf.hover          , opts)
+  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename         , opts)
+  vim.keymap.set('n', '<space>a' , vim.lsp.buf.code_action    , opts)
+  vim.keymap.set('n', '<C-j>'    , vim.diagnostic.goto_next   , opts)
+  vim.keymap.set('n', '<C-k>'    , vim.diagnostic.goto_prev   , opts)
+  vim.keymap.set("n", "<space>e" , vim.diagnostic.open_float  , opts)
+  vim.keymap.set("n", "<space>q" , vim.diagnostic.setloclist  , opts)
 
   -- 診断表示の設定
   vim.diagnostic.config({
