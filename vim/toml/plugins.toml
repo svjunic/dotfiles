@@ -33,7 +33,7 @@ repo = 'nvim-telescope/telescope.nvim'
 [[plugins]]
 repo = 'CopilotC-Nvim/CopilotChat.nvim'
 depends = ['github/copilot.vim', 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim']
-branch = 'canary'
+branch = 'main'
 hook_add = '''
   nmap ,cc [copilot_chat]
   nnoremap <silent> [copilot_chat]c <Cmd>CopilotChat<CR>
