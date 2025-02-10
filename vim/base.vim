@@ -130,8 +130,6 @@ let g:copilot_filetypes = {
   \ '*' : v:false,
   \ }
 
-CocStart
-
 "" ddu, denops デバッグ用
 "let g:denops#debug = 1
 "let g:ddu#enable_debug = 1
