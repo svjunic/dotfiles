@@ -27,19 +27,36 @@ hook_add = '''
   lua << EOF
   local lspconfig = require('lspconfig')
 
+  -- LSPの機能をcmpに提供する設定
+  local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
   -- LSPサーバーの設定
-  -- TypeScript
-  lspconfig.ts_ls.setup{}
+  -- TypeScript/JavaScript
+  lspconfig.ts_ls.setup({
+    capabilities = capabilities,
+    root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
+    single_file_support = true
+  })
   -- Vue
-  lspconfig.volar.setup{}
+  lspconfig.volar.setup({
+    capabilities = capabilities
+  })
   -- HTML
-  lspconfig.html.setup{}
+  lspconfig.html.setup({
+    capabilities = capabilities
+  })
   -- CSS
-  lspconfig.cssls.setup{}
+  lspconfig.cssls.setup({
+    capabilities = capabilities
+  })
   -- JSON
-  lspconfig.jsonls.setup{}
+  lspconfig.jsonls.setup({
+    capabilities = capabilities
+  })
   -- PHP
-  lspconfig.intelephense.setup{}
+  lspconfig.intelephense.setup({
+    capabilities = capabilities
+  })
 
   -- キーマッピング
   local opts = { silent = true }
@@ -73,6 +90,45 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
 
 EOF
 '''
+
+[[plugins]]
+repo = 'hrsh7th/nvim-cmp'
+hook_add = '''
+lua <<EOF
+  local cmp = require('cmp')
+  cmp.setup({
+    mapping = {
+      ['<C-p>'] = cmp.mapping.select_prev_item(),
+      ['<C-n>'] = cmp.mapping.select_next_item(),
+      ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.close(),
+      ['<CR>'] = cmp.mapping.confirm {
+        behavior = cmp.ConfirmBehavior.Replace,
+        select = true,
+      },
+    },
+    sources = {
+      { name = 'nvim_lsp' },
+      { name = 'buffer' },
+      { name = 'path' },
+    },
+    experimental = {
+      ghost_text = true
+    }
+  })
+EOF
+'''
+
+[[plugins]]
+repo = 'hrsh7th/cmp-nvim-lsp'
+
+[[plugins]]
+repo = 'hrsh7th/cmp-buffer'
+
+[[plugins]]
+repo = 'hrsh7th/cmp-path'
 
 [[plugins]]
 repo = 'github/copilot.vim'
