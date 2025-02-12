@@ -114,6 +114,11 @@ lua <<EOF
       { name = 'buffer' },
       { name = 'path' },
     },
+    window = {
+      documentation = {
+        winhighlight = 'Normal:CmpDocumentation',
+      },
+    },
     experimental = {
       ghost_text = true
     }
