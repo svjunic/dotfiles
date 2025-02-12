@@ -190,6 +190,36 @@ hook_add = '''
 [[plugins]]
 repo = 'tpope/vim-fugitive'
 
+[[plugins]]
+repo = 'nvimtools/none-ls.nvim'
+hook_add = '''
+lua << EOF
+local null_ls = require("null-ls")
+
+null_ls.setup({
+    sources = {
+        null_ls.builtins.formatting.prettier,
+        null_ls.builtins.diagnostics.eslint,
+    },
+    on_attach = function(client, bufnr)
+        if client.supports_method("textDocument/formatting") then
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                buffer = bufnr,
+                callback = function()
+                    vim.lsp.buf.format({
+                        bufnr = bufnr,
+                        filter = function(client)
+                            return client.name == "null-ls"
+                        end
+                    })
+                end,
+            })
+        end
+    end,
+})
+EOF
+'''
+
 # # {{{ いまは使ってなさそう
 # #[[plugins]]
 # #repo = 'othree/yajs.vim'
