@@ -191,15 +191,20 @@ hook_add = '''
 repo = 'tpope/vim-fugitive'
 
 [[plugins]]
+repo = 'nvimtools/none-ls-extras.nvim'
+
+[[plugins]]
 repo = 'nvimtools/none-ls.nvim'
+depends = ['nvimtools/none-ls-extras.nvim']
 hook_add = '''
 lua << EOF
 local null_ls = require("null-ls")
 
 null_ls.setup({
+    debug = true,
     sources = {
         null_ls.builtins.formatting.prettier,
-        null_ls.builtins.diagnostics.eslint,
+        require("none-ls.code_actions.eslint"),
     },
     on_attach = function(client, bufnr)
         if client.supports_method("textDocument/formatting") then
