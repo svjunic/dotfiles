@@ -337,9 +337,9 @@ alias spwget='wget --user-agent="Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Ma
 alias vimdiff='nvim -d'
 
 alias repo='function _repo() {
-    if [ -d ".git" ]; then
+    if git status &>/dev/null; then
         local branch
-        branch=$(git branch --list | sed "s/^ *//" | peco)
+        branch=$(git branch -a | sed "s/^[* ] //" | sed "s/remotes\/origin\///" | sort -u | grep -v "HEAD" | peco)
         if [ -n "$branch" ]; then
             git checkout "$branch"
         fi
@@ -347,4 +347,3 @@ alias repo='function _repo() {
         echo "This is not a git repository."
     fi
 }; _repo'
-
