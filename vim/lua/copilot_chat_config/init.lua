@@ -6,8 +6,12 @@ local utils = require('CopilotChat.utils')
 require("CopilotChat").setup {
   debug = true, -- Enable debugging
   max_message_length = 60000,
-  -- model = 'o3-mini', -- デフォルトのモデルを指定
-  model = 'claude-3.5-sonnet', -- デフォルトのモデルを指定
+
+  -- デフォルトのモデルを指定
+  -- model = 'o3-mini',
+  -- model = 'claude-3.5-sonnet',
+  model = 'claude-3.7-sonnet',
+  -- model = 'claude-3.7-sonnet-thought',
 
   -- プロンプトの設定
   -- デフォルトは英語なので日本語でオーバーライドしています
