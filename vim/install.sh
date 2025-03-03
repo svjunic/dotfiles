@@ -1,5 +1,6 @@
 #!/bin/bash
 
+echo '1. npm install ---------------'
 
 # TypeScript/JavaScript
 npm install -g typescript typescript-language-server
@@ -18,3 +19,10 @@ npm install -g prettier
 
 # eslint
 npm install -g eslint
+
+
+echo '2. brew install ---------------'
+
+# telecsope用のフォント
+brew tap homebrew/cask-fonts
+brew install font-hack-nerd-font
