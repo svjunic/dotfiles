@@ -33,4 +33,5 @@ source ~/.vim/auto.vim
 lua << EOF
 require'treesitter_config.init'
 require'copilot_chat_config.init'
+require'telescope_config.init'
 EOF
