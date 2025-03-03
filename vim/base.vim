@@ -1,6 +1,5 @@
 syntax on
 
-"set termguicolors
 set notermguicolors
 
 set nocompatible
@@ -72,7 +71,7 @@ set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp932,iso-2022-jp,euc-jp
 set fileformat=unix
 set fileformats=unix,dos
-set ambiwidth=double
+"set ambiwidth=double
 
 set foldmethod=marker
 
