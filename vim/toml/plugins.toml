@@ -18,8 +18,11 @@ merged = 0
 on_event = 'BufRead'
 hook_post_update = 'TSUpdate'
 
+# [[plugins]]
+# repo = 'nvim-treesitter/playground'
+
 [[plugins]]
-repo = 'nvim-treesitter/playground'
+repo = 'nvim-tree/nvim-web-devicons'
 
 [[plugins]]
 repo = 'neovim/nvim-lspconfig'
