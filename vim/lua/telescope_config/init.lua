@@ -1,5 +1,6 @@
 require("telescope").setup{
   defaults = {
+    file_ignore_patterns = { "node_modules", ".git" },
     borderchars = {
       "─",
       "│",
@@ -27,4 +28,5 @@ require("telescope").setup{
     results_height = 0.5,  -- 必要に応じて高さを調整
     preview_cutoff = 120,  -- プレビューの制限
   },
+  extensions = {},
 }

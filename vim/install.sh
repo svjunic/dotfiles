@@ -26,3 +26,6 @@ echo '2. brew install ---------------'
 # telecsope用のフォント
 brew tap homebrew/cask-fonts
 brew install font-hack-nerd-font
+
+# nvim-treesitter
+brew install gcc

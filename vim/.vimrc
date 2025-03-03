@@ -23,6 +23,7 @@ endif
 
 set runtimepath+=~/.vim
 set runtimepath+=~/.cache/dein/repos/github.com/CopilotC-Nvim/CopilotChat.nvim
+set runtimepath+=~/.cache/dein/repos/github.com/nvim-tree/nvim-web-devicons
 
 source ~/.vim/dein.vim
 source ~/.vim/ddu.vim
@@ -34,4 +35,5 @@ lua << EOF
 require'treesitter_config.init'
 require'copilot_chat_config.init'
 require'telescope_config.init'
+require'nvim-web-devicons_config.init'
 EOF

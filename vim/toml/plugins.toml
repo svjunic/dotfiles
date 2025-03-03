@@ -23,6 +23,9 @@ hook_post_update = 'TSUpdate'
 
 [[plugins]]
 repo = 'nvim-tree/nvim-web-devicons'
+hook_post_source = '''
+lua require('nvim-web-devicons').setup { default = true }
+'''
 
 [[plugins]]
 repo = 'neovim/nvim-lspconfig'
@@ -139,23 +142,29 @@ repo = 'hrsh7th/cmp-buffer'
 repo = 'hrsh7th/cmp-path'
 
 [[plugins]]
-repo = 'github/copilot.vim'
-
-[[plugins]]
 repo = 'nvim-lua/plenary.nvim'
 
 [[plugins]]
 repo = 'nvim-telescope/telescope.nvim'
+hook_add = '''
+  nmap ,f [telescope]
+  nnoremap <silent> [telescope]ff <cmd>Telescope find_files<cr>
+  nnoremap <silent> [telescope]fg <cmd>Telescope live_grep<cr>
+  nnoremap <silent> [telescope]fb <cmd>Telescope buffers<cr>
+  nnoremap <silent> [telescope]fh <cmd>Telescope help_tags<cr>
+'''
+
+[[plugins]]
+repo = 'github/copilot.vim'
 
 [[plugins]]
 repo = 'CopilotC-Nvim/CopilotChat.nvim'
-depends = ['github/copilot.vim', 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim']
+depends = ['github/copilot.vim', 'nvim-tree/nvim-web-devicons', 'nvim-lua/plenary.nvim', 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim']
 branch = 'main'
 hook_add = '''
   nmap ,cc [copilot_chat]
   nnoremap <silent> [copilot_chat]c <Cmd>CopilotChat<CR>
 '''
-
 
 [[plugins]]
 repo = 'thinca/vim-quickrun'
@@ -227,65 +236,3 @@ null_ls.setup({
 })
 EOF
 '''
-
-# # {{{ いまは使ってなさそう
-# #[[plugins]]
-# #repo = 'othree/yajs.vim'
-# #on_ft= ['javascript']
-#
-# #[[plugins]]
-# #repo = 'othree/es.next.syntax.vim'
-# #on_ft= ['javascript']
-# #
-# ##[[plugins]]
-# ##repo = 'posva/vim-vue'
-# ##on_ft= ['vue']
-# ##hook_add = '''
-# ##  autocmd FileType vue syntax sync fromstart
-# ##'''
-# #
-# #[[plugins]]
-# #repo = 'wuelnerdotexe/vim-astro'
-# #
-# #[[plugins]]
-# #repo = 'leafOfTree/vim-vue-plugin'
-# #on_ft= ['vue']
-# #hook_add = '''
-# #  let g:vim_vue_plugin_load_full_syntax = 1
-# #  "let g:vim_vue_plugin_use_pug = 1
-# #  let g:vim_vue_plugin_use_sass = 1
-# #  let g:vim_vue_plugin_use_typescript = 1
-# #'''
-# #
-# #[[plugins]]
-# #repo = 'kevinoid/vim-jsonc'
-# #
-# #[[plugins]]
-# #repo = 'leafgarland/typescript-vim'
-# #
-# #[[plugins]]
-# #repo = 'peitalin/vim-jsx-typescript'
-# #
-# #[[plugins]]
-# #repo = 'ap/vim-css-color'
-# #
-# #[[plugins]]
-# #repo = 'yasuharu519/vim-codic'
-# #hook_add = '''
-# #  nmap <silent> ,cd :VimCodic<CR>
-# #'''
-# #
-# #[[plugins]]
-# #repo = 'editorconfig/editorconfig-vim'
-# #
-# ## [[plugins]]
-# ## repo = 'rizzatti/dash.vim'
-# #
-# #[[plugins]]
-# #repo = 'simeji/winresizer'
-# #hook_add = '''
-# #  "後で考える
-# #  "let g:winresizer_start_key='<C-A>'
-# #  "let g:winresizer_gui_start_key='<C-A>'
-# #'''
-# # }}}
