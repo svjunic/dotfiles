@@ -163,7 +163,7 @@ depends = ['github/copilot.vim', 'nvim-tree/nvim-web-devicons', 'nvim-lua/plenar
 branch = 'main'
 hook_add = '''
   nmap ,cc [copilot_chat]
-  nnoremap <silent> [copilot_chat]c <Cmd>CopilotChat<CR>
+  nnoremap <silent> [copilot_chat]c <Cmd>CopilotChatOpen<CR>
 '''
 
 [[plugins]]
