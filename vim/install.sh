@@ -1,31 +1,51 @@
 #!/bin/bash
 
-echo '1. npm install ---------------'
+function install_npm() {
+    echo '1. npm install ---------------'
 
-# TypeScript/JavaScript
-npm install -g typescript typescript-language-server
+    # TypeScript/JavaScript
+    npm install -g typescript typescript-language-server
 
-# Vue
-npm install -g @volar/vue-language-server
+    # Vue
+    npm install -g @volar/vue-language-server
 
-# HTML/CSS/JSON
-npm install -g vscode-langservers-extracted
+    # HTML/CSS/JSON
+    npm install -g vscode-langservers-extracted
 
-# PHP
-npm install -g intelephense
+    # PHP
+    npm install -g intelephense
 
-# prettier
-npm install -g prettier
+    # prettier
+    npm install -g prettier
 
-# eslint
-npm install -g eslint
+    # eslint
+    npm install -g eslint
+}
 
+function install_brew() {
+    echo '2. brew install ---------------'
 
-echo '2. brew install ---------------'
+    # telescope用のフォント
+    brew tap homebrew/cask-fonts
+    brew install font-hack-nerd-font
 
-# telecsope用のフォント
-brew tap homebrew/cask-fonts
-brew install font-hack-nerd-font
+    # nvim-treesitter
+    brew install gcc
+}
 
-# nvim-treesitter
-brew install gcc
+case "$1" in
+    "npm")
+        install_npm
+        ;;
+    "brew")
+        install_brew
+        ;;
+    "all")
+        install_npm
+        install_brew
+        ;;
+    *)
+        echo "Usage: $0 [npm|brew|all]"
+        exit 1
+        ;;
+esac

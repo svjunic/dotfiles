@@ -76,8 +76,8 @@ function load_npm () {
   export PATH="/usr/local/bin:$PATH:/usr/local/sbin"
 
   source ~/.nvm/nvm.sh
-  nvm use v20.18.0
-  #nvm use --lts
+  #nvm use v20.18.0
+  nvm use --lts
 
   alias node="node --experimental-modules"
   echo "set NODE_PATH for node.js"
