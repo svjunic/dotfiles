@@ -7,7 +7,8 @@ require("CopilotChat").setup {
   debug = true, -- Enable debugging
   max_message_length = 60000,
   -- model = 'o3-mini', -- デフォルトのモデルを指定
-  model = 'claude-3.5-sonnet', -- デフォルトのモデルを指定
+  -- model = 'claude-3.5-sonnet', -- デフォルトのモデルを指定
+  model = 'gpt-4o', -- デフォルトのモデルを指定
 
   -- プロンプトの設定
   -- デフォルトは英語なので日本語でオーバーライドしています
