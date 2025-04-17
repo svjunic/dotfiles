@@ -243,4 +243,3 @@ on_event = 'BufRead'
 hook_add = '''
   let g:matchup_matchparen_offscreen = {'method': 'popup'}
 '''
-`
