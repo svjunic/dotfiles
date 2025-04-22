@@ -2,7 +2,7 @@
 autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('Todo', '\W\zs\(TODO\|FIXME\|CHANGED\|XXX\|BUG\|HACK\|NOTE\|INFO\|IDEA\)')
 
 " ファイルタイプ識別
-autocmd FileType html,jade,css,scss,sass,vue,typescript,typescript.tsx EmmetInstall
+autocmd FileType html,jade,css,scss,sass,vue,typescript,typescriptreact,javascript,javascriptreact EmmetInstall
 
 "autocmd Filetype javascript,vue,typescript,typescript.tsx ALELint
 
@@ -31,7 +31,6 @@ augroup END
 
 " tsxがts判定になるのを防ぐ
 autocmd BufNewFile,BufRead *.tsx let b:tsx_ext_found = 1
-autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
 
 " jsonc対応
 autocmd FileType json syntax match Comment +\/\/.\+$+

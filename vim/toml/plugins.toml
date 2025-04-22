@@ -41,6 +41,7 @@ hook_add = '''
   lspconfig.ts_ls.setup({
     capabilities = capabilities,
     root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
+    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
     single_file_support = true
   })
   -- Vue
