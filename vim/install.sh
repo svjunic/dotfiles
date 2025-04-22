@@ -6,6 +6,9 @@ function install_npm() {
     # TypeScript/JavaScript
     npm install -g typescript typescript-language-server
 
+    # tailwindcss
+    npm install -g @tailwindcss/language-server
+
     # Vue
     npm install -g @volar/vue-language-server
 
