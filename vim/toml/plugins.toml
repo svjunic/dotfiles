@@ -90,11 +90,16 @@ hook_add = '''
     severity_sort = true,
   })
 
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-  vim.lsp.handlers.hover, {
-    border = "rounded"
-  }
-)
+  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+    vim.lsp.handlers.hover, {
+      border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" }, -- 明示的に枠を指定
+      focusable = false,
+      max_width = 80,
+      max_height = 20,
+      winblend = 0, -- 透明度を無効化
+      zindex = 50
+    }
+  )
 
 EOF
 '''
