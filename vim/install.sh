@@ -12,6 +12,9 @@ function install_npm() {
     # Vue
     npm install -g @volar/vue-language-server
 
+    # Astro
+    npm install -g @astrojs/language-server
+
     # HTML/CSS/JSON
     npm install -g vscode-langservers-extracted
 
