@@ -29,6 +29,7 @@ lua require('nvim-web-devicons').setup { default = true }
 
 [[plugins]]
 repo = 'neovim/nvim-lspconfig'
+on_event = 'BufRead'
 hook_add = '''
   lua << EOF
   local lspconfig = require('lspconfig')
@@ -41,7 +42,7 @@ hook_add = '''
   lspconfig.ts_ls.setup({
     capabilities = capabilities,
     root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
-    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "astro" },
     single_file_support = true
   })
   -- Vue
@@ -62,6 +63,10 @@ hook_add = '''
   })
   -- PHP
   lspconfig.intelephense.setup({
+    capabilities = capabilities
+  })
+  -- Astro
+  lspconfig.astro.setup({
     capabilities = capabilities
   })
 
@@ -191,7 +196,7 @@ repo = 'vim-scripts/Align'
 
 [[plugins]]
 repo = 'Valloric/MatchTagAlways'
-on_ft = ['html', 'vue', 'typescript', 'javascript']
+on_ft = ['html', 'vue', 'typescript', 'javascript', 'astro']
 hook_add = '''
   "let g:mta_use_matchparen_group = 1
 
@@ -203,6 +208,7 @@ hook_add = '''
       \ 'jsx' : 1,
       \ 'vue' : 1,
       \ 'typescript' : 1,
+      \ 'astro' : 1,
       \}
 '''
 

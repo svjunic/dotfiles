@@ -21,6 +21,7 @@ require('nvim-treesitter.configs').setup {
     "vim",        -- Vimscript 部分もまだ残るなら
     "regex",      -- 正規表現のハイライト
     "tsx",        -- React (TypeScript + JSX)
+    "astro",      -- astro
 
     -- AI / Python 活用
     "python",

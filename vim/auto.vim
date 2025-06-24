@@ -2,9 +2,7 @@
 autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('Todo', '\W\zs\(TODO\|FIXME\|CHANGED\|XXX\|BUG\|HACK\|NOTE\|INFO\|IDEA\)')
 
 " ファイルタイプ識別
-autocmd FileType html,jade,css,scss,sass,vue,typescript,typescriptreact,javascript,javascriptreact EmmetInstall
-
-"autocmd Filetype javascript,vue,typescript,typescript.tsx ALELint
+autocmd FileType html,jade,css,scss,sass,vue,typescript,typescriptreact,javascript,javascriptreact,astro EmmetInstall
 
 autocmd BufRead,BufNewFile *.scss set filetype=scss
 autocmd BufRead,BufNewFile *.sass set filetype=scss
@@ -13,6 +11,7 @@ autocmd BufRead,BufNewFile *.md set filetype=markdown
 autocmd BufRead,BufNewFile *.js,*.mjs,*.cjs,*.jsx set filetype=javascript
 autocmd BufRead,BufNewFile *.vue set filetype=vue
 autocmd BufRead,BufNewFile *.pug set filetype=pug
+autocmd BufRead,BufNewFile *.astro set filetype=astro
 
 " " htmlのとじタグを</でいれる
 " augroup MyXML
