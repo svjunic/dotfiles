@@ -229,7 +229,10 @@ null_ls.setup({
     debug = true,
     debounce = 1000,
     sources = {
-        null_ls.builtins.formatting.prettier,
+        -- null_ls.builtins.formatting.prettier,
+        require("null-ls").builtins.formatting.prettier.with({
+          filetypes = { "astro", "javascript", "typescript", "json", "css", "markdown" },
+        }),
         require("none-ls.code_actions.eslint"),
     },
     on_attach = function(client, bufnr)
