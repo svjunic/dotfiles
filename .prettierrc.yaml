@@ -73,3 +73,11 @@ overrides:
       tabWidth: 2
       useTabs: false
       semi: true
+
+  - files: "*.astro"
+    options:
+      printWidth: 10000
+      singleQuote: true
+      tabWidth: 2
+      useTabs: false
+      semi: true

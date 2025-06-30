@@ -46,13 +46,11 @@ require("CopilotChat").setup {
       prompt = "変更のコミットメッセージをcommitizenの規約に従って日本語で書いてください。タイトルは最大50文字、メッセージは72文字で折り返してください。メッセージ全体をgitcommit言語のコードブロックで囲んでください。",
       selection = context.gitdiff,
     },
-    CommitStaged = {
-      prompt = "変更のコミットメッセージをcommitizenの規約に従って日本語で書いてください。タイトルは最大50文字、メッセージは72文字で折り返してください。メッセージ全体をgitcommit言語のコードブロックで囲んでください。",
-      selection = function(source)
-        local context = require("CopilotChat.select")
-        return context.gitdiff(source, true)
-      end,
-    },
+
+    -- Commit = {
+    --   prompt = "変更のコミットメッセージを以下のルールで作成してください。Gitの変更履歴が分かるように、コミットメッセージは[コミット種別] refs #チケット番号 変更内容 とする。コミット種別は、'feat: 新しい機能', 'fix: バグの修正', 'docs: ドキュメント変更', 'style: 空白、フォーマット、セミコロン追加など', 'refactor: リファクタリング', 'perf: パフォーマンス向上関連の変更', 'test: テスト関連の変更', 'chore: ビルド、補助ツール、ライブラリ関連の変更',例としては'[fix] refs #PRJ-12345 XXXの解消'という形になります。チケット番号については、不明な場合は# を入れてください。",
+    --   selection = context.gitdiff,
+    -- },
   }
 }
 

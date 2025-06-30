@@ -23,6 +23,7 @@ function install_npm() {
 
     # prettier
     npm install -g prettier
+    npm install -g prettier-plugin-astro
 
     # eslint
     npm install -g eslint

@@ -7,9 +7,7 @@
 --- npm install -g @astrojs/language-server
 --- ```
 
-local util = require 'lspconfig.util'
-
-return {
+vim.lsp.config('astro', {
   cmd = { 'astro-ls', '--stdio' },
   filetypes = { 'astro' },
   root_markers = { 'package.json', 'tsconfig.json', 'jsconfig.json', '.git' },
@@ -21,4 +19,4 @@ return {
       config.init_options.typescript.tsdk = util.get_typescript_server_path(config.root_dir)
     end
   end,
-}
+})
