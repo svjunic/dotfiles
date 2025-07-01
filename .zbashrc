@@ -219,7 +219,7 @@ function npx () {
 function node_vi () {
   unalias vi
   alias vi='nvim'
-  
+
   if ! (type "node" > /dev/null 2>&1) ; then
     load_npm
   fi
@@ -321,6 +321,13 @@ function gitbase () {
   git show-branch | grep '*' | grep -v "$(git rev-parse --abbrev-ref HEAD)" | head -1 | awk -F'[]~^[]' '{print $2}'
 }
 
+# NOTE: stash忘れがち、3ヶ月使わなかったら消す
+alias gitStashlist   = 'git stash list'              # stash確認用
+alias gitStashShow   = 'git stash show -p stash@{0}' # 差分内容をチェック
+alias gitStashSave   = 'git stash save'              # "作業内容メモ" のようにメッセージをつける
+alias gitStashBranch = 'git stash branch '           # 新しいブランチ名 で stash から直接作業再開（安全で便利！）
+
+# github copilot
 alias gs='gh copilot suggest'
 
 #alias adbDebug='sh ~/bash/androidDebug.sh'
