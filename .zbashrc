@@ -322,10 +322,10 @@ function gitbase () {
 }
 
 # NOTE: stash忘れがち、3ヶ月使わなかったら消す
-alias gitStashlist   = 'git stash list'              # stash確認用
-alias gitStashShow   = 'git stash show -p stash@{0}' # 差分内容をチェック
-alias gitStashSave   = 'git stash save'              # "作業内容メモ" のようにメッセージをつける
-alias gitStashBranch = 'git stash branch '           # 新しいブランチ名 で stash から直接作業再開（安全で便利！）
+alias gitStashlis='git stash list'               # stash確認用
+alias gitStashShow='git stash show -p stash@{0}' # 差分内容をチェック
+alias gitStashSave='git stash save'              # "作業内容メモ" のようにメッセージをつける
+alias gitStashBranch='git stash branch '         # 新しいブランチ名 で stash から直接作業再開（安全で便利！）
 
 # github copilot
 alias gs='gh copilot suggest'
