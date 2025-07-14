@@ -28,6 +28,11 @@ augroup scss
   autocmd CursorMoved,CursorMovedI *.scss checktime
 augroup END
 
+augroup astro
+  autocmd!
+  autocmd BufWritePre *.astro lua vim.lsp.buf.format()
+augroup END
+
 " tsxがts判定になるのを防ぐ
 autocmd BufNewFile,BufRead *.tsx let b:tsx_ext_found = 1
 
@@ -45,3 +50,4 @@ autocmd FileType css        let g:copilot_filetypes.css        = v:true
 autocmd FileType html       let g:copilot_filetypes.html       = v:true
 autocmd FileType pug        let g:copilot_filetypes.pug        = v:true
 autocmd FileType json       let g:copilot_filetypes.json       = v:true
+autocmd FileType astro      let g:copilot_filetypes.astro      = v:true

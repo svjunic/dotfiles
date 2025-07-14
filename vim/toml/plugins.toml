@@ -42,7 +42,7 @@ hook_add = '''
   lspconfig.ts_ls.setup({
     capabilities = capabilities,
     root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
-    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "astro" },
+    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
     single_file_support = true
   })
   -- Vue
@@ -235,7 +235,8 @@ null_ls.setup({
     sources = {
         -- null_ls.builtins.formatting.prettier,
         require("null-ls").builtins.formatting.prettier.with({
-          filetypes = { "astro", "javascript", "typescript", "json", "css", "markdown" },
+          -- astroはプラグインがうまく動かなかったのでautocmdで対応
+          filetypes = { "javascript", "typescript", "json", "css", "markdown" },
         }),
         require("none-ls.code_actions.eslint"),
     },
