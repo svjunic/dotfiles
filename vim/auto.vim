@@ -28,7 +28,7 @@ augroup scss
   autocmd CursorMoved,CursorMovedI *.scss checktime
 augroup END
 
-augroup astro
+augroup prettier
   autocmd!
   autocmd BufWritePre *.astro lua vim.lsp.buf.format()
 augroup END

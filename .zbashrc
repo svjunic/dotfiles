@@ -276,6 +276,42 @@ function cdff () {
   fi
 }
 
+function switch_aws_profile() {
+  local profile
+  profile=$(awk -F'[][]' '/\[.*\]/{print $2}' ~/.aws/credentials | peco)
+
+  if [ -n "$profile" ]; then
+    export AWS_PROFILE=$profile
+    echo "Switched AWS profile to: $AWS_PROFILE"
+  else
+    echo "No profile selected."
+  fi
+}
+
+function switch_venv() {
+  local VENV_DIR="$HOME/.venv"
+
+  if [ ! -d "$VENV_DIR" ]; then
+    echo "Virtual environments directory not found: $VENV_DIR"
+    return 1
+  fi
+
+  local VENV=$(ls "$VENV_DIR" | peco)
+
+  if [ -z "$VENV" ]; then
+    echo "No virtual environment selected."
+    return 0
+  fi
+
+  local VENV_PATH="$VENV_DIR/$VENV/bin/activate"
+  if [ -f "$VENV_PATH" ]; then
+    source "$VENV_PATH"
+    echo "Switched to virtual environment: $VENV"
+  else
+    echo "Activate script not found for: $VENV"
+    return 1
+  fi
+}
 
 #####################################################################################################
 # github
