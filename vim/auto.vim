@@ -28,10 +28,10 @@ augroup scss
   autocmd CursorMoved,CursorMovedI *.scss checktime
 augroup END
 
-augroup prettier
-  autocmd!
-  autocmd BufWritePre *.astro lua vim.lsp.buf.format()
-augroup END
+" augroup prettier
+"   autocmd!
+"   autocmd BufWritePre *.astro lua vim.lsp.buf.format()
+" augroup END
 
 " tsxがts判定になるのを防ぐ
 autocmd BufNewFile,BufRead *.tsx let b:tsx_ext_found = 1
