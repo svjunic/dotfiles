@@ -1,87 +1,10 @@
 plugins:
-  - prettier-plugin-astro
+  - "@prettier/plugin-lua"
 
 overrides:
-  - files: "*.js"
-    options:
-      printWidth: 500
-      singleQuote: true
-      bracketSpacing: true
-      tabWidth: 2
-      useTabs: false
-      semi: true
-      trailingComma: "es5"
-      arrowParens: "always"
 
-  - files: "*.html"
+  - files: "*.lua"
     options:
-      printWidth: 1000000000
+      printWidth: 100
       tabWidth: 2
       useTabs: false
-
-  - files: "*.xml"
-    options:
-      printWidth: 1000000000
-      tabWidth: 2
-      useTabs: false
-
-  - files: "*.css"
-    options:
-      tabWidth: 2
-      useTabs: false
-
-  - files: "*.scss"
-    options:
-      printWidth: 100000
-      tabWidth: 2
-      useTabs: false
-
-  - files: "*.vue"
-    options:
-      printWidth: 500
-      singleQuote: true
-      bracketSpacing: true
-      tabWidth: 2
-      useTabs: false
-      semi: true
-      trailingComma: "es5"
-      arrowParens: "always"
-
-  - files: "*.ts"
-    options:
-      printWidth: 150
-      singleQuote: true
-      bracketSpacing: true
-      tabWidth: 2
-      useTabs: false
-      semi: true
-      trailingComma: "es5"
-      arrowParens: "always"
-
-  - files: "*.tsx"
-    options:
-      printWidth: 450
-      singleQuote: true
-      bracketSpacing: true
-      tabWidth: 2
-      useTabs: false
-      semi: true
-      trailingComma: "es5"
-      arrowParens: "always"
-
-  - files: "*.pug"
-    options:
-      printWidth: 10000
-      singleQuote: true
-      tabWidth: 2
-      useTabs: false
-      semi: true
-
-  - files: "*.astro"
-    options:
-      parser: astro
-      printWidth: 10000
-      singleQuote: true
-      tabWidth: 2
-      useTabs: false
-      semi: true

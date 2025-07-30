@@ -157,7 +157,11 @@ repo = 'hrsh7th/cmp-path'
 repo = 'nvim-lua/plenary.nvim'
 
 [[plugins]]
+repo = 'nvim-telescope/telescope-ui-select.nvim'
+
+[[plugins]]
 repo = 'nvim-telescope/telescope.nvim'
+depends = ['nvim-telescope/telescope-ui-select.nvim']
 hook_add = '''
   nmap ,f [telescope]
   nnoremap <silent> [telescope]ff <cmd>Telescope find_files<cr>
@@ -176,6 +180,7 @@ branch = 'main'
 hook_add = '''
   nmap ,cc [copilot_chat]
   nnoremap <silent> [copilot_chat]c <Cmd>CopilotChatOpen<CR>
+  nnoremap <silent> [copilot_chat]p <Cmd>CopilotChatPrompts<CR>
 '''
 
 [[plugins]]

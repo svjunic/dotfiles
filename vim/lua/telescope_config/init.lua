@@ -34,5 +34,24 @@ require("telescope").setup{
       hidden = true
     },
   },
-  extensions = {},
+  extensions = {
+    ["ui-select"] = {
+      require("telescope.themes").get_dropdown({
+        borderchars = {
+          "─",
+          "│",
+          "─",
+          "│",
+          "╭",
+          "╮",
+          "╯",
+          "╰"
+        },
+        prompt_prefix = "🔍 ",
+        -- previewer = false,    -- プレビューを消すことも可
+      }),
+    }
+  }
 }
+
+require("telescope").load_extension("ui-select")
