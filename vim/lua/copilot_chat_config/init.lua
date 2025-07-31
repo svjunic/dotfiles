@@ -67,7 +67,8 @@ chat.setup {
         "変更のコミットメッセージを以下のルールで作成してください。 \
         Gitの変更履歴が分かるように、コミットメッセージは[コミット種別] refs #チケット番号 変更内容 とする。 \
         コミット種別は、'feat: 新しい機能', 'fix: バグの修正', 'docs: ドキュメント変更', 'style: 空白、フォーマット、セミコロン追加など', 'refactor: リファクタリング', 'perf: パフォーマンス向上関連の変更', 'test: テスト関連の変更', 'chore: ビルド、補助ツール、ライブラリ関連の変更'とする。 \
-        例としては'[fix] refs #PRJ-12345 XXXの解消'という形になります。チケット番号については、gitのコミットメッセージから取得してください。。",
+        コメントは、差分をみて考えてください。 \
+        例としては'[fix] refs #PRJ-12345 XXXの解消'という形になります。チケット番号については、gitのコミットメッセージから取得してください。",
       }, "\n"),
       mapping = "[copilot_chat]k2",
     },
@@ -77,6 +78,7 @@ chat.setup {
 vim.keymap.set("n", "[copilot_chat]q", function()
   local input = vim.fn.input("Quick Chat: ")
   if input ~= "" then
-    chat.ask(input)
+    -- ##neovim://buffer//Users/jun.fujimura/virtual/github/dotfiles/vim/lua/copilot_chat_config/init.lua
+    chat.ask("#buffers:visible\n" .. input)
   end
 end, { desc = "CopilotChat: Quick Chat" })
