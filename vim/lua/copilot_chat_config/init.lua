@@ -10,8 +10,13 @@ chat.setup {
 
   mappings = {
     -- デフォルトキーをカスタマイズしたい場合
-    close         = { "n", "<C-c>" },
-    submit_prompt = { "i", "<CR>" },
+    close         = {
+      normal = "q"
+    },
+    submit_prompt = {
+      insert = "<A-Enter>",
+      normal = "<CR>"
+    },
   },
 
   -- プロンプトの設定
