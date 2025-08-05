@@ -15,6 +15,9 @@ function install_npm() {
     # Astro
     npm install -g @astrojs/language-server
 
+    # yaml
+    npm install -g yaml-language-server
+
     # HTML/CSS/JSON
     npm install -g vscode-langservers-extracted
 
