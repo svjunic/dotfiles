@@ -69,6 +69,22 @@ hook_add = '''
   lspconfig.astro.setup({
     capabilities = capabilities
   })
+  -- Astro
+  -- YAML
+  lspconfig.yamlls.setup({
+    capabilities = capabilities,
+    settings = {
+      yaml = {
+        validate = true,
+        hover = true,
+        completion = true,
+        schemas = {
+          ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+          ["https://json.schemastore.org/github-action.json"] = "/.github/actions/*",
+        },
+      }
+    }
+  })
 
   -- キーマッピング
   local opts = { silent = true }
@@ -235,6 +251,7 @@ conform.setup({
     javascript = { "prettier", lsp_format = "fallback" },
     astro = { "prettier", lsp_format = "fallback" },
     markdown = { "prettier", lsp_format = "fallback" },
+    yaml = { "prettier", lsp_format = "fallback" },
     html = { "prettier", "markuplint", lsp_format = "fallback" },
     css = { "prettier", "stylelint", lsp_format = "fallback" },
     scss = { "prettier", "stylelint", lsp_format = "fallback" },
