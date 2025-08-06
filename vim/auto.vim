@@ -13,25 +13,12 @@ autocmd BufRead,BufNewFile *.vue set filetype=vue
 autocmd BufRead,BufNewFile *.pug set filetype=pug
 autocmd BufRead,BufNewFile *.astro set filetype=astro
 
-" " htmlのとじタグを</でいれる
-" augroup MyXML
-"   autocmd!
-"   autocmd Filetype xml inoremap <buffer> </ </<C-x><C-o>
-"   autocmd Filetype html inoremap <buffer> </ </<C-x><C-o>
-" augroup END
-" }}}
-
 " scssのときだけリロードの確認を頻繁に行う
 augroup scss
   autocmd!
   autocmd BufRead,BufNewFile *.scss set autoread
   autocmd CursorMoved,CursorMovedI *.scss checktime
 augroup END
-
-" augroup prettier
-"   autocmd!
-"   autocmd BufWritePre *.astro lua vim.lsp.buf.format()
-" augroup END
 
 " tsxがts判定になるのを防ぐ
 autocmd BufNewFile,BufRead *.tsx let b:tsx_ext_found = 1
@@ -51,3 +38,7 @@ autocmd FileType html       let g:copilot_filetypes.html       = v:true
 autocmd FileType pug        let g:copilot_filetypes.pug        = v:true
 autocmd FileType json       let g:copilot_filetypes.json       = v:true
 autocmd FileType astro      let g:copilot_filetypes.astro      = v:true
+autocmd FileType gitcommit  let g:copilot_filetypes.gitcommit  = v:true
+
+" Git Commit メッセージ
+autocmd FileType gitcommit CopilotChatK2Commit
