@@ -4,9 +4,7 @@ local utils = require('CopilotChat.utils')
 chat.setup {
   debug = true, -- Enable debugging
   max_message_length = 60000,
-  -- model = 'o3-mini', -- デフォルトのモデルを指定
-  -- model = 'claude-3.5-sonnet', -- デフォルトのモデルを指定
-  model = 'gpt-4o', -- デフォルトのモデルを指定
+  model = 'gpt-4.1', -- デフォルトのモデルを指定
 
   mappings = {
     -- デフォルトキーをカスタマイズしたい場合
@@ -19,35 +17,97 @@ chat.setup {
     },
   },
 
+  -- window = {
+  --   layout = 'float',
+  --   width = 80, -- Fixed width in columns
+  --   height = 20, -- Fixed height in rows
+  --   border = 'rounded', -- 'single', 'double', 'rounded', 'solid'
+  --   title = '🦋 Copilot Chat for Neovim: ',
+  --   zindex = 100, -- Ensure window stays on top
+  -- },
+
+  headers = {
+    user = '🐬 You: ',
+    assistant = '🦋 Copilot: ',
+    tool = '🔧 Tool: ',
+  },
+
   -- プロンプトの設定
   -- デフォルトは英語なので日本語でオーバーライドしています
   prompts = {
+    -- MyCustomPrompt = {
+    --   prompt = 'Explain how it works.',
+    --   system_prompt = 'You are very good at explaining stuff',
+    --   mapping = '<leader>ccmc',
+    --   description = 'My custom prompt description',
+    -- },
     Review= {
-      prompt = '/COPILOT_REVIEW カーソル上のコードを日本語でレビューしてください。',
+      prompt = table.concat({
+        "#buffer: current",
+        "",
+        "コードのレビューを行ってください。",
+      }, "\n"),
+      system_prompt = '日本語で回答してください。',
+      description = '現在のバッファのコードレビューを日本語で依頼します。',
+      mapping = '[copilot_chat]rc',
     },
     Explain = {
-      prompt = '/COPILOT_EXPLAIN カーソル上のコードの説明を段落をつけて書いてください。',
+      prompt = table.concat({
+        "カーソル上のコードの説明を段落をつけて書いてください。",
+      }, "\n"),
+      system_prompt = '日本語で回答してください。',
+      description = 'カーソル位置のコードを日本語で段落付きで説明します。',
+      mapping = '[copilot_chat]re',
     },
-    Tests = {
-      prompt = '/COPILOT_TESTS カーソル上のコードの詳細な単体テスト関数を書いてください。',
+    Test = {
+      prompt = table.concat({
+        "カーソル上のコードの詳細な単体テスト関数を書いてください。",
+      }, "\n"),
+      description = 'カーソル位置のコードに対する詳細な単体テスト関数を生成します。',
+      system_prompt = '日本語で回答してください。',
     },
-    Fix = {
-      prompt = '/COPILOT_FIX このコードには問題があります。バグを修正したコードに書き換えてください。',
+    TestCurrent = {
+      prompt = table.concat({
+        "#buffer: current",
+        "",
+        "カーソル上のコードの詳細な単体テスト関数を書いてください。",
+      }, "\n"),
+      description = '現在のバッファのコードに対する詳細な単体テスト関数を生成します。',
+      system_prompt = '日本語で回答してください。',
     },
+
+    -- Fix = {
+    --   prompt = '/COPILOT_FIX このコードには問題があります。バグを修正したコードに書き換えてください。',
+    -- },
+
     Optimize = {
-      prompt = '/COPILOT_REFACTOR 選択したコードを最適化し、パフォーマンスと可読性を向上させてください。',
+      prompt = table.concat({
+        "選択したコードを最適化し、パフォーマンスと可読性を向上させてください。",
+      }, "\n"),
+      system_prompt = '日本語で回答してください。',
+      description = '選択範囲のコードを最適化し、パフォーマンスと可読性を向上させます。',
+      mapping = '[copilot_chat]rc',
     },
+
     Docs = {
       prompt = '/COPILOT_REFACTOR 選択したコードのドキュメントを書いてください。ドキュメントをコメントとして追加した元のコードを含むコードブロックで回答してください。使用するプログラミング言語に最も適したドキュメントスタイルを使用してください（例：JavaScriptのJSDoc、Pythonのdocstringsなど）',
+      description = '選択範囲のコードに適切なドキュメントコメントを追加します。',
     },
+
+    DocsCurrent = {
+      prompt = table.concat({
+        "#buffer: current",
+        "",
+        "現在のファイルのコメントを書いてください。 \
+        コメントはJSDoc等、ファイルに合わせて一般的なコメントで記述してください",
+      }, "\n"),
+      description = '現在のファイル全体に適切なドキュメントコメントを追加します。',
+      system_prompt = '日本語で回答してください。',
+    },
+
     FixDiagnostic = {
       prompt = 'ファイル内の次のような診断上の問題を解決してください：',
-    },
-    -- FixDiagnostic = {
-    --   prompt = "/COPILOT_FIX このコードには問題があります。バグを修正したコードに書き直してください。日本語で返答ください。",
-    -- },
-    GenerateTest = {
-      prompt = "/COPILOT_GENERATE このコードのテストコードを作成してください。日本語で返答ください。",
+      description = 'ファイル内の診断（エラーや警告）を修正します。',
     },
 
     Commit = {
@@ -57,6 +117,7 @@ chat.setup {
         "",
         "変更のコミットメッセージをcommitizenの規約に従って日本語で書いてください。タイトルは最大50文字、メッセージは72文字で折り返してください。メッセージ全体をgitcommit言語のコードブロックで囲んでください。",
       }, "\n"),
+      description = 'ステージ済み変更のコミットメッセージをcommitizen形式で日本語生成します。',
     },
 
     K2Commit = {
@@ -70,6 +131,8 @@ chat.setup {
         コメントは、差分をみて考えてください。 \
         例としては'[fix] refs #PRJ-12345 XXXの解消'という形になります。チケット番号については、gitのコミットメッセージから取得してください。",
       }, "\n"),
+      system_prompt = '日本語で回答してください。',
+      description = 'K2ルールに従ったコミットメッセージを日本語で生成します。',
       mapping = "[copilot_chat]k2",
     },
   }
