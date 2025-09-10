@@ -1,6 +1,22 @@
 " ハイライトの追加
 autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('Todo', '\W\zs\(TODO\|FIXME\|CHANGED\|XXX\|BUG\|HACK\|NOTE\|INFO\|IDEA\)')
 
+autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('LogNormal', '\W\zs\[\(INFO\|DEBUG\|TRACE\)\]')
+autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('LogWarn', '\W\zs\[\(WARN\)\]')
+autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('LogError', '\W\zs\[\(ERROR\)\]')
+autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('LogFatal', '\W\zs\[\(FATAL\)\]')
+
+autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('LogNormal', '\(INFO\|DEBUG\|TRACE\)')
+autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('LogWarn', '\(WARN\)')
+autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('LogError', '\(ERROR\)')
+autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('LogFatal', '\(FATAL\)')
+
+
+hi LogNormal        ctermfg=81  ctermbg=0 cterm=bold,underline
+hi LogWarn          ctermfg=186 ctermbg=0 cterm=bold,underline
+hi LogError         ctermfg=164 ctermbg=0 cterm=bold,underline
+hi LogFatal         ctermfg=160 ctermbg=0 cterm=bold,underline
+
 " ファイルタイプ識別
 autocmd FileType html,jade,css,scss,sass,vue,typescript,typescriptreact,javascript,javascriptreact,astro EmmetInstall
 
