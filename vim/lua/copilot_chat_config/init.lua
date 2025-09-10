@@ -5,6 +5,7 @@ chat.setup {
   debug = true, -- Enable debugging
   max_message_length = 60000,
   model = 'gpt-4.1', -- デフォルトのモデルを指定
+  system_prompt = '日本語で回答してください。',
 
   mappings = {
     -- デフォルトキーをカスタマイズしたい場合
@@ -142,6 +143,8 @@ vim.keymap.set("n", "[copilot_chat]q", function()
   local input = vim.fn.input("Quick Chat: ")
   if input ~= "" then
     -- ##neovim://buffer//Users/jun.fujimura/virtual/github/dotfiles/vim/lua/copilot_chat_config/init.lua
-    chat.ask("#buffers:visible\n" .. input)
+    local system_prompt = "日本語で回答してください。"
+    chat.ask("#buffers:visible\n" .. input, { system_prompt = system_prompt })
+    -- chat.ask("#buffers:visible\n" .. input)
   end
 end, { desc = "CopilotChat: Quick Chat" })
