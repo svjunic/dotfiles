@@ -1,13 +1,17 @@
-require("lspconfig").tailwindcss.setup{
-  filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact", "svelte" },
+-- tailwindcss LSP configuration using Neovim 0.11+ vim.lsp API
+vim.lsp.config('tailwindcss', {
+  filetypes = { 'html', 'css', 'scss', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'svelte' },
   settings = {
     tailwindCSS = {
       experimental = {
         classRegex = {
-          -- 追加のクラス名検出ルールを設定可能
-          { "tw`([^`]*)", "tw=\"([^\"]*)", "tw={\"([^\"]*)", "tw\\.\\w+`([^`]*)" }
+          -- 追加のクラス名検出ルール / Additional custom class name extraction rules
+          { [[tw`([^`]*)]], [[tw="([^"]*)]], [[tw={"([^"]*)]], [[tw%.%w+`([^`]*)]] }
         }
       }
     }
   }
-}
+})
+
+-- Enable the server so it starts automatically for matching filetypes
+vim.lsp.enable('tailwindcss')
