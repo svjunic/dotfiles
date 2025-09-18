@@ -32,46 +32,57 @@ repo = 'neovim/nvim-lspconfig'
 on_event = 'BufRead'
 hook_add = '''
   lua << EOF
-  local lspconfig = require('lspconfig')
-
+  -- Use new vim.lsp.config / vim.lsp.enable API (nvim 0.11+)
   -- LSPの機能をcmpに提供する設定
   local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-  -- LSPサーバーの設定
+  -- helper: root_dir using vim.fs.find (replacement for lspconfig.util.root_pattern)
+  local function root_dir_from_markers(markers)
+    return function(fname)
+      local util = vim.fs
+      local dir = vim.fs.find(markers, { path = fname, upward = true, type = 'file' })
+      if dir and #dir > 0 then
+        return vim.fs.dirname(dir[1])
+      end
+      return nil
+    end
+  end
+
   -- TypeScript/JavaScript
-  lspconfig.ts_ls.setup({
+  vim.lsp.config('ts_ls', {
     capabilities = capabilities,
-    root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
-    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+    root_dir = root_dir_from_markers({ 'package.json', 'tsconfig.json', 'jsconfig.json', '.git' }),
+    filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
     single_file_support = true
   })
+  vim.lsp.enable('ts_ls')
+
   -- Vue
-  lspconfig.volar.setup({
-    capabilities = capabilities
-  })
+  vim.lsp.config('volar', { capabilities = capabilities })
+  vim.lsp.enable('volar')
+
   -- HTML
-  lspconfig.html.setup({
-    capabilities = capabilities
-  })
+  vim.lsp.config('html', { capabilities = capabilities })
+  vim.lsp.enable('html')
+
   -- CSS
-  lspconfig.cssls.setup({
-    capabilities = capabilities
-  })
+  vim.lsp.config('cssls', { capabilities = capabilities })
+  vim.lsp.enable('cssls')
+
   -- JSON
-  lspconfig.jsonls.setup({
-    capabilities = capabilities
-  })
+  vim.lsp.config('jsonls', { capabilities = capabilities })
+  vim.lsp.enable('jsonls')
+
   -- PHP
-  lspconfig.intelephense.setup({
-    capabilities = capabilities
-  })
+  vim.lsp.config('intelephense', { capabilities = capabilities })
+  vim.lsp.enable('intelephense')
+
   -- Astro
-  lspconfig.astro.setup({
-    capabilities = capabilities
-  })
-  -- Astro
+  vim.lsp.config('astro', { capabilities = capabilities })
+  vim.lsp.enable('astro')
+
   -- YAML
-  lspconfig.yamlls.setup({
+  vim.lsp.config('yamlls', {
     capabilities = capabilities,
     settings = {
       yaml = {
@@ -85,6 +96,7 @@ hook_add = '''
       }
     }
   })
+  vim.lsp.enable('yamlls')
 
   -- キーマッピング
   local opts = { silent = true }
@@ -100,7 +112,7 @@ hook_add = '''
   vim.keymap.set('n', '<C-j>'    , vim.diagnostic.goto_next   , opts)
   vim.keymap.set('n', '<C-k>'    , vim.diagnostic.goto_prev   , opts)
   vim.keymap.set("n", "<space>e" , vim.diagnostic.open_float  , opts)
-  vim.keymap.set("n", "<space>q" , vim.diagnostic.setloclist  , opts)
+  vim.keymap.set('n', '<space>q' , vim.diagnostic.setloclist  , opts)
 
   -- 診断表示の設定
   vim.diagnostic.config({

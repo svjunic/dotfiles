@@ -12,10 +12,10 @@ autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('LogError', '\(E
 autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('LogFatal', '\(FATAL\)')
 
 
-hi LogNormal        ctermfg=81  ctermbg=0 cterm=bold,underline
-hi LogWarn          ctermfg=186 ctermbg=0 cterm=bold,underline
-hi LogError         ctermfg=164 ctermbg=0 cterm=bold,underline
-hi LogFatal         ctermfg=160 ctermbg=0 cterm=bold,underline
+hi LogNormal        ctermfg=155 ctermbg=57  cterm=underline
+hi LogWarn          ctermfg=186 ctermbg=0   cterm=bold,underline
+hi LogError         ctermfg=164 ctermbg=0   cterm=bold,underline
+hi LogFatal         ctermfg=160 ctermbg=0   cterm=bold,underline
 
 " ファイルタイプ識別
 autocmd FileType html,jade,css,scss,sass,vue,typescript,typescriptreact,javascript,javascriptreact,astro EmmetInstall
