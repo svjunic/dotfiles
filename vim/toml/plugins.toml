@@ -58,8 +58,8 @@ hook_add = '''
   vim.lsp.enable('ts_ls')
 
   -- Vue
-  vim.lsp.config('volar', { capabilities = capabilities })
-  vim.lsp.enable('volar')
+  vim.lsp.config('vue_ls', { capabilities = capabilities })
+  vim.lsp.enable('vue_ls')
 
   -- HTML
   vim.lsp.config('html', { capabilities = capabilities })
