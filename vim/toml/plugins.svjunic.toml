@@ -7,6 +7,3 @@ rev= 'develop'
 
 #[[plugins]]
 #repo = 'svjunic/svjunic-snip'
-#rev = 'hotfix/coc'
-
-
