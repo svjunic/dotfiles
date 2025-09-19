@@ -36,26 +36,57 @@ hook_add = '''
   -- LSPの機能をcmpに提供する設定
   local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-  -- helper: root_dir using vim.fs.find (replacement for lspconfig.util.root_pattern)
+  -- 安全な root_dir ヘルパ（fname が空/数値のときにも耐性）
   local function root_dir_from_markers(markers)
     return function(fname)
-      local util = vim.fs
-      local dir = vim.fs.find(markers, { path = fname, upward = true, type = 'file' })
-      if dir and #dir > 0 then
-        return vim.fs.dirname(dir[1])
+      if type(fname) ~= "string" or fname == "" then
+        fname = vim.api.nvim_buf_get_name(0)
+      end
+      -- Deno プロジェクトでは vtsls を無効にする（deno.json* があれば nil）
+      local deno = vim.fs.find({ 'deno.json', 'deno.jsonc' }, { path = fname, upward = true, type = 'file' })[1]
+      if deno then return nil end
+
+      local hit = vim.fs.find(markers, { path = fname, upward = true, type = 'file' })[1]
+      if hit then
+        return vim.fs.dirname(hit)
       end
       return nil
     end
   end
 
-  -- TypeScript/JavaScript
-  vim.lsp.config('ts_ls', {
+  -- ========== TypeScript/JavaScript: vtsls ==========
+  vim.lsp.config('vtsls', {
     capabilities = capabilities,
     root_dir = root_dir_from_markers({ 'package.json', 'tsconfig.json', 'jsconfig.json', '.git' }),
-    filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
-    single_file_support = true
+    -- 単一ファイルでも動かしたいなら true（好みで）
+    single_file_support = true,
+    settings = {
+      -- vtsls 側の推奨設定（お好みで削ってOK）
+      typescript = {
+        format = { semicolons = "insert" },
+        preferences = { includePackageJsonAutoImports = "on" },
+        inlayHints = {
+          enumMemberValues = { enabled = true },
+          functionLikeReturnTypes = { enabled = true },
+          parameterNames = { enabled = "literals" },
+          parameterTypes = { enabled = true },
+          propertyDeclarationTypes = { enabled = true },
+          variableTypes = { enabled = false },
+        },
+      },
+      javascript = {
+        inlayHints = {
+          enumMemberValues = { enabled = true },
+          functionLikeReturnTypes = { enabled = true },
+          parameterNames = { enabled = "literals" },
+          parameterTypes = { enabled = true },
+          propertyDeclarationTypes = { enabled = true },
+          variableTypes = { enabled = false },
+        },
+      },
+    },
   })
-  vim.lsp.enable('ts_ls')
+  vim.lsp.enable('vtsls')
 
   -- Vue
   vim.lsp.config('vue_ls', { capabilities = capabilities })
