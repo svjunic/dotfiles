@@ -4,7 +4,7 @@ function install_npm() {
     echo '1. npm install ---------------'
 
     # TypeScript/JavaScript
-    npm install -g typescript typescript-language-server
+    npm install -g typescript vtsls
 
     # tailwindcss
     npm install -g @tailwindcss/language-server
