@@ -131,7 +131,8 @@ chat.setup {
         コミット種別は、'feat: 新しい機能', 'fix: バグの修正', 'docs: ドキュメント変更', 'style: 空白、フォーマット、セミコロン追加など', 'refactor: リファクタリング', 'perf: パフォーマンス向上関連の変更', 'test: テスト関連の変更', 'chore: ビルド、補助ツール、ライブラリ関連の変更'とする。 \
         コメントは、差分をみて考えてください。 \
         例としては'[fix] refs #PRJ-12345 XXXの解消'という形になります。チケット番号については、gitのコミットメッセージから取得してください。 \
-        publish/README.md、publish/tasks.yml、publish/src/modules配下、publish/src/classes配下、publish/src/services配下、publish/src/entrypoint.js、publish/payloads配下を変更している場合、「変更内容」のprefixとして「lmabda handler: 」をつけてください。",
+        publish/README.md、publish/tasks.yml、publish/src/modules配下、publish/src/classes配下、publish/src/services配下、publish/src/entrypoint.js、publish/payloads配下を変更している場合、「変更内容」のprefixとして「lmabda handler: 」をつけてください。 \
+        最後に、作成したコミットメッセージ全体をgitcommit言語のコードブロックで囲んでください。",
       }, "\n"),
       system_prompt = '日本語で回答してください。',
       description = 'K2ルールに従ったコミットメッセージを日本語で生成します。',
