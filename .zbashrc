@@ -184,6 +184,15 @@ git config --global alias.log 'log --all --branches --graph'
 #git show-branch --merge-base master HEAD
 #git diff `git show-branch --merge-base master HEAD` HEAD
 
+function gitpush_current_branch() {
+  branch=$(git rev-parse --abbrev-ref HEAD)
+  if [ -n "$branch" ]; then
+    git push origin "$branch"
+  else
+    echo "Not in a git repository."
+  fi
+}
+alias gitp='gitpush_current_branch'
 
 #####################################################################################################
 # zsh
