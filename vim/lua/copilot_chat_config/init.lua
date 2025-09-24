@@ -2,10 +2,11 @@ local chat = require("CopilotChat")
 local utils = require('CopilotChat.utils')
 
 chat.setup {
-  debug = true, -- Enable debugging
+  -- debug = true, -- Enable debugging
   max_message_length = 60000,
   model = 'gpt-4.1', -- デフォルトのモデルを指定
-  system_prompt = '日本語で回答してください。',
+  -- system_prompt = '日本語で回答してください。',
+  system_prompt = '必ず日本語で、他の言語を使わずに回答してください。',
 
   mappings = {
     -- デフォルトキーをカスタマイズしたい場合
@@ -48,7 +49,8 @@ chat.setup {
         "",
         "コードのレビューを行ってください。",
       }, "\n"),
-      system_prompt = '日本語で回答してください。',
+      -- system_prompt = '日本語で回答してください。',
+      system_prompt = '必ず日本語で、他の言語を使わずに回答してください。',
       description = '現在のバッファのコードレビューを日本語で依頼します。',
       mapping = '[copilot_chat]rc',
     },
@@ -56,7 +58,8 @@ chat.setup {
       prompt = table.concat({
         "カーソル上のコードの説明を段落をつけて書いてください。",
       }, "\n"),
-      system_prompt = '日本語で回答してください。',
+      -- system_prompt = '日本語で回答してください。',
+      system_prompt = '必ず日本語で、他の言語を使わずに回答してください。',
       description = 'カーソル位置のコードを日本語で段落付きで説明します。',
       mapping = '[copilot_chat]re',
     },
@@ -65,7 +68,8 @@ chat.setup {
         "カーソル上のコードの詳細な単体テスト関数を書いてください。",
       }, "\n"),
       description = 'カーソル位置のコードに対する詳細な単体テスト関数を生成します。',
-      system_prompt = '日本語で回答してください。',
+      -- system_prompt = '日本語で回答してください。',
+      system_prompt = '必ず日本語で、他の言語を使わずに回答してください。',
     },
     TestCurrent = {
       prompt = table.concat({
@@ -74,7 +78,8 @@ chat.setup {
         "カーソル上のコードの詳細な単体テスト関数を書いてください。",
       }, "\n"),
       description = '現在のバッファのコードに対する詳細な単体テスト関数を生成します。',
-      system_prompt = '日本語で回答してください。',
+      -- system_prompt = '日本語で回答してください。',
+      system_prompt = '必ず日本語で、他の言語を使わずに回答してください。',
     },
 
     -- Fix = {
@@ -85,7 +90,8 @@ chat.setup {
       prompt = table.concat({
         "選択したコードを最適化し、パフォーマンスと可読性を向上させてください。",
       }, "\n"),
-      system_prompt = '日本語で回答してください。',
+      -- system_prompt = '日本語で回答してください。',
+      system_prompt = '必ず日本語で、他の言語を使わずに回答してください。',
       description = '選択範囲のコードを最適化し、パフォーマンスと可読性を向上させます。',
       mapping = '[copilot_chat]rc',
     },
@@ -103,7 +109,8 @@ chat.setup {
         コメントはJSDoc等、ファイルに合わせて一般的なコメントで記述してください",
       }, "\n"),
       description = '現在のファイル全体に適切なドキュメントコメントを追加します。',
-      system_prompt = '日本語で回答してください。',
+      -- system_prompt = '日本語で回答してください。',
+      system_prompt = '必ず日本語で、他の言語を使わずに回答してください。',
     },
 
     FixDiagnostic = {
@@ -131,9 +138,12 @@ chat.setup {
         コミット種別は、'feat: 新しい機能', 'fix: バグの修正', 'docs: ドキュメント変更', 'style: 空白、フォーマット、セミコロン追加など', 'refactor: リファクタリング', 'perf: パフォーマンス向上関連の変更', 'test: テスト関連の変更', 'chore: ビルド、補助ツール、ライブラリ関連の変更'とする。 \
         コメントは、差分をみて考えてください。 \
         例としては'[fix] refs #PRJ-12345 XXXの解消'という形になります。チケット番号については、gitのコミットメッセージから取得してください。 \
-        publish/README.md、publish/tasks.yml、publish/src/modules配下、publish/src/classes配下、publish/src/services配下、publish/src/entrypoint.js、publish/payloads配下を変更している場合、「変更内容」のprefixとして「lmabda handler: 」をつけてください。",
+        publish/README.md、publish/tasks.yml、publish/src/modules配下、publish/src/classes配下、publish/src/services配下、publish/src/entrypoint.js、publish/payloads配下を変更している場合、「変更内容」のprefixとして「lmabda handler: 」をつけてください。 \
+        コメントは日本語で作成してください。〜しました、というものではなく言い切りの文章でOK。 \
+        最後に、作成したコミットメッセージ全体をgitcommit言語のコードブロックで囲んでください。",
       }, "\n"),
-      system_prompt = '日本語で回答してください。',
+      -- system_prompt = '日本語で回答してください。',
+      system_prompt = '必ず日本語で、他の言語を使わずに回答してください。',
       description = 'K2ルールに従ったコミットメッセージを日本語で生成します。',
       mapping = "[copilot_chat]k2",
     },
@@ -144,7 +154,8 @@ vim.keymap.set("n", "[copilot_chat]q", function()
   local input = vim.fn.input("Quick Chat: ")
   if input ~= "" then
     -- ##neovim://buffer//Users/jun.fujimura/virtual/github/dotfiles/vim/lua/copilot_chat_config/init.lua
-    local system_prompt = "日本語で回答してください。"
+    -- system_prompt = '日本語で回答してください。',
+    system_prompt = '必ず日本語で、他の言語を使わずに回答してください。',
     chat.ask("#buffers:visible\n" .. input, { system_prompt = system_prompt })
     -- chat.ask("#buffers:visible\n" .. input)
   end
