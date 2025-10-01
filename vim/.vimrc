@@ -36,6 +36,6 @@ require'treesitter_config.init'
 require'copilot_chat_config.init'
 require'telescope_config.init'
 require'nvim-web-devicons_config.init'
-require'lsp.tailwindcss'
+--require'lsp.tailwindcss'
 require'lsp.astro'
 EOF
