@@ -1,7 +1,7 @@
 [[plugins]]
 repo = 'mattn/emmet-vim'
 on_ft= ['css','scss']
-hook_add = '''
+hook_source = '''
   let g:user_emmet_settings = {
         \ 'variables': {
         \ 'lang' : 'ja'
@@ -24,7 +24,7 @@ on_ft= ['pug','jade']
 [[plugins]]
 repo = 'dNitro/vim-pug-complete'
 on_ft= ['pug','jade']
-hook_add = '''
+hook_source = '''
 let g:html5_event_handler_attributes_complete = 0 " Disable event-handler attributes
 let g:html5_rdfa_attributes_complete = 0          " Disable RDFa attributes
 let g:html5_microdata_attributes_complete = 0     " Disable microdata attributes
@@ -33,7 +33,7 @@ let g:html5_aria_attributes_complete = 0          " Disable WAI-ARIA attribute
 
 [[plugins]]
 repo = 'hrsh7th/nvim-cmp'
-hook_add = '''
+hook_source = '''
 lua <<EOF
   local cmp = require('cmp')
   cmp.setup({
@@ -79,7 +79,7 @@ repo = 'hrsh7th/cmp-path'
 repo = 'neovim/nvim-lspconfig'
 on_ft = ['javascript', 'typescript', 'typescriptreact', 'javascriptreact', 'vue', 'html', 'css', 'json', 'astro', 'yaml']
 depends = ['hrsh7th/cmp-nvim-lsp']
-hook_add = '''
+hook_source = '''
   lua << EOF
   -- Use new vim.lsp.config / vim.lsp.enable API (nvim 0.11+)
   -- LSPの機能をcmpに提供する設定
