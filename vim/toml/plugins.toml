@@ -60,9 +60,9 @@ hook_add = '''
   vim.lsp.config('jsonls', { capabilities = capabilities })
   vim.lsp.enable('jsonls')
 
-  -- PHP
-  vim.lsp.config('intelephense', { capabilities = capabilities })
-  vim.lsp.enable('intelephense')
+  -- -- PHP
+  -- vim.lsp.config('intelephense', { capabilities = capabilities })
+  -- vim.lsp.enable('intelephense')
 
   -- Astro
   vim.lsp.config('astro', { capabilities = capabilities })
