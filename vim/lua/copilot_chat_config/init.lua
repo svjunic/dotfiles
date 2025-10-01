@@ -4,7 +4,7 @@ local utils = require('CopilotChat.utils')
 chat.setup {
   -- debug = true, -- Enable debugging
   max_message_length = 60000,
-  model = 'gpt-4.1', -- デフォルトのモデルを指定
+  model = 'gpt-5-mini', -- デフォルトのモデルを指定
   -- system_prompt = '日本語で回答してください。',
   system_prompt = '必ず日本語で、他の言語を使わずに回答してください。',
 
