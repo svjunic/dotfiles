@@ -187,7 +187,7 @@ git config --global alias.log 'log --all --branches --graph'
 function gitpush_current_branch() {
   branch=$(git rev-parse --abbrev-ref HEAD)
   if [ -n "$branch" ]; then
-    git push origin "$branch"
+    git push -u origin "$branch"
   else
     echo "Not in a git repository."
   fi
