@@ -17,7 +17,7 @@ end
 vim.lsp.config('astro', {
   cmd = { 'astro-ls', '--stdio' },
   filetypes = { 'astro' },
-  root_markers = { 'package.json', 'tsconfig.json', 'jsconfig.json', '.git' },
+  root_markers = { 'package.json', 'tsconfig.json', 'jsconfig.json', '.git', 'astro.config.mjs' },
   init_options = {
     typescript = {},
   },
