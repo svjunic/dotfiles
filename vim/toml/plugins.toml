@@ -165,3 +165,11 @@ on_event = 'BufRead'
 hook_add = '''
   let g:matchup_matchparen_offscreen = {'method': 'popup'}
 '''
+
+[[plugins]]
+repo = 'ggandor/leap.nvim'
+hook_add = '''
+nnoremap <silent> gs <Plug>(leap-forward)
+nnoremap <silent> gS <Plug>(leap-backward)
+nnoremap <silent> g, <Plug>(leap-from-window)
+'''
