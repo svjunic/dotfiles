@@ -52,11 +52,39 @@ hook_source = '''
   -- LSPの機能をcmpに提供する設定
   local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
+  -- logをoff
+  vim.lsp.set_log_level("off")
+
   -- TypeScript/JavaScript
   vim.lsp.config('vtsls', {
     capabilities = capabilities,
     -- 単一ファイルでも動かしたいなら true（好みで）
     single_file_support = true,
+    settings = {
+      vtsls = {
+        tsserver = {
+          maxTsServerMemory = 4096,
+          watchOptions = {
+            watchFile = "useFsEvents", -- ←★ここが追加ポイント！
+          },
+        },
+        experimental = {
+          completion = {
+            enableServerSideFuzzyMatch = true,
+          },
+        },
+      },
+      typescript = {
+        preferences = {
+          includePackageJsonAutoImports = "off",
+        },
+      },
+      javascript = {
+        preferences = {
+          includePackageJsonAutoImports = "off",
+        },
+      },
+    },
   })
   vim.lsp.enable('vtsls')
 
