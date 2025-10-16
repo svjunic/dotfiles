@@ -43,6 +43,10 @@ function install_brew() {
 
     # nvim-treesitter
     brew install gcc
+
+    # nvim-tree/fzf-lua用
+    brew install fzf
+    brew install ripgrep
 }
 
 case "$1" in

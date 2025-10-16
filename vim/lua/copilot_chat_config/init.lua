@@ -45,7 +45,7 @@ chat.setup {
     -- },
     Review= {
       prompt = table.concat({
-        "#buffer: current",
+        "#buffer:current",
         "",
         "コードのレビューを行ってください。",
       }, "\n"),
@@ -73,7 +73,7 @@ chat.setup {
     },
     TestCurrent = {
       prompt = table.concat({
-        "#buffer: current",
+        "#buffer:current",
         "",
         "カーソル上のコードの詳細な単体テスト関数を書いてください。",
       }, "\n"),
@@ -120,8 +120,8 @@ chat.setup {
 
     Commit = {
       prompt = table.concat({
-        "#git:staged",
-        "#buffers:visible",
+        "#shell:git diff --staged",
+        "#buffer:visible",
         "",
         "変更のコミットメッセージをcommitizenの規約に従って日本語で書いてください。タイトルは最大50文字、メッセージは72文字で折り返してください。メッセージ全体をgitcommit言語のコードブロックで囲んでください。",
       }, "\n"),
@@ -130,8 +130,8 @@ chat.setup {
 
     K2Commit = {
       prompt = table.concat({
-        "#git:HEAD",
-        "#buffers:visible",
+        "#shell:git diff --staged",
+        "#buffer:visible",
         "",
         "変更のコミットメッセージを以下のルールで作成してください。 \
         Gitの変更履歴が分かるように、コミットメッセージは[コミット種別] refs #チケット番号 変更内容 とする。 \
@@ -157,7 +157,37 @@ vim.keymap.set("n", "[copilot_chat]q", function()
     -- ##neovim://buffer//Users/jun.fujimura/virtual/github/dotfiles/vim/lua/copilot_chat_config/init.lua
     -- system_prompt = '日本語で回答してください。',
     system_prompt = '必ず日本語で、他の言語を使わずに回答してください。',
-    chat.ask("#buffers:visible\n" .. input, { system_prompt = system_prompt })
+    chat.ask("#buffer:visible\n" .. input, { system_prompt = system_prompt })
     -- chat.ask("#buffers:visible\n" .. input)
   end
 end, { desc = "CopilotChat: Quick Chat" })
+
+
+
+-- CopilotChatHeader          - チャットバッファ内のヘッダー部分のハイライト
+-- CopilotChatSeparator       - チャットバッファ内の区切り線のハイライト
+-- CopilotChatSelection       - ソースバッファでの選択範囲のハイライト
+-- CopilotChatStatus          - チャットバッファ内のステータスやスピナーのハイライト
+-- CopilotChatHelp            - チャットバッファ内のヘルプ文のハイライト
+-- CopilotChatResource        - チャットバッファ内のリソース表記（例: #file、#gitdiff）のハイライト
+-- CopilotChatTool            - チャットバッファ内のツール呼び出し（例: @copilot）のハイライト
+-- CopilotChatPrompt          - チャットバッファ内のプロンプト表記（例: /Explain、/Review）のハイライト
+-- CopilotChatModel           - チャットバッファ内のモデル表記（例: $gpt-4.1）のハイライト
+-- CopilotChatUri             - チャットバッファ内のURI表示（例: URL not found: https://...）のハイライト
+-- CopilotChatAnnotation      - ファイルヘッダーやツール呼び出しのヘッダー・本文などの注釈ハイライト
+-- CopilotChatStreamingCursor - ストリーム中のカーソル（縦棒）
+-- CopilotChatStreaming       - ストリーム中の本文
+
+vim.api.nvim_set_hl(0, 'CopilotChatHeader',           { fg = '#ff0088', bg = 'none', bold = true })
+vim.api.nvim_set_hl(0, 'CopilotChatHelp',             { fg = '#6666aa', bg = 'none', bold = false })
+vim.api.nvim_set_hl(0, 'CopilotChatSeparator',        { fg = '#ffffff', bg = 'none', bold = false })
+vim.api.nvim_set_hl(0, 'CopilotChatStatus',           { fg = '#ff9900', bg = 'none', bold = false })
+vim.api.nvim_set_hl(0, 'CopilotChatStreamingCursor',  { fg = '#ff0099', bg = 'none', bold = false })
+vim.api.nvim_set_hl(0, 'CopilotChatStreaming',        { fg = '#eeeeee', bg = 'none', bold = false })
+-- vim.api.nvim_set_hl(0, 'CopilotChatSelection',  { fg = '#ffff00', bg = '#ff0000', bold = true })
+-- vim.api.nvim_set_hl(0, 'CopilotChatResource',   { fg = '#ffff00', bg = '#ff0000', bold = true })
+-- vim.api.nvim_set_hl(0, 'CopilotChatTool',       { fg = '#ffff00', bg = '#ff0000', bold = true })
+-- vim.api.nvim_set_hl(0, 'CopilotChatPrompt',     { fg = '#ffff00', bg = '#ff0000', bold = true })
+-- vim.api.nvim_set_hl(0, 'CopilotChatModel',      { fg = '#ffff00', bg = '#ff0000', bold = true })
+-- vim.api.nvim_set_hl(0, 'CopilotChatUri',        { fg = '#ffff00', bg = '#ff0000', bold = true })
+-- vim.api.nvim_set_hl(0, 'CopilotChatAnnotation', { fg = '#ffff00', bg = '#ff0000', bold = true })

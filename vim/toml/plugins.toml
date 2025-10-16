@@ -18,8 +18,8 @@ merged = 0
 on_event = 'BufRead'
 hook_post_update = 'TSUpdate'
 
-# [[plugins]]
-# repo = 'nvim-treesitter/playground'
+[[plugins]]
+repo = 'nvim-treesitter/playground'
 
 [[plugins]]
 repo = 'nvim-tree/nvim-web-devicons'
@@ -70,14 +70,18 @@ repo = 'nvim-lua/plenary.nvim'
 repo = 'nvim-telescope/telescope-ui-select.nvim'
 
 [[plugins]]
+repo  = 'nvim-telescope/telescope-fzf-native.nvim'
+build = 'make'
+
+[[plugins]]
 repo = 'nvim-telescope/telescope.nvim'
-depends = ['nvim-telescope/telescope-ui-select.nvim']
+depends = ['nvim-lua/plenary.nvim','nvim-telescope/telescope-ui-select.nvim', 'nvim-telescope/telescope-fzf-native.nvim']
 hook_add = '''
-  nmap ,f [telescope]
-  nnoremap <silent> [telescope]ff <cmd>Telescope find_files<cr>
-  nnoremap <silent> [telescope]fg <cmd>Telescope live_grep<cr>
-  nnoremap <silent> [telescope]fb <cmd>Telescope buffers<cr>
-  nnoremap <silent> [telescope]fh <cmd>Telescope help_tags<cr>
+  "nmap ,f [telescope]
+  "nnoremap <silent> [telescope]ff <cmd>Telescope find_files<cr>
+  "nnoremap <silent> [telescope]fg <cmd>Telescope live_grep<cr>
+  "nnoremap <silent> [telescope]fb <cmd>Telescope buffers<cr>
+  "nnoremap <silent> [telescope]fh <cmd>Telescope help_tags<cr>
 '''
 
 [[plugins]]
@@ -167,9 +171,17 @@ hook_add = '''
 '''
 
 [[plugins]]
+repo = 'ibhagwan/fzf-lua'
+
+[[plugins]]
+repo = 'nvim-tree/nvim-tree.lua'
+depends = ['ibhagwan/fzf-lua']
+
+[[plugins]]
 repo = 'ggandor/leap.nvim'
 hook_add = '''
-nnoremap <silent> gs <Plug>(leap-forward)
-nnoremap <silent> gS <Plug>(leap-backward)
-nnoremap <silent> g, <Plug>(leap-from-window)
+nmap ,l [leap]
+nnoremap <silent> [leap]lf <Plug>(leap-forward)
+nnoremap <silent> [leap]lb <Plug>(leap-backward)
+nnoremap <silent> [leap]lw <Plug>(leap-from-window)
 '''
