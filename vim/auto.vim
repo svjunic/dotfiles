@@ -1,21 +1,21 @@
 " ハイライトの追加
-autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('Todo', '\W\zs\(TODO\|FIXME\|CHANGED\|XXX\|BUG\|HACK\|NOTE\|INFO\|IDEA\)')
+autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('Todo', '\W\zs\(TODO\|FIXME\|CHANGED\|XXX\|BUG\|HACK\|NOTE\|INFO\|IDEA\)', 200)
 
-autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('LogNormal', '\W\zs\[\(INFO\|DEBUG\|TRACE\)\]')
-autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('LogWarn', '\W\zs\[\(WARN\)\]')
-autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('LogError', '\W\zs\[\(ERROR\)\]')
-autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('LogFatal', '\W\zs\[\(FATAL\)\]')
+autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('LogNormal', '\W\zs\[\(INFO\|DEBUG\|TRACE\)\]', 200)
+autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('LogWarn', '\W\zs\[\(WARN\)\]', 200)
+autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('LogError', '\W\zs\[\(ERROR\)\]', 200)
+autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('LogFatal', '\W\zs\[\(FATAL\)\]', 200)
 
-autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('LogNormal', '\(INFO\|DEBUG\|TRACE\)')
-autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('LogWarn', '\(WARN\)')
-autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('LogError', '\(ERROR\)')
-autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('LogFatal', '\(FATAL\)')
+autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('LogNormal', '\(INFO\|DEBUG\|TRACE\)', 200)
+autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('LogWarn', '\(WARN\)', 200)
+autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('LogError', '\(ERROR\)', 200)
+autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('LogFatal', '\(FATAL\)', 200)
 
 
-hi LogNormal        ctermfg=155 ctermbg=57  cterm=underline
-hi LogWarn          ctermfg=186 ctermbg=0   cterm=bold,underline
-hi LogError         ctermfg=164 ctermbg=0   cterm=bold,underline
-hi LogFatal         ctermfg=160 ctermbg=0   cterm=bold,underline
+hi LogNormal        ctermfg=155 ctermbg=57  cterm=underline      guifg=#5fd7ff guibg=#005f5f gui=underline
+hi LogWarn          ctermfg=186 ctermbg=0   cterm=bold,underline guifg=#ffd700 guibg=NONE gui=bold,underline
+hi LogError         ctermfg=164 ctermbg=0   cterm=bold,underline guifg=#ff5f87 guibg=NONE gui=bold,underline
+hi LogFatal         ctermfg=160 ctermbg=0   cterm=bold,underline guifg=#ff5f00 guibg=NONE gui=bold,underline
 
 " ファイルタイプ識別
 autocmd FileType html,jade,css,scss,sass,vue,typescript,typescriptreact,javascript,javascriptreact,astro EmmetInstall

@@ -411,3 +411,54 @@ alias repo='function _repo() {
         echo "This is not a git repository."
     fi
 }; _repo'
+
+
+# ~/.zshrc などに追記
+function gitdiff() {
+  emulate -L zsh
+  setopt pipefail
+  setopt localoptions noglob   # [] を含むパスでも展開されない
+
+  # 使い方
+  if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+    echo "Usage: gitdiff [<path> ...]"
+    echo "Choose a base branch with peco and show 'git diff <base> -- <path...>'"
+    return 0
+  fi
+
+  # Git リポジトリチェック
+  if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    echo "Not a git repository."
+    return 1
+  fi
+
+  # peco チェック
+  if ! command -v peco >/dev/null 2>&1; then
+    echo "peco is not installed (brew install peco などで導入してください)"
+    return 1
+  fi
+
+  # 現在ブランチ
+  local current
+  current=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+
+  # 候補一覧（ローカル＆リモート、HEADは除外、現在ブランチも除外）
+  local base
+  base=$(
+    git for-each-ref --format='%(refname:short)' refs/heads refs/remotes \
+    | grep -vE '/HEAD$' \
+    | grep -v "^${current}\$" \
+    | sort -u \
+    | peco --prompt "base branch to diff against > "
+  )
+
+  [[ -z "$base" ]] && { echo "Canceled."; return 1; }
+
+  # 引数が無ければリポジトリ全体、あればそのパスだけ
+  if (( $# == 0 )); then
+    git diff "$base"
+  else
+    git diff "$base" -- "$@"
+  fi
+}
+
