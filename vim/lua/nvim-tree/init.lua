@@ -28,7 +28,9 @@ require("nvim-tree").setup({
   actions = {
     open_file = {
       quit_on_open = true, -- ファイル開いたら閉じる
-      resize_window = true,
+      -- quit_on_open = false,
+      resize_window = false,
+      window_picker = { enable = false }, -- ウィンドウ選択を無効化（誤動作減）
     },
   },
 })
