@@ -65,7 +65,13 @@ hook_source = '''
         tsserver = {
           maxTsServerMemory = 4096,
           watchOptions = {
-            watchFile = "useFsEvents", -- ←★ここが追加ポイント！
+            watchFile = "useFsEvents",
+          },
+          globalPlugins = {
+            {
+              name = "@astrojs/ts-plugin",
+              enableForWorkspaceTypeScriptVersions = true,
+            },
           },
         },
         experimental = {
