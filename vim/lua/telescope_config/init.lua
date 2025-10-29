@@ -33,7 +33,8 @@ require("telescope").setup{
   },
   pickers = {
     find_files = {
-      hidden = true
+      hidden = true,
+      no_ignore = true,  -- .gitignore の無視設定を無視
     },
   },
   extensions = {
