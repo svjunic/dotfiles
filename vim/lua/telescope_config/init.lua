@@ -27,7 +27,8 @@ require("telescope").setup{
       height = 0.9,
     },
     sorting_strategy = "ascending",
-    layout_strategy = "horizontal",  -- または必要に応じて "vertical"
+    -- layout_strategy = "vertical",
+    layout_strategy = "horizontal",
     results_height = 0.5,  -- 必要に応じて高さを調整
     preview_cutoff = 120,  -- プレビューの制限
   },
@@ -60,17 +61,18 @@ require("telescope").setup{
 require("telescope").load_extension("ui-select")
 require('telescope').load_extension('fzf')
 
+-- ピッカー確定後に nvim-tree へ反映
+local reveal = function()
+  require('nvim-tree.api').tree.find_file({ open = false, focus = false })
+end
+
 -- キーマップ
-vim.keymap.set('n', ',fff', tb.find_files, { desc='Telescope Files' })
+-- vim.keymap.set('n', ',fff', tb.find_files, { desc='Telescope Files' })
 vim.keymap.set('n', ',ffg', tb.live_grep,  { desc='Telescope Grep'  })
 vim.keymap.set('n', ',ffb', tb.buffers,    { desc='Telescope Buffers' })
 vim.keymap.set('n', ',ffr', tb.oldfiles,   { desc='Telescope Recent'  })
 
 
--- ピッカー確定後に nvim-tree へ反映
-local reveal = function()
-  require('nvim-tree.api').tree.find_file({ open = false, focus = false })
-end
 vim.keymap.set('n', ',fff', function()
   tb.find_files({ attach_mappings = function(_, map)
     map('i','<CR>', function(prompt_bufnr)
@@ -83,4 +85,27 @@ vim.keymap.set('n', ',fff', function()
     end)
     return true
   end})
-end, { desc='Files + Reveal in Tree' })
+end, { desc='Telescope Files (horizontal)' })
+
+vim.keymap.set('n', ',ffF', function()
+  tb.find_files({
+    layout_strategy = 'vertical',
+    layout_config = {
+      width = 0.95,         -- ウィンドウの幅（1 で全画面）
+      height = 0.95,        -- 高さ（1 で全画面）
+      preview_cutoff = 0,   -- 小さい画面でもプレビューを残すかどうか
+      preview_height = 0.7, -- プレビューを使う場合の高さ割合
+    },
+    attach_mappings = function(_, map)
+      map('i','<CR>', function(prompt_bufnr)
+        require('telescope.actions').select_default(prompt_bufnr)
+        reveal()
+      end)
+      map('n','<CR>', function(prompt_bufnr)
+        require('telescope.actions').select_default(prompt_bufnr)
+        reveal()
+      end)
+    return true
+  end})
+end, { desc='Telescope Files (vertical)' })
+
