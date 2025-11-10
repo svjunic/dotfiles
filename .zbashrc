@@ -70,6 +70,21 @@ export LSCOLORS=gxfxcxdxbxegedabagacad
 #####################################################################################################
 # function
 #####################################################################################################
+
+
+# デフォルトバージョンのNodeを使う
+export NVM_DIR="$HOME/.nvm"
+if [ -f "$NVM_DIR/alias/default" ]; then
+  _NVM_DEFAULT_VER="$(cat "$NVM_DIR/alias/default")"
+  _NVM_BIN="$NVM_DIR/versions/node/${_NVM_DEFAULT_VER}/bin"
+  if [ -d "$_NVM_BIN" ]; then
+    case ":$PATH:" in
+      *":$_NVM_BIN:"*) ;;  # 既に入っていたらスキップ
+      *) export PATH="$_NVM_BIN:$PATH" ;;
+    esac
+  fi
+fi
+
 # load nvm
 function load_npm () {
   echo "add PATH for node.js"

@@ -107,6 +107,13 @@ hook_source = '''
   vim.lsp.config('astro', { capabilities = capabilities })
   vim.lsp.enable('astro')
 
+  -- -- bashls
+  -- vim.lsp.config('bashls', {
+  --   capabilities = capabilities,
+  --   filetypes = {'sh', 'zsh', 'conf'}
+  -- })
+  -- vim.lsp.enable('bashls')
+
   -- YAML
   vim.lsp.config('yamlls', {
     capabilities = capabilities,

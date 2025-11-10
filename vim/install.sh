@@ -22,6 +22,9 @@ function install_npm() {
     # HTML/CSS/JSON
     npm install -g vscode-langservers-extracted
 
+    ## HTML/CSS/JSON
+    #npm install -g bash-language-server
+
     # PHP
     npm install -g intelephense
 
