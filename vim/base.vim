@@ -1,11 +1,13 @@
 syntax on
 
-set notermguicolors
+" termguicolorsに対応しているときだけ有効にする
+if has('termguicolors')
+  set termguicolors
+endif
 
 set nocompatible
 
 colorscheme radicalgoodspeed
-"colorscheme snortist-theme
 
 scriptencoding utf-8
 
