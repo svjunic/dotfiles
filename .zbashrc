@@ -427,6 +427,11 @@ alias repo='function _repo() {
     fi
 }; _repo'
 
+alias c5='copilot --banner --model gpt-5'
+alias ch='copilot --banner --model claude-haiku-4.5'
+alias cs='copilot --banner --model claude-sonnet-4.5'
+
+alias remove-swp='rm ~/.local/state/nvim/swap/.*'
 
 # ~/.zshrc などに追記
 function gitdiff() {
