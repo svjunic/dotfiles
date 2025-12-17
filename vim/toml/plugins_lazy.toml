@@ -33,7 +33,7 @@ let g:html5_aria_attributes_complete = 0          " Disable WAI-ARIA attribute
 
 [[plugins]]
 repo = 'neovim/nvim-lspconfig'
-on_ft = ['javascript', 'typescript', 'typescriptreact', 'javascriptreact', 'vue', 'html', 'css', 'json', 'astro', 'yaml', 'smarty', 'tpl']
+on_ft = ['javascript', 'typescript', 'typescriptreact', 'javascriptreact', 'vue', 'html', 'css', 'json', 'astro', 'yaml', 'smarty', 'tpl', 'mdx']
 depends = ['hrsh7th/cmp-nvim-lsp']
 hook_source = '''
   lua << EOF
@@ -106,6 +106,10 @@ hook_source = '''
 
   -- Astro
   vim.lsp.config('astro', { capabilities = capabilities })
+  vim.lsp.enable('astro')
+
+  -- Astro
+  vim.lsp.config('marksman', { capabilities = capabilities, filetypes = {'md', 'mdx'} })
   vim.lsp.enable('astro')
 
   -- -- bashls
