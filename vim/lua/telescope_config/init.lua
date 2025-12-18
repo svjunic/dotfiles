@@ -2,7 +2,7 @@ local tb = require('telescope.builtin')
 
 require("telescope").setup{
   defaults = {
-    file_ignore_patterns = { "node_modules", ".git/", ".next" },
+    file_ignore_patterns = { "node_modules", ".git/", ".next", ".DS_Store" },
     hidden = true,
     borderchars = {
       "─",

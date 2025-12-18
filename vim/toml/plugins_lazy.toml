@@ -152,6 +152,33 @@ hook_source = '''
   vim.keymap.set("n", "<space>e" , vim.diagnostic.open_float  , opts)
   vim.keymap.set('n', '<space>q' , vim.diagnostic.setloclist  , opts)
 
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = "qf",
+    callback = function(ev)
+      vim.keymap.set(
+        "n",
+        "q",
+        "<cmd>close<CR>",
+        { buffer = ev.buf, silent = true }
+      )
+    end,
+  })
+
+  -- Quickfixが開いている状態でqを押すと、どのバッファにいても閉じる
+  local function any_qf_open()
+    local qf = vim.fn.getqflist({ winid = 0 })
+    if qf and qf.winid and qf.winid ~= 0 then return true end
+    local loc = vim.fn.getloclist(0, { winid = 0 })
+    if loc and loc.winid and loc.winid ~= 0 then return true end
+    return false
+  end
+  vim.keymap.set("n", "q", function()
+    if any_qf_open() then
+      return "<cmd>cclose<CR><cmd>lclose<CR>"
+    end
+    return "q" -- ふだん通り：マクロ記録
+  end, { expr = true, noremap = true, silent = true })
+
   -- 診断表示の設定
   vim.diagnostic.config({
     virtual_text = true,
