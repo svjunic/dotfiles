@@ -39,6 +39,7 @@ require'telescope_config.init'
 require'nvim-web-devicons_config.init'
 -- require'lsp.tailwindcss'
 -- require'lsp.astro'
+require'other.copilot_chat_buffer_tag'
 EOF
 
 " lua << EOF
