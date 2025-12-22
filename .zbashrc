@@ -195,6 +195,11 @@ git config --global alias.st  'status --branch --short'
 git config --global alias.sl  'log --all --branches --decorate --graph --oneline'
 git config --global alias.log 'log --all --branches --graph'
 
+git config --global core.pager delta
+git config --global interactive.diffFilter "delta --color-only"
+git config --global delta.navigate true
+git config --global delta.side-by-side true
+
 #git config --global alias.log 'log --all --branches --graph'
 #git show-branch --merge-base master HEAD
 #git diff `git show-branch --merge-base master HEAD` HEAD
@@ -337,11 +342,32 @@ function switch_venv() {
   fi
 }
 
-function gitdiff_peco_commit() {
+function gitdiff_select_commit() {
   local commit=$(git log --oneline | peco | awk '{print $1}')
   if [ -n "$commit" ]; then
     git diff "$commit"
   fi
+}
+
+function gitshow_select_commit() {
+  emulate -L zsh
+  setopt pipefail
+
+  # コミット選択（pager無効でpecoに流す）
+  local line commit
+  line=$(
+    git --no-pager log --oneline --decorate --all \
+    | peco --prompt "commit to show > "
+  )
+
+  # キャンセル対策
+  [[ -z "$line" ]] && { echo "Canceled."; return 1; }
+
+  # 先頭のハッシュだけ抜く
+  commit="${line%% *}"
+
+  # 選んだコミットの差分（メッセージ＋patch）
+  git show "$commit" -- "$@"
 }
 
 function nvim_swap_clean() {
