@@ -45,6 +45,8 @@ function install_brew() {
     brew install font-hack-nerd-font
 
     # nvim-treesitter
+    brew install tree-sitter
+    brew install tree-sitter-cli
     brew install gcc
 
     # nvim-tree/fzf-lua用

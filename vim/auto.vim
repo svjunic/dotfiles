@@ -59,3 +59,8 @@ autocmd FileType gitcommit  let g:copilot_filetypes.gitcommit  = v:true
 
 " Git Commit メッセージ
 autocmd FileType gitcommit CopilotChatK2Commit
+
+augroup MyTSStart
+  autocmd!
+  autocmd FileType javascript,lua,typescript,tsx lua vim.treesitter.start(0)
+augroup END

@@ -34,8 +34,7 @@ let g:html5_aria_attributes_complete = 0          " Disable WAI-ARIA attribute
 [[plugins]]
 repo = 'neovim/nvim-lspconfig'
 on_ft = ['javascript', 'typescript', 'typescriptreact', 'javascriptreact', 'vue', 'html', 'css', 'json', 'astro', 'yaml', 'smarty', 'tpl', 'mdx']
-depends = ['hrsh7th/cmp-nvim-lsp']
-hook_source = '''
+hook_post_source = '''
   lua << EOF
   -- Use new vim.lsp.config / vim.lsp.enable API (nvim 0.11+)
   -- LSPの機能をcmpに提供する設定
@@ -201,3 +200,7 @@ hook_source = '''
 
 EOF
 '''
+
+[[plugins]]
+repo = 'hrsh7th/cmp-nvim-lsp'
+on_lua = ['cmp_nvim_lsp']

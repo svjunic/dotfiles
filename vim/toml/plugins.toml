@@ -13,14 +13,8 @@ repo = 'wsdjeg/dein-ui.vim'
 
 [[plugins]]
 repo = 'nvim-treesitter/nvim-treesitter'
-merged = 0
-on_event = 'BufRead'
-hook_source = '''
-lua << EOF
-pcall(function()
-  require('treesitter_config.init')
-end)
-EOF
+hook_post_source= '''
+lua require('treesitter_config.init')
 '''
 hook_post_update = 'TSUpdate'
 
@@ -95,10 +89,6 @@ EOF
 '''
 
 [[plugins]]
-repo = 'hrsh7th/cmp-nvim-lsp'
-on_lua = ['cmp_nvim_lsp']
-
-[[plugins]]
 repo = 'hrsh7th/cmp-buffer'
 
 [[plugins]]
@@ -148,23 +138,23 @@ hook_add = '''
 [[plugins]]
 repo = 'vim-scripts/Align'
 
-[[plugins]]
-repo = 'Valloric/MatchTagAlways'
-on_ft = ['html', 'vue', 'typescript', 'javascript', 'astro']
-hook_add = '''
-  "let g:mta_use_matchparen_group = 1
-
-  let g:mta_filetypes = {
-      \ 'html' : 1,
-      \ 'xhtml' : 1,
-      \ 'xml' : 1,
-      \ 'javascript' : 1,
-      \ 'jsx' : 1,
-      \ 'vue' : 1,
-      \ 'typescript' : 1,
-      \ 'astro' : 1,
-      \}
-'''
+#[[plugins]]
+#repo = 'Valloric/MatchTagAlways'
+#on_ft = ['html', 'vue', 'typescript', 'javascript', 'astro']
+#hook_add = '''
+#  "let g:mta_use_matchparen_group = 1
+#
+#  let g:mta_filetypes = {
+#      \ 'html' : 1,
+#      \ 'xhtml' : 1,
+#      \ 'xml' : 1,
+#      \ 'javascript' : 1,
+#      \ 'jsx' : 1,
+#      \ 'vue' : 1,
+#      \ 'typescript' : 1,
+#      \ 'astro' : 1,
+#      \}
+#'''
 
 [[plugins]]
 repo = 'tpope/vim-fugitive'
