@@ -16,6 +16,7 @@ repo = 'nvim-treesitter/nvim-treesitter'
 merged = 0
 on_event = 'BufRead'
 hook_source = '''
+lua << EOF
 pcall(function()
   require('treesitter_config.init')
 end)
@@ -27,6 +28,24 @@ hook_post_update = 'TSUpdate'
 repo = 'nvim-tree/nvim-web-devicons'
 hook_post_source = '''
 lua require('nvim-web-devicons').setup { default = true }
+'''
+
+[[plugins]]
+repo = 'refractalize/oil-git-status.nvim'
+hook_source = '''
+lua << EOF
+require('oil-git-status').setup({
+  show_ignored = true,
+})
+EOF
+'''
+
+[[plugins]]
+repo = 'stevearc/oil.nvim'
+hook_source = '''
+lua << EOF
+  require('oil_config.init')
+EOF
 '''
 
 [[plugins]]
@@ -181,13 +200,6 @@ on_event = 'BufRead'
 hook_add = '''
   let g:matchup_matchparen_offscreen = {'method': 'popup'}
 '''
-
-[[plugins]]
-repo = 'ibhagwan/fzf-lua'
-
-[[plugins]]
-repo = 'nvim-tree/nvim-tree.lua'
-depends = ['ibhagwan/fzf-lua']
 
 [[plugins]]
 repo = 'ggandor/leap.nvim'
