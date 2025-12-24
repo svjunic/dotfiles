@@ -30,14 +30,14 @@ require('nvim-treesitter.configs').setup {
     "gitcommit",
     "git_rebase",
     "gitattributes",
-    "gitignore",
+    "gitignore"
   },
   highlight = {
-    enable = true,
-    disable = {},
-    additional_vim_regex_highlighting = false
+    enable = true
   },
   incremental_selection = { enable = false }
 }
 
-
+-- require('nvim-treesitter.configs').setup({
+--   highlight = { enable = true },
+-- })
