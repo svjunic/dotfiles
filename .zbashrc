@@ -70,14 +70,29 @@ export LSCOLORS=gxfxcxdxbxegedabagacad
 #####################################################################################################
 # function
 #####################################################################################################
+
+
+# デフォルトバージョンのNodeを使う
+export NVM_DIR="$HOME/.nvm"
+if [ -f "$NVM_DIR/alias/default" ]; then
+  _NVM_DEFAULT_VER="$(cat "$NVM_DIR/alias/default")"
+  _NVM_BIN="$NVM_DIR/versions/node/${_NVM_DEFAULT_VER}/bin"
+  if [ -d "$_NVM_BIN" ]; then
+    case ":$PATH:" in
+      *":$_NVM_BIN:"*) ;;  # 既に入っていたらスキップ
+      *) export PATH="$_NVM_BIN:$PATH" ;;
+    esac
+  fi
+fi
+
 # load nvm
 function load_npm () {
   echo "add PATH for node.js"
   export PATH="/usr/local/bin:$PATH:/usr/local/sbin"
 
   source ~/.nvm/nvm.sh
-  nvm use v20.18.0
-  #nvm use --lts
+  #nvm use v20.18.0
+  nvm use --lts
 
   alias node="node --experimental-modules"
   echo "set NODE_PATH for node.js"
@@ -180,10 +195,24 @@ git config --global alias.st  'status --branch --short'
 git config --global alias.sl  'log --all --branches --decorate --graph --oneline'
 git config --global alias.log 'log --all --branches --graph'
 
+git config --global core.pager delta
+git config --global interactive.diffFilter "delta --color-only"
+git config --global delta.navigate true
+git config --global delta.side-by-side true
+
 #git config --global alias.log 'log --all --branches --graph'
 #git show-branch --merge-base master HEAD
 #git diff `git show-branch --merge-base master HEAD` HEAD
 
+function gitpush_current_branch() {
+  branch=$(git rev-parse --abbrev-ref HEAD)
+  if [ -n "$branch" ]; then
+    git push -u origin "$branch"
+  else
+    echo "Not in a git repository."
+  fi
+}
+alias gitp='gitpush_current_branch'
 
 #####################################################################################################
 # zsh
@@ -219,7 +248,7 @@ function npx () {
 function node_vi () {
   unalias vi
   alias vi='nvim'
-  
+
   if ! (type "node" > /dev/null 2>&1) ; then
     load_npm
   fi
@@ -276,6 +305,74 @@ function cdff () {
   fi
 }
 
+function switch_aws_profile() {
+  local profile
+  profile=$(awk -F'[][]' '/\[.*\]/{print $2}' ~/.aws/credentials | peco)
+
+  if [ -n "$profile" ]; then
+    export AWS_PROFILE=$profile
+    echo "Switched AWS profile to: $AWS_PROFILE"
+  else
+    echo "No profile selected."
+  fi
+}
+
+function switch_venv() {
+  local VENV_DIR="$HOME/.venv"
+
+  if [ ! -d "$VENV_DIR" ]; then
+    echo "Virtual environments directory not found: $VENV_DIR"
+    return 1
+  fi
+
+  local VENV=$(ls "$VENV_DIR" | peco)
+
+  if [ -z "$VENV" ]; then
+    echo "No virtual environment selected."
+    return 0
+  fi
+
+  local VENV_PATH="$VENV_DIR/$VENV/bin/activate"
+  if [ -f "$VENV_PATH" ]; then
+    source "$VENV_PATH"
+    echo "Switched to virtual environment: $VENV"
+  else
+    echo "Activate script not found for: $VENV"
+    return 1
+  fi
+}
+
+function gitdiff_select_commit() {
+  local commit=$(git log --oneline | peco | awk '{print $1}')
+  if [ -n "$commit" ]; then
+    git diff "$commit"
+  fi
+}
+
+function gitshow_select_commit() {
+  emulate -L zsh
+  setopt pipefail
+
+  # コミット選択（pager無効でpecoに流す）
+  local line commit
+  line=$(
+    git --no-pager log --oneline --decorate --all \
+    | peco --prompt "commit to show > "
+  )
+
+  # キャンセル対策
+  [[ -z "$line" ]] && { echo "Canceled."; return 1; }
+
+  # 先頭のハッシュだけ抜く
+  commit="${line%% *}"
+
+  # 選んだコミットの差分（メッセージ＋patch）
+  git show "$commit" -- "$@"
+}
+
+function nvim_swap_clean() {
+  rm -v ~/.local/state/nvim/swap/*.swp 2>/dev/null
+}
 
 #####################################################################################################
 # github
@@ -314,14 +411,19 @@ alias vimdiff='nvim -d '
 
 # github
 alias gitst='git st'
-alias gitdiff='git difftool --tool=vimdiff --no-prompt'
+#alias gitdiff='git difftool --tool=vimdiff --no-prompt'
 alias gitlmm='git log origin/master..master'
 alias gitlg='git log --graph'
 function gitbase () {
   git show-branch | grep '*' | grep -v "$(git rev-parse --abbrev-ref HEAD)" | head -1 | awk -F'[]~^[]' '{print $2}'
 }
+alias gitadd='git add -A -- . ":(exclude).github"'
 
-alias gs='gh copilot suggest'
+# NOTE: stash忘れがち、3ヶ月使わなかったら消す
+alias gitStashlis='git stash list'               # stash確認用
+alias gitStashShow='git stash show -p stash@{0}' # 差分内容をチェック
+alias gitStashSave='git stash save'              # "作業内容メモ" のようにメッセージをつける
+alias gitStashBranch='git stash branch '         # 新しいブランチ名 で stash から直接作業再開（安全で便利！）
 
 #alias adbDebug='sh ~/bash/androidDebug.sh'
 alias tmux-session-clear='tmux kill-session -a'
@@ -347,3 +449,59 @@ alias repo='function _repo() {
         echo "This is not a git repository."
     fi
 }; _repo'
+
+alias c5='copilot --banner --model gpt-5'
+alias ch='copilot --banner --model claude-haiku-4.5'
+alias cs='copilot --banner --model claude-sonnet-4.5'
+
+alias remove-swp='rm ~/.local/state/nvim/swap/.*'
+
+# ~/.zshrc などに追記
+function gitdiff() {
+  emulate -L zsh
+  setopt pipefail
+  setopt localoptions noglob   # [] を含むパスでも展開されない
+
+  # 使い方
+  if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+    echo "Usage: gitdiff [<path> ...]"
+    echo "Choose a base branch with peco and show 'git diff <base> -- <path...>'"
+    return 0
+  fi
+
+  # Git リポジトリチェック
+  if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    echo "Not a git repository."
+    return 1
+  fi
+
+  # peco チェック
+  if ! command -v peco >/dev/null 2>&1; then
+    echo "peco is not installed (brew install peco などで導入してください)"
+    return 1
+  fi
+
+  # 現在ブランチ
+  local current
+  current=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+
+  # 候補一覧（ローカル＆リモート、HEADは除外、現在ブランチも除外）
+  local base
+  base=$(
+    git for-each-ref --format='%(refname:short)' refs/heads refs/remotes \
+    | grep -vE '/HEAD$' \
+    | grep -v "^${current}\$" \
+    | sort -u \
+    | peco --prompt "base branch to diff against > "
+  )
+
+  [[ -z "$base" ]] && { echo "Canceled."; return 1; }
+
+  # 引数が無ければリポジトリ全体、あればそのパスだけ
+  if (( $# == 0 )); then
+    git diff "$base"
+  else
+    git diff "$base" -- "$@"
+  fi
+}
+
