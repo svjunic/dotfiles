@@ -61,11 +61,6 @@ require("telescope").setup{
 require("telescope").load_extension("ui-select")
 require('telescope').load_extension('fzf')
 
--- ピッカー確定後に nvim-tree へ反映
-local reveal = function()
-  require('nvim-tree.api').tree.find_file({ open = false, focus = false })
-end
-
 -- キーマップ
 -- vim.keymap.set('n', ',fff', tb.find_files, { desc='Telescope Files' })
 vim.keymap.set('n', ',ffg', tb.live_grep,  { desc='Telescope Grep'  })
