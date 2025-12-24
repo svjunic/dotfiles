@@ -1,20 +1,12 @@
 [[plugins]]
 repo = 'mattn/emmet-vim'
 on_ft= ['css','scss']
-hook_add = '''
-  " 画像の縦横取得するときにPerlのImage::Info使っているので入ってないと動かない
-  " perl -MImage::Info -e ''
-  " これで確認
-  " 入っていれば何も表示されないし、入っていなければlocateにないぜっていわれる。
-  " cpan Image::Info
+hook_source = '''
   let g:user_emmet_settings = {
         \ 'variables': {
         \ 'lang' : 'ja'
         \ }
         \}
-
-  "c-kがneosnippetとかぶっていて変な動きになっていた模様
-  "これで一旦様子見る
   let g:user_emmet_leader_key='<C-E>'
   imap <C-L>    <C-E>,
   vmap <C-L>    <C-E>,
@@ -32,9 +24,183 @@ on_ft= ['pug','jade']
 [[plugins]]
 repo = 'dNitro/vim-pug-complete'
 on_ft= ['pug','jade']
-hook_add = '''
+hook_source = '''
 let g:html5_event_handler_attributes_complete = 0 " Disable event-handler attributes
 let g:html5_rdfa_attributes_complete = 0          " Disable RDFa attributes
 let g:html5_microdata_attributes_complete = 0     " Disable microdata attributes
 let g:html5_aria_attributes_complete = 0          " Disable WAI-ARIA attribute
 '''
+
+[[plugins]]
+repo = 'neovim/nvim-lspconfig'
+on_ft = ['javascript', 'typescript', 'typescriptreact', 'javascriptreact', 'vue', 'html', 'css', 'json', 'astro', 'yaml', 'smarty', 'tpl', 'mdx']
+hook_post_source = '''
+  lua << EOF
+  -- Use new vim.lsp.config / vim.lsp.enable API (nvim 0.11+)
+  -- LSPの機能をcmpに提供する設定
+  local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+  -- logをoff
+  vim.lsp.set_log_level("off")
+
+  -- TypeScript/JavaScript
+  vim.lsp.config('vtsls', {
+    capabilities = capabilities,
+    -- 単一ファイルでも動かしたいなら true（好みで）
+    single_file_support = true,
+    settings = {
+      vtsls = {
+        tsserver = {
+          maxTsServerMemory = 4096,
+          watchOptions = {
+            watchFile = "useFsEvents",
+          },
+          globalPlugins = {
+            {
+              name = "@astrojs/ts-plugin",
+              enableForWorkspaceTypeScriptVersions = true,
+            },
+          },
+        },
+        experimental = {
+          completion = {
+            enableServerSideFuzzyMatch = true,
+          },
+        },
+      },
+      typescript = {
+        preferences = {
+          includePackageJsonAutoImports = "off",
+        },
+      },
+      javascript = {
+        preferences = {
+          includePackageJsonAutoImports = "off",
+        },
+      },
+    },
+  })
+  vim.lsp.enable('vtsls')
+
+  -- Vue
+  vim.lsp.config('vue_ls', { capabilities = capabilities })
+  vim.lsp.enable('vue_ls')
+
+  -- HTML
+  -- vim.lsp.config('html', { capabilities = capabilities })
+  vim.lsp.config('html', { capabilities = capabilities, filetypes = {'html', 'smarty'} })
+  vim.lsp.enable('html')
+
+  -- CSS
+  vim.lsp.config('cssls', { capabilities = capabilities })
+  vim.lsp.enable('cssls')
+
+  -- JSON
+  vim.lsp.config('jsonls', { capabilities = capabilities })
+  vim.lsp.enable('jsonls')
+
+  -- -- PHP
+  -- vim.lsp.config('intelephense', { capabilities = capabilities })
+  -- vim.lsp.enable('intelephense')
+
+  -- Astro
+  vim.lsp.config('astro', { capabilities = capabilities })
+  vim.lsp.enable('astro')
+
+  -- Astro
+  vim.lsp.config('marksman', { capabilities = capabilities, filetypes = {'md', 'mdx'} })
+  vim.lsp.enable('astro')
+
+  -- -- bashls
+  -- vim.lsp.config('bashls', {
+  --   capabilities = capabilities,
+  --   filetypes = {'sh', 'zsh', 'conf'}
+  -- })
+  -- vim.lsp.enable('bashls')
+
+  -- YAML
+  vim.lsp.config('yamlls', {
+    capabilities = capabilities,
+    settings = {
+      yaml = {
+        validate = true,
+        hover = true,
+        completion = true,
+        schemas = {
+          ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+          ["https://json.schemastore.org/github-action.json"] = "/.github/actions/*",
+        },
+      }
+    }
+  })
+  vim.lsp.enable('yamlls')
+
+  -- キーマッピング
+  local opts = { silent = true }
+  vim.keymap.set('n', 'gd'       , vim.lsp.buf.definition     , opts)
+  vim.keymap.set('n', 'gD'       , vim.lsp.buf.declaration    , opts)
+
+  vim.keymap.set('n', 'gy'       , vim.lsp.buf.type_definition, opts)
+  vim.keymap.set('n', 'gi'       , vim.lsp.buf.implementation , opts)
+  vim.keymap.set('n', 'gr'       , vim.lsp.buf.references     , opts)
+  vim.keymap.set('n', '<space>h' , vim.lsp.buf.hover          , opts)
+  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename         , opts)
+  vim.keymap.set('n', '<space>a' , vim.lsp.buf.code_action    , opts)
+  vim.keymap.set('n', '<C-j>'    , vim.diagnostic.goto_next   , opts)
+  vim.keymap.set('n', '<C-k>'    , vim.diagnostic.goto_prev   , opts)
+  vim.keymap.set("n", "<space>e" , vim.diagnostic.open_float  , opts)
+  vim.keymap.set('n', '<space>q' , vim.diagnostic.setloclist  , opts)
+
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = "qf",
+    callback = function(ev)
+      vim.keymap.set(
+        "n",
+        "q",
+        "<cmd>close<CR>",
+        { buffer = ev.buf, silent = true }
+      )
+    end,
+  })
+
+  -- Quickfixが開いている状態でqを押すと、どのバッファにいても閉じる
+  local function any_qf_open()
+    local qf = vim.fn.getqflist({ winid = 0 })
+    if qf and qf.winid and qf.winid ~= 0 then return true end
+    local loc = vim.fn.getloclist(0, { winid = 0 })
+    if loc and loc.winid and loc.winid ~= 0 then return true end
+    return false
+  end
+  vim.keymap.set("n", "q", function()
+    if any_qf_open() then
+      return "<cmd>cclose<CR><cmd>lclose<CR>"
+    end
+    return "q" -- ふだん通り：マクロ記録
+  end, { expr = true, noremap = true, silent = true })
+
+  -- 診断表示の設定
+  vim.diagnostic.config({
+    virtual_text = true,
+    signs = true,
+    underline = true,
+    update_in_insert = false,
+    severity_sort = true,
+  })
+
+  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+    vim.lsp.handlers.hover, {
+      border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" }, -- 明示的に枠を指定
+      focusable = false,
+      max_width = 80,
+      max_height = 20,
+      winblend = 0, -- 透明度を無効化
+      zindex = 50
+    }
+  )
+
+EOF
+'''
+
+[[plugins]]
+repo = 'hrsh7th/cmp-nvim-lsp'
+on_lua = ['cmp_nvim_lsp']

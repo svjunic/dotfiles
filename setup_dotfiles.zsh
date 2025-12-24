@@ -7,6 +7,7 @@ if [ `uname` = "Darwin" ]; then
   ln -s ${pwd}/.zlogin ~/.zlogin
   ln -s ${pwd}/.zprofile ~/.zprofile
   ln -s ${pwd}/.zbashrc ~/.zbashrc
+  ln -s ${pwd}/.zshenv ~/.zshenv
   ln -s ${pwd}/.eslintrc ~/.eslintrc
   ln -s ${pwd}/.tmux ~/.tmux
   ln -s ${pwd}/.tmux.conf ~/.tmux.conf

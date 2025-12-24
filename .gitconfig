@@ -2,21 +2,23 @@
   helper = cache --timeout=3600
 
 [core]
-  editor = /Applications/MacVim.app/Contents/MacOS/Vim
-  excludesfile = /Users/macbookpro/.gitignore_global
+  ui = never
 
-[filter "media"]
-  clean = git-media-clean %f
-  smudge = git-media-smudge %f
+#[filter "media"]
+#  clean = git-media-clean %f
+#  smudge = git-media-smudge %f
 
 [push]
   default = matching
 
-#[diff]
-#  external = gitvimdiff
+[diff]
+  tool = vimdiff
 
-[color]
-  ui = auto
+[difftool]
+  prompt = false
+
+[merge]
+    conflictstyle = zdiff3
 
 [alias]
   co = checkout
@@ -30,3 +32,26 @@
 [user]
   name = sv.junic
   email = xxxxx
+
+[diff]
+  tool = vimdiff
+
+[difftool]
+  prompt = false
+
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true  # use n and N to move between diff sections
+    dark = true      # or light = true, or omit for auto-detection
+    features = my-theme
+
+[delta "my-theme"]
+    file-style = ul "#55FFFF"
+    file-decoration-style = underline "#55FFFF"
+    hunk-header-style = bold yellow
+    hunk-header-decoration-style = underline "#777777"
+
+    hunk-header-style = syntax "#000000"

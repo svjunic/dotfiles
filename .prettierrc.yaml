@@ -1,4 +1,8 @@
+plugins:
+  - "@prettier/plugin-lua"
+
 overrides:
+
   - files: "*.js"
     options:
       printWidth: 500
@@ -73,3 +77,9 @@ overrides:
       tabWidth: 2
       useTabs: false
       semi: true
+
+  - files: "*.lua"
+    options:
+      printWidth: 100
+      tabWidth: 2
+      useTabs: false
