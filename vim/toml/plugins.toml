@@ -15,10 +15,13 @@ repo = 'wsdjeg/dein-ui.vim'
 repo = 'nvim-treesitter/nvim-treesitter'
 merged = 0
 on_event = 'BufRead'
+hook_source = '''
+pcall(function()
+  require('treesitter_config.init')
+end)
+EOF
+'''
 hook_post_update = 'TSUpdate'
-
-[[plugins]]
-repo = 'nvim-treesitter/playground'
 
 [[plugins]]
 repo = 'nvim-tree/nvim-web-devicons'
