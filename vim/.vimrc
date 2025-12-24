@@ -33,7 +33,7 @@ source ~/.vim/auto.vim
 
 lua << EOF
 require'nvim-tree.init'
-require'treesitter_config.init'
+-- require'oil.init'
 require'copilot_chat_config.init'
 require'telescope_config.init'
 require'nvim-web-devicons_config.init'
