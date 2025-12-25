@@ -37,9 +37,7 @@ EOF
 [[plugins]]
 repo = 'stevearc/oil.nvim'
 hook_source = '''
-lua << EOF
-  require('oil_config.init')
-EOF
+lua require('oil_config.init')
 '''
 
 [[plugins]]
@@ -47,9 +45,11 @@ repo = 'nvim-lua/plenary.nvim'
 
 [[plugins]]
 repo = 'nvim-telescope/telescope-ui-select.nvim'
+depends = ['nvim-telescope/telescope.nvim']
 
 [[plugins]]
 repo  = 'nvim-telescope/telescope-fzf-native.nvim'
+depends = ['nvim-telescope/telescope.nvim']
 build = 'make'
 
 [[plugins]]
@@ -96,13 +96,13 @@ repo = 'hrsh7th/cmp-path'
 
 [[plugins]]
 repo = 'nvim-telescope/telescope.nvim'
-depends = ['nvim-lua/plenary.nvim','nvim-telescope/telescope-ui-select.nvim', 'nvim-telescope/telescope-fzf-native.nvim']
-hook_add = '''
-  "nmap ,f [telescope]
-  "nnoremap <silent> [telescope]ff <cmd>Telescope find_files<cr>
-  "nnoremap <silent> [telescope]fg <cmd>Telescope live_grep<cr>
-  "nnoremap <silent> [telescope]fb <cmd>Telescope buffers<cr>
-  "nnoremap <silent> [telescope]fh <cmd>Telescope help_tags<cr>
+depends = ['nvim-lua/plenary.nvim']
+on_event = 'BufRead'
+hook_add= '''
+lua require('telescope_config.keymap')
+'''
+hook_post_source = '''
+lua require('telescope_config.init')
 '''
 
 [[plugins]]
