@@ -40,7 +40,6 @@ telescope.setup{
       height = 0.9,
     },
     sorting_strategy = "ascending",
-    -- layout_strategy = "vertical",
     layout_strategy = "horizontal",
     results_height = 0.5,  -- 必要に応じて高さを調整
     preview_cutoff = 120,  -- プレビューの制限
@@ -65,7 +64,6 @@ telescope.setup{
           "╰"
         },
         prompt_prefix = "🔍 ",
-        -- previewer = false,    -- プレビューを消すことも可
       }),
     }
   }

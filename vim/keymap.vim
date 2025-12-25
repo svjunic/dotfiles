@@ -18,7 +18,6 @@ call s:ApplyKeymapHighlights()
 match ZenkakuSpace /　/
 
 " tab highlight
-"set listchars=tab:\ \
 set listchars=tab:\ \|
 
 " The Usual

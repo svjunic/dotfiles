@@ -1,7 +1,5 @@
 local tb = require('telescope.builtin')
 
--- キーマップ
--- vim.keymap.set('n', ',fff', tb.find_files, { desc='Telescope Files' })
 vim.keymap.set('n', ',ffg', tb.live_grep,  { desc='Telescope Grep'  })
 vim.keymap.set('n', ',ffb', tb.buffers,    { desc='Telescope Buffers' })
 vim.keymap.set('n', ',ffr', tb.oldfiles,   { desc='Telescope Recent'  })

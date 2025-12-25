@@ -57,7 +57,6 @@ set tabstop=2
 set nobackup
 set nowritebackup
 set matchpairs=(:),{:},[:],<:>
-"set pastetoggle=<Insert>
 
 " ステータスラインの設定
 set cmdheight=1
@@ -73,7 +72,6 @@ set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp932,iso-2022-jp,euc-jp
 set fileformat=unix
 set fileformats=unix,dos
-"set ambiwidth=double
 
 set foldmethod=marker
 
@@ -107,11 +105,6 @@ set synmaxcol=1000
 " ctagファイルを検索
 set tags=./tags;$HOME
 
-"" matcht.vimの読み込み
-"source $VIMRUNTIME/macros/matchit.vim
-"let g:hl_matchit_enable_on_vim_startup = 1
-"let g:hl_matchit_hl_groupname = 'Title'
-"let g:hl_matchit_allow_ft_regexp = 'html\|vim\|ruby\|sh'
 
 " ntetrwの初期設定変更
 " ファイルツリーの表示形式、1にするとls -laのような表示になります
@@ -130,7 +123,3 @@ let g:netrw_altv=1
 let g:copilot_filetypes = {
   \ '*' : v:false,
   \ }
-
-"" ddu, denops デバッグ用
-"let g:denops#debug = 1
-"let g:ddu#enable_debug = 1

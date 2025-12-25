@@ -1,8 +1,3 @@
-"Last Change: 07-Jan-2014."
-
-" ******************************************
-" Personal Settings ************************
-
 " カラー設定
 colorscheme radicalgoodspeed
 
