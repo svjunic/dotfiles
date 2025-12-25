@@ -5,6 +5,12 @@ require("oil").setup({
   win_options = { signcolumn = "yes:2" },
 })
 
+pcall(function()
+  require('oil-git-status').setup({
+    show_ignored = true,
+  })
+end)
+
 -- vim.api.nvim_create_autocmd("FileType", {
 --   pattern = "oil",
 --   callback = function()
@@ -19,5 +25,4 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
-
-vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Oil" })
+-- NOTE: '-' mapping は vim/keymap.vim で常駐定義（:Oil による遅延ロードのため）
