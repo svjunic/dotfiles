@@ -11,13 +11,6 @@ pcall(function()
   })
 end)
 
--- vim.api.nvim_create_autocmd("FileType", {
---   pattern = "oil",
---   callback = function()
---     vim.keymap.set("n", "q", "<CMD>close<CR>", { buffer = true })
---   end,
--- })
-
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "oil",
   callback = function()
