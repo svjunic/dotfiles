@@ -1,5 +1,19 @@
-local chat = require("CopilotChat")
-local utils = require('CopilotChat.utils')
+local ok_chat, chat = pcall(require, "CopilotChat")
+if not ok_chat then
+  -- 途中で return すると require() 側でロード済みキャッシュされ、
+  -- VimEnter での再 require が再実行されないためクリアする。
+  package.loaded['copilot_chat_config.init'] = nil
+  vim.api.nvim_create_autocmd('VimEnter', {
+    group = vim.api.nvim_create_augroup('CopilotChatConfigRetry', { clear = true }),
+    once = true,
+    callback = function()
+      pcall(require, 'copilot_chat_config.init')
+    end,
+  })
+  return
+end
+
+local _ = pcall(require, 'CopilotChat.utils')
 
 chat.setup {
   -- debug = true, -- Enable debugging
@@ -52,7 +66,7 @@ chat.setup {
       -- system_prompt = '日本語で回答してください。',
       system_prompt = '必ず日本語で、他の言語を使わずに回答してください。',
       description = '現在のバッファのコードレビューを日本語で依頼します。',
-      mapping = '[copilot_chat]rc',
+      mapping = ',ccrc',
     },
     Explain = {
       prompt = table.concat({
@@ -61,7 +75,7 @@ chat.setup {
       -- system_prompt = '日本語で回答してください。',
       system_prompt = '必ず日本語で、他の言語を使わずに回答してください。',
       description = 'カーソル位置のコードを日本語で段落付きで説明します。',
-      mapping = '[copilot_chat]re',
+      mapping = ',ccre',
     },
     Test = {
       prompt = table.concat({
@@ -93,7 +107,7 @@ chat.setup {
       -- system_prompt = '日本語で回答してください。',
       system_prompt = '必ず日本語で、他の言語を使わずに回答してください。',
       description = '選択範囲のコードを最適化し、パフォーマンスと可読性を向上させます。',
-      mapping = '[copilot_chat]rc',
+      mapping = ',ccrc',
     },
 
     Docs = {
@@ -161,12 +175,14 @@ chat.setup {
       -- system_prompt = '日本語で回答してください。',
       system_prompt = '必ず日本語で、他の言語を使わずに回答してください。',
       description = 'K2ルールに従ったコミットメッセージを日本語で生成します。',
-      mapping = "[copilot_chat]k2",
+      mapping = ",cck2",
     },
   }
 }
 
-vim.keymap.set("n", "[copilot_chat]q", function()
+
+
+vim.keymap.set("n", ",ccq", function()
   local input = vim.fn.input("Quick Chat: ")
   if input ~= "" then
     -- system_prompt = '日本語で回答してください。',
@@ -175,6 +191,10 @@ vim.keymap.set("n", "[copilot_chat]q", function()
     -- chat.ask("#buffers:visible\n" .. input)
   end
 end, { desc = "CopilotChat: Quick Chat" })
+
+-- vim.keymap.set('n', ',cc', ',cc', { noremap = false })
+-- vim.keymap.set('n', ',ccc', '<Cmd>CopilotChatOpen<CR>', { noremap = true, silent = true })
+-- vim.keymap.set('n', ',ccp', '<Cmd>CopilotChatPrompts<CR>', { noremap = true, silent = true })
 
 
 
@@ -192,12 +212,29 @@ end, { desc = "CopilotChat: Quick Chat" })
 -- CopilotChatStreamingCursor - ストリーム中のカーソル（縦棒）
 -- CopilotChatStreaming       - ストリーム中の本文
 
-vim.api.nvim_set_hl(0, 'CopilotChatHeader',           { fg = '#ff0088', bg = 'none', bold = true })
-vim.api.nvim_set_hl(0, 'CopilotChatHelp',             { fg = '#6666aa', bg = 'none', bold = false })
-vim.api.nvim_set_hl(0, 'CopilotChatSeparator',        { fg = '#ffffff', bg = 'none', bold = false })
-vim.api.nvim_set_hl(0, 'CopilotChatStatus',           { fg = '#ff9900', bg = 'none', bold = false })
-vim.api.nvim_set_hl(0, 'CopilotChatStreamingCursor',  { fg = '#ff0099', bg = 'none', bold = false })
-vim.api.nvim_set_hl(0, 'CopilotChatStreaming',        { fg = '#eeeeee', bg = 'none', bold = false })
+local function apply_copilotchat_highlights()
+  vim.api.nvim_set_hl(0, 'CopilotChatHeader', { fg = '#ff0088', bold = true })
+  vim.api.nvim_set_hl(0, 'CopilotChatHelp', { fg = '#6666aa' })
+  vim.api.nvim_set_hl(0, 'CopilotChatSeparator', { fg = '#ffffff' })
+  vim.api.nvim_set_hl(0, 'CopilotChatStatus', { fg = '#ff9900' })
+  vim.api.nvim_set_hl(0, 'CopilotChatStreamingCursor', { fg = '#ff0099' })
+  vim.api.nvim_set_hl(0, 'CopilotChatStreaming', { fg = '#eeeeee' })
+end
+
+apply_copilotchat_highlights()
+
+local copilotchat_hl_augroup = vim.api.nvim_create_augroup('CopilotChatCustomHighlights', { clear = true })
+vim.api.nvim_create_autocmd('ColorScheme', {
+  group = copilotchat_hl_augroup,
+  callback = apply_copilotchat_highlights,
+})
+
+-- CopilotChat 側が BufEnter 時にハイライトを貼り直す/リンクするケースを吸収
+vim.api.nvim_create_autocmd('BufEnter', {
+  group = copilotchat_hl_augroup,
+  pattern = 'copilot-*',
+  callback = apply_copilotchat_highlights,
+})
 -- vim.api.nvim_set_hl(0, 'CopilotChatSelection',  { fg = '#ffff00', bg = '#ff0000', bold = true })
 -- vim.api.nvim_set_hl(0, 'CopilotChatResource',   { fg = '#ffff00', bg = '#ff0000', bold = true })
 -- vim.api.nvim_set_hl(0, 'CopilotChatTool',       { fg = '#ffff00', bg = '#ff0000', bold = true })

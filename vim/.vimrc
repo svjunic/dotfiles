@@ -50,10 +50,7 @@ source ~/.vim/keymap.vim
 source ~/.vim/auto.vim
 
 lua << EOF
-require'copilot_chat_config.init'
-require'telescope_config.init'
-require'nvim-web-devicons_config.init'
--- require'lsp.tailwindcss'
--- require'lsp.astro'
-require'other.copilot_chat_buffer_tag'
+--require'copilot_chat_config.init'
+---- require'nvim-web-devicons_config.init'
+--require'other.copilot_chat_buffer_tag'
 EOF

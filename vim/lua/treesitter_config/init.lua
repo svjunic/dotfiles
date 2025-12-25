@@ -1,4 +1,9 @@
-require('nvim-treesitter.configs').setup {
+local ok, configs = pcall(require, 'nvim-treesitter.configs')
+if not ok then
+  return
+end
+
+configs.setup {
   -- ensure_installed = "all",
   ensure_installed = {
     -- Web / Frontend
@@ -21,10 +26,10 @@ require('nvim-treesitter.configs').setup {
     "vim",        -- Vimscript 部分もまだ残るなら
     "regex",      -- 正規表現のハイライト
     "tsx",        -- React (TypeScript + JSX)
-    "astro",      -- astro
+    -- "astro",      -- astro
 
-    -- AI / Python 活用
-    "python",
+    -- -- AI / Python 活用
+    -- "python",
 
     -- Git / DevOps
     "gitcommit",
@@ -33,11 +38,39 @@ require('nvim-treesitter.configs').setup {
     "gitignore"
   },
   highlight = {
-    enable = true
+    enable = true,
+    additional_vim_regex_highlighting = false,
   },
-  incremental_selection = { enable = false }
+  incremental_selection = { enable = false },
+  auto_install = true,
 }
 
 -- require('nvim-treesitter.configs').setup({
 --   highlight = { enable = true },
 -- })
+
+-- うまく attach されない環境向けのフォールバック。
+-- 本来は nvim-treesitter が FileType autocmd で自動 attach しますが、
+-- ロード順やクエリ/パーサ状態の影響で外れる場合があるので、
+-- 対象 ft の BufEnter で一度だけ start を試します。
+local function ensure_ts_started(bufnr)
+  if vim.treesitter.highlighter and vim.treesitter.highlighter.active and vim.treesitter.highlighter.active[bufnr] then
+    return
+  end
+
+  local ok_parser = pcall(vim.treesitter.get_parser, bufnr)
+  if not ok_parser then
+    return
+  end
+
+  pcall(vim.treesitter.start, bufnr)
+end
+
+local ts_fallback_group = vim.api.nvim_create_augroup('MyTSStartLua', { clear = true })
+vim.api.nvim_create_autocmd('BufEnter', {
+  group = ts_fallback_group,
+  pattern = { '*.js', '*.mjs', '*.cjs', '*.jsx', '*.ts', '*.tsx', '*.lua', '*.vim' },
+  callback = function(args)
+    ensure_ts_started(args.buf)
+  end,
+})

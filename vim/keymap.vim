@@ -3,7 +3,18 @@ nmap <C-l> <C-l>:nohlsearch<CR>
 
 "" カラースキーム、全角表示その他
 " MULTIByte Space Highlight
-hi ZenkakuSpace cterm=reverse gui=reverse
+function! s:ApplyKeymapHighlights() abort
+  hi ZenkakuSpace cterm=reverse gui=reverse
+  hi CurlyBracket guifg=#00bfff
+endfunction
+
+augroup MyKeymapHighlights
+  autocmd!
+  autocmd ColorScheme * call s:ApplyKeymapHighlights()
+augroup END
+
+call s:ApplyKeymapHighlights()
+
 match ZenkakuSpace /　/
 
 " tab highlight
@@ -11,7 +22,6 @@ match ZenkakuSpace /　/
 set listchars=tab:\ \|
 
 " The Usual
-hi CurlyBracket guifg=#00bfff
 match CurlyBracket /[{}]/
 
 """ 基本形
@@ -20,6 +30,31 @@ map ˜ ~
 " Buffer
 nmap bn :next<cr>
 nmap bp :prev<cr>
+
+" Oil
+function! s:OpenOil() abort
+  " oil.nvim は Neovim 専用。Vim の場合は netrw にフォールバック。
+  if !has('nvim')
+    execute 'Explore'
+    return
+  endif
+
+  " dein の on_cmd が効かない/ロード順が崩れた場合でも、明示的に source してから :Oil を呼ぶ。
+  if exists('*dein#source')
+    try
+      call dein#source('stevearc/oil.nvim')
+    catch
+    endtry
+  endif
+
+  if exists(':Oil')
+    execute 'Oil'
+  else
+    echoerr 'Oil command not available (plugin not installed/loaded)'
+  endif
+endfunction
+
+nnoremap <silent> - :call <SID>OpenOil()<CR>
 
 " Tab
 nmap tn :tabnext<cr>
