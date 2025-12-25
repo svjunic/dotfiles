@@ -1,21 +1,41 @@
 " ハイライトの追加
-autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('Todo', '\W\zs\(TODO\|FIXME\|CHANGED\|XXX\|BUG\|HACK\|NOTE\|INFO\|IDEA\)', 200)
+" NOTE:
+" - :colorscheme でハイライトが上書きされがちなので ColorScheme で再適用
+" - matchadd() をイベント毎に積み増すと match の枠が埋まり「効かない」状態になりやすいので、1ウィンドウ1回だけにする
 
-autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('LogNormal', '\W\zs\[\(INFO\|DEBUG\|TRACE\)\]', 200)
-autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('LogWarn', '\W\zs\[\(WARN\)\]', 200)
-autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('LogError', '\W\zs\[\(ERROR\)\]', 200)
-autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('LogFatal', '\W\zs\[\(FATAL\)\]', 200)
+function! s:ApplyCustomHighlights() abort
+  hi LogNormal        ctermfg=155 ctermbg=57  cterm=underline      guifg=#5fd7ff guibg=#005f5f gui=underline
+  hi LogWarn          ctermfg=186 ctermbg=0   cterm=bold,underline guifg=#ffd700 guibg=NONE gui=bold,underline
+  hi LogError         ctermfg=164 ctermbg=0   cterm=bold,underline guifg=#ff5f87 guibg=NONE gui=bold,underline
+  hi LogFatal         ctermfg=160 ctermbg=0   cterm=bold,underline guifg=#ff5f00 guibg=NONE gui=bold,underline
+endfunction
 
-autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('LogNormal', '\(INFO\|DEBUG\|TRACE\)', 200)
-autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('LogWarn', '\(WARN\)', 200)
-autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('LogError', '\(ERROR\)', 200)
-autocmd WinEnter,WinLeave,BufRead,BufNew,Syntax * call matchadd('LogFatal', '\(FATAL\)', 200)
+function! s:EnsureWindowMatches() abort
+  if exists('w:custom_matchadd_ids')
+    return
+  endif
 
+  let w:custom_matchadd_ids = []
+  call add(w:custom_matchadd_ids, matchadd('Todo', '\W\zs\(TODO\|FIXME\|CHANGED\|XXX\|BUG\|HACK\|NOTE\|INFO\|IDEA\)', 200))
 
-hi LogNormal        ctermfg=155 ctermbg=57  cterm=underline      guifg=#5fd7ff guibg=#005f5f gui=underline
-hi LogWarn          ctermfg=186 ctermbg=0   cterm=bold,underline guifg=#ffd700 guibg=NONE gui=bold,underline
-hi LogError         ctermfg=164 ctermbg=0   cterm=bold,underline guifg=#ff5f87 guibg=NONE gui=bold,underline
-hi LogFatal         ctermfg=160 ctermbg=0   cterm=bold,underline guifg=#ff5f00 guibg=NONE gui=bold,underline
+  call add(w:custom_matchadd_ids, matchadd('LogNormal', '\W\zs\[\(INFO\|DEBUG\|TRACE\)\]', 200))
+  call add(w:custom_matchadd_ids, matchadd('LogWarn',   '\W\zs\[\(WARN\)\]', 200))
+  call add(w:custom_matchadd_ids, matchadd('LogError',  '\W\zs\[\(ERROR\)\]', 200))
+  call add(w:custom_matchadd_ids, matchadd('LogFatal',  '\W\zs\[\(FATAL\)\]', 200))
+
+  call add(w:custom_matchadd_ids, matchadd('LogNormal', '\(INFO\|DEBUG\|TRACE\)', 200))
+  call add(w:custom_matchadd_ids, matchadd('LogWarn',   '\(WARN\)', 200))
+  call add(w:custom_matchadd_ids, matchadd('LogError',  '\(ERROR\)', 200))
+  call add(w:custom_matchadd_ids, matchadd('LogFatal',  '\(FATAL\)', 200))
+endfunction
+
+augroup MyCustomHighlights
+  autocmd!
+  autocmd ColorScheme * call s:ApplyCustomHighlights()
+  autocmd WinEnter,BufWinEnter,Syntax * call s:EnsureWindowMatches()
+augroup END
+
+call s:ApplyCustomHighlights()
 
 " ファイルタイプ識別
 autocmd FileType html,jade,css,scss,sass,vue,typescript,typescriptreact,javascript,javascriptreact,astro EmmetInstall
@@ -59,8 +79,3 @@ autocmd FileType gitcommit  let g:copilot_filetypes.gitcommit  = v:true
 
 " Git Commit メッセージ
 autocmd FileType gitcommit CopilotChatK2Commit
-
-augroup MyTSStart
-  autocmd!
-  autocmd FileType javascript,lua,typescript,tsx lua vim.treesitter.start(0)
-augroup END
