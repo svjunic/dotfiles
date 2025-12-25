@@ -26,17 +26,13 @@ lua require('nvim-web-devicons_config.init')
 
 [[plugins]]
 repo = 'refractalize/oil-git-status.nvim'
-hook_source = '''
-lua << EOF
-require('oil-git-status').setup({
-  show_ignored = true,
-})
-EOF
-'''
+depends = ['stevearc/oil.nvim']
 
 [[plugins]]
 repo = 'stevearc/oil.nvim'
-hook_source = '''
+depends = ['refractalize/oil-git-status.nvim']
+on_cmd = ['Oil']
+hook_post_source = '''
 lua require('oil_config.init')
 '''
 

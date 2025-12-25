@@ -31,6 +31,31 @@ map ˜ ~
 nmap bn :next<cr>
 nmap bp :prev<cr>
 
+" Oil
+function! s:OpenOil() abort
+  " oil.nvim は Neovim 専用。Vim の場合は netrw にフォールバック。
+  if !has('nvim')
+    execute 'Explore'
+    return
+  endif
+
+  " dein の on_cmd が効かない/ロード順が崩れた場合でも、明示的に source してから :Oil を呼ぶ。
+  if exists('*dein#source')
+    try
+      call dein#source('stevearc/oil.nvim')
+    catch
+    endtry
+  endif
+
+  if exists(':Oil')
+    execute 'Oil'
+  else
+    echoerr 'Oil command not available (plugin not installed/loaded)'
+  endif
+endfunction
+
+nnoremap <silent> - :call <SID>OpenOil()<CR>
+
 " Tab
 nmap tn :tabnext<cr>
 nmap tp :tabprevious<cr>
