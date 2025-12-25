@@ -3,7 +3,18 @@ nmap <C-l> <C-l>:nohlsearch<CR>
 
 "" カラースキーム、全角表示その他
 " MULTIByte Space Highlight
-hi ZenkakuSpace cterm=reverse gui=reverse
+function! s:ApplyKeymapHighlights() abort
+  hi ZenkakuSpace cterm=reverse gui=reverse
+  hi CurlyBracket guifg=#00bfff
+endfunction
+
+augroup MyKeymapHighlights
+  autocmd!
+  autocmd ColorScheme * call s:ApplyKeymapHighlights()
+augroup END
+
+call s:ApplyKeymapHighlights()
+
 match ZenkakuSpace /　/
 
 " tab highlight
@@ -11,7 +22,6 @@ match ZenkakuSpace /　/
 set listchars=tab:\ \|
 
 " The Usual
-hi CurlyBracket guifg=#00bfff
 match CurlyBracket /[{}]/
 
 """ 基本形
