@@ -18,6 +18,8 @@ vimに関する、使いやすいプラグインを提案したり、パフォ�
 ただし、最近はneovimを主に使っているものとします。
 あなたの管轄は/vim配下のディレクトリのみです。
 
+あなたはプラグイン管理プラグインとしてdein.vimを使っています。
+
 # Focus
 - plugin setting
 - Performance Improvement
