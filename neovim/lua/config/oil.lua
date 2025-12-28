@@ -6,7 +6,7 @@ require("oil").setup({
 })
 
 pcall(function()
-  require('oil-git-status').setup({
+  require("oil-git-status").setup({
     show_ignored = true,
   })
 end)
@@ -17,5 +17,3 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.keymap.set("n", "q", "<CMD>b#<CR>", { buffer = true, silent = true, desc = "Back to previous buffer" })
   end,
 })
-
--- NOTE: '-' mapping は vim/keymap.vim で常駐定義（:Oil による遅延ロードのため）
