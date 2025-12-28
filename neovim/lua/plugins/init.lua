@@ -180,6 +180,24 @@ return {
     },
   },
 
+  -- Test (neotest + playwright)
+  {
+    "nvim-neotest/neotest",
+    event = "VeryLazy",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-neotest/nvim-nio",
+      "nvim-treesitter/nvim-treesitter",
+      {
+        "thenbe/neotest-playwright",
+        dependencies = { "nvim-telescope/telescope.nvim" },
+      },
+    },
+    config = function()
+      require("plugins.neotest")
+    end,
+  },
+
   -- Editing helpers
   { "tpope/vim-surround", lazy = false },
   {
