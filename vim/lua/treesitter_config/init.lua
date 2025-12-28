@@ -4,7 +4,6 @@ if not ok then
 end
 
 configs.setup {
-  -- ensure_installed = "all",
   ensure_installed = {
     -- Web / Frontend
     "html",
@@ -26,10 +25,6 @@ configs.setup {
     "vim",        -- Vimscript 部分もまだ残るなら
     "regex",      -- 正規表現のハイライト
     "tsx",        -- React (TypeScript + JSX)
-    -- "astro",      -- astro
-
-    -- -- AI / Python 活用
-    -- "python",
 
     -- Git / DevOps
     "gitcommit",
@@ -44,10 +39,6 @@ configs.setup {
   incremental_selection = { enable = false },
   auto_install = true,
 }
-
--- require('nvim-treesitter.configs').setup({
---   highlight = { enable = true },
--- })
 
 -- うまく attach されない環境向けのフォールバック。
 -- 本来は nvim-treesitter が FileType autocmd で自動 attach しますが、
