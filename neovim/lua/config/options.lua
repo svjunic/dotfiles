@@ -32,7 +32,6 @@ vim.opt.cmdheight = 1
 vim.opt.laststatus = 2
 vim.opt.statusline = "%<%F %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l, [TYPE=%Y] [ASCII=\\%03.3b] [HEX=\\%02.2B] %c%V%8P"
 
-vim.opt.encoding = "utf-8"
 vim.opt.fileencodings = { "ucs-bom", "utf-8", "cp932", "iso-2022-jp", "euc-jp" }
 vim.opt.fileformat = "unix"
 vim.opt.fileformats = { "unix", "dos" }
