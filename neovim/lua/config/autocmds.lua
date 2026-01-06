@@ -7,7 +7,7 @@ local function apply_custom_highlights()
   vim.api.nvim_set_hl(0, "LogFatal", { fg = "#ff5f00", bold = true, underline = true })
 
   vim.api.nvim_set_hl(0, "ZenkakuSpace", { reverse = true })
-  vim.api.nvim_set_hl(0, "CurlyBracket", { fg = "#00bfff" })
+  -- vim.api.nvim_set_hl(0, "CurlyBracket", { fg = "#00bfff" })
 end
 
 local function ensure_window_matches()
