@@ -68,18 +68,6 @@ vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
   end,
 })
 
--- Copilot は特定 filetype のみ有効化
-local copilot_group = vim.api.nvim_create_augroup("MyCopilotFiletypes", { clear = true })
-vim.api.nvim_create_autocmd("FileType", {
-  group = copilot_group,
-  pattern = { "javascript", "typescript", "scss", "css", "html", "pug", "json", "astro", "gitcommit" },
-  callback = function(args)
-    local ft = vim.bo[args.buf].filetype
-    vim.g.copilot_filetypes = vim.g.copilot_filetypes or { ["*"] = false }
-    vim.g.copilot_filetypes[ft] = true
-  end,
-})
-
 -- Git commit message: CopilotChatK2Commit
 vim.api.nvim_create_autocmd("FileType", {
   group = vim.api.nvim_create_augroup("MyGitCommit", { clear = true }),
