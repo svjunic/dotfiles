@@ -4,6 +4,8 @@ return {
     "svjunic/RadicalGoodSpeed",
     priority = 1000,
     lazy = false,
+    dev = true,
+    dir = "~/virtual/github/RadicalGoodSpeed.vim",
     config = function()
       vim.cmd("colorscheme radicalgoodspeed")
     end,
@@ -23,7 +25,6 @@ return {
     "nvim-tree/nvim-web-devicons",
     config = function()
       require("nvim-web-devicons").setup({ override = {}, default = true })
-      -- NOTE: vim/lua/nvim-web-devicons_config/init.lua の TextChanged+echo は neovim 側では採用しない
     end,
   },
 
@@ -142,7 +143,7 @@ return {
   -- Emmet
   {
     "mattn/emmet-vim",
-    ft = { "css", "scss" },
+    ft = { "css", "scss", "html", "tsx", "astro" },
     init = function()
       vim.g.user_emmet_settings = { variables = { lang = "ja" } }
       vim.g.user_emmet_leader_key = "<C-E>"

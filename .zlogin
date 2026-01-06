@@ -1,6 +1,5 @@
 #!/bin/zsh
 
-
 echo 'include .zlogin'
 
 test -r ~/.zbashrc && source ~/.zbashrc
