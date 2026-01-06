@@ -201,6 +201,8 @@ return {
   -- Formatting
   {
     "stevearc/conform.nvim",
+    cmd = { "ConformInfo" },
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
       require("plugins.conform")
     end,
