@@ -114,12 +114,25 @@ return {
   {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
-    event = "InsertEnter",
+    -- InsertEnter だと「最初の提案」までが遅くなりがちなので、対象ftで先にロードする
+    ft = {
+      "javascript",
+      "typescript",
+      "scss",
+      "css",
+      "html",
+      "pug",
+      "json",
+      "astro",
+      "gitcommit",
+    },
     config = function()
       require("copilot").setup({
         suggestion = {
           enabled = true,
           auto_trigger = true,
+          -- 打鍵停止後の待ち時間。小さくすると提案が出やすいがリクエスト増にもなる
+          debounce = 50,
           hide_during_completion = false,
           keymap = {
             -- accept は下のカスタムマップで制御（補完ポップアップ確定と競合させない）
