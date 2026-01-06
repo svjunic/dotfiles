@@ -111,14 +111,67 @@ return {
   },
 
   -- Copilot
-  { "github/copilot.vim", lazy = true },
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("copilot").setup({
+        suggestion = {
+          enabled = true,
+          auto_trigger = true,
+          hide_during_completion = false,
+          keymap = {
+            -- accept は下のカスタムマップで制御（補完ポップアップ確定と競合させない）
+            accept = false,
+          },
+        },
+        panel = { enabled = false },
+        filetypes = {
+          ["*"] = false,
+          javascript = true,
+          typescript = true,
+          scss = true,
+          css = true,
+          html = true,
+          pug = true,
+          json = true,
+          astro = true,
+          gitcommit = true,
+        },
+      })
+
+      -- <C-y> は補完ポップアップ確定に使われがちなので、
+      -- 1) ポップアップ表示中は素通し
+      -- 2) Copilotの提案が見えている時だけ accept
+      vim.keymap.set("i", "<C-y>", function()
+        local ok_s, suggestion = pcall(require, "copilot.suggestion")
+        local ok_cmp, cmp = pcall(require, "cmp")
+
+        -- 1) cmpメニューが出ていて、かつユーザーが明示的に選択している場合はcmp確定
+        if ok_cmp and cmp.visible() then
+          local selected = cmp.get_selected_entry()
+          if selected ~= nil then
+            return cmp.confirm({ select = false })
+          end
+        end
+
+        -- 2) cmpが未選択なら、Copilotインライン提案が見えている時だけ受け入れる
+        if ok_s and suggestion.is_visible() then
+          return suggestion.accept()
+        end
+
+        -- 3) それ以外は通常の<C-y>（pumの挙動に委ねる）
+        return "<C-y>"
+      end, { expr = true, replace_keycodes = false, desc = "Copilot: accept suggestion" })
+    end,
+  },
   {
     "CopilotC-Nvim/CopilotChat.nvim",
     branch = "main",
     cmd = { "CopilotChat", "CopilotChatOpen", "CopilotChatPrompts", "CopilotChatToggle", "CopilotChatModels" },
     ft = { "gitcommit" },
     dependencies = {
-      "github/copilot.vim",
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons",
       "nvim-telescope/telescope.nvim",
