@@ -79,26 +79,12 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- filetype 上書き（vim/auto.vim 由来）
--- 方針: 移行直後は事故防止のため無効化し、コメントとして残す。
---
--- autocmd BufRead,BufNewFile *.scss set filetype=scss
--- autocmd BufRead,BufNewFile *.sass set filetype=scss
--- autocmd BufRead,BufNewFile *.styl set filetype=stylus
--- autocmd BufRead,BufNewFile *.md,*.mdx set filetype=markdown
--- DANGER: patternless override (almost everything becomes markdown)
--- autocmd BufRead,BufNewFile  set filetype=markdown
--- autocmd BufRead,BufNewFile *.js,*.mjs,*.cjs,*.jsx set filetype=javascript
--- autocmd BufRead,BufNewFile *.vue set filetype=vue
--- autocmd BufRead,BufNewFile *.pug set filetype=pug
--- autocmd BufRead,BufNewFile *.astro set filetype=astro
---
--- jsonc 対応（treesitter と競合する可能性があるので必要になったら検討）
--- autocmd FileType json syntax match Comment +//.+$+
--- autocmd BufRead,BufNewFile *.json set filetype=jsonc
---
--- tsx が ts 判定になるのを防ぐ（現行 nvim では不要な可能性）
--- autocmd BufNewFile,BufRead *.tsx let b:tsx_ext_found = 1
---
--- emmet（プラグイン側に寄せる）
--- autocmd FileType html,jade,css,scss,sass,vue,typescript,typescriptreact,javascript,javascriptreact,astro EmmetInstall
+-- filetype 追加
+vim.filetype.add({
+  extension = {
+    mdx = "markdown",
+  },
+  pattern = {
+    [".*/Dockerfile[^./]*$"] = "dockerfile",
+  },
+})

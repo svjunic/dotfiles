@@ -3,6 +3,13 @@ if not ok then
   return
 end
 
+-- mdx は nvim-treesitter 側で未対応なバージョンがあるため、
+-- filetype は mdx のまま treesitter は markdown パーサを使うフォールバック。
+pcall(function()
+  vim.treesitter.language.register("markdown", "mdx")
+  vim.treesitter.language.register("markdown", "markdown.mdx")
+end)
+
 configs.setup({
   ensure_installed = {
     "html",
