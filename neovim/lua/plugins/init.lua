@@ -4,6 +4,8 @@ return {
     "svjunic/RadicalGoodSpeed",
     priority = 1000,
     lazy = false,
+    dev = true,
+    dir = "~/virtual/github/RadicalGoodSpeed.vim",
     config = function()
       vim.cmd("colorscheme radicalgoodspeed")
     end,
@@ -23,7 +25,6 @@ return {
     "nvim-tree/nvim-web-devicons",
     config = function()
       require("nvim-web-devicons").setup({ override = {}, default = true })
-      -- NOTE: vim/lua/nvim-web-devicons_config/init.lua の TextChanged+echo は neovim 側では採用しない
     end,
   },
 
@@ -110,14 +111,80 @@ return {
   },
 
   -- Copilot
-  { "github/copilot.vim", lazy = true },
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    -- InsertEnter だと「最初の提案」までが遅くなりがちなので、対象ftで先にロードする
+    ft = {
+      "javascript",
+      "typescript",
+      "scss",
+      "css",
+      "html",
+      "pug",
+      "json",
+      "astro",
+      "gitcommit",
+    },
+    config = function()
+      require("copilot").setup({
+        suggestion = {
+          enabled = true,
+          auto_trigger = true,
+          -- 打鍵停止後の待ち時間。小さくすると提案が出やすいがリクエスト増にもなる
+          debounce = 50,
+          hide_during_completion = false,
+          keymap = {
+            -- accept は下のカスタムマップで制御（補完ポップアップ確定と競合させない）
+            accept = false,
+          },
+        },
+        panel = { enabled = false },
+        filetypes = {
+          ["*"] = false,
+          javascript = true,
+          typescript = true,
+          scss = true,
+          css = true,
+          html = true,
+          pug = true,
+          json = true,
+          astro = true,
+          gitcommit = true,
+        },
+      })
+
+      -- <C-y> は補完ポップアップ確定に使われがちなので、
+      -- 1) ポップアップ表示中は素通し
+      -- 2) Copilotの提案が見えている時だけ accept
+      vim.keymap.set("i", "<C-y>", function()
+        local ok_s, suggestion = pcall(require, "copilot.suggestion")
+        local ok_cmp, cmp = pcall(require, "cmp")
+
+        -- 1) cmpメニューが出ていて、かつユーザーが明示的に選択している場合はcmp確定
+        if ok_cmp and cmp.visible() then
+          local selected = cmp.get_selected_entry()
+          if selected ~= nil then
+            return cmp.confirm({ select = false })
+          end
+        end
+
+        -- 2) cmpが未選択なら、Copilotインライン提案が見えている時だけ受け入れる
+        if ok_s and suggestion.is_visible() then
+          return suggestion.accept()
+        end
+
+        -- 3) それ以外は通常の<C-y>（pumの挙動に委ねる）
+        return "<C-y>"
+      end, { expr = true, replace_keycodes = false, desc = "Copilot: accept suggestion" })
+    end,
+  },
   {
     "CopilotC-Nvim/CopilotChat.nvim",
     branch = "main",
     cmd = { "CopilotChat", "CopilotChatOpen", "CopilotChatPrompts", "CopilotChatToggle", "CopilotChatModels" },
     ft = { "gitcommit" },
     dependencies = {
-      "github/copilot.vim",
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons",
       "nvim-telescope/telescope.nvim",
@@ -134,6 +201,8 @@ return {
   -- Formatting
   {
     "stevearc/conform.nvim",
+    cmd = { "ConformInfo" },
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
       require("plugins.conform")
     end,
@@ -142,7 +211,7 @@ return {
   -- Emmet
   {
     "mattn/emmet-vim",
-    ft = { "css", "scss" },
+    ft = { "css", "scss", "html", "tsx", "astro" },
     init = function()
       vim.g.user_emmet_settings = { variables = { lang = "ja" } }
       vim.g.user_emmet_leader_key = "<C-E>"

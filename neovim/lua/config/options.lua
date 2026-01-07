@@ -54,9 +54,6 @@ vim.g.netrw_timefmt = "%Y/%m/%d(%a) %H:%M:%S"
 vim.g.netrw_preview = 1
 vim.g.netrw_altv = 1
 
--- Copilot はデフォルト無効。必要な filetype だけ autocmd で有効化。
-vim.g.copilot_filetypes = { ["*"] = false }
-
 -- base.vim 由来の便利コマンド/abbrev
 vim.api.nvim_create_user_command("CdCurrent", function()
   local dir = vim.fn.expand("%:p:h")
