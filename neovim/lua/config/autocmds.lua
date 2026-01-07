@@ -7,7 +7,7 @@ local function apply_custom_highlights()
   vim.api.nvim_set_hl(0, "LogFatal", { fg = "#ff5f00", bold = true, underline = true })
 
   vim.api.nvim_set_hl(0, "ZenkakuSpace", { reverse = true })
-  vim.api.nvim_set_hl(0, "CurlyBracket", { fg = "#00bfff" })
+  -- vim.api.nvim_set_hl(0, "CurlyBracket", { fg = "#00bfff" })
 end
 
 local function ensure_window_matches()
@@ -68,18 +68,6 @@ vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
   end,
 })
 
--- Copilot は特定 filetype のみ有効化
-local copilot_group = vim.api.nvim_create_augroup("MyCopilotFiletypes", { clear = true })
-vim.api.nvim_create_autocmd("FileType", {
-  group = copilot_group,
-  pattern = { "javascript", "typescript", "scss", "css", "html", "pug", "json", "astro", "gitcommit" },
-  callback = function(args)
-    local ft = vim.bo[args.buf].filetype
-    vim.g.copilot_filetypes = vim.g.copilot_filetypes or { ["*"] = false }
-    vim.g.copilot_filetypes[ft] = true
-  end,
-})
-
 -- Git commit message: CopilotChatK2Commit
 vim.api.nvim_create_autocmd("FileType", {
   group = vim.api.nvim_create_augroup("MyGitCommit", { clear = true }),
@@ -91,26 +79,13 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- filetype 上書き（vim/auto.vim 由来）
--- 方針: 移行直後は事故防止のため無効化し、コメントとして残す。
---
--- autocmd BufRead,BufNewFile *.scss set filetype=scss
--- autocmd BufRead,BufNewFile *.sass set filetype=scss
--- autocmd BufRead,BufNewFile *.styl set filetype=stylus
--- autocmd BufRead,BufNewFile *.md,*.mdx set filetype=markdown
--- DANGER: patternless override (almost everything becomes markdown)
--- autocmd BufRead,BufNewFile  set filetype=markdown
--- autocmd BufRead,BufNewFile *.js,*.mjs,*.cjs,*.jsx set filetype=javascript
--- autocmd BufRead,BufNewFile *.vue set filetype=vue
--- autocmd BufRead,BufNewFile *.pug set filetype=pug
--- autocmd BufRead,BufNewFile *.astro set filetype=astro
---
--- jsonc 対応（treesitter と競合する可能性があるので必要になったら検討）
--- autocmd FileType json syntax match Comment +//.+$+
--- autocmd BufRead,BufNewFile *.json set filetype=jsonc
---
--- tsx が ts 判定になるのを防ぐ（現行 nvim では不要な可能性）
--- autocmd BufNewFile,BufRead *.tsx let b:tsx_ext_found = 1
---
--- emmet（プラグイン側に寄せる）
--- autocmd FileType html,jade,css,scss,sass,vue,typescript,typescriptreact,javascript,javascriptreact,astro EmmetInstall
+-- filetype 追加
+vim.filetype.add({
+  extension = {
+    mdx = "markdown",
+  },
+  pattern = {
+    ["Dockerfile%-.+"] = "dockerfile",
+    [".*/Dockerfile%-.+"] = "dockerfile",
+  },
+})

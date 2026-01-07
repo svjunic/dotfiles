@@ -21,7 +21,7 @@ match ZenkakuSpace /　/
 set listchars=tab:\ \|
 
 " The Usual
-match CurlyBracket /[{}]/
+" match CurlyBracket /[{}]/
 
 """ 基本形
 map ˜ ~

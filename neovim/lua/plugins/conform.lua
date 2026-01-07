@@ -6,7 +6,9 @@ end
 conform.setup({
   formatters_by_ft = {
     typescript = { "prettier", lsp_format = "fallback" },
+    typescriptreact = { "prettier", lsp_format = "fallback" },
     javascript = { "prettier", lsp_format = "fallback" },
+    javascriptreact = { "prettier", lsp_format = "fallback" },
     astro = { "prettier", lsp_format = "fallback" },
     markdown = { "prettier", lsp_format = "fallback" },
     yaml = { "prettier", lsp_format = "fallback" },
