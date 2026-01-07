@@ -85,6 +85,7 @@ vim.filetype.add({
     mdx = "markdown",
   },
   pattern = {
-    [".*/Dockerfile[^./]*$"] = "dockerfile",
+    ["Dockerfile%-.+"] = "dockerfile",
+    [".*/Dockerfile%-.+"] = "dockerfile",
   },
 })
