@@ -16,15 +16,16 @@ let s:toml         = g:toml_dir . '/plugins.toml'
 let s:toml_svjunic = g:toml_dir . '/plugins.svjunic.toml'
 let s:toml_ddu     = g:toml_dir . '/plugins.ddu.toml'
 let s:toml_lazy    = g:toml_dir . '/plugins_lazy.toml'
+let s:toml_vim_lsp = g:toml_dir . '/plugins_vim_lsp.toml'
 
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
   call dein#load_toml(s:toml_general , {'lazy': 0})
-
   call dein#load_toml(s:toml         , {'lazy': 0})
   call dein#load_toml(s:toml_svjunic , {'lazy': 0})
   call dein#load_toml(s:toml_ddu,      {'lazy': 0})
+  call dein#load_toml(s:toml_vim_lsp,  {'lazy': 0})
   call dein#load_toml(s:toml_lazy,     {'lazy': 1})
 
   call dein#end()
