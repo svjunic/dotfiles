@@ -78,4 +78,4 @@ autocmd FileType astro      let g:copilot_filetypes.astro      = v:true
 autocmd FileType gitcommit  let g:copilot_filetypes.gitcommit  = v:true
 
 " Git Commit メッセージ
-autocmd FileType gitcommit CopilotChatK2Commit
+autocmd FileType gitcommit if exists(':CopilotChatK2Commit') | CopilotChatK2Commit | endif
