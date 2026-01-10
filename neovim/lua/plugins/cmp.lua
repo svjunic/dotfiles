@@ -76,7 +76,7 @@ cmp.setup({
     },
     documentation = {
       winhighlight = "Normal:CmpDocumentation",
-      -- border = "rounded",
+      border = "rounded",
       auto_show = true,
       auto_show_delay_ms = 0,
     },
