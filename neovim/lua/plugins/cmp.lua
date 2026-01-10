@@ -70,8 +70,15 @@ cmp.setup({
     { name = "path" },
   },
   window = {
+    completion = {
+      scrollbar = true,
+      -- border = "rounded",
+    },
     documentation = {
       winhighlight = "Normal:CmpDocumentation",
+      border = "rounded",
+      auto_show = true,
+      auto_show_delay_ms = 0,
     },
   },
   experimental = {

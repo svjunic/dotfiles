@@ -12,7 +12,7 @@ conform.setup({
     astro = { "prettier", lsp_format = "fallback" },
     markdown = { "prettier", lsp_format = "fallback" },
     yaml = { "prettier", lsp_format = "fallback" },
-    html = { "prettier", "markuplint", lsp_format = "fallback" },
+    html = { "prettier",  lsp_format = "fallback" },
     css = { "prettier", "stylelint", lsp_format = "fallback" },
     scss = { "prettier", "stylelint", lsp_format = "fallback" },
   },
