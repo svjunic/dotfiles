@@ -13,7 +13,8 @@ vim.opt.ignorecase = true
 vim.opt.wildmenu = true
 vim.opt.wildmode = { "list:longest", "full" }
 vim.opt.history = 10000
-vim.opt.completeopt = { "menuone" }
+vim.opt.completeopt = { "menu", "menuone", "noselect" }
+vim.opt.pumheight = 15
 vim.opt.wrap = false
 vim.opt.breakindent = true
 vim.opt.iskeyword:append("@-@")
