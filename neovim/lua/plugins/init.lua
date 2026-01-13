@@ -4,8 +4,8 @@ return {
     "svjunic/RadicalGoodSpeed",
     priority = 1000,
     lazy = false,
-    dev = true,
-    dir = "~/virtual/github/RadicalGoodSpeed.vim",
+    -- dev = true,
+    -- dir = "~/virtual/github/RadicalGoodSpeed.vim",
     config = function()
       vim.cmd("colorscheme radicalgoodspeed")
     end,
