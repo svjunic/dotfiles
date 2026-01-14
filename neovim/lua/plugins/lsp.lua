@@ -27,6 +27,7 @@ vim.lsp.config("vtsls", {
       },
     },
     typescript = {
+      locale = "ja",
       preferences = { includePackageJsonAutoImports = "off" },
     },
     javascript = {
