@@ -52,8 +52,9 @@ install_npm() {
   npm install -g markuplint
   npm install -g stylelint
 
-  # eslint (optional; kept for parity)
+  # eslint
   npm install -g eslint
+  npm install -g eslint_d
 
   echo 'NOTE: neotest-playwright usually expects project-local Playwright (@playwright/test)'
   echo '      If needed, run: npm i -D @playwright/test && npx playwright install'
