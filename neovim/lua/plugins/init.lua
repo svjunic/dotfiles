@@ -289,13 +289,23 @@ return {
   },
 
   {
-    "ggandor/leap.nvim",
+    "https://codeberg.org/andyg/leap.nvim",
     lazy = false,
     init = function()
       vim.keymap.set("n", ",l", "[leap]", { remap = true })
-      vim.keymap.set("n", "[leap]lf", "<Plug>(leap-forward)", { remap = true, silent = true })
-      vim.keymap.set("n", "[leap]lb", "<Plug>(leap-backward)", { remap = true, silent = true })
-      vim.keymap.set("n", "[leap]lw", "<Plug>(leap-from-window)", { remap = true, silent = true })
+      vim.keymap.set("n", "[leap]f", "<Plug>(leap-forward)", { remap = true, silent = true })
+      vim.keymap.set("n", "[leap]b", "<Plug>(leap-backward)", { remap = true, silent = true })
+      vim.keymap.set("n", "[leap]w", "<Plug>(leap-from-window)", { remap = true, silent = true })
     end,
+  },
+
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    build = "cd app && npm install",
+    init = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+    ft = { "markdown" },
   },
 }
