@@ -308,4 +308,14 @@ return {
     end,
     ft = { "markdown" },
   },
+
+  {
+    "nwiizo/marp.nvim",
+    ft = "markdown",
+    config = function()
+      require("marp").setup {
+        marp_command = "npx @marp-team/marp-cli@latest",
+      }
+    end,
+  }
 }
