@@ -124,11 +124,20 @@ vim.keymap.set("n", "q", function()
 end, { expr = true, noremap = true, silent = true })
 
 vim.diagnostic.config({
-  virtual_text = true,
   signs = true,
   underline = true,
   update_in_insert = false,
   severity_sort = true,
+
+  virtual_text = {
+    format = function(d)
+      local msg = d.message:gsub("\n", " "):gsub("%s+", " ")
+      local max = 50
+      if #msg > max then msg = msg:sub(1, max) .. "…" end
+      return msg
+    end,
+  },
+  float = { wrap = true },
 })
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
