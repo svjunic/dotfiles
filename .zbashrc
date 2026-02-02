@@ -505,3 +505,58 @@ function gitdiff() {
   fi
 }
 
+# gh のユーザ切替を行う
+# - 事前要件: gh, peco がインストールされていること
+# - 入力: ~/.config/gh/hosts.yml の github.com.users を peco で選択
+# - 挙動: 選択したユーザで `gh auth switch --hostname github.com --user <user>` を実行
+# - 失敗時: エラーメッセージを出力して非ゼロを返す
+ghswitch() {
+  if ! command -v gh >/dev/null 2>&1; then
+    echo "gh コマンドが見つかりません（brew install gh など）"
+    return 1
+  fi
+
+  HOSTS_FILE="$HOME/.config/gh/hosts.yml"
+  if [ ! -f "$HOSTS_FILE" ]; then
+    echo "gh の設定ファイルが見つかりません: $HOSTS_FILE"
+    return 1
+  fi
+
+  if ! command -v peco >/dev/null 2>&1; then
+    echo "peco が見つかりません（brew install peco など）"
+    return 1
+  fi
+
+  users=$(awk '
+    /^[[:space:]]*github.com:/{found=1; next}
+    found && /^[[:space:]]*users:/{userblock=1; next}
+    # ユーザ名行は「先頭空白 + キー + コロン + （空白のみ）行末」のみを許可する
+    userblock && /^[[:space:]]+[^[:space:]]+:[[:space:]]*$/{
+      line=$0
+      sub(/^[[:space:]]+/,"",line)
+      sub(/:[[:space:]]*$/,"",line)
+      gsub(/^"|"$/,"",line)
+      print line
+      next
+    }
+    userblock && !/^[[:space:]]+[^[:space:]]+:[[:space:]]*$/ {exit}
+  ' "$HOSTS_FILE" | sed 's/^"//;s/"$//' | sort -u)
+
+  # fallback: top-level user if users block not found
+  if [ -z "$users" ]; then
+    users=$(awk '/^[[:space:]]*github.com:/{found=1} found && /^[[:space:]]*user:/{print $2; exit}' "$HOSTS_FILE" | sed 's/^"//;s/"$//')
+  fi
+
+  if [ -z "$users" ]; then
+    echo "github.com に紐づくユーザが見つかりません: $HOSTS_FILE"
+    return 1
+  fi
+
+  user=$(printf "%s\n" "$users" | peco --prompt "gh user > ")
+  if [ -z "$user" ]; then
+    echo "Canceled."
+    return 1
+  fi
+
+  gh auth switch --hostname github.com --user "$user"
+}
