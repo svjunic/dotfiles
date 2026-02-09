@@ -67,7 +67,7 @@ local prompts = {
   },
   Commit = {
     prompt = table.concat({
-      "#shell:git diff --staged",
+      "#gitdiff:staged",
       "#buffer:visible",
       "",
       "変更のコミットメッセージをcommitizenの規約に従って日本語で書いてください。タイトルは最大50文字、メッセージは72文字で折り返してください。メッセージ全体をgitcommit言語のコードブロックで囲んでください。",
@@ -76,7 +76,7 @@ local prompts = {
   },
   K2Commit = {
     prompt = table.concat({
-      "#shell:git diff --staged",
+      "#gitdiff:staged",
       "#buffer:visible",
       "",
       "変更のコミットメッセージを以下のルールで作成してください。",
@@ -115,6 +115,15 @@ chat.setup({
   mappings = {
     close = { normal = "q" },
     submit_prompt = { insert = "<A-Enter>", normal = "<CR>" },
+  },
+  tools = {
+    "gitdiff:staged",
+    "browser",
+    "terminal",
+    "chat",
+    "diagnostics",
+    "code",
+    "tests",
   },
   headers = {
     user = "🐬 You: ",
