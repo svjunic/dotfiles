@@ -110,7 +110,8 @@ local prompts = {
 
 chat.setup({
   max_message_length = 60000,
-  model = "gpt-5.1-codex-mini",
+  --model = "gpt-5.1-codex-mini",
+  model = "gpt-5-mini",
   system_prompt = system_prompt_ja,
   mappings = {
     close = { normal = "q" },
@@ -120,7 +121,7 @@ chat.setup({
     "gitdiff:staged",
     "browser",
     "terminal",
-    "chat",
+    -- "chat",
     "diagnostics",
     "code",
     "tests",
