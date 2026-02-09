@@ -121,6 +121,9 @@ chat.setup({
     assistant = "🦋 Copilot: ",
     tool = "🔧 Tool: ",
   },
+  -- window = {
+  --   layout = 'float'
+  -- },
   prompts = prompts,
 })
 
