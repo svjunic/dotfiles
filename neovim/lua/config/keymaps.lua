@@ -9,8 +9,8 @@ map("n", "<C-l>", "<C-l>:nohlsearch<CR>", { silent = true })
 map({ "n", "v", "o" }, "˜", "~", { remap = false })
 
 -- Buffer
-map("n", "bn", ":next<cr>", { silent = true })
-map("n", "bp", ":prev<cr>", { silent = true })
+map("n", "ln", ":next<cr>", { silent = true })
+map("n", "lp", ":prev<cr>", { silent = true })
 
 -- Tab
 map("n", "tn", ":tabnext<cr>", { silent = true })

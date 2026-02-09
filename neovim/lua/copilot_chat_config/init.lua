@@ -10,13 +10,12 @@ local system_prompt_ja = "必ず日本語で、他の言語を使わずに回答
 local prompts = {
   Review = {
     prompt = table.concat({
-      "#buffer:current",
+      "#buffer:visible",
       "",
       "コードのレビューを行ってください。",
     }, "\n"),
     system_prompt = system_prompt_ja,
     description = "現在のバッファのコードレビューを日本語で依頼します。",
-    mapping = ",ccrc",
   },
   Explain = {
     prompt = table.concat({
@@ -24,7 +23,6 @@ local prompts = {
     }, "\n"),
     system_prompt = system_prompt_ja,
     description = "カーソル位置のコードを日本語で段落付きで説明します。",
-    mapping = ",ccre",
   },
   Test = {
     prompt = table.concat({
@@ -35,7 +33,7 @@ local prompts = {
   },
   TestCurrent = {
     prompt = table.concat({
-      "#buffer:current",
+      "#buffer:visible",
       "",
       "カーソル上のコードの詳細な単体テスト関数を書いてください。",
     }, "\n"),
@@ -48,7 +46,6 @@ local prompts = {
     }, "\n"),
     system_prompt = system_prompt_ja,
     description = "選択範囲のコードを最適化し、パフォーマンスと可読性を向上させます。",
-    mapping = ",ccrc",
   },
   Docs = {
     prompt = "/COPILOT_REFACTOR 選択したコードのドキュメントを書いてください。ドキュメントをコメントとして追加した元のコードを含むコードブロックで回答してください。使用するプログラミング言語に最も適したドキュメントスタイルを使用してください（例：JavaScriptのJSDoc、Pythonのdocstringsなど）",
@@ -56,7 +53,7 @@ local prompts = {
   },
   DocsCurrent = {
     prompt = table.concat({
-      "#buffer: current",
+      "#buffer:visible",
       "",
       "現在のファイルのコメントを書いてください。 \\",
       "        コメントはJSDoc等、ファイルに合わせて一般的なコメントで記述してください",
@@ -70,7 +67,7 @@ local prompts = {
   },
   Commit = {
     prompt = table.concat({
-      "#shell:git diff --staged",
+      "#gitdiff:staged",
       "#buffer:visible",
       "",
       "変更のコミットメッセージをcommitizenの規約に従って日本語で書いてください。タイトルは最大50文字、メッセージは72文字で折り返してください。メッセージ全体をgitcommit言語のコードブロックで囲んでください。",
@@ -79,7 +76,7 @@ local prompts = {
   },
   K2Commit = {
     prompt = table.concat({
-      "#shell:git diff --staged",
+      "#gitdiff:staged",
       "#buffer:visible",
       "",
       "変更のコミットメッセージを以下のルールで作成してください。",
@@ -108,23 +105,35 @@ local prompts = {
     }, "\n"),
     system_prompt = system_prompt_ja,
     description = "K2ルールに従ったコミットメッセージを日本語で生成します。",
-    mapping = ",cck2",
   },
 }
 
 chat.setup({
   max_message_length = 60000,
+  --model = "gpt-5.1-codex-mini",
   model = "gpt-5-mini",
   system_prompt = system_prompt_ja,
   mappings = {
     close = { normal = "q" },
     submit_prompt = { insert = "<A-Enter>", normal = "<CR>" },
   },
+  tools = {
+    "gitdiff:staged",
+    "browser",
+    "terminal",
+    -- "chat",
+    "diagnostics",
+    "code",
+    "tests",
+  },
   headers = {
     user = "🐬 You: ",
     assistant = "🦋 Copilot: ",
     tool = "🔧 Tool: ",
   },
+  -- window = {
+  --   layout = 'float'
+  -- },
   prompts = prompts,
 })
 
@@ -135,6 +144,26 @@ vim.keymap.set("n", ",ccq", function()
     chat.ask("#buffer:visible\n" .. input, { system_prompt = system_prompt_ja })
   end
 end, { desc = "CopilotChat: Quick Chat" })
+
+-- Explicit keymaps to work before first CopilotChat open
+vim.keymap.set("n", ",ccr", function()
+  chat.ask(prompts.Review.prompt, { system_prompt = system_prompt_ja })
+end, { desc = prompts.Review.description })
+
+vim.keymap.set("n", ",ccre", function()
+  chat.ask(prompts.Explain.prompt, { system_prompt = system_prompt_ja })
+end, { desc = prompts.Explain.description })
+
+vim.keymap.set("n", ",cco", function()
+  chat.ask(prompts.Optimize.prompt, { system_prompt = system_prompt_ja })
+end, { desc = prompts.Optimize.description })
+
+vim.keymap.set("n", ",cck2", function()
+  chat.ask(prompts.K2Commit.prompt, {
+    system_prompt = system_prompt_ja,
+    model = "gpt-5-mini"
+  })
+end, { desc = prompts.K2Commit.description })
 
 -- Highlights
 local function apply_copilotchat_highlights()
@@ -161,5 +190,8 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 -- Custom command: CopilotChatK2Commit (this repo's legacy)
 vim.api.nvim_create_user_command("CopilotChatK2Commit", function()
-  chat.ask(prompts.K2Commit.prompt, { system_prompt = prompts.K2Commit.system_prompt or system_prompt_ja })
+  chat.ask(prompts.K2Commit.prompt, {
+    system_prompt = prompts.K2Commit.system_prompt or system_prompt_ja,
+    model = "gpt-5-mini"
+  })
 end, {})
