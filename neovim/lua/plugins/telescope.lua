@@ -57,6 +57,34 @@ end
 
 -- キーマップ（vim/lua/telescope_config/keymap.lua 相当）
 local tb = require("telescope.builtin")
+local actions = require("telescope.actions")
+local action_state = require("telescope.actions.state")
+
+-- 絞り込んだファイルをすべて開くアクション
+local function open_all_filtered(prompt_bufnr)
+  local picker = action_state.get_current_picker(prompt_bufnr)
+  local manager = picker.manager
+  
+  local entries = {}
+  for entry in manager:iter() do
+    table.insert(entries, entry)
+  end
+  
+  actions.close(prompt_bufnr)
+  
+  if #entries == 0 then
+    return
+  end
+  
+  -- 最初のファイルは現在のバッファで開く
+  vim.cmd("e " .. vim.fn.fnameescape(entries[1].value or entries[1].filename or entries[1].path or entries[1][1]))
+  
+  -- 残りのファイルをタブで開く
+  for i = 2, #entries do
+    local file = entries[i].value or entries[i].filename or entries[i].path or entries[i][1]
+    vim.cmd("tabnew " .. vim.fn.fnameescape(file))
+  end
+end
 
 vim.keymap.set("n", ",ffg", tb.live_grep, { desc = "Telescope Grep" })
 vim.keymap.set("n", ",ffb", tb.buffers, { desc = "Telescope Buffers" })
@@ -66,11 +94,14 @@ vim.keymap.set("n", ",fff", function()
   tb.find_files({
     attach_mappings = function(_, map)
       map("i", "<CR>", function(prompt_bufnr)
-        require("telescope.actions").select_default(prompt_bufnr)
+        actions.select_default(prompt_bufnr)
       end)
       map("n", "<CR>", function(prompt_bufnr)
-        require("telescope.actions").select_default(prompt_bufnr)
+        actions.select_default(prompt_bufnr)
       end)
+      -- 絞り込んだファイルをすべて開く（Ctrl-a）
+      map("i", "<C-a>", open_all_filtered)
+      map("n", "<C-a>", open_all_filtered)
       return true
     end,
   })
@@ -87,11 +118,14 @@ vim.keymap.set("n", ",ffF", function()
     },
     attach_mappings = function(_, map)
       map("i", "<CR>", function(prompt_bufnr)
-        require("telescope.actions").select_default(prompt_bufnr)
+        actions.select_default(prompt_bufnr)
       end)
       map("n", "<CR>", function(prompt_bufnr)
-        require("telescope.actions").select_default(prompt_bufnr)
+        actions.select_default(prompt_bufnr)
       end)
+      -- 絞り込んだファイルをすべて開く（Ctrl-a）
+      map("i", "<C-a>", open_all_filtered)
+      map("n", "<C-a>", open_all_filtered)
       return true
     end,
   })
