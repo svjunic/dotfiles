@@ -33,10 +33,10 @@ my dotfiles.
 - `scripts/setup_*.sh`: 本体セットアップ（エディタ本体/設定反映）
 
 - Vim
-- `/Users/jun.fujimura/virtual/github/dotfiles/vim/scripts/install_deps.sh`
-- `/Users/jun.fujimura/virtual/github/dotfiles/vim/scripts/setup_mac.sh`
-- `/Users/jun.fujimura/virtual/github/dotfiles/vim/scripts/setup_linux.sh`
+  - `/Users/jun.fujimura/virtual/github/dotfiles/vim/scripts/install_deps.sh`
+  - `/Users/jun.fujimura/virtual/github/dotfiles/vim/scripts/setup_mac.sh`
+  - `/Users/jun.fujimura/virtual/github/dotfiles/vim/scripts/setup_linux.sh`
 
 - Neovim
-- `/Users/jun.fujimura/virtual/github/dotfiles/neovim/scripts/install_deps.sh`
-- `/Users/jun.fujimura/virtual/github/dotfiles/neovim/scripts/setup_mac.sh`
+  - `/Users/jun.fujimura/virtual/github/dotfiles/neovim/scripts/install_deps.sh`
+  - `/Users/jun.fujimura/virtual/github/dotfiles/neovim/scripts/setup_mac.sh`
