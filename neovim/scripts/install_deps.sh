@@ -4,7 +4,7 @@ set -euo pipefail
 
 usage() {
   cat <<'USAGE'
-Usage: install.sh [npm|brew|all]
+Usage: scripts/install_deps.sh [npm|brew|all]
 
   npm  : Install global npm tools (LSP/formatters used by neovim config)
   brew : Install Homebrew packages used by neovim config (macOS)
@@ -40,7 +40,7 @@ install_npm() {
   # HTML/CSS/JSON (LSP)
   npm install -g vscode-langservers-extracted
 
-  # PHP (optional in many repos, kept for parity with vim/install.sh)
+  # PHP (optional in many repos, kept for parity with vim/scripts/install_deps.sh)
   npm install -g intelephense
 
   # Prettier (formatter)
