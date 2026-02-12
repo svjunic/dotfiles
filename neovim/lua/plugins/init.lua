@@ -243,9 +243,12 @@ return {
   -- QuickRun
   {
     "thinca/vim-quickrun",
+    cmd = { "QuickRun" },
     keys = {
-      { "<Leader>r", ":QuickRun<CR>", mode = "n", silent = true, desc = "QuickRun" },
-      { "<Leader>r", ":<C-U>QuickRun<CR>", mode = "v", silent = true, desc = "QuickRun (visual)" },
+      { ",r", ":QuickRun<CR>", mode = "n", silent = true, desc = "QuickRun" },
+      { ",r", ":<C-U>QuickRun<CR>", mode = "v", silent = true, desc = "QuickRun (visual)" },
+      { "<Leader>r", ":QuickRun<CR>", mode = "n", silent = true, desc = "QuickRun (legacy)" },
+      { "<Leader>r", ":<C-U>QuickRun<CR>", mode = "v", silent = true, desc = "QuickRun visual (legacy)" },
     },
   },
 
