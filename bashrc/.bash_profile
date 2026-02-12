@@ -9,5 +9,5 @@ fi
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 [[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
-. "/Users/sv.junic/.deno/env"
+. "$HOME/.deno/env"
 source /usr/local/etc/bash_completion.d/deno.bash

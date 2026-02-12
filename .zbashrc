@@ -261,17 +261,16 @@ function node_vi () {
 }
 
 #####################################################################################################
-# tmux
+# platform profile
 #####################################################################################################
 
-if [[ -n "$ITERM_SESSION_ID" ]] && ! [ -n "$TMUX" ]; then
-  if ! [ -n "$TMUX" ]; then
-    #nvm use --lts
-    npm_dir=${NVM_PATH}_modules
-    tmux a -d || tmux
-  else
-    . ~/bash/tmux/alias.sh
-  fi
+if [ -f ~/shell/common.sh ]; then
+  . ~/shell/common.sh
+fi
+if [ "$(uname -s)" = "Darwin" ] && [ -f ~/shell/mac.sh ]; then
+  . ~/shell/mac.sh
+elif [ "$(uname -s)" = "Linux" ] && [ -f ~/shell/linux-ssh.sh ]; then
+  . ~/shell/linux-ssh.sh
 fi
 
 #####################################################################################################
@@ -390,20 +389,6 @@ compinit -u
 #####################################################################################################
 # alias
 #####################################################################################################
-case "${OSTYPE}" in
-darwin*)
-  alias ls="ls -G"
-  alias ll="ls -lG"
-  alias la="ls -laG"
-  alias openf='sh ~/bash/openf'
-  ;;
-linux*)
-  alias ls='ls --color'
-  alias ll='ls -l --color'
-  alias la='ls -la --color'
-  ;;
-esac
-alias cdc='cd `pwd -P`'
 #alias vi='vim'
 #alias vi='nvim'
 alias vi='node_vi'
@@ -426,14 +411,6 @@ alias gitStashSave='git stash save'              # "作業内容メモ" のよ�
 alias gitStashBranch='git stash branch '         # 新しいブランチ名 で stash から直接作業再開（安全で便利！）
 
 #alias adbDebug='sh ~/bash/androidDebug.sh'
-alias tmux-session-clear='tmux kill-session -a'
-
-# ディレクトリの容量表示
-alias dud='du -d 1 -h '
-
-alias gitfilemode='git config core.filemode'
-
-alias spwget='wget --user-agent="Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1" '
 # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 alias vimdiff='nvim -d'

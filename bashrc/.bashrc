@@ -262,20 +262,14 @@ export PS1='\[\e[0;37m\e[40m\]\u\[\e[0m\]:\[\e[0;96m\e[40m\]\w\[\e[1;92m\e[40m\]
 #####################################################################################################
 # alias
 #####################################################################################################
-case "${OSTYPE}" in
-darwin*)
-  alias ls="ls -G"
-  alias ll="ls -lG"
-  alias la="ls -laG"
-  alias openf='sh ~/bash/openf'
-  ;;
-linux*)
-  alias ls='ls --color'
-  alias ll='ls -l --color'
-  alias la='ls -la --color'
-  ;;
-esac
-alias cdc='cd `pwd -P`'
+if [ -f ~/shell/common.sh ]; then
+  . ~/shell/common.sh
+fi
+if [ "$(uname -s)" = "Darwin" ] && [ -f ~/shell/mac.sh ]; then
+  . ~/shell/mac.sh
+elif [ "$(uname -s)" = "Linux" ] && [ -f ~/shell/linux-ssh.sh ]; then
+  . ~/shell/linux-ssh.sh
+fi
 alias vi='vim'
 
 # github
@@ -284,14 +278,6 @@ alias gitdiff='git difftool --tool=vimdiff --no-prompt'
 alias gitlmm='git log origin/master..master'
 
 #alias adbDebug='sh ~/bash/androidDebug.sh'
-alias tmux-session-clear='tmux kill-session -a'
-
-# ディレクトリの容量表示
-alias dud='du -d 1 -h '
-
-alias gitfilemode='git config core.filemode'
-
-alias spwget='wget --user-agent="Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1" '
 
 
 #####################################################################################################
@@ -302,5 +288,5 @@ if [ `which avn` ]; then
 else
   [[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
 fi
-. "/Users/sv.junic/.deno/env"
+. "$HOME/.deno/env"
 source /usr/local/etc/bash_completion.d/deno.bash
