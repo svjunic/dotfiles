@@ -4,4 +4,6 @@
 
 echo 'include .zprofile'
 
-export PATH="$PATH:/opt/homebrew/bin"
+if [ "$(uname -s)" = "Darwin" ]; then
+  export PATH="$PATH:/opt/homebrew/bin"
+fi
