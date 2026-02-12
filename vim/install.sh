@@ -3,6 +3,9 @@
 function install_npm() {
     echo '1. npm install ---------------'
 
+    ## ddu.nvim依存
+    curl -fsSL https://deno.land/install.sh | sh
+
     # TypeScript/JavaScript
     npm install -g typescript
     npm install -g @vtsls/language-server
