@@ -1,23 +1,18 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-pwd=`pwd -P`
+set -euo pipefail
 
-if [ `uname` = "Darwin" ]; then
-  #mac用のコード
-  ln -s ${pwd}/.bash_profile ~/.bash_profile
-  ln -s ${pwd}/.bashrc ~/.bashrc
-  #ln -s ${pwd}/.eslintrc ~/.eslintrc
-  ln -s ${pwd}/.eslintrc.js ~/.eslintrc.js
-  ln -s ${pwd}/.prettierrc.yaml ~/
-  ln -s ${pwd}/.tmux ~/.tmux
-  ln -s ${pwd}/.tmux.conf ~/.tmux.conf
-  #bash ${pwd}/vim_mac.sh
-elif [ `uname` = "Linux" ]; then
-  #Linux用のコード
-  ln -s ${pwd}/.bashrc ~/.bashrc
-  ln -s ${pwd}/.eslintrc.js ~/.eslintrc.js
-  ln -s ${pwd}/.prettierrc.yaml ~/
-  ln -s ${pwd}/.tmux ~/.tmux
-  ln -s ${pwd}/.tmux.conf ~/.tmux.conf
-  #bash ${pwd}/vim_linux.sh
-fi
+ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd -P)"
+
+case "$(uname -s)" in
+  Darwin)
+    bash "$ROOT_DIR/install/mac.sh"
+    ;;
+  Linux)
+    bash "$ROOT_DIR/install/linux-ssh.sh"
+    ;;
+  *)
+    echo "Unsupported platform: $(uname -s)"
+    exit 1
+    ;;
+esac
