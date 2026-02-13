@@ -1,0 +1,14 @@
+{
+  "name": "neovim",
+  "version": "1.0.0",
+  "description": "このディレクトリは Neovim (0.11.5+) 用の設定です。`vim/` 配下の設定をベースに **lazy.nvim** へ移行しています。",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "sv.junic",
+  "license": "ISC",
+  "devDependencies": {
+    "@prettier/plugin-lua": "^0.0.3"
+  }
+}
