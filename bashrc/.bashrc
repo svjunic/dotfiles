@@ -158,8 +158,8 @@ function agg() {
 # git_diff_archive 識別子1 識別子2
 . ~/bash/git_diff_archive.sh
 
-# peco,vim,pt
-. ~/bash/ptvim.sh
+# peco,vim,rg
+. ~/bash/rgvim.sh
 git config --global color.ui auto
 git config --global alias.co checkout
 git config --global alias.ci commit
