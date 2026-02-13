@@ -292,7 +292,7 @@ return {
   },
 
   {
-    "https://codeberg.org/andyg/leap.nvim",
+    url = "https://codeberg.org/andyg/leap.nvim",
     lazy = false,
     init = function()
       vim.keymap.set("n", ",l", "[leap]", { remap = true })
