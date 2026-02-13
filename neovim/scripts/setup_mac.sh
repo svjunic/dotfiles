@@ -21,6 +21,9 @@ else
   echo "pip3 not found. Skip pip3 install neovim."
 fi
 
-mkdir -p "$HOME/.config/nvim"
+# mkdir -p "$HOME/.config/nvim"
+ln -s "$HOME/virtual/github/dotfiles/neovim" "$HOME/.config/nvim"
+
 
 echo "neovim setup for mac completed."
+
