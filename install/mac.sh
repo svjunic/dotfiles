@@ -39,4 +39,7 @@ backup_and_link "$ROOT_DIR/zsh" "$HOME/zsh"
 backup_and_link "$ROOT_DIR/command" "$HOME/command"
 backup_and_link "$ROOT_DIR/shell" "$HOME/shell"
 
+
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
 echo "mac setup completed."
