@@ -1,5 +1,8 @@
 echo 'include .zbashrc'
 
+# エディタはneovim!
+export VISUAL=nvim
+export EDITOR=nvim
 
 # メモ：このcacheは消しても問題ない
 # //sudo rm -rf /System/Library/Caches/* /Library/Caches/* ~/Library/Caches/*
