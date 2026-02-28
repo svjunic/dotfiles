@@ -1,5 +1,8 @@
 echo 'include .zbashrc'
 
+# エディタはneovim!
+export VISUAL=nvim
+export EDITOR=nvim
 
 # メモ：このcacheは消しても問題ない
 # //sudo rm -rf /System/Library/Caches/* /Library/Caches/* ~/Library/Caches/*
@@ -427,9 +430,10 @@ alias repo='function _repo() {
     fi
 }; _repo'
 
-alias c5='copilot --banner --model gpt-5'
-alias ch='copilot --banner --model claude-haiku-4.5'
-alias cs='copilot --banner --model claude-sonnet-4.5'
+alias c5="copilot --banner --model gpt-5.2 --allow-tool 'write'"
+alias ch="copilot --banner --model claude-haiku-4.5 --allow-tool 'write'"
+alias cs="copilot --banner --model claude-sonnet-4.5 --allow-tool 'write'"
+alias cl='claude'
 
 alias remove-swp='rm ~/.local/state/nvim/swap/.*'
 

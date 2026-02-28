@@ -211,7 +211,7 @@ return {
   -- Emmet
   {
     "mattn/emmet-vim",
-    ft = { "css", "scss", "html", "tsx", "astro" },
+    ft = { "css", "scss", "html", "tsx", "astro", "markdown" },
     init = function()
       vim.g.user_emmet_settings = { variables = { lang = "ja" } }
       vim.g.user_emmet_leader_key = "<C-E>"
