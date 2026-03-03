@@ -65,6 +65,22 @@ local prompts = {
     prompt = "ファイル内の次のような診断上の問題を解決してください：",
     description = "ファイル内の診断（エラーや警告）を修正します。",
   },
+  RefineSentence= {
+    prompt = table.concat({
+      "#buffer:visible",
+      "",
+      "記述されている日本語を丁寧な日本語に書き直してください。",
+    }, "\n"),
+    description = "記述されている日本語を丁寧な日本語に書き直してください。",
+  },
+  RefineMarkdown= {
+    prompt = table.concat({
+      "#buffer:visible",
+      "",
+      "記述されている内容を丁寧なマークダウンに書き直してください。",
+    }, "\n"),
+    description = "記述されている内容を丁寧なマークダウンに書き直してください。",
+  },
   Commit = {
     prompt = table.concat({
       "#gitdiff:staged",
