@@ -42,4 +42,6 @@ backup_and_link "$ROOT_DIR/shell" "$HOME/shell"
 
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
+bash "$ROOT_DIR/install/common.sh"
+
 echo "mac setup completed."
