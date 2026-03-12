@@ -4,6 +4,10 @@ echo 'include .zbashrc'
 export VISUAL=nvim
 export EDITOR=nvim
 
+# # vscode の人はこっち
+# export VISUAL="code --wait"
+# export EDITOR="code --wait"
+
 # メモ：このcacheは消しても問題ない
 # //sudo rm -rf /System/Library/Caches/* /Library/Caches/* ~/Library/Caches/*
 
