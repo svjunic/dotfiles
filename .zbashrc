@@ -4,6 +4,10 @@ echo 'include .zbashrc'
 export VISUAL=nvim
 export EDITOR=nvim
 
+# # vscode の人はこっち
+# export VISUAL="code --wait"
+# export EDITOR="code --wait"
+
 # メモ：このcacheは消しても問題ない
 # //sudo rm -rf /System/Library/Caches/* /Library/Caches/* ~/Library/Caches/*
 
@@ -187,22 +191,6 @@ function agg() {
 
 # peco,vim,rg
 . ~/bash/rgvim.sh
-git config --global color.ui auto
-git config --global alias.co checkout
-git config --global alias.ci commit
-#git config --global alias.st status
-git config --global alias.br branch
-git config --global alias.hist 'log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short'
-
-git config --global alias.st  'status --branch --short'
-git config --global alias.sl  'log --all --branches --decorate --graph --oneline'
-git config --global alias.log 'log --all --branches --graph'
-
-git config --global core.pager delta
-git config --global interactive.diffFilter "delta --color-only"
-git config --global delta.navigate true
-git config --global delta.side-by-side true
-
 #git config --global alias.log 'log --all --branches --graph'
 #git show-branch --merge-base master HEAD
 #git diff `git show-branch --merge-base master HEAD` HEAD
@@ -429,6 +417,63 @@ alias repo='function _repo() {
         echo "This is not a git repository."
     fi
 }; _repo'
+
+alias gm='function _gm() {
+    if git status &>/dev/null; then
+        local branch
+        if [ -n "$1" ]; then
+            branch="$1"
+        else
+            branch=$(git branch -a | sed "s/^[* ] //" | sed "s/remotes\/origin\///" | sort -u | grep -v "HEAD" | peco)
+        fi
+
+        if [ -n "$branch" ]; then
+            git merge "$branch" --no-ff
+        fi
+    else
+        echo "This is not a git repository."
+    fi
+}; _gm'
+
+alias gwr='function _gwr() {
+    if git status &>/dev/null; then
+        local dir
+        if [ -n "$1" ]; then
+            dir="$1"
+        else
+            dir=$(git worktree list | awk "{print \$1}" | peco)
+        fi
+
+        if [ -n "$dir" ]; then
+            git worktree remove "$dir"
+        fi
+    else
+        echo "This is not a git repository."
+    fi
+}; _gwr'
+
+alias gwa='function _gwa() {
+    if git status &>/dev/null; then
+        if [ $# -eq 0 ]; then
+            git worktree list
+        elif [ $# -eq 1 ]; then
+            local branch
+            branch=$(git branch -a | sed "s/^[* ] //" | sed "s/remotes\/origin\///" | sort -u | grep -v "HEAD" | peco)
+            if [ -n "$branch" ]; then
+                git worktree add "$1" "$branch"
+            fi
+        elif [ $# -eq 2 ]; then
+            git worktree add "$1" "$2"
+        else
+            echo "Usage: gwa                 # list"
+            echo "       gwa <dir>           # add with peco branch selection"
+            echo "       gwa <dir> <branch>  # add"
+            return 1
+        fi
+    else
+        echo "This is not a git repository."
+    fi
+}; _gwa'
 
 alias c5="copilot --banner --model gpt-5.2 --allow-tool 'write'"
 alias ch="copilot --banner --model claude-haiku-4.5 --allow-tool 'write'"

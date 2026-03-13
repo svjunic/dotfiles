@@ -36,4 +36,6 @@ backup_and_link "$ROOT_DIR/zsh" "$HOME/zsh"
 backup_and_link "$ROOT_DIR/command" "$HOME/command"
 backup_and_link "$ROOT_DIR/shell" "$HOME/shell"
 
+bash "$ROOT_DIR/install/common.sh"
+
 echo "linux-ssh setup completed."

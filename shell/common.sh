@@ -18,3 +18,7 @@ tmux_ai_grid() {
 tmux_coding_grid() {
   ~/bash/tmux/pane.sh coding_grid
 }
+
+tmux_ai_agents_teams() {
+  ~/bash/tmux/pane.sh agents "$@"
+}

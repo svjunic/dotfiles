@@ -64,31 +64,83 @@ local action_state = require("telescope.actions.state")
 local function open_all_filtered(prompt_bufnr)
   local picker = action_state.get_current_picker(prompt_bufnr)
   local manager = picker.manager
-  
+
   local entries = {}
   for entry in manager:iter() do
     table.insert(entries, entry)
   end
-  
+
   actions.close(prompt_bufnr)
-  
+
   if #entries == 0 then
     return
   end
-  
+
+  local function resolve_file(entry)
+    if type(entry.filename) == "string" and entry.filename ~= "" then
+      return entry.filename
+    end
+    if type(entry.path) == "string" and entry.path ~= "" then
+      return entry.path
+    end
+
+    local value = entry.value
+    if type(value) == "string" and value ~= "" then
+      -- live_grep の value は "file:line:col:text" 形式になる場合がある
+      local file = value:match("^(.-):%d+:%d+:")
+      return file or value
+    end
+
+    if type(entry[1]) == "string" and entry[1] ~= "" then
+      return entry[1]
+    end
+
+    return nil
+  end
+
+  -- 同一ファイルは1回だけ開く
+  local files = {}
+  local seen = {}
+  for _, entry in ipairs(entries) do
+    local file = resolve_file(entry)
+    if file and not seen[file] then
+      seen[file] = true
+      table.insert(files, file)
+    end
+  end
+
+  if #files == 0 then
+    return
+  end
+
   -- 最初のファイルは現在のバッファで開く
-  vim.cmd("e " .. vim.fn.fnameescape(entries[1].value or entries[1].filename or entries[1].path or entries[1][1]))
-  
+  vim.cmd("e " .. vim.fn.fnameescape(files[1]))
+
   -- 残りのファイルをタブで開く
-  for i = 2, #entries do
-    local file = entries[i].value or entries[i].filename or entries[i].path or entries[i][1]
-    vim.cmd("tabnew " .. vim.fn.fnameescape(file))
+  for i = 2, #files do
+    vim.cmd("tabnew " .. vim.fn.fnameescape(files[i]))
   end
 end
 
-vim.keymap.set("n", ",ffg", tb.live_grep, { desc = "Telescope Grep" })
 vim.keymap.set("n", ",ffb", tb.buffers, { desc = "Telescope Buffers" })
 vim.keymap.set("n", ",ffr", tb.oldfiles, { desc = "Telescope Recent" })
+
+vim.keymap.set("n", ",ffg", function()
+  tb.live_grep({
+    attach_mappings = function(_, map)
+      map("i", "<CR>", function(prompt_bufnr)
+        actions.select_default(prompt_bufnr)
+      end)
+      map("n", "<CR>", function(prompt_bufnr)
+        actions.select_default(prompt_bufnr)
+      end)
+      -- 絞り込んだファイルをすべて開く（Ctrl-a）
+      map("i", "<C-a>", open_all_filtered)
+      map("n", "<C-a>", open_all_filtered)
+      return true
+    end,
+  })
+end, { desc = "Telescope Grep" })
 
 vim.keymap.set("n", ",fff", function()
   tb.find_files({

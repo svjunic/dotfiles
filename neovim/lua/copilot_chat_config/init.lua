@@ -65,6 +65,22 @@ local prompts = {
     prompt = "ファイル内の次のような診断上の問題を解決してください：",
     description = "ファイル内の診断（エラーや警告）を修正します。",
   },
+  RefineSentence= {
+    prompt = table.concat({
+      "#buffer:visible",
+      "",
+      "記述されている日本語を丁寧な日本語に書き直してください。",
+    }, "\n"),
+    description = "記述されている日本語を丁寧な日本語に書き直してください。",
+  },
+  RefineMarkdown= {
+    prompt = table.concat({
+      "#buffer:visible",
+      "",
+      "記述されている内容を丁寧なマークダウンに書き直してください。",
+    }, "\n"),
+    description = "記述されている内容を丁寧なマークダウンに書き直してください。",
+  },
   Commit = {
     prompt = table.concat({
       "#gitdiff:staged",
@@ -101,7 +117,7 @@ local prompts = {
       "- [test] refs #PRJ-12345 コミットメッセージ",
       "- [chore] refs #PRJ-12345 コミットメッセージ",
       "コメントは日本語で作成してください。〜しました、というものではなく言い切りの文章でOK。",
-      "最後に、作成したコミットメッセージ全体をgitcommit言語のコードブロックで囲んでください。",
+      "作成したコミットメッセージ全体をgitcommit言語のコードブロックで囲んでください。",
     }, "\n"),
     system_prompt = system_prompt_ja,
     description = "K2ルールに従ったコミットメッセージを日本語で生成します。",
@@ -125,6 +141,49 @@ chat.setup({
     "diagnostics",
     "code",
     "tests",
+  },
+  functions = {
+    gitdiff_staged_filtered = {
+      description = "Get staged git diff excluding noisy files",
+      uri = "gitdiff-staged-filtered://current",
+      resolve = function()
+        local cmd = table.concat({
+          "git",
+          "diff",
+          "--cached",
+          "--",
+          ".",
+          ":(exclude)**/*.png",
+          ":(exclude)**/*.jpg",
+          ":(exclude)**/*.jpeg",
+          ":(exclude)**/*.gif",
+          ":(exclude)**/*.webp",
+          ":(exclude)**/*.pdf",
+          ":(exclude)**/*.zip",
+          ":(exclude)**/*.gz",
+          ":(exclude)**/*.tgz",
+          ":(exclude)**/*.br",
+          ":(exclude)**/*.min.js",
+          ":(exclude)**/*.min.css",
+          ":(exclude)dist/**",
+          ":(exclude)build/**",
+          ":(exclude).next/**",
+        }, " ")
+
+        local result = vim.fn.system(cmd)
+        if vim.v.shell_error ~= 0 then
+          result = "git diff failed:\n" .. result
+        end
+
+        return {
+          {
+            uri = "gitdiff-staged-filtered://current",
+            mimetype = "text/plain",
+            data = result,
+          },
+        }
+      end,
+    },
   },
   headers = {
     user = "🐬 You: ",
