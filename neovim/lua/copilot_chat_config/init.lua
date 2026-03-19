@@ -90,6 +90,14 @@ local prompts = {
     }, "\n"),
     description = "ステージ済み変更のコミットメッセージをcommitizen形式で日本語生成します。",
   },
+  viewCodeRequest = {
+    prompt = table.concat({
+      "#buffer:visible",
+      "",
+    }, "\n"),
+    system_prompt = system_prompt_ja,
+    description = "現在のバッファに対して何かを依頼します。",
+  },
   K2Commit = {
     prompt = table.concat({
       "#gitdiff:staged",
@@ -209,7 +217,7 @@ vim.keymap.set("n", ",ccr", function()
   chat.ask(prompts.Review.prompt, { system_prompt = system_prompt_ja })
 end, { desc = prompts.Review.description })
 
-vim.keymap.set("n", ",ccre", function()
+vim.keymap.set("n", ",cce", function()
   chat.ask(prompts.Explain.prompt, { system_prompt = system_prompt_ja })
 end, { desc = prompts.Explain.description })
 
