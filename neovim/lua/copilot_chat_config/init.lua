@@ -135,7 +135,7 @@ local prompts = {
 chat.setup({
   max_message_length = 60000,
   --model = "gpt-5.1-codex-mini",
-  model = "gpt-5-mini",
+  model = "claude-sonnet-4.6",
   system_prompt = system_prompt_ja,
   mappings = {
     close = { normal = "q" },
@@ -228,7 +228,7 @@ end, { desc = prompts.Optimize.description })
 vim.keymap.set("n", ",cck2", function()
   chat.ask(prompts.K2Commit.prompt, {
     system_prompt = system_prompt_ja,
-    model = "gpt-5-mini"
+    model = "gpt-5.1-codex-mini"
   })
 end, { desc = prompts.K2Commit.description })
 
@@ -259,6 +259,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
 vim.api.nvim_create_user_command("CopilotChatK2Commit", function()
   chat.ask(prompts.K2Commit.prompt, {
     system_prompt = prompts.K2Commit.system_prompt or system_prompt_ja,
-    model = "gpt-5-mini"
+    model = "gpt-5.1-codex-mini"
   })
 end, {})
