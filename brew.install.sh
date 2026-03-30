@@ -6,3 +6,4 @@ brew install ripgrep
 brew install jq
 brew install yq
 brew install bat
+brew install worktrunk && wt config shell install
