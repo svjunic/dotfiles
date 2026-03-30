@@ -313,10 +313,15 @@ return {
   },
 
   {
-    "nwiizo/marp.nvim",
+    "svjunic/marp.nvim",
+    -- dev = true,
+    -- dir = "~/virtual/github/marp.nvim",
     ft = "markdown",
+    cmd = { "MarpWatch", "MarpStop", "MarpExport" },
+    lazy=false,
     config = function()
       require("marp").setup {
+        mermaid = true,
         marp_command = "npx @marp-team/marp-cli@latest",
       }
     end,
