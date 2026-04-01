@@ -81,15 +81,14 @@ local prompts = {
     }, "\n"),
     description = "記述されている内容を丁寧なマークダウンに書き直してください。",
   },
-  Commit = {
-    prompt = table.concat({
-      "#gitdiff:staged",
-      "#buffer:visible",
-      "",
-      "変更のコミットメッセージをcommitizenの規約に従って日本語で書いてください。タイトルは最大50文字、メッセージは72文字で折り返してください。メッセージ全体をgitcommit言語のコードブロックで囲んでください。",
-    }, "\n"),
-    description = "ステージ済み変更のコミットメッセージをcommitizen形式で日本語生成します。",
-  },
+--  Commit = {
+--    prompt = table.concat({
+--      -- "#gitdiff:staged",
+--      -- "",
+--      "変更のコミットメッセージをcommitizenの規約に従って日本語で書いてください。タイトルは最大50文字、メッセージは72文字で折り返してください。メッセージ全体をgitcommit言語のコードブロックで囲んでください。",
+--    }, "\n"),
+--    description = "ステージ済み変更のコミットメッセージをcommitizen形式で日本語生成します。",
+--  },
   viewCodeRequest = {
     prompt = table.concat({
       "#buffer:visible",
@@ -98,38 +97,38 @@ local prompts = {
     system_prompt = system_prompt_ja,
     description = "現在のバッファに対して何かを依頼します。",
   },
-  K2Commit = {
-    prompt = table.concat({
-      "#gitdiff:staged",
-      "#buffer:visible",
-      "",
-      "変更のコミットメッセージを以下のルールで作成してください。",
-      "Gitの変更履歴が分かるように、コミットメッセージは[コミット種別] refs #チケット番号 変更内容 とする。",
-      "コミット種別は英単語で入力し、feat: 新しい機能, fix: バグの修正, docs: ドキュメント変更, style: 空白、フォーマット、セミコロン追加など, refactor: リファクタリング, perf: パフォーマンス向上関連の変更, test: テスト関連の変更, chore: ビルド、補助ツール、ライブラリ関連の変更とする。",
-      "コメントは、差分をみて考えてください。",
-      "[fix] refs #PRJ-12345 XXXの解消'という形になります。チケット番号については、gitのコミットメッセージから取得してください。",
-      "特別なルールとして、下記を忘れないでください。",
-      "publish/README.md、publish/tasks.yml、publish/src/modules配下、publish/src/classes配下、publish/src/services配下、publish/src/entrypoint.js、publish/payloads配下を変更している場合、「変更内容」のprefixとして「lmabda handler: 」をつけてください。",
-      "astro-app配下のファイルの場合、「変更内容」のprefixとして「lmabda handler: 」をつけてください。",
-      "src-fargate配下のファイルの場合、「変更内容」のprefixとして「fargate: 」をつけてください。",
-      "例：",
-      "- [fix] refs #PRJ-12345 lambnda handler: コミットメッセージ",
-      "- [fix] refs #PRJ-12345 fargate: コミットメッセージ",
-      "- [fix] refs #PRJ-12345 astro: コミットメッセージ",
-      "- [feat] refs #PRJ-12345 コミットメッセージ",
-      "- [fix] refs #PRJ-12345 コミットメッセージ",
-      "- [docs] refs #PRJ-12345 コミットメッセージ",
-      "- [style] refs #PRJ-12345 コミットメッセージ",
-      "- [refactor] refs #PRJ-12345 コミットメッセージ",
-      "- [perf] refs #PRJ-12345 コミットメッセージ",
-      "- [test] refs #PRJ-12345 コミットメッセージ",
-      "- [chore] refs #PRJ-12345 コミットメッセージ",
-      "コメントは日本語で作成してください。〜しました、というものではなく言い切りの文章でOK。",
-      "作成したコミットメッセージ全体をgitcommit言語のコードブロックで囲んでください。",
-    }, "\n"),
-    system_prompt = system_prompt_ja,
-    description = "K2ルールに従ったコミットメッセージを日本語で生成します。",
-  },
+  -- K2Commit = {
+  --   prompt = table.concat({
+  --     "#gitdiff:staged",
+  --     "#buffer:visible",
+  --     "",
+  --     "変更のコミットメッセージを以下のルールで作成してください。",
+  --     "Gitの変更履歴が分かるように、コミットメッセージは[コミット種別] refs #チケット番号 変更内容 とする。",
+  --     "コミット種別は英単語で入力し、feat: 新しい機能, fix: バグの修正, docs: ドキュメント変更, style: 空白、フォーマット、セミコロン追加など, refactor: リファクタリング, perf: パフォーマンス向上関連の変更, test: テスト関連の変更, chore: ビルド、補助ツール、ライブラリ関連の変更とする。",
+  --     "コメントは、差分をみて考えてください。",
+  --     "[fix] refs #PRJ-12345 XXXの解消'という形になります。チケット番号については、gitのコミットメッセージから取得してください。",
+  --     "特別なルールとして、下記を忘れないでください。",
+  --     "publish/README.md、publish/tasks.yml、publish/src/modules配下、publish/src/classes配下、publish/src/services配下、publish/src/entrypoint.js、publish/payloads配下を変更している場合、「変更内容」のprefixとして「lmabda handler: 」をつけてください。",
+  --     "astro-app配下のファイルの場合、「変更内容」のprefixとして「lmabda handler: 」をつけてください。",
+  --     "src-fargate配下のファイルの場合、「変更内容」のprefixとして「fargate: 」をつけてください。",
+  --     "例：",
+  --     "- [fix] refs #PRJ-12345 lambnda handler: コミットメッセージ",
+  --     "- [fix] refs #PRJ-12345 fargate: コミットメッセージ",
+  --     "- [fix] refs #PRJ-12345 astro: コミットメッセージ",
+  --     "- [feat] refs #PRJ-12345 コミットメッセージ",
+  --     "- [fix] refs #PRJ-12345 コミットメッセージ",
+  --     "- [docs] refs #PRJ-12345 コミットメッセージ",
+  --     "- [style] refs #PRJ-12345 コミットメッセージ",
+  --     "- [refactor] refs #PRJ-12345 コミットメッセージ",
+  --     "- [perf] refs #PRJ-12345 コミットメッセージ",
+  --     "- [test] refs #PRJ-12345 コミットメッセージ",
+  --     "- [chore] refs #PRJ-12345 コミットメッセージ",
+  --     "コメントは日本語で作成してください。〜しました、というものではなく言い切りの文章でOK。",
+  --     "作成したコミットメッセージ全体をgitcommit言語のコードブロックで囲んでください。",
+  --   }, "\n"),
+  --   system_prompt = system_prompt_ja,
+  --   description = "K2ルールに従ったコミットメッセージを日本語で生成します。",
+  -- },
 }
 
 chat.setup({
@@ -149,49 +148,6 @@ chat.setup({
     "diagnostics",
     "code",
     "tests",
-  },
-  functions = {
-    gitdiff_staged_filtered = {
-      description = "Get staged git diff excluding noisy files",
-      uri = "gitdiff-staged-filtered://current",
-      resolve = function()
-        local cmd = table.concat({
-          "git",
-          "diff",
-          "--cached",
-          "--",
-          ".",
-          ":(exclude)**/*.png",
-          ":(exclude)**/*.jpg",
-          ":(exclude)**/*.jpeg",
-          ":(exclude)**/*.gif",
-          ":(exclude)**/*.webp",
-          ":(exclude)**/*.pdf",
-          ":(exclude)**/*.zip",
-          ":(exclude)**/*.gz",
-          ":(exclude)**/*.tgz",
-          ":(exclude)**/*.br",
-          ":(exclude)**/*.min.js",
-          ":(exclude)**/*.min.css",
-          ":(exclude)dist/**",
-          ":(exclude)build/**",
-          ":(exclude).next/**",
-        }, " ")
-
-        local result = vim.fn.system(cmd)
-        if vim.v.shell_error ~= 0 then
-          result = "git diff failed:\n" .. result
-        end
-
-        return {
-          {
-            uri = "gitdiff-staged-filtered://current",
-            mimetype = "text/plain",
-            data = result,
-          },
-        }
-      end,
-    },
   },
   headers = {
     user = "🐬 You: ",
@@ -255,10 +211,71 @@ vim.api.nvim_create_autocmd("BufEnter", {
   callback = apply_copilotchat_highlights,
 })
 
--- Custom command: CopilotChatK2Commit (this repo's legacy)
-vim.api.nvim_create_user_command("CopilotChatK2Commit", function()
-  chat.ask(prompts.K2Commit.prompt, {
-    system_prompt = prompts.K2Commit.system_prompt or system_prompt_ja,
-    model = "gpt-5.1-codex-mini"
+-- Custom command: CopilotChatCommit
+vim.api.nvim_create_user_command("CopilotChatCommit", function()
+  local files_result = vim.system({
+    "git",
+    "diff",
+    "--cached",
+    "--name-only",
+  }, { text = true }):wait()
+
+  local staged_files = files_result.code == 0 and (files_result.stdout or "") or ""
+
+  local diff_result = vim.system({
+    "git",
+    "diff",
+    "--cached",
+    "--",
+    ".",
+    ":(exclude)**/*.png",
+    ":(exclude)**/*.jpg",
+    ":(exclude)**/*.jpeg",
+    ":(exclude)**/*.gif",
+    ":(exclude)**/*.webp",
+    ":(exclude)**/*.pdf",
+    ":(exclude)**/*.zip",
+    ":(exclude)**/*.gz",
+    ":(exclude)**/*.tgz",
+    ":(exclude)**/*.br",
+    ":(exclude)**/*.min.js",
+    ":(exclude)**/*.min.css",
+    ":(exclude)dist/**",
+    ":(exclude)build/**",
+    ":(exclude).next/**",
+    ":(exclude)**/package-lock.json",
+    ":(exclude)**/yarn.lock",
+    ":(exclude)**/pnpm-lock.yaml",
+    ":(exclude)**/bun.lockb",
+  }, { text = true }):wait()
+  local diff = diff_result.code == 0 and (diff_result.stdout or "") or ""
+
+  local prompt = table.concat({
+    "以下はステージ済み変更です。",
+    "",
+    "変更ファイル一覧:",
+    "```text",
+    staged_files ~= "" and staged_files or "(なし)",
+    "```",
+    "",
+    "実際の差分:",
+    "```diff",
+    diff ~= "" and diff or "(差分なし: 除外対象ファイルのみ)",
+    "```",
+    "",
+    "変更のコミットメッセージをcommitizenの規約に従って日本語で書いてください。タイトルは最大50文字、メッセージは72文字で折り返してください。メッセージ全体をgitcommit言語のコードブロックで囲んでください。",
+  }, "\n")
+
+  chat.ask(prompt, {
+    system_prompt = prompts.Commit.system_prompt or system_prompt_ja,
+    model = "gpt-5.1-codex-mini",
   })
 end, {})
+
+-- -- Custom command: CopilotChatK2Commit
+-- vim.api.nvim_create_user_command("CopilotChatK2Commit", function()
+--   chat.ask(prompts.K2Commit.prompt, {
+--     system_prompt = prompts.K2Commit.system_prompt or system_prompt_ja,
+--     model = "gpt-5.1-codex-mini"
+--   })
+-- end, {})
