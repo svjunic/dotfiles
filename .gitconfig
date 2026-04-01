@@ -3,10 +3,11 @@
 
 [core]
   ui = never
-	pager = delta
-	excludesfile = ~/.gitignore
-	editor = nvim
-	hooksPath = ~/git/hooks
+  pager = delta
+  excludesfile = ~/.gitignore
+  editor = nvim
+  hooksPath = ~/git/hooks
+  quotepath = false
 
 #[filter "media"]
 #  clean = git-media-clean %f
@@ -25,15 +26,15 @@
     conflictstyle = zdiff3
 
 [alias]
-	co = checkout
-	ci = commit
-	st = status --branch --short
-	br = branch
-	hist = log --pretty=format:\\\"%h %ad | %s%d [%an]\\\" --graph --date=short
+  co = checkout
+  ci = commit
+  st = status --branch --short
+  br = branch
+  hist = log --pretty=format:\\\"%h %ad | %s%d [%an]\\\" --graph --date=short
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   lga = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-	sl = log --all --branches --decorate --graph --oneline
-	log = log --all --branches --graph
+  sl = log --all --branches --decorate --graph --oneline
+  log = log --all --branches --graph
 
 [user]
   name = sv.junic
@@ -47,13 +48,13 @@
 
 
 [interactive]
-	diffFilter = delta --color-only
+  diffFilter = delta --color-only
 
 [delta]
-	navigate = true
+  navigate = true
   dark = true      # or light = true, or omit for auto-detection
   features = my-theme
-	side-by-side = true
+  side-by-side = true
 
 [delta "my-theme"]
   zero-style = "#C8C8C8"
