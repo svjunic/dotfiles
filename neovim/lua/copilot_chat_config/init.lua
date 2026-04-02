@@ -81,14 +81,14 @@ local prompts = {
     }, "\n"),
     description = "記述されている内容を丁寧なマークダウンに書き直してください。",
   },
---  Commit = {
---    prompt = table.concat({
---      -- "#gitdiff:staged",
---      -- "",
---      "変更のコミットメッセージをcommitizenの規約に従って日本語で書いてください。タイトルは最大50文字、メッセージは72文字で折り返してください。メッセージ全体をgitcommit言語のコードブロックで囲んでください。",
---    }, "\n"),
---    description = "ステージ済み変更のコミットメッセージをcommitizen形式で日本語生成します。",
---  },
+  Commit = {
+    prompt = table.concat({
+      "#gitdiff:staged",
+      -- "",
+      "変更のコミットメッセージをcommitizenの規約に従って日本語で書いてください。タイトルは最大50文字、メッセージは72文字で折り返してください。メッセージ全体をgitcommit言語のコードブロックで囲んでください。",
+    }, "\n"),
+    description = "ステージ済み変更のコミットメッセージをcommitizen形式で日本語生成します。",
+  },
   viewCodeRequest = {
     prompt = table.concat({
       "#buffer:visible",
@@ -181,12 +181,12 @@ vim.keymap.set("n", ",cco", function()
   chat.ask(prompts.Optimize.prompt, { system_prompt = system_prompt_ja })
 end, { desc = prompts.Optimize.description })
 
-vim.keymap.set("n", ",cck2", function()
-  chat.ask(prompts.K2Commit.prompt, {
-    system_prompt = system_prompt_ja,
-    model = "gpt-5.1-codex-mini"
-  })
-end, { desc = prompts.K2Commit.description })
+-- vim.keymap.set("n", ",cck2", function()
+--   chat.ask(prompts.K2Commit.prompt, {
+--     system_prompt = system_prompt_ja,
+--     model = "gpt-5.1-codex-mini"
+--   })
+-- end, { desc = prompts.K2Commit.description })
 
 -- Highlights
 local function apply_copilotchat_highlights()
@@ -212,7 +212,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 })
 
 -- Custom command: CopilotChatCommit
-vim.api.nvim_create_user_command("CopilotChatCommit", function()
+vim.api.nvim_create_user_command("CopilotChatOriginalCommit", function()
   local files_result = vim.system({
     "git",
     "diff",
@@ -273,8 +273,7 @@ vim.api.nvim_create_user_command("CopilotChatCommit", function()
   }, "\n")
 
   chat.ask(prompt, {
-    system_prompt = prompts.Commit.system_prompt or system_prompt_ja,
-    model = "gpt-5.1-codex-mini",
+    system_prompt = system_prompt_ja,
   })
 end, {})
 
