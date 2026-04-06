@@ -2,7 +2,7 @@
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-vim.lsp.set_log_level("off")
+vim.lsp.log.set_level("off")
 
 -- TypeScript/JavaScript
 vim.lsp.config("vtsls", {
@@ -140,11 +140,18 @@ vim.diagnostic.config({
   float = { wrap = true },
 })
 
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-  border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },
-  focusable = false,
-  max_width = 80,
-  max_height = 20,
-  winblend = 0,
-  zindex = 50,
+vim.lsp.config("*", {
+  handlers = {
+    ["textDocument/hover"] = function(err, result, ctx, config)
+      config = vim.tbl_deep_extend("force", config or {}, {
+        border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },
+        focusable = false,
+        max_width = 80,
+        max_height = 20,
+        winblend = 0,
+        zindex = 50,
+      })
+      vim.lsp.handlers.hover(err, result, ctx, config)
+    end,
+  },
 })

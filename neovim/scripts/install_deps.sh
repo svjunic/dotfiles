@@ -82,6 +82,9 @@ install_brew() {
 
   # Markdown LSP
   brew install marksman
+
+  # lazy.nvim
+  brew install luarocks lua
 }
 
 case "${1:-}" in

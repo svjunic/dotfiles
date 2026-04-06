@@ -81,6 +81,14 @@ local prompts = {
     }, "\n"),
     description = "記述されている内容を丁寧なマークダウンに書き直してください。",
   },
+  RefinePrompt= {
+    prompt = table.concat({
+      "#buffer:visible",
+      "",
+      "記述されている内容をAIエージェントに対して渡すためのプロンプトに書き直してください。",
+    }, "\n"),
+    description = "記述されている内容をAIエージェントに対して渡すためのプロンプトに書き直してください。",
+  },
   Commit = {
     prompt = table.concat({
       "#gitdiff:staged",
