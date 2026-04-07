@@ -420,6 +420,18 @@ alias repo='function _repo() {
     fi
 }; _repo'
 
+alias tag='function _tag() {
+    if git status &>/dev/null; then
+        local tag
+        tag=$(git tag | peco)
+        if [ -n "$tag" ]; then
+            git checkout "$tag"
+        fi
+    else
+        echo "This is not a git repository."
+    fi
+}; _tag'
+
 alias gm='function _gm() {
     if git status &>/dev/null; then
         local branch
