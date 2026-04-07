@@ -394,6 +394,8 @@ function gitbase () {
   git show-branch | grep '*' | grep -v "$(git rev-parse --abbrev-ref HEAD)" | head -1 | awk -F'[]~^[]' '{print $2}'
 }
 alias gitadd='git add -A -- . ":(exclude).github"'
+alias gitsethead='git remote set-head origin $(git symbolic-ref --short HEAD)'
+
 
 # NOTE: stash忘れがち、3ヶ月使わなかったら消す
 alias gitStashlis='git stash list'               # stash確認用
