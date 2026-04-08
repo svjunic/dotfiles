@@ -63,6 +63,7 @@ local prompts = {
   },
   FixDiagnostic = {
     prompt = "ファイル内の次のような診断上の問題を解決してください：",
+    system_prompt = system_prompt_ja,
     description = "ファイル内の診断（エラーや警告）を修正します。",
   },
   RefineSentence= {
@@ -71,6 +72,7 @@ local prompts = {
       "",
       "記述されている日本語を丁寧な日本語に書き直してください。",
     }, "\n"),
+    system_prompt = system_prompt_ja,
     description = "記述されている日本語を丁寧な日本語に書き直してください。",
   },
   RefineMarkdown= {
@@ -79,6 +81,7 @@ local prompts = {
       "",
       "記述されている内容を丁寧なマークダウンに書き直してください。",
     }, "\n"),
+    system_prompt = system_prompt_ja,
     description = "記述されている内容を丁寧なマークダウンに書き直してください。",
   },
   RefinePrompt= {
@@ -87,6 +90,7 @@ local prompts = {
       "",
       "記述されている内容をAIエージェントに対して渡すためのプロンプトに書き直してください。",
     }, "\n"),
+    system_prompt = system_prompt_ja,
     description = "記述されている内容をAIエージェントに対して渡すためのプロンプトに書き直してください。",
   },
   Commit = {
@@ -95,6 +99,7 @@ local prompts = {
       -- "",
       "変更のコミットメッセージをcommitizenの規約に従って日本語で書いてください。タイトルは最大50文字、メッセージは72文字で折り返してください。メッセージ全体をgitcommit言語のコードブロックで囲んでください。",
     }, "\n"),
+    system_prompt = system_prompt_ja,
     description = "ステージ済み変更のコミットメッセージをcommitizen形式で日本語生成します。",
   },
   viewCodeRequest = {

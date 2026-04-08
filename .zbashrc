@@ -489,7 +489,8 @@ alias gwa='function _gwa() {
     fi
 }; _gwa'
 
-alias c5="copilot --banner --model gpt-5.2 --allow-tool 'write'"
+alias c54="copilot --banner --model gpt-5.4 --allow-tool 'write'"
+alias c5="copilot --banner --model gpt-5.3-codex --allow-tool 'write'"
 alias ch="copilot --banner --model claude-haiku-4.5 --allow-tool 'write'"
 alias cs="copilot --banner --model claude-sonnet-4.5 --allow-tool 'write'"
 alias cl='claude'
