@@ -225,6 +225,51 @@ vim.api.nvim_create_autocmd("BufEnter", {
 })
 
 -- Custom command: CopilotChatCommit
+local DIFF_CONTEXT_LINES = 3   -- unified diff のコンテキスト行数（-U オプション）
+local MAX_LINES_PER_FILE = 100 -- ファイルごとの diff 最大行数
+local MAX_TOTAL_LINES = 500    -- diff 全体の最大行数
+
+local function truncate_diff(diff)
+  if diff == "" then
+    return diff, false
+  end
+  local lines = vim.split(diff, "\n", { plain = true })
+  local result = {}
+  local file_line_count = 0
+  local file_truncated = false
+  local total_lines = 0
+  local was_truncated = false
+
+  for _, line in ipairs(lines) do
+    if total_lines >= MAX_TOTAL_LINES then
+      table.insert(result, "-- [truncated: 合計行数の上限 (" .. MAX_TOTAL_LINES .. " 行) に達しました。残りのファイルは省略されています]")
+      was_truncated = true
+      break
+    end
+
+    local is_boundary = line:match("^diff %-%-git ")
+    if is_boundary then
+      file_line_count = 0
+      file_truncated = false
+    end
+
+    if file_truncated then
+      -- 次のファイル境界までスキップ
+    elseif file_line_count >= MAX_LINES_PER_FILE then
+      table.insert(result, "-- [truncated: このファイルの差分が " .. MAX_LINES_PER_FILE .. " 行を超えたため省略されています]")
+      total_lines = total_lines + 1
+      file_truncated = true
+      was_truncated = true
+    else
+      table.insert(result, line)
+      file_line_count = file_line_count + 1
+      total_lines = total_lines + 1
+    end
+  end
+
+  return table.concat(result, "\n"), was_truncated
+end
+
 vim.api.nvim_create_user_command("CopilotChatOriginalCommit", function()
   local files_result = vim.system({
     "git",
@@ -239,6 +284,7 @@ vim.api.nvim_create_user_command("CopilotChatOriginalCommit", function()
     "git",
     "diff",
     "--cached",
+    "-U" .. DIFF_CONTEXT_LINES,
     "--",
     ".",
     ":(exclude)**/*.png",
@@ -253,6 +299,10 @@ vim.api.nvim_create_user_command("CopilotChatOriginalCommit", function()
     ":(exclude)**/*.br",
     ":(exclude)**/*.min.js",
     ":(exclude)**/*.min.css",
+    ":(exclude)**/*.map",
+    ":(exclude)**/*.snap",
+    ":(exclude)**/*.generated.*",
+    ":(exclude)**/*.svg",
     ":(exclude)dist/**",
     ":(exclude)build/**",
     ":(exclude).next/**",
@@ -261,10 +311,16 @@ vim.api.nvim_create_user_command("CopilotChatOriginalCommit", function()
     ":(exclude)**/pnpm-lock.yaml",
     ":(exclude)**/bun.lockb",
   }, { text = true }):wait()
-  local diff = diff_result.code == 0 and (diff_result.stdout or "") or ""
+  local raw_diff = diff_result.code == 0 and (diff_result.stdout or "") or ""
+  local diff, was_truncated = truncate_diff(raw_diff)
+
+  local diff_note = was_truncated
+    and "（注意: 差分が長すぎるため一部省略されています。省略箇所には [truncated] マーカーが入っています）"
+    or ""
 
   local prompt = table.concat({
     "以下はステージ済み変更です。",
+    diff_note,
     "",
     "変更ファイル一覧:",
     "```text",
