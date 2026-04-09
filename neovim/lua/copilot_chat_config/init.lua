@@ -342,6 +342,7 @@ vim.api.nvim_create_user_command("CopilotChatOriginalCommit", function()
   }, "\n")
 
   chat.ask(prompt, {
+    model = "gpt-5-mini",
     system_prompt = system_prompt_ja,
   })
 end, {})
