@@ -78,6 +78,29 @@ export LSCOLORS=gxfxcxdxbxegedabagacad
 # function
 #####################################################################################################
 
+# tmuxのpaneの背景色toggle
+function tmuxBackgroundToggle() {
+  if ! command -v tmux >/dev/null 2>&1; then
+    echo "tmux command not found." >&2
+    return 1
+  fi
+  if [[ -z "${TMUX_PANE:-}" ]]; then
+    echo "Not inside a tmux session (TMUX_PANE is empty)." >&2
+    return 1
+  fi
+
+  local pane state_file state
+  pane="$TMUX_PANE"
+  state_file="/tmp/tmux_bg_toggle_${pane//[^a-zA-Z0-9]/_}"
+
+  if [[ -f "$state_file" ]]; then
+    tmux select-pane -t "$pane" -P default
+    rm -f "$state_file"
+  else
+    tmux select-pane -t "$pane" -P 'bg=#ffffff,fg=#000000'
+    touch "$state_file"
+  fi
+}
 
 # デフォルトバージョンのNodeを使う
 export NVM_DIR="$HOME/.nvm"
