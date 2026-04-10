@@ -147,7 +147,8 @@ local prompts = {
 chat.setup({
   max_message_length = 60000,
   --model = "gpt-5.1-codex-mini",
-  model = "claude-sonnet-4.6",
+  --model = "claude-sonnet-4.6",
+  model = "gpt-5.4-mini",
   system_prompt = system_prompt_ja,
   mappings = {
     close = { normal = "q" },
