@@ -1,6 +1,6 @@
-rgvim() {
+_rgvim_open_selected() {
   local sel file line col
-  sel=$(rg --no-heading --line-number --column "$@" | peco --query "${LBUFFER-}") || return
+  sel=$1
   [[ -z $sel ]] && return
 
   if [[ $sel =~ ^(.*):([0-9]+):([0-9]+): ]]; then
@@ -12,4 +12,10 @@ rgvim() {
   fi
 
   vim +"call cursor(${line:-1},${col:-1})" -- "$file"
+}
+
+rgvim() {
+  local sel
+  sel=$(rg --no-heading --line-number --column "$@" | fzf --layout=reverse --tmux center,80%,80% --query "${LBUFFER-}") || return
+  _rgvim_open_selected "$sel"
 }
