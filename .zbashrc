@@ -212,8 +212,6 @@ function agg() {
 # git_diff_archive 識別子1 識別子2
 . ~/zsh/git_diff_archive.zsh
 
-# fzf,vim,rg
-. ~/bash/rgvim.sh
 #git config --global alias.log 'log --all --branches --graph'
 #git show-branch --merge-base master HEAD
 #git diff `git show-branch --merge-base master HEAD` HEAD
@@ -306,14 +304,14 @@ function cdf () {
 }
 
 function cdd {
-  local dir=$(find . -type d | grep -v 'node_modules' | _fzf_popup)
+  local dir=$(find . -type d | grep -v 'node_modules' | _fzf_popup --preview 'if command -v tree >/dev/null 2>&1; then tree -L 2 -C -I "node_modules|.git" {} | head -200; else find {} -maxdepth 2 \( -name node_modules -o -name .git \) -prune -o -print | head -200; fi')
   if [ ! -z "$dir" ] ; then
       cd "$dir"
   fi
 }
 
 function cddf {
-  local dir=$(find . -type d | _fzf_popup)
+  local dir=$(find . -type d | _fzf_popup --preview 'if command -v tree >/dev/null 2>&1; then tree -L 2 -C -I "node_modules|.git" {} | head -200; else find {} -maxdepth 2 \( -name node_modules -o -name .git \) -prune -o -print | head -200; fi')
   if [ ! -z "$dir" ] ; then
       cd "$dir"
   fi
