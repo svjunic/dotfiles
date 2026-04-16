@@ -211,6 +211,7 @@ return {
     "mfussenegger/nvim-lint",
     event = { "BufReadPost", "BufNewFile" },
     config = function()
+      package.loaded["plugins.lint"] = nil
       require("plugins.lint")
     end,
   },
