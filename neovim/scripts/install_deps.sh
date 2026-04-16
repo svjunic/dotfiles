@@ -48,7 +48,7 @@ install_npm() {
   npm install -g prettier-plugin-astro
   npm install -g @prettier/plugin-lua
 
-  # markuplint/stylelint (used by conform.nvim)
+  # markuplint/stylelint (used by nvim-lint / conform.nvim)
   npm install -g markuplint
   npm install -g stylelint
 
