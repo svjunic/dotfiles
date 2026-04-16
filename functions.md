@@ -41,6 +41,7 @@
 - `gitbase`: `git show-branch` ベースで比較元ブランチを推定する
 - `gitdiff [path...]`: `fzf` で比較先ブランチを選んで `git diff` を表示する
 - `ghswitch`: `gh` の認証ユーザを `fzf` で選んで切り替える
+- `gclean [base]`: `base` にマージ済みのローカルブランチを `fzf` で選んで削除する
 
 ## Editor
 

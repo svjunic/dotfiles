@@ -673,3 +673,11 @@ ghswitch() {
 
   gh auth switch --hostname github.com --user "$user"
 }
+
+# ローカルブランチ整理
+gclean() {
+  git branch --merged "${1:-main}" \
+    | grep -vE '^\*|^(main|master|develop)$' \
+    | fzf -m --prompt="Delete branches> " \
+    | xargs -r git branch -d
+}
