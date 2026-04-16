@@ -296,6 +296,49 @@ _fzf_popup() {
   fzf --layout=reverse --tmux center,80%,80% "$@"
 }
 
+function rgf() {
+  if ! command -v fzf >/dev/null 2>&1; then
+    echo "fzf is not installed."
+    return 1
+  fi
+  if ! command -v rg >/dev/null 2>&1; then
+    echo "rg is not installed."
+    return 1
+  fi
+
+  local include_all=0
+  local query_parts=()
+  local arg
+  for arg in "$@"; do
+    case "$arg" in
+      -a|--all)
+        include_all=1
+        ;;
+      *)
+        query_parts+=("$arg")
+        ;;
+    esac
+  done
+
+  local query="${(j: :)query_parts}"
+  local rg_cmd="rg --column --line-number --no-heading --color=always --smart-case"
+  if [ "$include_all" -eq 0 ]; then
+    rg_cmd="$rg_cmd -g !.git -g !node_modules"
+  fi
+
+  _fzf_popup \
+    --ansi \
+    --disabled \
+    --query "$query" \
+    --prompt 'rg > ' \
+    --delimiter ':' \
+    --preview-window 'right,60%,border-left,+{2}-10' \
+    --preview 'if command -v bat >/dev/null 2>&1; then bat --style=numbers --color=always --highlight-line {2} --line-range {2}:+200 {1} 2>/dev/null; else sed -n "1,200p" {1} 2>/dev/null; fi' \
+    --bind "start:reload:$rg_cmd -- {q} . || true" \
+    --bind "change:reload:$rg_cmd -- {q} . || true" \
+    --bind 'enter:become(vim +{2} {1})'
+}
+
 function cdf () {
   local dir=$(find . -type f | grep -v 'node_modules' | _fzf_popup --preview 'if command -v bat >/dev/null 2>&1; then bat --style=numbers --color=always --line-range=:200 {} 2>/dev/null; else sed -n "1,200p" {} 2>/dev/null; fi' --preview-window 'right,60%,border-left')
   if [ ! -z "$dir" ] ; then
