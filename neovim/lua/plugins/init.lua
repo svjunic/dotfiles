@@ -207,6 +207,13 @@ return {
       require("plugins.conform")
     end,
   },
+  {
+    "mfussenegger/nvim-lint",
+    event = { "BufReadPost", "BufNewFile" },
+    config = function()
+      require("plugins.lint")
+    end,
+  },
 
   -- Emmet
   {
