@@ -26,6 +26,7 @@ my dotfiles.
 - `shell/common.sh`: 共通 alias
 - `shell/mac.sh`: mac 専用 alias/挙動
 - `shell/linux-ssh.sh`: linux(ssh) 専用 alias
+- [function.md](/Users/jun.fujimura/virtual/github/dotfiles/function.md): `.zbashrc` の関数一覧
 
 ## Vim / Neovim install scripts
 
