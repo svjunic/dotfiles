@@ -297,7 +297,7 @@ _fzf_popup() {
 }
 
 function cdf () {
-  local dir=$(find . -type f | grep -v 'node_modules' | _fzf_popup)
+  local dir=$(find . -type f | grep -v 'node_modules' | _fzf_popup --preview 'if command -v bat >/dev/null 2>&1; then bat --style=numbers --color=always --line-range=:200 {} 2>/dev/null; else sed -n "1,200p" {} 2>/dev/null; fi' --preview-window 'right,60%,border-left')
   if [ ! -z "$dir" ] ; then
     vim "$dir"
   fi
