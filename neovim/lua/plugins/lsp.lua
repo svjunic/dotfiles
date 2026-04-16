@@ -123,6 +123,16 @@ vim.keymap.set("n", "q", function()
   return "q"
 end, { expr = true, noremap = true, silent = true })
 
+for name, text in pairs({
+  Error = "E",
+  Warn = "W",
+  Info = "I",
+  Hint = "H",
+}) do
+  local hl = "DiagnosticSign" .. name
+  vim.fn.sign_define(hl, { text = text, texthl = hl, numhl = "" })
+end
+
 vim.diagnostic.config({
   signs = true,
   underline = true,
