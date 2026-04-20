@@ -21,7 +21,7 @@ my dotfiles.
 
 ## Structure (excluding vim/neovim)
 
-- `install/mac.sh`: mac 用の symlink セットアップ
+- `install/mac.sh`: mac 用の symlink セットアップと基本コマンド導入
 - `install/linux-ssh.sh`: linux(ssh) 用の symlink セットアップ
 - `shell/common.sh`: 共通 alias
 - `shell/mac.sh`: mac 専用 alias/挙動
