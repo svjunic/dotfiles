@@ -341,6 +341,10 @@ vim.api.nvim_create_user_command("CopilotChatOriginalCommit", function()
     "- 必ず日本語で書いてください",
     "- タイトルは最大50文字、メッセージは72文字で折り返してください",
     "- メッセージ全体をgitcommit言語のコードブロックで囲んでください",
+    "",
+    "# 出力形式",
+    "- エラーがあればエラーの内容（個人情報が含まれていた場合など）",
+    "- コミットメッセージ（gitcommitのブロックで出力）",
   }, "\n")
 
   chat.ask(prompt, {
