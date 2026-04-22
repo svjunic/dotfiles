@@ -17,6 +17,7 @@ nginx.pid
 
 
 # personal file
+sv
 sv.*
 *.sv
 *.sv.*
