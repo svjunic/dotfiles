@@ -98,5 +98,6 @@
       ".claude/docs",
       ".claude/commands"
     ]
-  }
+  },
+  "cleanupPeriodDays": 99999
 }
