@@ -4,6 +4,13 @@ echo 'include .zbashrc'
 export VISUAL=nvim
 export EDITOR=nvim
 
+# aider
+export PATH="$HOME/Library/Python/3.9/bin:$PATH"
+
+# lm-studio
+export OPENAI_API_BASE=http://localhost:1234/v1
+export OPENAI_API_KEY=lm-studio
+
 # # vscode の人はこっち
 # export VISUAL="code --wait"
 # export EDITOR="code --wait"
@@ -338,6 +345,65 @@ function rgf() {
     --bind "change:reload:$rg_cmd -- {q} . || true" \
     --bind 'enter:become(vim +{2} {1})'
 }
+
+function aider_lmstudio() {
+  if ! command -v aider >/dev/null 2>&1; then
+    echo "aider is not installed."
+    return 1
+  fi
+  if ! command -v jq >/dev/null 2>&1; then
+    echo "jq is not installed."
+    return 1
+  fi
+  if ! command -v fzf >/dev/null 2>&1; then
+    echo "fzf is not installed."
+    return 1
+  fi
+
+  local base="${LM_STUDIO_API_BASE:-${OPENAI_API_BASE:-http://localhost:1234/v1}}"
+  local api_key="${LM_STUDIO_API_KEY:-${OPENAI_API_KEY:-dummy-api-key}}"
+  local response models model source
+
+  if command -v lms >/dev/null 2>&1; then
+    response=$(lms ls --llm --json 2>/dev/null)
+    models=$(printf "%s" "$response" | jq -r '.. | objects | (.path? // .modelKey? // .identifier? // .id? // empty)' 2>/dev/null | sort -u)
+    source="downloaded"
+  fi
+
+  if [ -z "$models" ]; then
+    if ! command -v curl >/dev/null 2>&1; then
+      echo "curl is not installed."
+      return 1
+    fi
+
+    response=$(curl -fsS "${base%/}/models" 2>/dev/null)
+    if [ -z "$response" ]; then
+      echo "LM Studio models are not available."
+      echo "Start LM Studio, run 'lms bootstrap' if needed, or set LM_STUDIO_API_BASE."
+      return 1
+    fi
+
+    models=$(printf "%s" "$response" | jq -r '.data[]?.id' 2>/dev/null | sort -u)
+    source="loaded"
+    if [ -z "$models" ]; then
+      echo "No models found from LM Studio."
+      return 1
+    fi
+  fi
+
+  model=$(printf "%s\n" "$models" | _fzf_popup --prompt "lm-studio ${source} model > ")
+  if [ -z "$model" ]; then
+    echo "Canceled."
+    return 1
+  fi
+
+  if [ "$source" = "downloaded" ]; then
+    lms load "$model" -y || return 1
+  fi
+
+  LM_STUDIO_API_BASE="$base" LM_STUDIO_API_KEY="$api_key" aider --model "lm_studio/$model" "$@"
+}
+alias aider-lm='aider_lmstudio'
 
 function cdf () {
   local dir=$(find . -type f | grep -v 'node_modules' | _fzf_popup --preview 'if command -v bat >/dev/null 2>&1; then bat --style=numbers --color=always --line-range=:200 {} 2>/dev/null; else sed -n "1,200p" {} 2>/dev/null; fi' --preview-window 'right,60%,border-left')

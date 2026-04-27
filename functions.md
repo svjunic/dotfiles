@@ -33,6 +33,11 @@
 - `switch_aws_profile`: `~/.aws/credentials` から AWS プロファイルを選んで切り替える
 - `switch_venv`: `~/.venv` から Python 仮想環境を選んで有効化する
 
+## AI
+
+- `aider_lmstudio [aider args...]`: LM Studio のダウンロード済みモデルを `fzf` で選んでロードし、`aider --model lm_studio/<model>` を起動する
+- `aider-lm [aider args...]`: `aider_lmstudio` の alias
+
 ## Git / GitHub
 
 - `gitpush_current_branch`: 現在のブランチを `git push -u origin` する
