@@ -314,15 +314,32 @@ function rgf() {
   fi
 
   local include_all=0
+  local extensions=()
   local query_parts=()
   local arg
-  for arg in "$@"; do
+  while [ $# -gt 0 ]; do
+    arg="$1"
     case "$arg" in
       -a|--all)
         include_all=1
+        shift
+        ;;
+      -e|--ext)
+        if [ -z "$2" ]; then
+          echo "Usage: rgf [-a|--all] [-e ext|--ext ext] [query...]"
+          return 1
+        fi
+        extensions+=("${2#.}")
+        shift 2
+        ;;
+      --ext=*)
+        extensions+=("${arg#--ext=}")
+        extensions[-1]="${extensions[-1]#.}"
+        shift
         ;;
       *)
         query_parts+=("$arg")
+        shift
         ;;
     esac
   done
@@ -332,6 +349,11 @@ function rgf() {
   if [ "$include_all" -eq 0 ]; then
     rg_cmd="$rg_cmd -g !.git -g !node_modules"
   fi
+  for arg in "${extensions[@]}"; do
+    if [ -n "$arg" ]; then
+      rg_cmd="$rg_cmd -g '*.$arg'"
+    fi
+  done
 
   _fzf_popup \
     --ansi \
