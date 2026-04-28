@@ -344,7 +344,7 @@ vim.api.nvim_create_user_command("CopilotChatOriginalCommit", function()
     "",
     "# 出力形式",
     "- エラーがあればエラーの内容（個人情報が含まれていた場合など）",
-    "- コミットメッセージ（gitcommitのブロックで出力）",
+    "- コミットメッセージ（gitcommitのブロックで出力、個人情報の有無の報告は不要）",
   }, "\n")
 
   chat.ask(prompt, {
