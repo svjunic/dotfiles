@@ -8,7 +8,7 @@ export EDITOR=nvim
 export PATH="$HOME/Library/Python/3.9/bin:$PATH"
 
 function aider() {
-  command aider --yes-always "$@"
+  command aider --yes-always --no-show-model-warnings "$@"
 }
 
 # lm-studio
@@ -388,7 +388,7 @@ function aider_lmstudio() {
 
   local base="${LM_STUDIO_API_BASE:-${OPENAI_API_BASE:-http://localhost:1234/v1}}"
   local api_key="${LM_STUDIO_API_KEY:-${OPENAI_API_KEY:-dummy-api-key}}"
-  local response models model source
+  local response models model source ps_response is_running
 
   if command -v lms >/dev/null 2>&1; then
     response=$(lms ls --llm --json 2>/dev/null)
@@ -423,11 +423,26 @@ function aider_lmstudio() {
     return 1
   fi
 
-  if [ "$source" = "downloaded" ]; then
+  is_running=0
+  if [ "$source" = "downloaded" ] && command -v lms >/dev/null 2>&1; then
+    ps_response=$(lms ps --json 2>/dev/null)
+    if [ -n "$ps_response" ] && printf "%s" "$ps_response" | jq -e --arg model "$model" '
+      any(.[]?;
+        (.path? == $model) or
+        (.modelKey? == $model) or
+        (.identifier? == $model) or
+        (.indexedModelIdentifier? == $model)
+      )
+    ' >/dev/null 2>&1; then
+      is_running=1
+    fi
+  fi
+
+  if [ "$source" = "downloaded" ] && [ "$is_running" -eq 0 ]; then
     lms load "$model" -y || return 1
   fi
 
-  LM_STUDIO_API_BASE="$base" LM_STUDIO_API_KEY="$api_key" command aider --yes-always --model "lm_studio/$model" "$@"
+  LM_STUDIO_API_BASE="$base" LM_STUDIO_API_KEY="$api_key" command aider --yes-always --no-show-model-warnings --model "lm_studio/$model" "$@"
 }
 alias aider-lm='aider_lmstudio'
 
