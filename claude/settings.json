@@ -1,0 +1,103 @@
+{
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "Bash(ls *)",
+      "Bash(cat *)",
+      "Bash(node *)",
+      "Bash(npm *)",
+      "Bash(npx *)"
+    ],
+    "deny": [
+      "Bash(curl *)",
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(**/*.pem)"
+    ],
+    "ask": [
+      "Bash(git push *)"
+    ]
+  },
+  "model": "opusplan",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo \"SESSION_START $(date)\" >> /tmp/claude-hooks.log"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "terminal-notifier -message \"タスクが完了しました\" -title \"Claude Code\" -sound default && echo \"STOP $(date '+%Y-%m-%d %H:%M:%S')\" >> /tmp/claude-hooks.log"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "terminal-notifier -message \"入力が必要です\" -title \"Claude Code\" -sound Basso && echo \"NOTIFICATION $(date '+%Y-%m-%d %H:%M:%S')\" >> /tmp/claude-hooks.log"
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "typescript-lsp@claude-plugins-official": true,
+    "figma@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
+    "context7@claude-plugins-official": true,
+    "playwright@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "anthropic-agent-skills": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/skills"
+      }
+    }
+  },
+  "language": "Japanese",
+  "effortLevel": "medium",
+  "voiceEnabled": true,
+  "defaultMode": "auto",
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@latest"
+      ]
+    },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": [
+        "chrome-devtools-mcp@latest"
+      ]
+    }
+  },
+  "teammateMode": "tmux",
+  "worktree": {
+    "symlinkDirectories": [
+      ".claude/skills",
+      ".claude/agents",
+      ".claude/rules",
+      ".claude/docs",
+      ".claude/commands"
+    ]
+  },
+  "cleanupPeriodDays": 99999
+}

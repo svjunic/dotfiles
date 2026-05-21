@@ -4,9 +4,10 @@
 [core]
   ui = never
 	pager = delta
-	excludesfile = ~/.gitignore
-	editor = nvim
-	hooksPath = ~/git/hooks
+  excludesfile = ~/.gitignore
+  editor = nvim
+  hooksPath = ~/git/hooks
+  quotepath = false
 
 #[filter "media"]
 #  clean = git-media-clean %f
@@ -29,7 +30,7 @@
 	ci = commit
 	st = status --branch --short
 	br = branch
-	hist = log --pretty=format:\\\"%h %ad | %s%d [%an]\\\" --graph --date=short
+	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   lga = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 	sl = log --all --branches --decorate --graph --oneline
@@ -51,16 +52,24 @@
 
 [delta]
 	navigate = true
-    dark = true      # or light = true, or omit for auto-detection
-    features = my-theme
+  dark = true      # or light = true, or omit for auto-detection
+  features = my-theme
 	side-by-side = true
 
 [delta "my-theme"]
-    file-style = ul "#55FFFF"
-    file-decoration-style = underline "#55FFFF"
-    hunk-header-style = bold yellow
-    hunk-header-decoration-style = underline "#777777"
+  zero-style = "#C8C8C8"
+  line-numbers-left-style = "#808080"
+  line-numbers-right-style = "#808080"
+  line-numbers-minus-style = "#FF8080"
+  line-numbers-zero-style = "#A0A0A0"
+  line-numbers-plus-style = "#80FF80"
 
-    hunk-header-style = syntax "#000000"
+  file-style = bold "#6CB6FF"
+  file-decoration-style = "#6CB6FF"
+  hunk-header-style = bold "#FFD580"
+  hunk-header-decoration-style = "#666666"
+
+  plus-style = syntax "#009900"
+  minus-style = syntax "#990000"
 [color]
 	ui = auto

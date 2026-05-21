@@ -4,6 +4,17 @@ echo 'include .zbashrc'
 export VISUAL=nvim
 export EDITOR=nvim
 
+# aider
+export PATH="$HOME/Library/Python/3.9/bin:$PATH"
+
+function aider() {
+  command aider --yes-always "$@"
+}
+
+# lm-studio
+export OPENAI_API_BASE=http://localhost:1234/v1
+export OPENAI_API_KEY=lm-studio
+
 # # vscode の人はこっち
 # export VISUAL="code --wait"
 # export EDITOR="code --wait"
@@ -78,6 +89,29 @@ export LSCOLORS=gxfxcxdxbxegedabagacad
 # function
 #####################################################################################################
 
+# tmuxのpaneの背景色toggle
+function tmuxBackgroundToggle() {
+  if ! command -v tmux >/dev/null 2>&1; then
+    echo "tmux command not found." >&2
+    return 1
+  fi
+  if [[ -z "${TMUX_PANE:-}" ]]; then
+    echo "Not inside a tmux session (TMUX_PANE is empty)." >&2
+    return 1
+  fi
+
+  local pane state_file state
+  pane="$TMUX_PANE"
+  state_file="/tmp/tmux_bg_toggle_${pane//[^a-zA-Z0-9]/_}"
+
+  if [[ -f "$state_file" ]]; then
+    tmux select-pane -t "$pane" -P default
+    rm -f "$state_file"
+  else
+    tmux select-pane -t "$pane" -P 'bg=#ffffff,fg=#000000'
+    touch "$state_file"
+  fi
+}
 
 # デフォルトバージョンのNodeを使う
 export NVM_DIR="$HOME/.nvm"
@@ -189,8 +223,6 @@ function agg() {
 # git_diff_archive 識別子1 識別子2
 . ~/zsh/git_diff_archive.zsh
 
-# peco,vim,rg
-. ~/bash/rgvim.sh
 #git config --global alias.log 'log --all --branches --graph'
 #git show-branch --merge-base master HEAD
 #git diff `git show-branch --merge-base master HEAD` HEAD
@@ -265,31 +297,163 @@ elif [ "$(uname -s)" = "Linux" ] && [ -f ~/shell/linux-ssh.sh ]; then
 fi
 
 #####################################################################################################
-# peco
+# selector
 #####################################################################################################
+_git_branch_candidates() {
+  git branch -a | sed "s/^[* ] //" | sed "s/remotes\/origin\///" | sort -u | grep -v "HEAD"
+}
+
+_fzf_popup() {
+  fzf --layout=reverse --tmux center,80%,80% "$@"
+}
+
+function rgf() {
+  if ! command -v fzf >/dev/null 2>&1; then
+    echo "fzf is not installed."
+    return 1
+  fi
+  if ! command -v rg >/dev/null 2>&1; then
+    echo "rg is not installed."
+    return 1
+  fi
+
+  local include_all=0
+  local extensions=()
+  local query_parts=()
+  local arg
+  while [ $# -gt 0 ]; do
+    arg="$1"
+    case "$arg" in
+      -a|--all)
+        include_all=1
+        shift
+        ;;
+      -e|--ext)
+        if [ -z "$2" ]; then
+          echo "Usage: rgf [-a|--all] [-e ext|--ext ext] [query...]"
+          return 1
+        fi
+        extensions+=("${2#.}")
+        shift 2
+        ;;
+      --ext=*)
+        extensions+=("${arg#--ext=}")
+        extensions[-1]="${extensions[-1]#.}"
+        shift
+        ;;
+      *)
+        query_parts+=("$arg")
+        shift
+        ;;
+    esac
+  done
+
+  local query="${(j: :)query_parts}"
+  local rg_cmd="rg --column --line-number --no-heading --color=always --smart-case"
+  if [ "$include_all" -eq 0 ]; then
+    rg_cmd="$rg_cmd -g !.git -g !node_modules"
+  fi
+  for arg in "${extensions[@]}"; do
+    if [ -n "$arg" ]; then
+      rg_cmd="$rg_cmd -g '*.$arg'"
+    fi
+  done
+
+  _fzf_popup \
+    --ansi \
+    --disabled \
+    --query "$query" \
+    --prompt 'rg > ' \
+    --delimiter ':' \
+    --preview-window 'right,60%,border-left,+{2}-10' \
+    --preview 'if command -v bat >/dev/null 2>&1; then bat --style=numbers --color=always --highlight-line {2} --line-range {2}:+200 {1} 2>/dev/null; else sed -n "1,200p" {1} 2>/dev/null; fi' \
+    --bind "start:reload:$rg_cmd -- {q} . || true" \
+    --bind "change:reload:$rg_cmd -- {q} . || true" \
+    --bind 'enter:become(vim +{2} {1})'
+}
+
+function aider_lmstudio() {
+  if ! command -v aider >/dev/null 2>&1; then
+    echo "aider is not installed."
+    return 1
+  fi
+  if ! command -v jq >/dev/null 2>&1; then
+    echo "jq is not installed."
+    return 1
+  fi
+  if ! command -v fzf >/dev/null 2>&1; then
+    echo "fzf is not installed."
+    return 1
+  fi
+
+  local base="${LM_STUDIO_API_BASE:-${OPENAI_API_BASE:-http://localhost:1234/v1}}"
+  local api_key="${LM_STUDIO_API_KEY:-${OPENAI_API_KEY:-dummy-api-key}}"
+  local response models model source
+
+  if command -v lms >/dev/null 2>&1; then
+    response=$(lms ls --llm --json 2>/dev/null)
+    models=$(printf "%s" "$response" | jq -r '.. | objects | (.path? // .modelKey? // .identifier? // .id? // empty)' 2>/dev/null | sort -u)
+    source="downloaded"
+  fi
+
+  if [ -z "$models" ]; then
+    if ! command -v curl >/dev/null 2>&1; then
+      echo "curl is not installed."
+      return 1
+    fi
+
+    response=$(curl -fsS "${base%/}/models" 2>/dev/null)
+    if [ -z "$response" ]; then
+      echo "LM Studio models are not available."
+      echo "Start LM Studio, run 'lms bootstrap' if needed, or set LM_STUDIO_API_BASE."
+      return 1
+    fi
+
+    models=$(printf "%s" "$response" | jq -r '.data[]?.id' 2>/dev/null | sort -u)
+    source="loaded"
+    if [ -z "$models" ]; then
+      echo "No models found from LM Studio."
+      return 1
+    fi
+  fi
+
+  model=$(printf "%s\n" "$models" | _fzf_popup --prompt "lm-studio ${source} model > ")
+  if [ -z "$model" ]; then
+    echo "Canceled."
+    return 1
+  fi
+
+  if [ "$source" = "downloaded" ]; then
+    lms load "$model" -y || return 1
+  fi
+
+  LM_STUDIO_API_BASE="$base" LM_STUDIO_API_KEY="$api_key" command aider --yes-always --model "lm_studio/$model" "$@"
+}
+alias aider-lm='aider_lmstudio'
+
 function cdf () {
-  local dir=$(find ./* -type f | grep -v 'node_modules' | peco)
+  local dir=$(find . -type f | grep -v 'node_modules' | _fzf_popup --preview 'if command -v bat >/dev/null 2>&1; then bat --style=numbers --color=always --line-range=:200 {} 2>/dev/null; else sed -n "1,200p" {} 2>/dev/null; fi' --preview-window 'right,60%,border-left')
   if [ ! -z "$dir" ] ; then
     vim "$dir"
   fi
 }
 
 function cdd {
-  local dir=$(find ./* -type d | grep -v 'node_modules' | peco)
+  local dir=$(find . -type d | grep -v 'node_modules' | _fzf_popup --preview 'if command -v tree >/dev/null 2>&1; then tree -L 2 -C -I "node_modules|.git" {} | head -200; else find {} -maxdepth 2 \( -name node_modules -o -name .git \) -prune -o -print | head -200; fi')
   if [ ! -z "$dir" ] ; then
       cd "$dir"
   fi
 }
 
 function cddf {
-  local dir=$(find ./* -type d | peco)
+  local dir=$(find . -type d | _fzf_popup --preview 'if command -v tree >/dev/null 2>&1; then tree -L 2 -C -I "node_modules|.git" {} | head -200; else find {} -maxdepth 2 \( -name node_modules -o -name .git \) -prune -o -print | head -200; fi')
   if [ ! -z "$dir" ] ; then
       cd "$dir"
   fi
 }
 
 function cdff () {
-  local dir=$(find ./* -type f | peco)
+  local dir=$(find . -type f | _fzf_popup)
   if [ ! -z "$dir" ] ; then
     vim "$dir"
   fi
@@ -297,7 +461,7 @@ function cdff () {
 
 function switch_aws_profile() {
   local profile
-  profile=$(awk -F'[][]' '/\[.*\]/{print $2}' ~/.aws/credentials | peco)
+  profile=$(awk -F'[][]' '/\[.*\]/{print $2}' ~/.aws/credentials | _fzf_popup)
 
   if [ -n "$profile" ]; then
     export AWS_PROFILE=$profile
@@ -315,7 +479,7 @@ function switch_venv() {
     return 1
   fi
 
-  local VENV=$(ls "$VENV_DIR" | peco)
+  local VENV=$(ls "$VENV_DIR" | _fzf_popup)
 
   if [ -z "$VENV" ]; then
     echo "No virtual environment selected."
@@ -333,7 +497,7 @@ function switch_venv() {
 }
 
 function gitdiff_select_commit() {
-  local commit=$(git log --oneline | peco | awk '{print $1}')
+  local commit=$(git log --oneline | _fzf_popup | awk '{print $1}')
   if [ -n "$commit" ]; then
     git diff "$commit"
   fi
@@ -343,11 +507,11 @@ function gitshow_select_commit() {
   emulate -L zsh
   setopt pipefail
 
-  # コミット選択（pager無効でpecoに流す）
+  # コミット選択（pager無効でfzfに流す）
   local line commit
   line=$(
     git --no-pager log --oneline --decorate --all \
-    | peco --prompt "commit to show > "
+    | _fzf_popup --prompt "commit to show > "
   )
 
   # キャンセル対策
@@ -394,6 +558,8 @@ function gitbase () {
   git show-branch | grep '*' | grep -v "$(git rev-parse --abbrev-ref HEAD)" | head -1 | awk -F'[]~^[]' '{print $2}'
 }
 alias gitadd='git add -A -- . ":(exclude).github"'
+alias gitsethead='git remote set-head origin $(git symbolic-ref --short HEAD)'
+
 
 # NOTE: stash忘れがち、3ヶ月使わなかったら消す
 alias gitStashlis='git stash list'               # stash確認用
@@ -409,7 +575,7 @@ alias vimdiff='nvim -d'
 alias repo='function _repo() {
     if git status &>/dev/null; then
         local branch
-        branch=$(git branch -a | sed "s/^[* ] //" | sed "s/remotes\/origin\///" | sort -u | grep -v "HEAD" | peco)
+        branch=$(_git_branch_candidates | _fzf_popup)
         if [ -n "$branch" ]; then
             git checkout "$branch"
         fi
@@ -418,13 +584,25 @@ alias repo='function _repo() {
     fi
 }; _repo'
 
+alias tag='function _tag() {
+    if git status &>/dev/null; then
+        local tag
+        tag=$(git tag | _fzf_popup)
+        if [ -n "$tag" ]; then
+            git checkout "$tag"
+        fi
+    else
+        echo "This is not a git repository."
+    fi
+}; _tag'
+
 alias gm='function _gm() {
     if git status &>/dev/null; then
         local branch
         if [ -n "$1" ]; then
             branch="$1"
         else
-            branch=$(git branch -a | sed "s/^[* ] //" | sed "s/remotes\/origin\///" | sort -u | grep -v "HEAD" | peco)
+            branch=$(_git_branch_candidates | _fzf_popup)
         fi
 
         if [ -n "$branch" ]; then
@@ -441,7 +619,7 @@ alias gwr='function _gwr() {
         if [ -n "$1" ]; then
             dir="$1"
         else
-            dir=$(git worktree list | awk "{print \$1}" | peco)
+            dir=$(git worktree list | awk "{print \$1}" | _fzf_popup)
         fi
 
         if [ -n "$dir" ]; then
@@ -458,7 +636,7 @@ alias gwa='function _gwa() {
             git worktree list
         elif [ $# -eq 1 ]; then
             local branch
-            branch=$(git branch -a | sed "s/^[* ] //" | sed "s/remotes\/origin\///" | sort -u | grep -v "HEAD" | peco)
+            branch=$(_git_branch_candidates | _fzf_popup)
             if [ -n "$branch" ]; then
                 git worktree add "$1" "$branch"
             fi
@@ -466,7 +644,7 @@ alias gwa='function _gwa() {
             git worktree add "$1" "$2"
         else
             echo "Usage: gwa                 # list"
-            echo "       gwa <dir>           # add with peco branch selection"
+            echo "       gwa <dir>           # add with fzf branch selection"
             echo "       gwa <dir> <branch>  # add"
             return 1
         fi
@@ -475,7 +653,8 @@ alias gwa='function _gwa() {
     fi
 }; _gwa'
 
-alias c5="copilot --banner --model gpt-5.2 --allow-tool 'write'"
+alias c54="copilot --banner --model gpt-5.4 --allow-tool 'write'"
+alias c5="copilot --banner --model gpt-5.3-codex --allow-tool 'write'"
 alias ch="copilot --banner --model claude-haiku-4.5 --allow-tool 'write'"
 alias cs="copilot --banner --model claude-sonnet-4.5 --allow-tool 'write'"
 alias cl='claude'
@@ -491,7 +670,7 @@ function gitdiff() {
   # 使い方
   if [[ "$1" == "-h" || "$1" == "--help" ]]; then
     echo "Usage: gitdiff [<path> ...]"
-    echo "Choose a base branch with peco and show 'git diff <base> -- <path...>'"
+    echo "Choose a base branch with fzf and show 'git diff <base> -- <path...>'"
     return 0
   fi
 
@@ -501,9 +680,9 @@ function gitdiff() {
     return 1
   fi
 
-  # peco チェック
-  if ! command -v peco >/dev/null 2>&1; then
-    echo "peco is not installed (brew install peco などで導入してください)"
+  # fzf チェック
+  if ! command -v fzf >/dev/null 2>&1; then
+    echo "fzf is not installed (brew install fzf などで導入してください)"
     return 1
   fi
 
@@ -518,7 +697,7 @@ function gitdiff() {
     | grep -vE '/HEAD$' \
     | grep -v "^${current}\$" \
     | sort -u \
-    | peco --prompt "base branch to diff against > "
+    | _fzf_popup --prompt "base branch to diff against > "
   )
 
   [[ -z "$base" ]] && { echo "Canceled."; return 1; }
@@ -532,8 +711,8 @@ function gitdiff() {
 }
 
 # gh のユーザ切替を行う
-# - 事前要件: gh, peco がインストールされていること
-# - 入力: ~/.config/gh/hosts.yml の github.com.users を peco で選択
+# - 事前要件: gh, fzf がインストールされていること
+# - 入力: ~/.config/gh/hosts.yml の github.com.users を fzf で選択
 # - 挙動: 選択したユーザで `gh auth switch --hostname github.com --user <user>` を実行
 # - 失敗時: エラーメッセージを出力して非ゼロを返す
 ghswitch() {
@@ -548,8 +727,8 @@ ghswitch() {
     return 1
   fi
 
-  if ! command -v peco >/dev/null 2>&1; then
-    echo "peco が見つかりません（brew install peco など）"
+  if ! command -v fzf >/dev/null 2>&1; then
+    echo "fzf が見つかりません（brew install fzf など）"
     return 1
   fi
 
@@ -578,11 +757,19 @@ ghswitch() {
     return 1
   fi
 
-  user=$(printf "%s\n" "$users" | peco --prompt "gh user > ")
+  user=$(printf "%s\n" "$users" | _fzf_popup --prompt "gh user > ")
   if [ -z "$user" ]; then
     echo "Canceled."
     return 1
   fi
 
   gh auth switch --hostname github.com --user "$user"
+}
+
+# ローカルブランチ整理
+gclean() {
+  git branch --merged "${1:-main}" \
+    | grep -vE '^\*|^(main|master|develop)$' \
+    | fzf -m --prompt="Delete branches> " \
+    | xargs -r git branch -d
 }

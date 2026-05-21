@@ -10,7 +10,23 @@ Thumbs.db
 .idea
 .sass-cache
 node_modules
-package-lock.json
 nginx.pid
 
 .tmux/plugins/*
+
+
+# personal file
+sv
+sv.*
+*.sv
+*.sv.*
+
+# claude
+CLAUDE.local.md
+settings.local.json
+.claude/worktrees
+.claude/skills
+.claude/agents
+.claude/rules
+.claude/docs
+.claude/commands

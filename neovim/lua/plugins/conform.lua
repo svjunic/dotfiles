@@ -13,8 +13,10 @@ conform.setup({
     markdown = { "prettier", lsp_format = "fallback" },
     yaml = { "prettier", lsp_format = "fallback" },
     html = { "prettier",  lsp_format = "fallback" },
-    css = { "prettier", "stylelint", lsp_format = "fallback" },
-    scss = { "prettier", "stylelint", lsp_format = "fallback" },
+    css = { "prettier", lsp_format = "fallback" },
+    scss = { "prettier", lsp_format = "fallback" },
+    -- css = { "prettier", "stylelint", lsp_format = "fallback" },
+    -- scss = { "prettier", "stylelint", lsp_format = "fallback" },
   },
   format_on_save = {
     timeout_ms = 2000,

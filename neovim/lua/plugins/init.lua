@@ -207,6 +207,14 @@ return {
       require("plugins.conform")
     end,
   },
+  {
+    "mfussenegger/nvim-lint",
+    event = { "BufReadPost", "BufNewFile" },
+    config = function()
+      package.loaded["plugins.lint"] = nil
+      require("plugins.lint")
+    end,
+  },
 
   -- Emmet
   {
@@ -313,10 +321,15 @@ return {
   },
 
   {
-    "nwiizo/marp.nvim",
+    "svjunic/marp.nvim",
+    -- dev = true,
+    -- dir = "~/virtual/github/marp.nvim",
     ft = "markdown",
+    cmd = { "MarpWatch", "MarpStop", "MarpExport" },
+    lazy=false,
     config = function()
       require("marp").setup {
+        mermaid = true,
         marp_command = "npx @marp-team/marp-cli@latest",
       }
     end,
