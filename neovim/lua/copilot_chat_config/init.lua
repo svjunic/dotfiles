@@ -225,10 +225,18 @@ vim.api.nvim_create_autocmd("BufEnter", {
   callback = apply_copilotchat_highlights,
 })
 
--- Custom command: CopilotChatCommit
 local DIFF_CONTEXT_LINES = 3   -- unified diff のコンテキスト行数（-U オプション）
 local MAX_LINES_PER_FILE = 100 -- ファイルごとの diff 最大行数
 local MAX_TOTAL_LINES = 500    -- diff 全体の最大行数
+local MAX_CHARS_PER_LINE = 1000 -- 1行あたりの最大文字数
+
+local function truncate_long_line(line)
+  if vim.fn.strchars(line) <= MAX_CHARS_PER_LINE then
+    return line, false
+  end
+
+  return vim.fn.strcharpart(line, 0, MAX_CHARS_PER_LINE) .. " … [truncated: 行が長すぎるため省略されています]", true
+end
 
 local function truncate_diff(diff)
   if diff == "" then
@@ -254,6 +262,8 @@ local function truncate_diff(diff)
       file_truncated = false
     end
 
+    local display_line, line_truncated = truncate_long_line(line)
+
     if file_truncated then
       -- 次のファイル境界までスキップ
     elseif file_line_count >= MAX_LINES_PER_FILE then
@@ -262,9 +272,12 @@ local function truncate_diff(diff)
       file_truncated = true
       was_truncated = true
     else
-      table.insert(result, line)
+      table.insert(result, display_line)
       file_line_count = file_line_count + 1
       total_lines = total_lines + 1
+      if line_truncated then
+        was_truncated = true
+      end
     end
   end
 
