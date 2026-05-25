@@ -91,6 +91,7 @@
   },
   "teammateMode": "tmux",
   "worktree": {
+    "baseRef": "head",
     "symlinkDirectories": [
       ".claude/skills",
       ".claude/agents",
