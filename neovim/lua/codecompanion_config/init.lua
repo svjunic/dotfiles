@@ -350,6 +350,21 @@ require("codecompanion").setup({
   prompt_library = prompt_library,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup("CodeCompanionCustomKeymaps", { clear = true }),
+  pattern = "codecompanion",
+  callback = function(args)
+    vim.keymap.set("n", "q", function()
+      local chat = require("codecompanion").buf_get_chat(args.buf)
+      if chat and type(chat.close) == "function" then
+        chat:close()
+      else
+        require("codecompanion").close_last_chat()
+      end
+    end, { buffer = args.buf, silent = true, desc = "Close CodeCompanion chat" })
+  end,
+})
+
 function M.prompt(alias)
   require("codecompanion").prompt(alias)
 end
