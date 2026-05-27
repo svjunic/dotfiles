@@ -339,6 +339,13 @@ require("codecompanion").setup({
         show_preset_prompts = false,
       },
     },
+    chat = {
+      window = {
+        layout = "vertical",
+        position = "right",
+        width = 0.5,
+      },
+    },
   },
   prompt_library = prompt_library,
 })
