@@ -1,0 +1,21 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Ollama (local)",
+      "options": {
+        "baseURL": "http://localhost:11434/v1"
+      },
+      "models": {
+        "qwen3.5:4b-mlx": {
+          "name": "qwen3.5:4b-mlx"
+        },
+        "gemma4:e4b-mlx": {
+          "name": "gemma4:e4b-mlx"
+        }
+      }
+    }
+  },
+  "model": "ollama/{env:LLM_MODEL}"
+}

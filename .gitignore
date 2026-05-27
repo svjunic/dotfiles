@@ -30,3 +30,4 @@ settings.local.json
 .claude/rules
 .claude/docs
 .claude/commands
+.aider*

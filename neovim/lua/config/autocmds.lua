@@ -68,29 +68,18 @@ vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
   end,
 })
 
--- Git commit message: CopilotChatCommit
+-- Git commit message: CodeCompanionCommit
 vim.api.nvim_create_autocmd("VimEnter", {
   group = vim.api.nvim_create_augroup("MyGitCommit", { clear = true }),
   pattern = "*COMMIT_EDITMSG",
   callback = function()
     vim.defer_fn(function()
-      if vim.fn.exists(":CopilotChatOriginalCommit") == 2 then
-        vim.cmd("CopilotChatOriginalCommit")
+      if vim.fn.exists(":CodeCompanionOriginalCommit") == 2 then
+        vim.cmd("CodeCompanionOriginalCommit")
       end
     end, 1000)
   end,
 })
-
--- -- Git commit message: CopilotChatK2Commit
--- vim.api.nvim_create_autocmd("FileType", {
---   group = vim.api.nvim_create_augroup("MyGitCommit", { clear = true }),
---   pattern = "gitcommit",
---   callback = function()
---     if vim.fn.exists(":CopilotChatK2Commit") == 2 then
---       vim.cmd("CopilotChatK2Commit")
---     end
---   end,
--- })
 
 -- filetype 追加
 vim.filetype.add({
