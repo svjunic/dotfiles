@@ -180,21 +180,47 @@ return {
     end,
   },
   {
-    "CopilotC-Nvim/CopilotChat.nvim",
-    branch = "main",
-    cmd = { "CopilotChat", "CopilotChatOpen", "CopilotChatPrompts", "CopilotChatToggle", "CopilotChatModels" },
+    "olimorris/codecompanion.nvim",
+    cmd = { "CodeCompanion", "CodeCompanionChat", "CodeCompanionActions", "CodeCompanionCmd" },
     ft = { "gitcommit" },
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons",
       "nvim-telescope/telescope.nvim",
     },
     keys = {
-      { ",ccc", "<cmd>CopilotChatOpen<cr>", desc = "CopilotChat Open" },
-      { ",ccp", "<cmd>CopilotChatPrompts<cr>", desc = "CopilotChat Prompts" },
+      { ",ccc", "<cmd>CodeCompanionChat Toggle<cr>", desc = "CodeCompanion Chat" },
+      { ",ccp", "<cmd>CodeCompanionActions<cr>", desc = "CodeCompanion Actions" },
+      {
+        ",ccq",
+        function()
+          require("codecompanion_config").quick_chat()
+        end,
+        desc = "CodeCompanion Quick Chat",
+      },
+      {
+        ",ccr",
+        function()
+          require("codecompanion_config").prompt("review")
+        end,
+        desc = "現在のバッファのコードレビューを日本語で依頼します。",
+      },
+      {
+        ",cce",
+        function()
+          require("codecompanion_config").prompt("explain")
+        end,
+        desc = "カーソル位置のコードを日本語で段落付きで説明します。",
+      },
+      {
+        ",cco",
+        function()
+          require("codecompanion_config").prompt("optimize")
+        end,
+        desc = "選択範囲のコードを最適化し、パフォーマンスと可読性を向上させます。",
+      },
     },
     config = function()
-      pcall(require, "copilot_chat_config.init")
+      require("codecompanion_config")
     end,
   },
 
