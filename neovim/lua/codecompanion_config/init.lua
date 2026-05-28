@@ -346,6 +346,24 @@ require("codecompanion").setup({
           modes = { n = "q" },
         },
         send = {
+          callback = function(chat)
+            if chat.bufnr and vim.api.nvim_buf_is_valid(chat.bufnr) then
+              if type(chat._clear_status) == "function" then
+                chat:_clear_status()
+              end
+              local ns = vim.api.nvim_create_namespace("CodeCompanion-virtual_text")
+              local line = math.max(vim.api.nvim_buf_line_count(chat.bufnr) - 1, 0)
+              local ok, extmark = pcall(vim.api.nvim_buf_set_extmark, chat.bufnr, ns, line, 0, {
+                virt_lines = { { { "送信中...", "CodeCompanionVirtualText" } } },
+                virt_lines_above = false,
+              })
+              if ok then
+                chat._status = { extmark = extmark, submitting = true }
+              end
+            end
+            vim.cmd("stopinsert")
+            chat:submit()
+          end,
           modes = { n = "<CR>", i = "<A-Enter>" },
         },
       },
@@ -390,6 +408,27 @@ vim.api.nvim_create_autocmd("FileType", {
         require("codecompanion").close_last_chat()
       end
     end, { buffer = args.buf, silent = true, desc = "Close CodeCompanion chat" })
+  end,
+})
+
+vim.api.nvim_create_autocmd("User", {
+  group = vim.api.nvim_create_augroup("CodeCompanionResponseNotifications", { clear = true }),
+  pattern = "CodeCompanionChatDone",
+  callback = function()
+    vim.notify("CodeCompanion: 応答を受信しました", vim.log.levels.INFO, { title = "CodeCompanion" })
+  end,
+})
+
+vim.api.nvim_create_autocmd("User", {
+  group = vim.api.nvim_create_augroup("CodeCompanionErrorNotifications", { clear = true }),
+  pattern = "CodeCompanionRequestFinished",
+  callback = function(args)
+    local status = args.data and args.data.status
+    if status and status ~= "success" then
+      vim.notify("CodeCompanion: リクエストが失敗しました (" .. status .. ")", vim.log.levels.WARN, {
+        title = "CodeCompanion",
+      })
+    end
   end,
 })
 
