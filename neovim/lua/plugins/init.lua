@@ -188,7 +188,13 @@ return {
       "nvim-telescope/telescope.nvim",
     },
     keys = {
-      { ",ccc", "<cmd>CodeCompanionChat Toggle<cr>", desc = "CodeCompanion Chat" },
+      {
+        ",ccc",
+        function()
+          require("codecompanion_config").chat_with_buffer()
+        end,
+        desc = "CodeCompanion Chat with buffer",
+      },
       { ",ccp", "<cmd>CodeCompanionActions<cr>", desc = "CodeCompanion Actions" },
       {
         ",ccq",
@@ -196,6 +202,7 @@ return {
           require("codecompanion_config").quick_chat()
         end,
         desc = "CodeCompanion Quick Chat",
+        mode = { "v" },
       },
       {
         ",ccr",

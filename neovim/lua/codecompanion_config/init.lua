@@ -324,6 +324,13 @@ require("codecompanion").setup({
       end,
     },
   },
+  rules = {
+    opts = {
+      chat = {
+        enabled = false,
+      },
+    },
+  },
   interactions = {
     chat = {
       adapter = {
@@ -390,6 +397,13 @@ function M.prompt(alias)
   require("codecompanion").prompt(alias)
 end
 
+function M.chat_with_buffer()
+  local chat = require("codecompanion").chat({ auto_submit = false })
+  if chat and type(chat.add_buf_message) == "function" then
+    chat:add_buf_message({ role = "user", content = "#{buffer}\n" })
+  end
+end
+
 function M.quick_chat()
   vim.ui.input({ prompt = "Quick Chat: " }, function(input)
     if input == nil or input == "" then
@@ -398,14 +412,14 @@ function M.quick_chat()
 
     local chat = require("codecompanion").chat()
     if chat and type(chat.add_buf_message) == "function" and type(chat.submit) == "function" then
-      chat:add_buf_message({ role = "user", content = "#{buffer}\n" .. input })
+      chat:add_buf_message({ role = "user", content = "#{selection}\n" .. input })
       chat:submit()
       return
     end
 
     vim.api.nvim_cmd({
       cmd = "CodeCompanionChat",
-      args = { "#{buffer}\n" .. input },
+      args = { "#{selection}\n" .. input },
     }, {})
   end)
 end
