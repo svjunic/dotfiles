@@ -303,6 +303,27 @@ local prompt_library = {
 }
 
 require("codecompanion").setup({
+  adapters = {
+    http = {
+      copilot = function()
+        return require("codecompanion.adapters").extend("copilot", {
+          schema = {
+            top_p = {
+              enabled = function(self)
+                local model = self.schema.model.default
+                if type(model) == "function" then
+                  model = model()
+                end
+                return not vim.startswith(model, "o1")
+                  and not model:find("codex")
+                  and not vim.startswith(model, "gpt-5")
+              end,
+            },
+          },
+        })
+      end,
+    },
+  },
   interactions = {
     chat = {
       adapter = {
