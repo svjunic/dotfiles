@@ -8,6 +8,37 @@ local MAX_LINES_PER_FILE = 100
 local MAX_TOTAL_LINES = 500
 local MAX_CHARS_PER_LINE = 1000
 
+local function env_or_default(name, default)
+  local value = os.getenv(name)
+  if value == nil or vim.trim(value) == "" then
+    return default
+  end
+  return value
+end
+
+local function env_bool(name)
+  local value = os.getenv(name)
+  if value == nil or vim.trim(value) == "" then
+    return nil
+  end
+
+  value = vim.trim(value):lower()
+  if value == "true" or value == "1" or value == "yes" or value == "on" then
+    return true
+  end
+  if value == "false" or value == "0" or value == "no" or value == "off" then
+    return false
+  end
+  return nil
+end
+
+local function original_commit_adapter()
+  return {
+    name = env_or_default("LLM_SERVICE", "copilot"),
+    model = env_or_default("LLM_MODEL", "gpt-5-mini"),
+  }
+end
+
 local function truncate_long_line(line)
   if vim.fn.strchars(line) <= MAX_CHARS_PER_LINE then
     return line, false
@@ -152,8 +183,11 @@ local function extract_commit_message(content)
     return nil
   end
 
+  content = content:gsub("\r\n", "\n"):gsub("\r", "\n")
+
   local message = content:match("```gitcommit%s*\n(.-)\n```")
-    or content:match("```%w*%s*\n(.-)\n```")
+    or content:match("```git%-commit%s*\n(.-)\n```")
+    or content:match("```[%w_-]*%s*\n(.-)\n```")
     or content
 
   message = vim.trim(message)
@@ -277,10 +311,7 @@ local prompt_library = {
       alias = "original_commit",
       short_name = "original_commit",
       auto_submit = true,
-      adapter = {
-        name = "copilot",
-        model = "gpt-5-mini",
-      },
+      adapter = original_commit_adapter(),
       callbacks = {
         on_completed = function(chat)
           local target = M._commit_target_bufnr
@@ -317,6 +348,21 @@ require("codecompanion").setup({
                 return not vim.startswith(model, "o1")
                   and not model:find("codex")
                   and not vim.startswith(model, "gpt-5")
+              end,
+            },
+          },
+        })
+      end,
+      ollama = function()
+        return require("codecompanion.adapters").extend("ollama", {
+          schema = {
+            think = {
+              default = function(self)
+                local think = env_bool("LLM_THINK")
+                if think ~= nil then
+                  return think
+                end
+                return require("codecompanion.adapters.http.ollama.get_models").check_thinking_capability(self)
               end,
             },
           },
