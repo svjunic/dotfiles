@@ -39,6 +39,31 @@ local function original_commit_adapter()
   }
 end
 
+local function resolve_adapter_model(adapter)
+  if type(adapter.model) == "table" and adapter.model.name then
+    return adapter.model.name
+  end
+  if type(adapter.model) == "string" then
+    return adapter.model
+  end
+
+  local schema_model = adapter.schema and adapter.schema.model and adapter.schema.model.default
+  if type(schema_model) == "function" then
+    local ok, model = pcall(schema_model, adapter)
+    if ok then
+      return model
+    end
+    return nil
+  end
+  return schema_model
+end
+
+local function llm_role_name(adapter)
+  local service = adapter.name or "unknown"
+  local model = resolve_adapter_model(adapter) or "unknown"
+  return "Assistant(" .. service .. "/" .. model .. ")"
+end
+
 local function truncate_long_line(line)
   if vim.fn.strchars(line) <= MAX_CHARS_PER_LINE then
     return line, false
@@ -181,7 +206,20 @@ local function build_commit_prompt()
     "",
     "# 出力形式",
     "- エラーがあればエラーの内容（個人情報が含まれていた場合など）",
-    "- コミットメッセージ（gitcommitのブロックで出力、個人情報の有無の報告は不要）",
+    "```text",
+    "<type>(<scope>): <subject>",
+    "<BLANK LINE>",
+    "<body>",
+    "<BLANK LINE>",
+    "<footer>",
+    "```"
+    "",
+    "## 注意",
+    "- <type>は、英語にしてください。",
+    "- <scope>は、英語にしてください。",
+    "- <subject> は、日本語にしてください。",
+    "- <body> は、日本語にしてください。",
+    "- <footer> は、日本語にしてください。",
   }, "\n")
 end
 
@@ -392,7 +430,7 @@ require("codecompanion").setup({
       },
       roles = {
         user = "You",
-        llm = "Copilot",
+        llm = llm_role_name,
       },
       keymaps = {
         close = {
