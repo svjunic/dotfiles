@@ -11,8 +11,14 @@ function aider() {
   command aider --yes-always --no-show-model-warnings "$@"
 }
 
-# OpenCode
-export LLM_MODEL=qwen3.5:9b-mlx
+# OpenCode / CodeCompanion
+# githubcopilot
+export LLM_SERVICE=copilot
+export LLM_MODEL=gpt-5.4-mini
+##ollama
+#export LLM_SERVICE=ollama
+#export LLM_MODEL=qwen3.5:0.8b-mlx
+#export LLM_THINK=true
 
 
 # local llm
