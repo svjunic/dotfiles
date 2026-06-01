@@ -205,7 +205,6 @@ local function build_commit_prompt()
     "- メッセージには、コードブロックを記述しない",
     "",
     "# 出力形式",
-    "- エラーがあればエラーの内容（個人情報が含まれていた場合など）",
     "```text",
     "<type>(<scope>): <subject>",
     "<BLANK LINE>",
@@ -214,12 +213,14 @@ local function build_commit_prompt()
     "<footer>",
     "```",
     "",
-    "## 注意",
     "- <type>は、英語にすること",
     "- <scope>は、英語にすること",
     "- <subject> は、日本語にすること",
     "- <body> は、日本語にすること",
     "- <footer> は、日本語にすること",
+    "",
+    "# 注意",
+    "個人情報が含まれていた場合は、警告を表示すること"
   }, "\n")
 end
 
