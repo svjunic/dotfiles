@@ -12,7 +12,7 @@ function aider() {
 }
 
 # OpenCode
-export LLM_MODEL=qwen3.5:4b-mlx
+export LLM_MODEL=qwen3.5:9b-mlx
 
 
 # local llm
