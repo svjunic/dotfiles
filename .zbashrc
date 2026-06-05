@@ -318,6 +318,10 @@ _git_branch_candidates() {
   git branch -a | sed "s/^[* ] //" | sed "s/remotes\/origin\///" | sort -u | grep -v "HEAD"
 }
 
+_git_merge_branch_candidates() {
+  git branch -a | sed "s/^[* ] //" | sed "s/remotes\///" | sort -u | grep -v "HEAD"
+}
+
 _fzf_popup() {
   fzf --layout=reverse --tmux center,80%,80% "$@"
 }
@@ -632,7 +636,7 @@ alias gm='function _gm() {
         if [ -n "$1" ]; then
             branch="$1"
         else
-            branch=$(_git_branch_candidates | _fzf_popup)
+            branch=$(_git_merge_branch_candidates | _fzf_popup)
         fi
 
         if [ -n "$branch" ]; then
