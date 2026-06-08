@@ -70,7 +70,26 @@ local function truncate_long_line(line)
     return line, false
   end
 
-  return vim.fn.strcharpart(line, 0, MAX_CHARS_PER_LINE) .. " … [truncated: 行が長すぎるため省略されています]", true
+  return "-- [truncated: この行は長すぎるため全文を省略しました]", true
+end
+
+local function truncate_long_lines_only(diff)
+  if diff == "" then
+    return diff, false
+  end
+
+  local lines = vim.split(diff, "\n", { plain = true })
+  local was_truncated = false
+
+  for index, line in ipairs(lines) do
+    local display_line, line_truncated = truncate_long_line(line)
+    lines[index] = display_line
+    if line_truncated then
+      was_truncated = true
+    end
+  end
+
+  return table.concat(lines, "\n"), was_truncated
 end
 
 local function truncate_diff(diff)
@@ -194,11 +213,10 @@ local function build_commit_prompt()
   -- if diff_closed then
   --   was_truncated = true
   -- end
-  local diff = raw_diff
-  local was_truncated = false
+  local diff, was_truncated = truncate_long_lines_only(raw_diff)
 
   local diff_note = was_truncated
-      and "（注意: 差分が長すぎるため一部省略されています。省略箇所には [truncated] マーカーが入っています）"
+      and "差分内の長すぎる行は [truncated] マーカーに置換されています。省略された内容は推測せず、[truncated] やこの注意文をコミットメッセージに含めないでください。"
     or ""
 
   return table.concat({
@@ -206,6 +224,7 @@ local function build_commit_prompt()
     "",
     "- 必ずcommitizenの規約に沿ったメッセージにする",
     "- 必ず日本語で書く",
+    "- 出力はコミットメッセージのみとし、説明・注釈・コードブロックは出力しない",
     "- 必ず個人情報が含まれていないか確認する",
     "- 個人情報が含まれている場合は、コミットメッセージを出力せず「"
       .. PERSONAL_INFO_DETECTED_MESSAGE
@@ -216,42 +235,46 @@ local function build_commit_prompt()
     "",
     "```text",
     "<type>(<scope>): <subject>",
-    "<BLANK LINE>",
+    "改行",
     "<body>",
-    "<BLANK LINE>",
+    "改行",
     "<footer>",
     "```",
     "",
     "メッセージのルール: ",
     "- <type>、<scope>は、英語にすること",
     "- <subject>、<body>、<footer> は、日本語にすること",
+    "- <footer> は Breaking Change や issue 参照などが必要な場合のみ書くこと",
     "- <subject>は、最大50文字とする",
     "- メッセージは、72文字で折り返し",
     "- メッセージは、全角句点「。」の直後で必ず改行する",
     "- メッセージには、コードブロックを記述しない",
+    "- Note: や注意書きなど、差分メタ情報をコミットメッセージに書かない",
+    "- 改行する際に改行という文字をいれない",
+    "- [truncated] マーカーをコミットメッセージに書かない",
     "",
     "<type> に入る文字のルール: ",
     "",
-    "下記の中から適切な単語を選択してください。",
-    "- feat: Introduces a new feature (correlates with MINOR version increment)",
-    "- fix: Patches a bug (correlates with PATCH version increment)",
-    "- docs: Documentation only changes",
-    "- style: Code style changes (formatting, missing semicolons, etc.)",
-    "- refactor: Code refactoring without changing functionality",
-    "- perf: Performance improvements",
-    "- test: Adding or updating tests",
-    "- build: Changes to build system or dependencies",
-    "- ci: Changes to CI configuration files",
-    "- chore: Other changes that don't modify source or test files",
+    "下記の中から type だけを選択してください。説明文は出力に含めないでください。",
+    "- feat",
+    "- fix",
+    "- docs",
+    "- style",
+    "- refactor",
+    "- perf",
+    "- test",
+    "- build",
+    "- ci",
+    "- chore",
     "",
     "注意: ",
     "個人情報が含まれていた場合は、コミットメッセージを出力しないこと",
     "個人情報が含まれていない場合は、「個人情報はありません」などの説明を出力しないこと",
+    diff_note,
     "",
     "---",
     "差分の情報: ",
     "以下はステージ済み変更です。",
-    diff_note,
     "",
     "変更ファイル一覧: ",
     "```text",
