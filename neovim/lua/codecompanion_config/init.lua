@@ -175,6 +175,8 @@ local function build_commit_prompt()
     or ""
 
   return table.concat({
+    "変更のコミットメッセージを書いてください。",
+    "",
     "以下はステージ済み変更です。",
     diff_note,
     "",
@@ -187,8 +189,6 @@ local function build_commit_prompt()
     "```diff",
     diff ~= "" and diff or "(差分なし: 除外対象ファイルのみ)",
     "```",
-    "",
-    "変更のコミットメッセージを書いてください。",
     "",
     "下記のことを守ってください",
     "",
@@ -545,6 +545,18 @@ function M.chat_with_buffer()
   if chat and type(chat.add_buf_message) == "function" then
     chat:add_buf_message({ role = "user", content = "#{buffer}\n" })
   end
+end
+
+function M.inline_edit_with_buffer()
+  vim.ui.input({ prompt = "Inline Edit: " }, function(input)
+    if input == nil or vim.trim(input) == "" then
+      return
+    end
+
+    require("codecompanion").inline({
+      args = "#{buffer}\n" .. input,
+    })
+  end)
 end
 
 function M.quick_chat()
