@@ -7,6 +7,7 @@ local DIFF_CONTEXT_LINES = 3
 local MAX_LINES_PER_FILE = 100
 local MAX_TOTAL_LINES = 500
 local MAX_CHARS_PER_LINE = 1000
+local PERSONAL_INFO_DETECTED_MESSAGE = "個人情報が含まれている可能性があります。コミットメッセージは生成しません。"
 
 local function env_or_default(name, default)
   local value = os.getenv(name)
@@ -186,12 +187,15 @@ local function build_commit_prompt()
   }, { text = true }):wait()
 
   local raw_diff = diff_result.code == 0 and (diff_result.stdout or "") or ""
-  local diff, was_truncated = truncate_diff(raw_diff)
-  local diff_closed = false
-  diff, diff_closed = close_unbalanced_code_block(diff)
-  if diff_closed then
-    was_truncated = true
-  end
+  -- テストのため、差分の省略処理を一時的に無効化してプロンプトへそのまま渡す。
+  -- local diff, was_truncated = truncate_diff(raw_diff)
+  -- local diff_closed = false
+  -- diff, diff_closed = close_unbalanced_code_block(diff)
+  -- if diff_closed then
+  --   was_truncated = true
+  -- end
+  local diff = raw_diff
+  local was_truncated = false
 
   local diff_note = was_truncated
       and "（注意: 差分が長すぎるため一部省略されています。省略箇所には [truncated] マーカーが入っています）"
@@ -202,7 +206,11 @@ local function build_commit_prompt()
     "",
     "- 必ずcommitizenの規約に沿ったメッセージにする",
     "- 必ず日本語で書く",
-    "- 必ず個人情報が含まれていか確認する",
+    "- 必ず個人情報が含まれていないか確認する",
+    "- 個人情報が含まれている場合は、コミットメッセージを出力せず「"
+      .. PERSONAL_INFO_DETECTED_MESSAGE
+      .. "」のみを出力する",
+    "- 個人情報が含まれていない場合は、個人情報に関する説明を出力せず、コミットメッセージのみを出力する",
     "",
     "出力形式: ",
     "",
@@ -237,7 +245,8 @@ local function build_commit_prompt()
     "- chore: Other changes that don't modify source or test files",
     "",
     "注意: ",
-    "個人情報が含まれていた場合は、警告を表示すること",
+    "個人情報が含まれていた場合は、コミットメッセージを出力しないこと",
+    "個人情報が含まれていない場合は、「個人情報はありません」などの説明を出力しないこと",
     "",
     "---",
     "差分の情報: ",
@@ -272,6 +281,9 @@ local function extract_commit_message(content)
   if message == "" then
     return nil
   end
+  if message == PERSONAL_INFO_DETECTED_MESSAGE then
+    return nil, "personal_info_detected"
+  end
 
   return message
 end
@@ -291,7 +303,11 @@ local function write_commit_message_to_buffer(bufnr, content)
     return
   end
 
-  local message = extract_commit_message(content)
+  local message, reason = extract_commit_message(content)
+  if reason == "personal_info_detected" then
+    vim.notify(PERSONAL_INFO_DETECTED_MESSAGE, vim.log.levels.WARN, { title = "CodeCompanion" })
+    return
+  end
   if not message then
     vim.notify("CodeCompanion: commit message was empty", vim.log.levels.WARN)
     return
