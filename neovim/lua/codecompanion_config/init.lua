@@ -119,6 +119,24 @@ local function truncate_diff(diff)
   return table.concat(result, "\n"), was_truncated
 end
 
+
+local function close_unbalanced_code_block(text)
+  if text == nil or text == "" then
+    return text, false
+  end
+
+  local fence_count = 0
+  for _ in text:gmatch("```") do
+    fence_count = fence_count + 1
+  end
+
+  if fence_count % 2 == 1 then
+    return text .. "\n```", true
+  end
+
+  return text, false
+end
+
 local function build_commit_prompt()
   local files_result = vim.system({
     "git",
@@ -169,6 +187,11 @@ local function build_commit_prompt()
 
   local raw_diff = diff_result.code == 0 and (diff_result.stdout or "") or ""
   local diff, was_truncated = truncate_diff(raw_diff)
+  local diff_closed = false
+  diff, diff_closed = close_unbalanced_code_block(diff)
+  if diff_closed then
+    was_truncated = true
+  end
 
   local diff_note = was_truncated
       and "（注意: 差分が長すぎるため一部省略されています。省略箇所には [truncated] マーカーが入っています）"
