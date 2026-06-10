@@ -195,6 +195,13 @@ return {
         end,
         desc = "CodeCompanion Chat with buffer",
       },
+      {
+        ",cci",
+        function()
+          require("codecompanion_config").inline_edit_with_buffer()
+        end,
+        desc = "CodeCompanion Inline edit with buffer",
+      },
       { ",ccp", "<cmd>CodeCompanionActions<cr>", desc = "CodeCompanion Actions" },
       {
         ",ccq",

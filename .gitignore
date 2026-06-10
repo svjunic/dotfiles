@@ -15,6 +15,9 @@ nginx.pid
 .tmux/plugins/*
 
 
+# neovim
+nvim.log
+
 # personal file
 sv
 sv.*

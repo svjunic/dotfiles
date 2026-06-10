@@ -7,13 +7,89 @@ local DIFF_CONTEXT_LINES = 3
 local MAX_LINES_PER_FILE = 100
 local MAX_TOTAL_LINES = 500
 local MAX_CHARS_PER_LINE = 1000
+local PERSONAL_INFO_DETECTED_MESSAGE = "個人情報が含まれている可能性があります。コミットメッセージは生成しません。"
+
+local function env_or_default(name, default)
+  local value = os.getenv(name)
+  if value == nil or vim.trim(value) == "" then
+    return default
+  end
+  return value
+end
+
+local function env_bool(name)
+  local value = os.getenv(name)
+  if value == nil or vim.trim(value) == "" then
+    return nil
+  end
+
+  value = vim.trim(value):lower()
+  if value == "true" or value == "1" or value == "yes" or value == "on" then
+    return true
+  end
+  if value == "false" or value == "0" or value == "no" or value == "off" then
+    return false
+  end
+  return nil
+end
+
+local function original_commit_adapter()
+  return {
+    name = env_or_default("LLM_SERVICE", "copilot"),
+    model = env_or_default("LLM_MODEL", "gpt-5-mini"),
+  }
+end
+
+local function resolve_adapter_model(adapter)
+  if type(adapter.model) == "table" and adapter.model.name then
+    return adapter.model.name
+  end
+  if type(adapter.model) == "string" then
+    return adapter.model
+  end
+
+  local schema_model = adapter.schema and adapter.schema.model and adapter.schema.model.default
+  if type(schema_model) == "function" then
+    local ok, model = pcall(schema_model, adapter)
+    if ok then
+      return model
+    end
+    return nil
+  end
+  return schema_model
+end
+
+local function llm_role_name(adapter)
+  local service = adapter.name or "unknown"
+  local model = resolve_adapter_model(adapter) or "unknown"
+  return "Assistant(" .. service .. "/" .. model .. ")"
+end
 
 local function truncate_long_line(line)
   if vim.fn.strchars(line) <= MAX_CHARS_PER_LINE then
     return line, false
   end
 
-  return vim.fn.strcharpart(line, 0, MAX_CHARS_PER_LINE) .. " … [truncated: 行が長すぎるため省略されています]", true
+  return "-- [truncated: この行は長すぎるため全文を省略しました]", true
+end
+
+local function truncate_long_lines_only(diff)
+  if diff == "" then
+    return diff, false
+  end
+
+  local lines = vim.split(diff, "\n", { plain = true })
+  local was_truncated = false
+
+  for index, line in ipairs(lines) do
+    local display_line, line_truncated = truncate_long_line(line)
+    lines[index] = display_line
+    if line_truncated then
+      was_truncated = true
+    end
+  end
+
+  return table.concat(lines, "\n"), was_truncated
 end
 
 local function truncate_diff(diff)
@@ -61,6 +137,24 @@ local function truncate_diff(diff)
   end
 
   return table.concat(result, "\n"), was_truncated
+end
+
+
+local function close_unbalanced_code_block(text)
+  if text == nil or text == "" then
+    return text, false
+  end
+
+  local fence_count = 0
+  for _ in text:gmatch("```") do
+    fence_count = fence_count + 1
+  end
+
+  if fence_count % 2 == 1 then
+    return text .. "\n```", true
+  end
+
+  return text, false
 end
 
 local function build_commit_prompt()
@@ -112,38 +206,86 @@ local function build_commit_prompt()
   }, { text = true }):wait()
 
   local raw_diff = diff_result.code == 0 and (diff_result.stdout or "") or ""
-  local diff, was_truncated = truncate_diff(raw_diff)
+  -- テストのため、差分の省略処理を一時的に無効化してプロンプトへそのまま渡す。
+  -- local diff, was_truncated = truncate_diff(raw_diff)
+  -- local diff_closed = false
+  -- diff, diff_closed = close_unbalanced_code_block(diff)
+  -- if diff_closed then
+  --   was_truncated = true
+  -- end
+  local diff, was_truncated = truncate_long_lines_only(raw_diff)
 
   local diff_note = was_truncated
-      and "（注意: 差分が長すぎるため一部省略されています。省略箇所には [truncated] マーカーが入っています）"
+      and "差分内の長すぎる行は [truncated] マーカーに置換されています。省略された内容は推測せず、[truncated] やこの注意文をコミットメッセージに含めないでください。"
     or ""
 
   return table.concat({
-    "以下はステージ済み変更です。",
+    "下記のルールで、変更のコミットメッセージを書いてください。",
+    "",
+    "- 必ずcommitizenの規約に沿ったメッセージにする",
+    "- 必ず日本語で書く",
+    "- 出力はコミットメッセージのみとし、説明・注釈・コードブロックは出力しない",
+    "- 必ず個人情報が含まれていないか確認する",
+    "- 個人情報が含まれている場合は、コミットメッセージを出力せず「"
+      .. PERSONAL_INFO_DETECTED_MESSAGE
+      .. "」のみを出力する",
+    "- 個人情報が含まれていない場合は、個人情報に関する説明を出力せず、コミットメッセージのみを出力する",
+    "",
+    "出力形式: ",
+    "",
+    "```",
+    "<type>(<scope>): <subject>",
+    "\n",
+    "<body:subjectだけでは保管できない説明を追記>",
+    "\n",
+    "<footer:変更内容のmarkdownのhyphenで箇条書き>",
+    "```",
+    "",
+    "メッセージのルール: ",
+    "- <type>、<scope>は、英語にすること",
+    "- <subject>、<body>、<footer> は、日本語にすること",
+    "- <footer> は Breaking Change や issue 参照などが必要な場合のみ書くこと",
+    "- <subject>は、最大50文字とする",
+    "- メッセージは、72文字で折り返し",
+    "- メッセージは、全角句点「。」の直後で必ず改行する",
+    "- メッセージには、コードブロックを記述しない",
+    "- Note: や注意書きなど、差分メタ情報をコミットメッセージに書かない",
+    "- 改行する際に改行という文字をいれない",
+    "- フッターが不要の場合は、何も書かない",
+    "- [truncated] マーカーをコミットメッセージに書かない",
+    "",
+    "<type> に入る文字のルール: ",
+    "",
+    "下記の中から type だけを選択してください。説明文は出力に含めないでください。",
+    "- feat",
+    "- fix",
+    "- docs",
+    "- style",
+    "- refactor",
+    "- perf",
+    "- test",
+    "- build",
+    "- ci",
+    "- chore",
+    "",
+    "注意: ",
+    "個人情報が含まれていた場合は、コミットメッセージを出力しないこと",
+    "個人情報が含まれていない場合は、「個人情報はありません」などの説明を出力しないこと",
     diff_note,
     "",
-    "変更ファイル一覧:",
+    "---",
+    "差分の情報: ",
+    "以下はステージ済み変更です。",
+    "",
+    "変更ファイル一覧: ",
     "```text",
     staged_files ~= "" and staged_files or "(なし)",
     "```",
     "",
-    "実際の差分:",
-    "```diff",
+    "差分: ",
+    "```",
     diff ~= "" and diff or "(差分なし: 除外対象ファイルのみ)",
     "```",
-    "",
-    "変更のコミットメッセージをcommitizenの規約に従って書いてください。",
-    "",
-    "下記のことを守ってください",
-    "",
-    "- 個人情報が含まれていないこと",
-    "- 必ず日本語で書いてください",
-    "- タイトルは最大50文字、メッセージは72文字で折り返してください",
-    "- メッセージ全体をgitcommit言語のコードブロックで囲んでください",
-    "",
-    "# 出力形式",
-    "- エラーがあればエラーの内容（個人情報が含まれていた場合など）",
-    "- コミットメッセージ（gitcommitのブロックで出力、個人情報の有無の報告は不要）",
   }, "\n")
 end
 
@@ -152,13 +294,19 @@ local function extract_commit_message(content)
     return nil
   end
 
+  content = content:gsub("\r\n", "\n"):gsub("\r", "\n")
+
   local message = content:match("```gitcommit%s*\n(.-)\n```")
-    or content:match("```%w*%s*\n(.-)\n```")
+    or content:match("```git%-commit%s*\n(.-)\n```")
+    or content:match("```[%w_-]*%s*\n(.-)\n```")
     or content
 
   message = vim.trim(message)
   if message == "" then
     return nil
+  end
+  if message == PERSONAL_INFO_DETECTED_MESSAGE then
+    return nil, "personal_info_detected"
   end
 
   return message
@@ -179,7 +327,11 @@ local function write_commit_message_to_buffer(bufnr, content)
     return
   end
 
-  local message = extract_commit_message(content)
+  local message, reason = extract_commit_message(content)
+  if reason == "personal_info_detected" then
+    vim.notify(PERSONAL_INFO_DETECTED_MESSAGE, vim.log.levels.WARN, { title = "CodeCompanion" })
+    return
+  end
   if not message then
     vim.notify("CodeCompanion: commit message was empty", vim.log.levels.WARN)
     return
@@ -277,10 +429,7 @@ local prompt_library = {
       alias = "original_commit",
       short_name = "original_commit",
       auto_submit = true,
-      adapter = {
-        name = "copilot",
-        model = "gpt-5-mini",
-      },
+      adapter = original_commit_adapter(),
       callbacks = {
         on_completed = function(chat)
           local target = M._commit_target_bufnr
@@ -322,6 +471,21 @@ require("codecompanion").setup({
           },
         })
       end,
+      ollama = function()
+        return require("codecompanion.adapters").extend("ollama", {
+          schema = {
+            think = {
+              default = function(self)
+                local think = env_bool("LLM_THINK")
+                if think ~= nil then
+                  return think
+                end
+                return require("codecompanion.adapters.http.ollama.get_models").check_thinking_capability(self)
+              end,
+            },
+          },
+        })
+      end,
     },
   },
   rules = {
@@ -335,11 +499,11 @@ require("codecompanion").setup({
     chat = {
       adapter = {
         name = "copilot",
-        model = "gpt-5.4-mini",
+        model = "gpt-5-mini",
       },
       roles = {
         user = "You",
-        llm = "Copilot",
+        llm = llm_role_name,
       },
       keymaps = {
         close = {
@@ -441,6 +605,18 @@ function M.chat_with_buffer()
   if chat and type(chat.add_buf_message) == "function" then
     chat:add_buf_message({ role = "user", content = "#{buffer}\n" })
   end
+end
+
+function M.inline_edit_with_buffer()
+  vim.ui.input({ prompt = "Inline Edit: " }, function(input)
+    if input == nil or vim.trim(input) == "" then
+      return
+    end
+
+    require("codecompanion").inline({
+      args = "#{buffer}\n" .. input,
+    })
+  end)
 end
 
 function M.quick_chat()

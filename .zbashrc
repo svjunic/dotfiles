@@ -11,8 +11,14 @@ function aider() {
   command aider --yes-always --no-show-model-warnings "$@"
 }
 
-# OpenCode
-export LLM_MODEL=qwen3.5:4b-mlx
+# OpenCode / CodeCompanion
+# githubcopilot
+export LLM_SERVICE=copilot
+export LLM_MODEL=gpt-5-mini
+##ollama
+#export LLM_SERVICE=ollama
+#export LLM_MODEL=gemma4:12b-mlx
+#export LLM_THINK=true
 
 
 # local llm
@@ -310,6 +316,10 @@ fi
 #####################################################################################################
 _git_branch_candidates() {
   git branch -a | sed "s/^[* ] //" | sed "s/remotes\/origin\///" | sort -u | grep -v "HEAD"
+}
+
+_git_merge_branch_candidates() {
+  git branch -a | sed "s/^[* ] //" | sed "s/remotes\///" | sort -u | grep -v "HEAD"
 }
 
 _fzf_popup() {
@@ -626,7 +636,7 @@ alias gm='function _gm() {
         if [ -n "$1" ]; then
             branch="$1"
         else
-            branch=$(_git_branch_candidates | _fzf_popup)
+            branch=$(_git_merge_branch_candidates | _fzf_popup)
         fi
 
         if [ -n "$branch" ]; then
