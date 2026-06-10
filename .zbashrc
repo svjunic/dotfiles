@@ -14,7 +14,7 @@ function aider() {
 # OpenCode / CodeCompanion
 # githubcopilot
 export LLM_SERVICE=copilot
-export LLM_MODEL=gpt-5.4-mini
+export LLM_MODEL=gpt-5-mini
 ##ollama
 #export LLM_SERVICE=ollama
 #export LLM_MODEL=gemma4:12b-mlx
