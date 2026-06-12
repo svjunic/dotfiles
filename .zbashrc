@@ -807,3 +807,9 @@ gclean() {
     | fzf -m --prompt="Delete branches> " \
     | xargs -r git branch -d
 }
+
+gg() {
+  msg="$(./ccm)"
+  echo "$msg"           # 内容を確認
+  git commit -m "$msg"  # 問題なければコミット
+}
