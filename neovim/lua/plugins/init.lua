@@ -212,6 +212,13 @@ return {
         mode = { "v" },
       },
       {
+        ",ccgc",
+        function()
+          require("codecompanion_config").interactive_commit()
+        end,
+        desc = "ステージ済み変更のコミットメッセージを対話しながら生成します。",
+      },
+      {
         ",ccr",
         function()
           require("codecompanion_config").prompt("review")

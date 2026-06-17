@@ -40,6 +40,14 @@ local function original_commit_adapter()
   }
 end
 
+local function original_commit_chat_params()
+  local adapter = original_commit_adapter()
+  return {
+    adapter = adapter.name,
+    model = adapter.model,
+  }
+end
+
 local function resolve_adapter_model(adapter)
   if type(adapter.model) == "table" and adapter.model.name then
     return adapter.model.name
@@ -157,7 +165,7 @@ local function close_unbalanced_code_block(text)
   return text, false
 end
 
-local function build_commit_prompt()
+local function get_staged_commit_context()
   local files_result = vim.system({
     "git",
     "diff",
@@ -206,6 +214,11 @@ local function build_commit_prompt()
   }, { text = true }):wait()
 
   local raw_diff = diff_result.code == 0 and (diff_result.stdout or "") or ""
+  return staged_files, raw_diff
+end
+
+local function build_commit_prompt()
+  local staged_files, raw_diff = get_staged_commit_context()
   -- テストのため、差分の省略処理を一時的に無効化してプロンプトへそのまま渡す。
   -- local diff, was_truncated = truncate_diff(raw_diff)
   -- local diff_closed = false
@@ -284,6 +297,63 @@ local function build_commit_prompt()
     "",
     "差分: ",
     "```",
+    diff ~= "" and diff or "(差分なし: 除外対象ファイルのみ)",
+    "```",
+  }, "\n")
+end
+
+local function build_interactive_commit_prompt()
+  local staged_files, raw_diff = get_staged_commit_context()
+  local diff, was_truncated = truncate_diff(raw_diff)
+  local diff_closed = false
+  diff, diff_closed = close_unbalanced_code_block(diff)
+  if diff_closed then
+    was_truncated = true
+  end
+
+  local diff_note = was_truncated
+      and "差分はコンテキストを抑えるため一部省略されています。省略箇所は推測せず、必要ならユーザーに追加の差分提示を依頼してください。"
+    or ""
+
+  return table.concat({
+    "下記のステージ済み変更について、対話しながらコミットメッセージを作成してください。",
+    "",
+    "まず差分を確認し、不足する情報があれば質問してください。",
+    "十分に判断できる場合は、commitizen形式の日本語コミットメッセージ案だけを提示してください。",
+    "",
+    "ルール:",
+    "- 必ずcommitizenの規約に沿ったメッセージにする",
+    "- 必ず日本語で書く",
+    "- <type>、<scope>は英語にする",
+    "- <subject>、<body>、<footer> は日本語にする",
+    "- <subject>は最大50文字にする",
+    "- メッセージは72文字で折り返す",
+    "- メッセージは全角句点「。」の直後で必ず改行する",
+    "- 個人情報が含まれている可能性がある場合は、コミットメッセージを出さずに確認する",
+    "- [truncated] マーカーや差分の省略に関する注釈をコミットメッセージに含めない",
+    "",
+    "出力形式:",
+    "```gitcommit",
+    "<type>(<scope>): <subject>",
+    "",
+    "<body:subjectだけでは補足できない説明が必要な場合のみ>",
+    "",
+    "<footer:必要な場合のみ>",
+    "```",
+    "",
+    "<type> は次のいずれかから選択してください:",
+    "feat, fix, docs, style, refactor, perf, test, build, ci, chore",
+    "",
+    diff_note,
+    "",
+    "---",
+    "変更ファイル一覧:",
+    "```text",
+    staged_files ~= "" and staged_files or "(なし)",
+    "```",
+    "",
+    "差分:",
+    "```diff",
     diff ~= "" and diff or "(差分なし: 除外対象ファイルのみ)",
     "```",
   }, "\n")
@@ -637,6 +707,23 @@ function M.quick_chat()
       args = { "#{selection}\n" .. input },
     }, {})
   end)
+end
+
+function M.interactive_commit()
+  require("codecompanion").chat({
+    auto_submit = false,
+    messages = {
+      {
+        role = "system",
+        content = system_prompt_ja,
+      },
+      {
+        role = "user",
+        content = build_interactive_commit_prompt(),
+      },
+    },
+    params = original_commit_chat_params(),
+  })
 end
 
 vim.api.nvim_create_user_command("CodeCompanionOriginalCommit", function()
