@@ -692,6 +692,7 @@ alias c5="copilot --banner --model gpt-5.3-codex --allow-tool 'write'"
 alias ch="copilot --banner --model claude-haiku-4.5 --allow-tool 'write'"
 alias cs="copilot --banner --model claude-sonnet-4.5 --allow-tool 'write'"
 alias cl='claude'
+alias commit='codex -m "コミットしてください。"'
 
 alias remove-swp='rm ~/.local/state/nvim/swap/.*'
 
