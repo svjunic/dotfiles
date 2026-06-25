@@ -22,3 +22,16 @@ tmux_coding_grid() {
 tmux_ai_agents_teams() {
   ~/bash/tmux/pane.sh agents "$@"
 }
+
+tpwd() {
+  if ! command -v tmux >/dev/null 2>&1; then
+    echo "tmux command not found." >&2
+    return 1
+  fi
+  if [ -z "${TMUX:-}" ]; then
+    echo "Not inside a tmux session." >&2
+    return 1
+  fi
+
+  tmux list-panes -F '#{pane_id}' | xargs -I{} tmux send-keys -t {} 'pwd' Enter
+}
