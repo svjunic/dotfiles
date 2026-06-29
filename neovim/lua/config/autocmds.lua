@@ -69,10 +69,19 @@ vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
 })
 
 -- Git commit message: CodeCompanionCommit
+-- LLM_COMMIT=true/1/yes/on のときのみ自動生成が動作する
 vim.api.nvim_create_autocmd("VimEnter", {
   group = vim.api.nvim_create_augroup("MyGitCommit", { clear = true }),
   pattern = "*COMMIT_EDITMSG",
   callback = function()
+    local env_val = os.getenv("LLM_COMMIT")
+    if env_val == nil then
+      return
+    end
+    local v = vim.trim(env_val):lower()
+    if v ~= "true" and v ~= "1" and v ~= "yes" and v ~= "on" then
+      return
+    end
     vim.defer_fn(function()
       if vim.fn.exists(":CodeCompanionOriginalCommit") == 2 then
         vim.cmd("CodeCompanionOriginalCommit")
