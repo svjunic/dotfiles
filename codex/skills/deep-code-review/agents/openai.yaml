@@ -1,0 +1,4 @@
+interface:
+  display_name: "Deep Code Review"
+  short_description: "Comprehensive expectation-fit code reviews"
+  default_prompt: "Use $deep-code-review to perform a strict review of this change."
