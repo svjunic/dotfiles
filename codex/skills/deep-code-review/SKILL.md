@@ -42,6 +42,8 @@ Use this skill to perform strict, evidence-based code reviews. Start by reconstr
 
 ## Output Requirements
 
+Write the final review response in Japanese. Keep code identifiers, file paths, command names, and quoted source text in their original language.
+
 Use this structure for the final response:
 
 ```markdown
