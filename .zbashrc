@@ -12,23 +12,22 @@ function aider() {
 }
 
 # OpenCode / CodeCompanion
-# githubcopilot
+# git commitで開いたときに勝手にコミットメッセージつくる
 export LLM_COMMIT=false
-export LLM_SERVICE=copilot
-export LLM_MODEL=gpt-5-mini
-##ollama
+## githubcopilot
+#export LLM_SERVICE=copilot
+#export LLM_MODEL=gpt-5-mini
+## codex
+export LLM_SERVICE=codex
+## ollama
 #export LLM_SERVICE=ollama
 #export LLM_MODEL=gemma4:12b-mlx
 #export LLM_THINK=true
-
-
-# local llm
+#export OPENAI_BASE_URL=http://localhost:11434/v1
+#export OPENAI_API_KEY=ollama
 ## lm-studio
 #export OPENAI_API_BASE=http://localhost:1234/v1
 #export OPENAI_API_KEY=lm-studio
-# ollama
-export OPENAI_BASE_URL=http://localhost:11434/v1
-export OPENAI_API_KEY=ollama
 
 
 # # vscode の人はこっち
