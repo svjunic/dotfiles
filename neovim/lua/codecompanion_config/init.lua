@@ -8,6 +8,7 @@ local MAX_LINES_PER_FILE = 100
 local MAX_TOTAL_LINES = 500
 local MAX_CHARS_PER_LINE = 1000
 local PERSONAL_INFO_DETECTED_MESSAGE = "個人情報が含まれている可能性があります。コミットメッセージは生成しません。"
+local CODEX_UNSUPPORTED_MESSAGE = "Codex ACPではこのCodeCompanion機能を利用できません。"
 
 local function env_or_default(name, default)
   local value = os.getenv(name)
@@ -33,19 +34,50 @@ local function env_bool(name)
   return nil
 end
 
+local LLM_SERVICE = env_or_default("LLM_SERVICE", "copilot")
+local SUPPORTED_LLM_SERVICES = {
+  copilot = true,
+  ollama = true,
+  codex = true,
+}
+
+if not SUPPORTED_LLM_SERVICES[LLM_SERVICE] then
+  error("Unsupported LLM_SERVICE: " .. LLM_SERVICE)
+end
+
+local IS_CODEX = LLM_SERVICE == "codex"
+
+local function selected_model()
+  local model = os.getenv("LLM_MODEL")
+  if model ~= nil and vim.trim(model) ~= "" then
+    return vim.trim(model)
+  end
+  if not IS_CODEX then
+    return "gpt-5-mini"
+  end
+  return nil
+end
+
+local function selected_adapter()
+  local adapter = { name = LLM_SERVICE }
+  local model = selected_model()
+  if model then
+    adapter.model = model
+  end
+  return adapter
+end
+
 local function original_commit_adapter()
-  return {
-    name = env_or_default("LLM_SERVICE", "copilot"),
-    model = env_or_default("LLM_MODEL", "gpt-5-mini"),
-  }
+  return selected_adapter()
 end
 
 local function original_commit_chat_params()
   local adapter = original_commit_adapter()
-  return {
-    adapter = adapter.name,
-    model = adapter.model,
-  }
+  local params = { adapter = adapter.name }
+  if not IS_CODEX then
+    params.model = adapter.model
+  end
+  return params
 end
 
 local function resolve_adapter_model(adapter)
@@ -54,6 +86,19 @@ local function resolve_adapter_model(adapter)
   end
   if type(adapter.model) == "string" then
     return adapter.model
+  end
+
+  local default_model = adapter.defaults and adapter.defaults.model
+  if default_model == nil and adapter.defaults and adapter.defaults.session_config_options then
+    default_model = adapter.defaults.session_config_options.model
+  end
+  if type(default_model) == "function" then
+    local ok, model = pcall(default_model, adapter)
+    if ok and type(model) == "string" then
+      return model
+    end
+  elseif type(default_model) == "string" then
+    return default_model
   end
 
   local schema_model = adapter.schema and adapter.schema.model and adapter.schema.model.default
@@ -69,8 +114,11 @@ end
 
 local function llm_role_name(adapter)
   local service = adapter.name or "unknown"
-  local model = resolve_adapter_model(adapter) or "unknown"
-  return "Assistant(" .. service .. "/" .. model .. ")"
+  local model = resolve_adapter_model(adapter)
+  if model then
+    return "Assistant(" .. service .. "/" .. model .. ")"
+  end
+  return "Assistant(" .. service .. ")"
 end
 
 local function truncate_long_line(line)
@@ -521,43 +569,88 @@ local prompt_library = {
   },
 }
 
-require("codecompanion").setup({
-  adapters = {
+local function build_adapters()
+  local configured = {
     http = {
-      copilot = function()
-        return require("codecompanion.adapters").extend("copilot", {
-          schema = {
-            top_p = {
-              enabled = function(self)
-                local model = self.schema.model.default
-                if type(model) == "function" then
-                  model = model()
-                end
-                return not vim.startswith(model, "o1")
-                  and not model:find("codex")
-                  and not vim.startswith(model, "gpt-5")
-              end,
-            },
-          },
-        })
-      end,
-      ollama = function()
-        return require("codecompanion.adapters").extend("ollama", {
-          schema = {
-            think = {
-              default = function(self)
-                local think = env_bool("LLM_THINK")
-                if think ~= nil then
-                  return think
-                end
-                return require("codecompanion.adapters.http.ollama.get_models").check_thinking_capability(self)
-              end,
-            },
-          },
-        })
-      end,
+      opts = {
+        show_presets = false,
+      },
     },
-  },
+    acp = {
+      opts = {
+        show_presets = false,
+      },
+    },
+  }
+
+  if IS_CODEX then
+    configured.acp.codex = function()
+      local defaults = {
+        auth_method = "chat-gpt",
+      }
+      local model = selected_model()
+      if model then
+        defaults.session_config_options = { model = model }
+      end
+      return require("codecompanion.adapters").extend("codex", {
+        defaults = defaults,
+      })
+    end
+    return configured
+  end
+
+  if LLM_SERVICE == "copilot" then
+    configured.http.copilot = function()
+      return require("codecompanion.adapters").extend("copilot", {
+        schema = {
+          top_p = {
+            enabled = function(self)
+              local model = self.schema.model.default
+              if type(model) == "function" then
+                model = model()
+              end
+              return not vim.startswith(model, "o1")
+                and not model:find("codex")
+                and not vim.startswith(model, "gpt-5")
+            end,
+          },
+        },
+      })
+    end
+  elseif LLM_SERVICE == "ollama" then
+    configured.http.ollama = function()
+      return require("codecompanion.adapters").extend("ollama", {
+        schema = {
+          think = {
+            default = function(self)
+              local think = env_bool("LLM_THINK")
+              if think ~= nil then
+                return think
+              end
+              return require("codecompanion.adapters.http.ollama.get_models").check_thinking_capability(self)
+            end,
+          },
+        },
+      })
+    end
+  end
+
+  return configured
+end
+
+local shared_keymaps = nil
+local yolo_mode_keymap = nil
+if IS_CODEX then
+  shared_keymaps = {
+    always_accept = {
+      modes = { n = "<Plug>(CodeCompanionAlwaysAcceptDisabled)" },
+    },
+  }
+  yolo_mode_keymap = false
+end
+
+require("codecompanion").setup({
+  adapters = build_adapters(),
   rules = {
     opts = {
       chat = {
@@ -566,16 +659,22 @@ require("codecompanion").setup({
     },
   },
   interactions = {
-    chat = {
-      adapter = {
-        name = "copilot",
-        model = "gpt-5-mini",
+    background = {
+      adapter = selected_adapter(),
+      chat = {
+        opts = {
+          enabled = false,
+        },
       },
+    },
+    chat = {
+      adapter = selected_adapter(),
       roles = {
         user = "You",
         llm = llm_role_name,
       },
       keymaps = {
+        yolo_mode = yolo_mode_keymap,
         close = {
           modes = { n = "q" },
         },
@@ -606,10 +705,13 @@ require("codecompanion").setup({
       },
     },
     inline = {
-      adapter = "copilot",
+      adapter = LLM_SERVICE,
     },
     cmd = {
-      adapter = "copilot",
+      adapter = LLM_SERVICE,
+    },
+    shared = {
+      keymaps = shared_keymaps,
     },
   },
   display = {
@@ -629,6 +731,22 @@ require("codecompanion").setup({
   },
   prompt_library = prompt_library,
 })
+
+if IS_CODEX then
+  local function disable_codecompanion_command(name)
+    pcall(vim.api.nvim_del_user_command, name)
+    vim.api.nvim_create_user_command(name, function()
+      vim.notify(CODEX_UNSUPPORTED_MESSAGE, vim.log.levels.WARN, { title = "CodeCompanion" })
+    end, {
+      desc = "Unavailable while LLM_SERVICE=codex",
+      nargs = "*",
+      range = true,
+    })
+  end
+
+  disable_codecompanion_command("CodeCompanion")
+  disable_codecompanion_command("CodeCompanionCmd")
+end
 
 vim.api.nvim_create_autocmd("FileType", {
   group = vim.api.nvim_create_augroup("CodeCompanionCustomKeymaps", { clear = true }),
@@ -678,6 +796,11 @@ function M.chat_with_buffer()
 end
 
 function M.inline_edit_with_buffer()
+  if IS_CODEX then
+    vim.notify(CODEX_UNSUPPORTED_MESSAGE, vim.log.levels.WARN, { title = "CodeCompanion" })
+    return
+  end
+
   vim.ui.input({ prompt = "Inline Edit: " }, function(input)
     if input == nil or vim.trim(input) == "" then
       return

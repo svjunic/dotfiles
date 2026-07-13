@@ -56,6 +56,9 @@ install_npm() {
   npm install -g eslint
   npm install -g eslint_d
 
+  # CodeCompanion
+  npm install -g @agentclientprotocol/codex-acp
+
   echo 'NOTE: neotest-playwright usually expects project-local Playwright (@playwright/test)'
   echo '      If needed, run: npm i -D @playwright/test && npx playwright install'
 }
