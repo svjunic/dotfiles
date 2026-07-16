@@ -70,13 +70,6 @@ setopt pushd_ignore_dups
 # どういう意味を持つかは `man zshexpn` の FILENAME GENERATION を参照
 setopt extended_glob
 
-
-# ctrl+f, ctrl+<-で次の単語に移動
-#TODO
-
-# ctrl+b, ctrl+->で次の単語に移動
-#TODO
-
 # ^R で履歴検索をするときに * でワイルドカードを使用出来るようにする
 bindkey '^R' history-incremental-pattern-search-backward
 
