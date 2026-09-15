@@ -35,3 +35,23 @@ tpwd() {
 
   tmux list-panes -F '#{pane_id}' | xargs -I{} tmux send-keys -t {} 'pwd' Enter
 }
+
+cdpwd() {
+  if ! command -v tmux >/dev/null 2>&1; then
+    echo "tmux command not found." >&2
+    return 1
+  fi
+  if [ -z "${TMUX:-}" ]; then
+    echo "Not inside a tmux session." >&2
+    return 1
+  fi
+
+  # Quote the path so spaces and shell metacharacters are preserved in each pane.
+  local current_dir quoted_dir
+  current_dir=$(pwd -P) || return 1
+  quoted_dir=$(printf '%q' "$current_dir")
+
+  tmux list-panes -F '#{pane_id}' | while IFS= read -r pane_id; do
+    tmux send-keys -t "$pane_id" "cd -- $quoted_dir" Enter
+  done
+}

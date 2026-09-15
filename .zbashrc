@@ -807,3 +807,7 @@ gg() {
   echo "$msg"           # 内容を確認
   git commit -m "$msg"  # 問題なければコミット
 }
+
+# Worktrunk
+## claude codeの場合は ~/.config/worktrunk/config.toml に下記を設定しておくと都合がいい（トップレベルに記述）
+## worktree-path = ".claude/worktrees/{{ branch | sanitize }}"
