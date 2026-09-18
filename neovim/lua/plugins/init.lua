@@ -328,11 +328,16 @@ return {
   -- Editing helpers
   { "tpope/vim-surround", lazy = false },
   {
-    "vim-scripts/YankRing.vim",
-    lazy = false,
-    init = function()
-      vim.keymap.set("n", ",y", "[yankring]", { remap = true })
-      vim.keymap.set("n", "[yankring]", "<Cmd>YRShow<CR>", { silent = true })
+    "gbprod/yanky.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+    keys = {
+      { "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = "Yank text" },
+      { ",y", "<cmd>Telescope yank_history<cr>", desc = "Open yank history" },
+    },
+    opts = {},
+    config = function(_, opts)
+      require("yanky").setup(opts)
+      require("telescope").load_extension("yank_history")
     end,
   },
   { "vim-scripts/Align", lazy = false },
