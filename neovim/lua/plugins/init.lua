@@ -332,6 +332,10 @@ return {
     dependencies = { "nvim-telescope/telescope.nvim" },
     keys = {
       { "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = "Yank text" },
+      { "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" }, desc = "Put yanked text after cursor" },
+      { "P", "<Plug>(YankyPutBefore)", mode = { "n", "x" }, desc = "Put yanked text before cursor" },
+      { "<C-p>", "<Plug>(YankyPreviousEntry)", mode = "n", desc = "Select previous yank history entry" },
+      { "<C-n>", "<Plug>(YankyNextEntry)", mode = "n", desc = "Select next yank history entry" },
       { ",y", "<cmd>Telescope yank_history<cr>", desc = "Open yank history" },
     },
     opts = {},
