@@ -329,7 +329,10 @@ return {
   { "tpope/vim-surround", lazy = false },
   {
     "gbprod/yanky.nvim",
-    dependencies = { "nvim-telescope/telescope.nvim" },
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+      "kkharji/sqlite.lua",
+    },
     keys = {
       { "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = "Yank text" },
       { "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" }, desc = "Put yanked text after cursor" },
@@ -338,7 +341,13 @@ return {
       { "<C-n>", "<Plug>(YankyNextEntry)", mode = "n", desc = "Select next yank history entry" },
       { ",y", "<cmd>Telescope yank_history<cr>", desc = "Open yank history" },
     },
-    opts = {},
+    opts = {
+      ring = {
+        -- Keep one persistent history for all Neovim instances using this config.
+        storage = "sqlite",
+        storage_path = vim.fn.stdpath("data") .. "/databases/yanky.db",
+      },
+    },
     config = function(_, opts)
       require("yanky").setup(opts)
       require("telescope").load_extension("yank_history")

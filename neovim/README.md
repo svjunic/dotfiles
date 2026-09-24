@@ -22,6 +22,7 @@
 
 - `rg` (ripgrep): telescope の `live_grep` に必要
 - `make` / ビルドツール: `telescope-fzf-native.nvim` に必要
+- `sqlite3`: yanky.nvim の SQLite ストレージに必要
 - 各種 LSP サーバ: `vtsls`, `vue-language-server`, `astro-language-server`, `marksman`, `yaml-language-server` など
 - Linter: `markuplint` (`nvim-lint` 経由で `html` / `vue` / `astro` に使用)
 
