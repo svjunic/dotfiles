@@ -113,6 +113,7 @@ return {
   -- Copilot
   {
     "zbirenbaum/copilot.lua",
+    enabled = false, -- Pro再契約時はtrueに戻す
     cmd = "Copilot",
     -- InsertEnter だと「最初の提案」までが遅くなりがちなので、対象ftで先にロードする
     ft = {

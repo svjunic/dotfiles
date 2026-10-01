@@ -66,16 +66,13 @@ autocmd FileType json syntax match Comment +\/\/.\+$+
 " jsonをjsoncとして開きたい
 autocmd BufRead,BufNewFile *.json set filetype=jsonc
 
-" 特定のファイルタイプだけcopilot.vimを有効にする
-autocmd FileType javascript let g:copilot_filetypes.javascript = v:true
-autocmd FileType typescript let g:copilot_filetypes.typescript = v:true
-autocmd FileType scss       let g:copilot_filetypes.scss       = v:true
-autocmd FileType css        let g:copilot_filetypes.css        = v:true
-autocmd FileType html       let g:copilot_filetypes.html       = v:true
-autocmd FileType pug        let g:copilot_filetypes.pug        = v:true
-autocmd FileType json       let g:copilot_filetypes.json       = v:true
-autocmd FileType astro      let g:copilot_filetypes.astro      = v:true
-autocmd FileType gitcommit  let g:copilot_filetypes.gitcommit  = v:true
-
-" Git Commit メッセージ
-autocmd FileType gitcommit if exists(':CopilotChatK2Commit') | CopilotChatK2Commit | endif
+" 特定のファイルタイプだけcopilot.vimを有効にする（再契約時に戻す）
+"autocmd FileType javascript let g:copilot_filetypes.javascript = v:true
+"autocmd FileType typescript let g:copilot_filetypes.typescript = v:true
+"autocmd FileType scss       let g:copilot_filetypes.scss       = v:true
+"autocmd FileType css        let g:copilot_filetypes.css        = v:true
+"autocmd FileType html       let g:copilot_filetypes.html       = v:true
+"autocmd FileType pug        let g:copilot_filetypes.pug        = v:true
+"autocmd FileType json       let g:copilot_filetypes.json       = v:true
+"autocmd FileType astro      let g:copilot_filetypes.astro      = v:true
+"autocmd FileType gitcommit  let g:copilot_filetypes.gitcommit  = v:true

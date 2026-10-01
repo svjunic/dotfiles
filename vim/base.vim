@@ -120,6 +120,6 @@ let g:netrw_preview=1
 " vで開いたときに右に出す
 let g:netrw_altv=1
 
-let g:copilot_filetypes = {
-  \ '*' : v:false,
-  \ }
+"let g:copilot_filetypes = {
+"  \ '*' : v:false,
+"  \ }
