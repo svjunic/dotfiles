@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 # Shared aliases for both mac and linux(ssh).
-alias cdc='cd `pwd -P`'
+alias cdc='cd "$(pwd -P)"'
 alias tmux-session-clear='tmux kill-session -a'
 alias dud='du -d 1 -h '
 alias gitfilemode='git config core.filemode'
