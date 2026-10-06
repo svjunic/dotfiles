@@ -13,7 +13,6 @@ cmp.setup({
       }
 
       local kind_icons = {
-        Copilot = "",
         Text = "󰉿",
         Method = "󰆧",
         Function = "󰊕",

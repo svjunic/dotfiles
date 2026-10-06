@@ -34,7 +34,7 @@ local function env_bool(name)
   return nil
 end
 
-local LLM_SERVICE = env_or_default("LLM_SERVICE", "copilot")
+local LLM_SERVICE = env_or_default("LLM_SERVICE", "codex")
 local SUPPORTED_LLM_SERVICES = {
   copilot = true,
   ollama = true,

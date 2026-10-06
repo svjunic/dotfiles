@@ -88,6 +88,9 @@ install_brew() {
 
   # lazy.nvim
   brew install luarocks lua
+
+  # sqlite.lua / yanky.nvim
+  brew install sqlite
 }
 
 case "${1:-}" in
