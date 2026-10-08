@@ -19,6 +19,8 @@ export LLM_COMMIT=false
 #export LLM_MODEL=gpt-5-mini
 ## codex
 export LLM_SERVICE=codex
+# CodeCompanion の codex-acp から通常インストール版の Codex CLI を使う
+export CODEX_PATH=/opt/homebrew/bin/codex
 ## ollama
 #export LLM_SERVICE=ollama
 #export LLM_MODEL=gemma4:12b-mlx
