@@ -123,17 +123,16 @@ function tmuxBackgroundToggle() {
   fi
 }
 
-# デフォルトバージョンのNodeを使う
+# デフォルトnodeバージョンのNodeの最新をを使う
 export NVM_DIR="$HOME/.nvm"
-if [ -f "$NVM_DIR/alias/default" ]; then
-  _NVM_DEFAULT_VER="$(cat "$NVM_DIR/alias/default")"
-  _NVM_BIN="$NVM_DIR/versions/node/${_NVM_DEFAULT_VER}/bin"
-  if [ -d "$_NVM_BIN" ]; then
-    case ":$PATH:" in
-      *":$_NVM_BIN:"*) ;;  # 既に入っていたらスキップ
-      *) export PATH="$_NVM_BIN:$PATH" ;;
-    esac
+if [[ -f "$NVM_DIR/alias/default" ]]; then
+  _NVM_DEFAULT_VER="$(<"$NVM_DIR/alias/default")"
+  _NVM_NODE_DIRS=("$NVM_DIR"/versions/node/v${_NVM_DEFAULT_VER}.*(Nn))
+  if (( ${#_NVM_NODE_DIRS} )); then
+    _NVM_BIN="${_NVM_NODE_DIRS[-1]}/bin"
+    export PATH="$_NVM_BIN:$PATH"
   fi
+  unset _NVM_DEFAULT_VER _NVM_NODE_DIRS _NVM_BIN
 fi
 
 # load nvm
@@ -142,7 +141,6 @@ function load_npm () {
   export PATH="/usr/local/bin:$PATH:/usr/local/sbin"
 
   source ~/.nvm/nvm.sh
-  #nvm use v20.18.0
   nvm use --lts
 
   alias node="node --experimental-modules"
