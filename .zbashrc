@@ -687,6 +687,8 @@ alias gwa='function _gwa() {
 alias cl='claude'
 alias commit='codex "コミットしてください。"'
 
+alias ccusage='npx ccusage@latest'
+
 alias remove-swp='rm ~/.local/state/nvim/swap/.*'
 
 # ~/.zshrc などに追記
