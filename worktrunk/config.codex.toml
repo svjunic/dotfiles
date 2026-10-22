@@ -1,0 +1,2 @@
+# Worktrunk 標準の作成先（リポジトリの隣）を使用する。
+worktree-path = "{{ repo_path }}/../{{ repo }}.{{ branch | sanitize }}"

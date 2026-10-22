@@ -1,0 +1,1 @@
+worktree-path = ".claude/worktrees/{{ branch | sanitize }}"

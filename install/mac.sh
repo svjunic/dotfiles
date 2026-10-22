@@ -73,6 +73,9 @@ backup_and_link "$ROOT_DIR/zsh" "$HOME/zsh"
 backup_and_link "$ROOT_DIR/command" "$HOME/command"
 backup_and_link "$ROOT_DIR/shell" "$HOME/shell"
 
+source "$ROOT_DIR/install/worktrunk.sh"
+setup_worktrunk
+
 ensure_claude_team_commands
 
 if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then

@@ -809,5 +809,4 @@ gg() {
 }
 
 # Worktrunk
-## claude codeの場合は ~/.config/worktrunk/config.toml に下記を設定しておくと都合がいい（トップレベルに記述）
-## worktree-path = ".claude/worktrees/{{ branch | sanitize }}"
+## install 時に Codex / Claude を選択し、worktrunk/config.<tool>.toml を ~/.config/worktrunk/config.toml へリンクする。

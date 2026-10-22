@@ -18,6 +18,12 @@ my dotfiles.
 
 `Linux` の場合は `install/linux-ssh.sh` が使われます。
 
+インストール中にメインで使うツール（Codex / Claude）を選択します。
+選択した `worktrunk/config.codex.toml` または `worktrunk/config.claude.toml` を
+`${XDG_CONFIG_HOME:-~/.config}/worktrunk/config.toml` にリンクします。
+Codex はリポジトリの隣、Claude は `.claude/worktrees/` 配下にワークツリーを作成します。
+既存の設定ファイルはバックアップされます。
+
 ## Structure (excluding vim/neovim)
 
 - `install/mac.sh`: mac 用の symlink セットアップと基本コマンド導入
