@@ -4,6 +4,14 @@ if not ok then
 end
 
 conform.setup({
+  formatters = {
+    prettier = {
+      prepend_args = {
+        "--ignore-path",
+        vim.fn.stdpath("config") .. "/.prettierignore",
+      },
+    },
+  },
   formatters_by_ft = {
     typescript = { "eslint_d", "prettier", lsp_format = "fallback" },
     typescriptreact = { "eslint_d", "prettier", lsp_format = "fallback" },
