@@ -1,1 +1,1 @@
-sv.*
+# Conform explicitly uses this file to bypass the working directory's .gitignore.
