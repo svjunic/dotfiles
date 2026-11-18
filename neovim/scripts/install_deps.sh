@@ -6,7 +6,7 @@ usage() {
   cat <<'USAGE'
 Usage: scripts/install_deps.sh [npm|brew|all]
 
-  npm  : Install global npm tools (LSP/formatters used by neovim config)
+  npm  : Install global npm tools and local Neovim formatter dependencies
   brew : Install Homebrew packages used by neovim config (macOS)
   all  : Run both
 USAGE
@@ -20,6 +20,9 @@ need_cmd() {
 }
 
 install_npm() {
+  local neovim_dir
+  neovim_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+
   echo '1. npm install (global) ---------------'
 
   need_cmd npm
@@ -38,15 +41,13 @@ install_npm() {
   npm install -g yaml-language-server
 
   # HTML/CSS/JSON (LSP)
-  npm install -g vscode-langservers-extracted
-
-  # PHP (optional in many repos, kept for parity with vim/scripts/install_deps.sh)
-  npm install -g intelephense
+  # core-js uses its postinstall hook to display a funding message.
+  npm install -g --ignore-scripts vscode-langservers-extracted
 
   # Prettier (formatter)
   npm install -g prettier
   npm install -g prettier-plugin-astro
-  npm install -g @prettier/plugin-lua
+  npm ci --prefix "$neovim_dir" --include=dev
 
   # markuplint/stylelint (used by nvim-lint / conform.nvim)
   npm install -g markuplint

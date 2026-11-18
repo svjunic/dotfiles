@@ -25,6 +25,7 @@
 - `sqlite3`: yanky.nvim の SQLite ストレージに必要
 - 各種 LSP サーバ: `vtsls`, `vue-language-server`, `astro-language-server`, `marksman`, `yaml-language-server` など
 - Linter: `markuplint` (`nvim-lint` 経由で `html` / `vue` / `astro` に使用)
+- リポジトリのルートで `bash neovim/scripts/install_deps.sh npm` を実行すると、LSP などのグローバルツールと、Lua 整形用のローカル依存が入ります。
 
 ## キーマップ
 

@@ -1,9 +1,8 @@
-plugins:
-  - "@prettier/plugin-lua"
-
 overrides:
   - files: "*.lua"
     options:
+      plugins:
+        - "@prettier/plugin-lua"
       printWidth: 100
       tabWidth: 2
       useTabs: false
