@@ -1,1 +1,6 @@
 worktree-path = ".claude/worktrees/{{ branch | sanitize }}"
+
+[list]
+#columns = ["upstream", "branch", "branch-diff", "working-diff", "age", "message", "path"]
+columns = ["upstream", "branch", "branch-diff", "working-diff", "age", "message"]
+
